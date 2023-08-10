@@ -1,348 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
+  
     <title>Bash Shell Scripting :: Terminal</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="I&#39;ve acquired a range of valuable Bash shell commands, enabling me to proficiently navigate and utilize the shell for everyday functions. Additionally, I&#39;ve successfully authored a Bash shell script designed to create directory backups, compress files, and initiate email transmission. My expertise also encompasses a variety of Linux command line interface commands." />
+<meta name="keywords" content="" />
 
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="I&#39;ve acquired a range of valuable Bash shell commands, enabling me to proficiently navigate and utilize the shell for everyday functions. Additionally, I&#39;ve successfully authored a Bash shell script designed to create directory backups, compress files, and initiate email transmission. My expertise also encompasses a variety of Linux command line interface commands."
-    />
-    <meta name="keywords" content="" />
+  <meta name="robots" content="noodp" />
 
-    <meta name="robots" content="noodp" />
+<link rel="canonical" href="https://mchoumar.github.io/CyberBored.github.io/posts/bashscript/" />
 
-    <link
-      rel="canonical"
-      href="https://mchoumar.github.io/CyberBored.github.io/posts/bashscript/"
-    />
 
-    <link
-      rel="stylesheet"
-      href="https://mchoumar.github.io/CyberBored.github.io/styles.css"
-    />
 
-    <link
-      rel="shortcut icon"
-      href="https://mchoumar.github.io/CyberBored.github.io/img/theme-colors/blue.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      href="https://mchoumar.github.io/CyberBored.github.io/img/theme-colors/blue.png"
-    />
 
-    <meta name="twitter:card" content="summary" />
 
-    <meta property="og:locale" content="en" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="Bash Shell Scripting" />
-    <meta
-      property="og:description"
-      content="I&#39;ve acquired a range of valuable Bash shell commands, enabling me to proficiently navigate and utilize the shell for everyday functions. Additionally, I&#39;ve successfully authored a Bash shell script designed to create directory backups, compress files, and initiate email transmission. My expertise also encompasses a variety of Linux command line interface commands."
-    />
-    <meta
-      property="og:url"
-      content="https://mchoumar.github.io/CyberBored.github.io/posts/bashscript/"
-    />
-    <meta property="og:site_name" content="Terminal" />
 
-    <meta
-      property="og:image"
-      content="https://mchoumar.github.io/CyberBored.github.io/img/favicon/blue.png"
-    />
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://mchoumar.github.io/CyberBored.github.io/styles.css">
 
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="627" />
 
-    <meta
-      property="article:published_time"
-      content="2023-08-10 04:32:52 &#43;0200 CEST"
-    />
-  </head>
-  <body class="blue">
-    <div class="container headings--one-size">
-      <header class="header">
-        <div class="header__inner">
-          <div class="header__logo">
-            <a href="/">
-              <div class="logo">Terminal</div>
-            </a>
-          </div>
 
-          <ul class="menu menu--mobile">
-            <li class="menu__trigger">Menu&nbsp;▾</li>
-            <li>
-              <ul class="menu__dropdown">
-                <li><a href="/CyberBored.github.io/about">About</a></li>
 
-                <li><a href="/CyberBored.github.io/showcase">Showcase</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
 
-        <nav class="navigation-menu">
-          <ul class="navigation-menu__inner menu--desktop">
-            <li><a href="/CyberBored.github.io/about">About</a></li>
 
-            <li><a href="/CyberBored.github.io/showcase">Showcase</a></li>
-          </ul>
-        </nav>
-      </header>
 
-      <div class="content">
-        <article class="post">
-          <h1 class="post-title">
-            <a
-              href="https://mchoumar.github.io/CyberBored.github.io/posts/bashscript/"
-              >Bash Shell Scripting</a
-            >
-          </h1>
-          <div class="post-meta">
-            <time class="post-date">2023-08-10</time
-            ><span class="post-author">Mahmoud Choumar</span>
-          </div>
+  <link rel="shortcut icon" href="https://mchoumar.github.io/CyberBored.github.io/img/theme-colors/blue.png">
+  <link rel="apple-touch-icon" href="https://mchoumar.github.io/CyberBored.github.io/img/theme-colors/blue.png">
 
-          <div class="post-content">
-            <div>
-              <h1 id="introduction">
-                Introduction:<a
-                  href="#introduction"
-                  class="hanchor"
-                  ariaLabel="Anchor"
-                  >&#8983;</a
-                >
-              </h1>
-              <p>
-                I started by checking out what shell is running in our terminal
-                using echo $SHELL.
-              </p>
-              <p><img src="../../static/images/bash/pic0.png" alt="Shell" /></p>
-              <p>
-                Then using the command <strong>ls</strong> I listed the
-                available files and directories in our working directory, and
-                after that I listed the long format of the directories and files
-                including the hidden ones using <strong>-la</strong>. After
-                checking the current data available using ls, I typed
-                <strong>pwd</strong> to check my current working directory. Next
-                using <strong>cd /</strong> I navigated to the root directory
-                which is located at the top of all directories, which contains
-                sensitive files.
-              </p>
-              <h1 id="manipulating-files">
-                Manipulating files:<a
-                  href="#manipulating-files"
-                  class="hanchor"
-                  ariaLabel="Anchor"
-                  >&#8983;</a
-                >
-              </h1>
-              <p>
-                I used <strong>touch</strong> command to create a file name
-                myBashScript then used <strong>ls -l myBashScript</strong> to
-                list my new file and check that it was created successfully, I
-                decided next that I would like to change the name of the file
-                using the command
-                <strong>mv myBashScript muchBetterName</strong>. Finally, I
-                removed the file using rm muchBetterName.
-              </p>
-              <p>
-                <img src="../../static/images/bash/pic1.png" alt="Commands" />
-              </p>
-              <p>
-                Next, I tried cat command which stands for concatenate, to list
-                the contents of a file and redirect the contents into another
-                file. First, I made a file called myNewFile.txt and using the
-                command
-                <strong
-                  >echo &ldquo;Hello World&rdquo; &gt; myNewFile.txt</strong
-                >
-                to output the phrase hello world into the file, then
-                <strong>cat myNewFile.txt</strong> to output the content on the
-                screen. Next, I used the command
-                <strong>cat myNewFile.txt &gt; test.txt</strong> and finally
-                displayed it using cat.
-              </p>
-              <p>
-                <img src="../../static/images/bash/pic2.png" alt="Commands1" />
-              </p>
-              <p>
-                Using more and less you can view all the content of the file or
-                portion of them. I used nano to edit the contents of the files I
-                created.
-              </p>
-              <h1 id="finding-information">
-                Finding Information:<a
-                  href="#finding-information"
-                  class="hanchor"
-                  ariaLabel="Anchor"
-                  >&#8983;</a
-                >
-              </h1>
-              <p>
-                I tried creating a new directory using mkdir and moved it to a
-                new directory called backups and created two new files into it,
-                then we deleted the whole file using rm -r backups because rmdir
-                only deletes empty directories.
-              </p>
-              <p>
-                <img src="../../static/images/bash/pic3.png" alt="create" />
-              </p>
-              <p>
-                I tried to find a directory using find command, which displayed
-                a bunch of errors then tried it again but I added 2&gt;dev/null
-                which outputs all the errors into the file called null. By using
-                * to be able to get all files and directories that has backup in
-                their names.
-              </p>
-              <p><img src="../../static/images/bash/pic4.png" alt="find" /></p>
-              <p>
-                Next I tried the grep command to find specific files that
-                contains regular expressions.
-              </p>
-              <p><img src="../../static/images/bash/pic5.png" alt="grep" /></p>
-              <p>
-                I learned that using <strong>!ls</strong> I can access the
-                content since last time I used ls. Using
-                <strong>history</strong> I can check the history of all commands
-                I used in my CLI and <strong>man</strong> is used to check the
-                manual of a specific command.
-              </p>
-              <h1 id="aliases">
-                Aliases:<a href="#aliases" class="hanchor" ariaLabel="Anchor"
-                  >&#8983;</a
-                >
-              </h1>
-              <p>
-                Alias is a shortcut we can use to access a command that is
-                frequently used, for example, <strong>ll</strong> which is an
-                alias for the command ls <strong>-alF</strong>, we can check
-                what an alias is for by typing <strong>alias ll</strong>. We can
-                create aliases by going to the file called
-                <strong>.bash_aliases</strong> which is checked when the shell
-                is first lunched and checks the <strong>.bashrc</strong> file.
-                To create the aliase, we should run the following into the
-                <strong>.bash_aliases</strong> file:
-              </p>
-              <p><img src="../../static/images/bash/pic6.png" alt="alias" /></p>
-              <p>
-                And replace the command that is after fbackup with the command
-                you want to create an aliase for, and replace fbackup with the
-                name that you desire for the alias command. Note: When you first
-                create an alias the shell won&rsquo;t recognize it, since it
-                only looks into the file once when it is first lunched, to make
-                it look into the file and recognize the new alias we can type
-                <strong>source .bash_aliases</strong>.
-              </p>
-              <h1 id="writing-a-shell-script">
-                Writing a Shell Script:<a
-                  href="#writing-a-shell-script"
-                  class="hanchor"
-                  ariaLabel="Anchor"
-                  >&#8983;</a
-                >
-              </h1>
-              <p>
-                I started writing my first bash script. First, I created a file
-                using nano and then using #!/bin/bash also known as the Shebang
-                which specifies that the shell type is bash. Next, I wrote a
-                comment to specify what this script is for so that in the future
-                I can understand what it is made for. Then I set up variables
-                and stored directory path into them. After that, to make sure
-                that the file names aren&rsquo;t the same, I assigned a variable
-                that stores the date and I used back tick to let the shell know
-                that it should execute the command that is inside of the back
-                ticks, file name, and the file extension type, then combined
-                them into a variable called FILE_NAME. After the script was
-                create, I changed the file user permission using chmod to be
-                able to execute the script.
-              </p>
-              <p>
-                <img
-                  src="../../static/images/bash/pic7.png"
-                  alt="bash script"
-                />
-              </p>
-              <p>
-                <img
-                  src="../../static/images/bash/pic8.png"
-                  alt="script output"
-                />
-              </p>
-              <p>
-                Then I added tar to my script, which stands for tape archive and
-                is used to create Archive and extract the Archive files. Using
-                the command bellow allowed me to create and extracted the
-                archived file using the following flags:
-                <strong>-c</strong> which creates an archive by bundling files
-                and directories together. <strong>-f</strong> Specifies the
-                filename of the archive to be created or extracted.
-                <strong>-z</strong> Uses gzip compression when creating a tar
-                file.
-              </p>
-              <p>
-                <img src="../../static/images/bash/pic9.png" alt="zip file" />
-              </p>
-              <p>
-                Reference used:
-                <a
-                  href="https://www.geeksforgeeks.org/tar-command-linux-examples/"
-                  >https://www.geeksforgeeks.org/tar-command-linux-examples/</a
-                >
-              </p>
-              <h1 id="bash-scripting-and-creating-a-cron-job-with-crontab">
-                Bash Scripting and Creating a Cron Job With Crontab:<a
-                  href="#bash-scripting-and-creating-a-cron-job-with-crontab"
-                  class="hanchor"
-                  ariaLabel="Anchor"
-                  >&#8983;</a
-                >
-              </h1>
-              <p>
-                Final step, I started by creating an if else statement to check
-                if the script is working and sends it to the specified email
-                using the mail command else it will output that at that date
-                something went wrong into the error.log file. Then, I used
-                <strong>crontab -e</strong> to automate the process.
-              </p>
-              <p>
-                <img
-                  src="../../static/images/bash/pic10.png"
-                  alt="extra code"
-                />
-              </p>
-              <p>
-                <img src="../../static/images/bash/pic11.png" alt="crontab" />
-              </p>
-            </div>
-          </div>
-        </article>
-      </div>
 
-      <footer class="footer">
-        <div class="footer__inner">
-          <div class="copyright">
-            <span>© 2023 Powered by <a href="https://gohugo.io">Hugo</a></span>
 
-            <span
-              >::
-              <a
-                href="https://github.com/panr/hugo-theme-terminal"
-                target="_blank"
-                >Theme</a
-              >
-              made by
-              <a href="https://github.com/panr" target="_blank">panr</a></span
-            >
-          </div>
-        </div>
-      </footer>
+<meta name="twitter:card" content="summary" />
 
-      <script
-        type="text/javascript"
-        src="/CyberBored.github.io/bundle.min.js"
-      ></script>
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Bash Shell Scripting">
+<meta property="og:description" content="I&#39;ve acquired a range of valuable Bash shell commands, enabling me to proficiently navigate and utilize the shell for everyday functions. Additionally, I&#39;ve successfully authored a Bash shell script designed to create directory backups, compress files, and initiate email transmission. My expertise also encompasses a variety of Linux command line interface commands." />
+<meta property="og:url" content="https://mchoumar.github.io/CyberBored.github.io/posts/bashscript/" />
+<meta property="og:site_name" content="Terminal" />
+
+  
+    <meta property="og:image" content="https://mchoumar.github.io/CyberBored.github.io/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2023-08-10 04:32:52 &#43;0200 CEST" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="blue">
+
+
+<div class="container headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/CyberBored.github.io/">
+  <div class="logo">
+    CyberBored
+  </div>
+</a>
+
     </div>
-  </body>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/CyberBored.github.io/about">About</a></li>
+        
+      
+        
+          <li><a href="/CyberBored.github.io/showcase">Showcase</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/CyberBored.github.io/about" >About</a></li>
+        
+      
+        
+          <li><a href="/CyberBored.github.io/showcase" >Showcase</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="https://mchoumar.github.io/CyberBored.github.io/posts/bashscript/">Bash Shell Scripting</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2023-08-10</time><span class="post-author">Mahmoud Choumar</span></div>
+
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <h1 id="introduction">Introduction:<a href="#introduction" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>I started by checking out what shell is running in our terminal using echo $SHELL.</p>
+<p><img src="../../images/bash/pic0.png" alt="Shell"></p>
+<p>Then using the command <strong>ls</strong> I listed the available files and directories in our working directory, and after that I listed the long format of the directories and files including the hidden ones using <strong>-la</strong>.
+After checking the current data available using ls, I typed <strong>pwd</strong> to check my current working directory. Next using <strong>cd /</strong> I navigated to the root directory which is located at the top of all directories, which contains sensitive files.</p>
+<h1 id="manipulating-files">Manipulating files:<a href="#manipulating-files" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>I used <strong>touch</strong> command to create a file name myBashScript then used <strong>ls -l myBashScript</strong> to list my new file and check that it was created successfully, I decided next that I would like to change the name of the file using the command <strong>mv myBashScript muchBetterName</strong>. Finally, I removed the file using rm muchBetterName.</p>
+<p><img src="../../images/bash/pic1.png" alt="Commands"></p>
+<p>Next, I tried cat command which stands for concatenate, to list the contents of a file and redirect the contents into another file. First, I made a file called myNewFile.txt and using the command <strong>echo &ldquo;Hello World&rdquo; &gt; myNewFile.txt</strong> to output the phrase hello world into the file, then <strong>cat myNewFile.txt</strong> to output the content on the screen. Next, I used the command <strong>cat myNewFile.txt &gt; test.txt</strong> and finally displayed it using cat.</p>
+<p><img src="../../images/bash/pic2.png" alt="Commands1"></p>
+<p>Using more and less you can view all the content of the file or portion of them. I used nano to edit the contents of the files I created.</p>
+<h1 id="finding-information">Finding Information:<a href="#finding-information" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>I tried creating a new directory using mkdir and moved it to a new directory called backups and created two new files into it, then we deleted the whole file using rm -r backups because rmdir only deletes empty directories.</p>
+<p><img src="../../images/bash/pic3.png" alt="create"></p>
+<p>I tried to find a directory using find command, which displayed a bunch of errors then tried it again but I added 2&gt;dev/null which outputs all the errors into the file called null. By using * to be able to get all files and directories that has backup in their names.</p>
+<p><img src="../../images/bash/pic4.png" alt="find"></p>
+<p>Next I tried the grep command to find specific files that contains regular expressions.</p>
+<p><img src="../../images/bash/pic5.png" alt="grep"></p>
+<p>I learned that using <strong>!ls</strong> I can access the content since last time I used ls. Using <strong>history</strong> I can check the history of all commands I used in my CLI and <strong>man</strong> is used to check the manual of a specific command.</p>
+<h1 id="aliases">Aliases:<a href="#aliases" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Alias is a shortcut we can use to access a command that is frequently used, for example, <strong>ll</strong> which is an alias for the command ls <strong>-alF</strong>, we can check what an alias is for by typing <strong>alias ll</strong>. We can create aliases by going to the file called <strong>.bash_aliases</strong> which is checked when the shell is first lunched and checks the <strong>.bashrc</strong> file. To create the aliase, we should run the following into the <strong>.bash_aliases</strong> file:</p>
+<p><img src="../../images/bash/pic6.png" alt="alias"></p>
+<p>And replace the command that is after fbackup with the command you want to create an aliase for, and replace fbackup with the name that you desire for the alias command.
+Note: When you first create an alias the shell won&rsquo;t recognize it, since it only looks into the file once when it is first lunched, to make it look into the file and recognize the new alias we can type <strong>source .bash_aliases</strong>.</p>
+<h1 id="writing-a-shell-script">Writing a Shell Script:<a href="#writing-a-shell-script" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>I started writing my first bash script. First, I created a file using nano and then using #!/bin/bash also known as the Shebang which specifies that the shell type is bash. Next, I wrote a comment to specify what this script is for so that in the future I can understand what it is made for. Then I set up variables and stored directory path into them. After that, to make sure that the file names aren&rsquo;t the same, I assigned a variable that stores the date and I used back tick to let the shell know that it should execute the command that is inside of the back ticks, file name, and the file extension type, then combined them into a variable called FILE_NAME. After the script was create, I changed the file user permission using chmod to be able to execute the script.</p>
+<p><img src="../../images/bash/pic7.png" alt="bash script"></p>
+<p><img src="../../images/bash/pic8.png" alt="script output"></p>
+<p>Then I added tar to my script, which stands for tape archive and is used to create Archive and extract the Archive files. Using the command bellow allowed me to create and extracted the archived file using the following flags:
+<strong>-c</strong> which creates an archive by bundling files and directories together.
+<strong>-f</strong> Specifies the filename of the archive to be created or extracted.
+<strong>-z</strong> Uses gzip compression when creating a tar file.</p>
+<p><img src="../../images/bash/pic9.png" alt="zip file"></p>
+<p>Reference used: <a href="https://www.geeksforgeeks.org/tar-command-linux-examples/">https://www.geeksforgeeks.org/tar-command-linux-examples/</a></p>
+<h1 id="bash-scripting-and-creating-a-cron-job-with-crontab">Bash Scripting and Creating a Cron Job With Crontab:<a href="#bash-scripting-and-creating-a-cron-job-with-crontab" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Final step, I started by creating an if else statement to check if the script is working and sends it to the specified email using the mail command else it will output that at that date something went wrong into the error.log file. Then, I used <strong>crontab -e</strong> to automate the process.</p>
+<p><img src="../../images/bash/pic10.png" alt="extra code"></p>
+<p><img src="../../images/bash/pic11.png" alt="crontab"></p>
+
+      </div></div>
+
+  
+    
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2023 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/CyberBored.github.io/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
 </html>
