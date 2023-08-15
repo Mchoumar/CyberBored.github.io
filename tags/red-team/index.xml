@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on CyberBored Blog</title>
-    <link>https://mchoumar.github.io/CyberBored.github.io/posts/</link>
-    <description>Recent content in Posts on CyberBored Blog</description>
+    <title>Red-Team on CyberBored Blog</title>
+    <link>https://mchoumar.github.io/CyberBored.github.io/tags/red-team/</link>
+    <description>Recent content in Red-Team on CyberBored Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 15 Aug 2023 14:43:22 +0200</lastBuildDate><atom:link href="https://mchoumar.github.io/CyberBored.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 15 Aug 2023 14:43:22 +0200</lastBuildDate><atom:link href="https://mchoumar.github.io/CyberBored.github.io/tags/red-team/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Nmap</title>
       <link>https://mchoumar.github.io/CyberBored.github.io/posts/nmap/</link>
@@ -156,55 +156,6 @@ first 999 ports are open/filtered using Xmas scan and specifying the number of p
 &lt;p&gt;&lt;img src=&#34;../../images/nmap/pic3.png&#34; alt=&#34;result&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/nmap/pic4.png&#34; alt=&#34;login&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/nmap/pic5.png&#34; alt=&#34;login&#34;&gt;&lt;/p&gt;
-</content>
-    </item>
-    
-    <item>
-      <title>Bash Shell Scripting</title>
-      <link>https://mchoumar.github.io/CyberBored.github.io/posts/bashscript/</link>
-      <pubDate>Thu, 10 Aug 2023 04:32:52 +0200</pubDate>
-      
-      <guid>https://mchoumar.github.io/CyberBored.github.io/posts/bashscript/</guid>
-      <description>Introduction: I started by checking out what shell is running in our terminal using echo $SHELL.
-Then using the command ls I listed the available files and directories in our working directory, and after that I listed the long format of the directories and files including the hidden ones using -la. After checking the current data available using ls, I typed pwd to check my current working directory. Next using cd / I navigated to the root directory which is located at the top of all directories, which contains sensitive files.</description>
-      <content>&lt;h1 id=&#34;introduction&#34;&gt;Introduction:&lt;/h1&gt;
-&lt;p&gt;I started by checking out what shell is running in our terminal using echo $SHELL.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../images/bash/pic0.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Then using the command &lt;strong&gt;ls&lt;/strong&gt; I listed the available files and directories in our working directory, and after that I listed the long format of the directories and files including the hidden ones using &lt;strong&gt;-la&lt;/strong&gt;.
-After checking the current data available using ls, I typed &lt;strong&gt;pwd&lt;/strong&gt; to check my current working directory. Next using &lt;strong&gt;cd /&lt;/strong&gt; I navigated to the root directory which is located at the top of all directories, which contains sensitive files.&lt;/p&gt;
-&lt;h1 id=&#34;manipulating-files&#34;&gt;Manipulating files:&lt;/h1&gt;
-&lt;p&gt;I used &lt;strong&gt;touch&lt;/strong&gt; command to create a file name myBashScript then used &lt;strong&gt;ls -l myBashScript&lt;/strong&gt; to list my new file and check that it was created successfully, I decided next that I would like to change the name of the file using the command &lt;strong&gt;mv myBashScript muchBetterName&lt;/strong&gt;. Finally, I removed the file using rm muchBetterName.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../images/bash/pic1.png&#34; alt=&#34;Commands&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Next, I tried cat command which stands for concatenate, to list the contents of a file and redirect the contents into another file. First, I made a file called myNewFile.txt and using the command &lt;strong&gt;echo &amp;ldquo;Hello World&amp;rdquo; &amp;gt; myNewFile.txt&lt;/strong&gt; to output the phrase hello world into the file, then &lt;strong&gt;cat myNewFile.txt&lt;/strong&gt; to output the content on the screen. Next, I used the command &lt;strong&gt;cat myNewFile.txt &amp;gt; test.txt&lt;/strong&gt; and finally displayed it using cat.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../images/bash/pic2.png&#34; alt=&#34;Commands1&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Using more and less you can view all the content of the file or portion of them. I used nano to edit the contents of the files I created.&lt;/p&gt;
-&lt;h1 id=&#34;finding-information&#34;&gt;Finding Information:&lt;/h1&gt;
-&lt;p&gt;I tried creating a new directory using mkdir and moved it to a new directory called backups and created two new files into it, then we deleted the whole file using rm -r backups because rmdir only deletes empty directories.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../images/bash/pic3.png&#34; alt=&#34;create&#34;&gt;&lt;/p&gt;
-&lt;p&gt;I tried to find a directory using find command, which displayed a bunch of errors then tried it again but I added 2&amp;gt;dev/null which outputs all the errors into the file called null. By using * to be able to get all files and directories that has backup in their names.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../images/bash/pic4.png&#34; alt=&#34;find&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Next I tried the grep command to find specific files that contains regular expressions.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../images/bash/pic5.png&#34; alt=&#34;grep&#34;&gt;&lt;/p&gt;
-&lt;p&gt;I learned that using &lt;strong&gt;!ls&lt;/strong&gt; I can access the content since last time I used ls. Using &lt;strong&gt;history&lt;/strong&gt; I can check the history of all commands I used in my CLI and &lt;strong&gt;man&lt;/strong&gt; is used to check the manual of a specific command.&lt;/p&gt;
-&lt;h1 id=&#34;aliases&#34;&gt;Aliases:&lt;/h1&gt;
-&lt;p&gt;Alias is a shortcut we can use to access a command that is frequently used, for example, &lt;strong&gt;ll&lt;/strong&gt; which is an alias for the command ls &lt;strong&gt;-alF&lt;/strong&gt;, we can check what an alias is for by typing &lt;strong&gt;alias ll&lt;/strong&gt;. We can create aliases by going to the file called &lt;strong&gt;.bash_aliases&lt;/strong&gt; which is checked when the shell is first lunched and checks the &lt;strong&gt;.bashrc&lt;/strong&gt; file. To create the aliase, we should run the following into the &lt;strong&gt;.bash_aliases&lt;/strong&gt; file:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../images/bash/pic6.png&#34; alt=&#34;alias&#34;&gt;&lt;/p&gt;
-&lt;p&gt;And replace the command that is after fbackup with the command you want to create an aliase for, and replace fbackup with the name that you desire for the alias command.
-Note: When you first create an alias the shell won&amp;rsquo;t recognize it, since it only looks into the file once when it is first lunched, to make it look into the file and recognize the new alias we can type &lt;strong&gt;source .bash_aliases&lt;/strong&gt;.&lt;/p&gt;
-&lt;h1 id=&#34;writing-a-shell-script&#34;&gt;Writing a Shell Script:&lt;/h1&gt;
-&lt;p&gt;I started writing my first bash script. First, I created a file using nano and then using #!/bin/bash also known as the Shebang which specifies that the shell type is bash. Next, I wrote a comment to specify what this script is for so that in the future I can understand what it is made for. Then I set up variables and stored directory path into them. After that, to make sure that the file names aren&amp;rsquo;t the same, I assigned a variable that stores the date and I used back tick to let the shell know that it should execute the command that is inside of the back ticks, file name, and the file extension type, then combined them into a variable called FILE_NAME. After the script was create, I changed the file user permission using chmod to be able to execute the script.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../images/bash/pic7.png&#34; alt=&#34;bash script&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../images/bash/pic8.png&#34; alt=&#34;script output&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Then I added tar to my script, which stands for tape archive and is used to create Archive and extract the Archive files. Using the command bellow allowed me to create and extracted the archived file using the following flags:
-&lt;strong&gt;-c&lt;/strong&gt; which creates an archive by bundling files and directories together.
-&lt;strong&gt;-f&lt;/strong&gt; Specifies the filename of the archive to be created or extracted.
-&lt;strong&gt;-z&lt;/strong&gt; Uses gzip compression when creating a tar file.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../images/bash/pic9.png&#34; alt=&#34;zip file&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Reference used: &lt;a href=&#34;https://www.geeksforgeeks.org/tar-command-linux-examples/&#34;&gt;https://www.geeksforgeeks.org/tar-command-linux-examples/&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&#34;bash-scripting-and-creating-a-cron-job-with-crontab&#34;&gt;Bash Scripting and Creating a Cron Job With Crontab:&lt;/h1&gt;
-&lt;p&gt;Final step, I started by creating an if else statement to check if the script is working and sends it to the specified email using the mail command else it will output that at that date something went wrong into the error.log file. Then, I used &lt;strong&gt;crontab -e&lt;/strong&gt; to automate the process.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../images/bash/pic10.png&#34; alt=&#34;extra code&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../images/bash/pic11.png&#34; alt=&#34;crontab&#34;&gt;&lt;/p&gt;
 </content>
     </item>
     

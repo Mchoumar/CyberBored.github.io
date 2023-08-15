@@ -1,12 +1,164 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Terminal</title>
+    <title>CyberBored Blog</title>
     <link>https://mchoumar.github.io/CyberBored.github.io/</link>
-    <description>Recent content on Terminal</description>
+    <description>Recent content on CyberBored Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 10 Aug 2023 04:32:52 +0200</lastBuildDate><atom:link href="https://mchoumar.github.io/CyberBored.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 15 Aug 2023 14:43:22 +0200</lastBuildDate><atom:link href="https://mchoumar.github.io/CyberBored.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nmap</title>
+      <link>https://mchoumar.github.io/CyberBored.github.io/posts/nmap/</link>
+      <pubDate>Tue, 15 Aug 2023 14:43:22 +0200</pubDate>
+      
+      <guid>https://mchoumar.github.io/CyberBored.github.io/posts/nmap/</guid>
+      <description>Today I am starting Nmap project, testing and playing around scanning devices.
+First, there are 65535 open ports available on any network-enabled computer, and 1024 of them are well-known.
+Key flags to keep in mind:
+Flags Description -sS Half-open or stealth scan, which has similar function to TCP scan. Key difference between the two scan is that TCP scan performs. -sT TCP connect scans, which performs 3-way handshake. -sU UDP connect scans, which doesn&amp;rsquo;t rely on the handshake.</description>
+      <content>&lt;p&gt;Today I am starting Nmap project, testing and playing around scanning devices.&lt;/p&gt;
+&lt;p&gt;First, there are 65535 open ports available on any network-enabled computer, and 1024 of them are well-known.&lt;/p&gt;
+&lt;p&gt;Key flags to keep in mind:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Flags&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;-sS&lt;/td&gt;
+&lt;td&gt;Half-open or stealth scan, which has similar function to TCP scan. Key difference between the two scan is that TCP scan performs.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-sT&lt;/td&gt;
+&lt;td&gt;TCP connect scans, which performs 3-way handshake.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-sU&lt;/td&gt;
+&lt;td&gt;UDP connect scans, which doesn&amp;rsquo;t rely on the handshake.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-sN&lt;/td&gt;
+&lt;td&gt;NULL scans, TCP request is sent with no flag set at all, and receives RST if port is closed.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-sX&lt;/td&gt;
+&lt;td&gt;Xmas scans, sends malformed TCP packet and expects RST response for closed ports. It is called Xmas, as it sends(PSH, URG and FIN) which give it the appearance of a blinking Christmas tree.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-sF&lt;/td&gt;
+&lt;td&gt;FIN scans, similar to the NULL scan, but sends with a FIN flag.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-O&lt;/td&gt;
+&lt;td&gt;Detects which operating system the target is running.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-sV&lt;/td&gt;
+&lt;td&gt;Detects the version of the services running on the target.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-v, vv, vvv&lt;/td&gt;
+&lt;td&gt;Verbosity is used to scan with in depth details.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-oA&lt;/td&gt;
+&lt;td&gt;Outputs Nmap results in three major formats.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-oN&lt;/td&gt;
+&lt;td&gt;Saves Nmap results in normal format.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-oG&lt;/td&gt;
+&lt;td&gt;Saves Nmap results in gerpable format.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-A&lt;/td&gt;
+&lt;td&gt;Aggressive mode, which activates service detection, operating system, traceroute, and script scanning.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-T1-5&lt;/td&gt;
+&lt;td&gt;Timer template from level 1-5.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-p&lt;/td&gt;
+&lt;td&gt;Port scan, can be used to specify the ports to be scanned.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-p-&lt;/td&gt;
+&lt;td&gt;All ports scan, as the name suggest it scans all open ports.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;ndash;script&lt;/td&gt;
+&lt;td&gt;Activates Nmap scripts.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-sn&lt;/td&gt;
+&lt;td&gt;Ping sweep, depends on ICMP message, which is sent to all specified IP addresses.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-Pn&lt;/td&gt;
+&lt;td&gt;Tells Nmap to scan without pinging the target in other words Nmap assumes that the target is alive.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-f&lt;/td&gt;
+&lt;td&gt;Used to fragment the packets.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;ndash;mtu &lt;!-- raw HTML omitted --&gt;&lt;/td&gt;
+&lt;td&gt;Similar to the use of fragmented packet, but allows you to control the size of the packet.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;ndash;scan-delay &lt;!-- raw HTML omitted --&gt;ms&lt;/td&gt;
+&lt;td&gt;Used to add a delay between packets sent.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;ndash;badsum&lt;/td&gt;
+&lt;td&gt;Used to generate in invalid checksum for packets. However, firewalls might respond automatically, without bothering to check the checksum of the packet. Which allows this flag to check the presence of firewall/IDS.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;The Nmap Scripting Engine (NSE) is an incredibly powerful addition to Nmap, extending its functionality quite considerably. NSE Scripts are written in the Lua programming language, and can be used to do a variety of things:
+from scanning for vulnerabilities, to automating exploits for them. The NSE is particularly useful for reconnaissance, however, it is well worth bearing in mind how extensive the script library is.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;• safe: Won&#39;t affect the target
+• intrusive: Not safe: likely to affect the target
+• vuln: Scan for vulnerabilities
+• exploit: Attempt to exploit a vulnerability
+• auth: Attempt to bypass authentication for running services (e.g. Log into an FTP server anonymously)
+• brute: Attempt to brute force credentials for running services
+• discovery: Attempt to query running services for further information about the network (e.g. query an SNMP server).
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Example: &amp;ndash;script=&lt;!-- raw HTML omitted --&gt; or &amp;ndash;script=vuln.
+Multiple scripts can be run at the same time using the following command: &amp;lt;&amp;ndash;script=smb-enum-users,smb-enum-shares&amp;gt;.&lt;/p&gt;
+&lt;p&gt;Some scripts requires arguments to run, like credentials, if they&amp;rsquo;re exploiting an authenticated vulnerability. Which can be done using &amp;ndash;script-args Nmap switch.
+Example, nmap -p 80 &amp;ndash;script http-put &amp;ndash;script-args http-put.url=&amp;rsquo;/dav/shell.php&amp;rsquo;,http-put.file&amp;rsquo;./shell.php&#39;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; that the arguments are separated by commas, and connected to the
+corresponding script with periods &lt;!-- raw HTML omitted --&gt;.&lt;!-- raw HTML omitted --&gt;.
+For extra help regarding scripts, you can type the following command nmap &amp;ndash;script-help &lt;!-- raw HTML omitted --&gt;.&lt;/p&gt;
+&lt;p&gt;Nmap has a formatted text file containing filenames and categories for each available script, which we can search for and find in the following directory: /usr/share/nmap/scripts/script.db. There are two ways to search for scripts in the Nmap script.db, either grep &amp;ldquo;gtp&amp;rdquo; /usr/share/nmap/scripts/script.db or ls -l /usr/share/nmap/scripts/&lt;em&gt;ftp&lt;/em&gt;.
+The following reference is to search for all nmap scripts and libraries: &lt;a href=&#34;https://nmap.org/nsedoc/&#34;&gt;https://nmap.org/nsedoc/&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Ways to install/update script list:
+1-sudo apt update &amp;amp;&amp;amp; sudo apt install nmap
+2-sudo wget -O /usr/share/nmap/scripts/&lt;!-- raw HTML omitted --&gt;.nse https:/svb.nmap.org/nmap/scripts/&lt;!-- raw HTML omitted --&gt;.nse follow by nmap &amp;ndash;script-updatedb.&lt;/p&gt;
+&lt;h1 id=&#34;practical-lab&#34;&gt;Practical Lab:&lt;/h1&gt;
+&lt;p&gt;First, I pinged the target using ping -c 5 10.10.239.246 to check if the target responds with an ICMP message, after using ping -h to check all available flags. -c flag is used to stop pinging the target after a certain number of replied, which in that case I chose 5.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/nmap/pic0.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;And according to the results shown, the target didn&amp;rsquo;t even receive the packets. Next, I checked if the
+first 999 ports are open/filtered using Xmas scan and specifying the number of ports to be scanned using -p.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/nmap/pic1.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Which showed the ports to be open, but in ignored state. Then, I noticed that I was facing issue with my openvpn, which was resolved by regenerating a new openvpn file configuration on TryHackMe. Next, I rerun the nmap scans again to check the open ports using TCP scan, which revealed 5 open ports:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/nmap/pic2.png&#34; alt=&#34;Script&#34;&gt;&lt;/p&gt;
+&lt;p&gt;For the final part, I used nmap &amp;ndash;script to check port 21 FTP and check if I can possible use it to login into the target, and then logged in using anonymous username.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/nmap/pic3.png&#34; alt=&#34;result&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/nmap/pic4.png&#34; alt=&#34;login&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/nmap/pic5.png&#34; alt=&#34;login&#34;&gt;&lt;/p&gt;
+</content>
+    </item>
+    
     <item>
       <title>Bash Shell Scripting</title>
       <link>https://mchoumar.github.io/CyberBored.github.io/posts/bashscript/</link>
