@@ -151,22 +151,22 @@
   <div class="post-content"><div>
         <h1 id="my-personal-walk-through">My personal walk through:<a href="#my-personal-walk-through" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
 <p>I started today with my first ever machine after the starting point training. I first connected to the htb openvpn service and started searching the ports and versions of the port using nmap:</p>
-<p><img src="../../images/htb/pic0.png" alt="Shell"></p>
+<p><img src="../../../images/htb/pic0.png" alt="Shell"></p>
 <p>After that, I accessed the ftp open port and tried downloading and uploading some files using get and put, which allowed me to learn that I am on root privilege. Then, I started searching and learning about BurpSuit Reference which I used to intercept the websites requests. I learned then that the website version is Microsoft IIS httpd 7.5, which after doing a little research I learned that it uses aspx file extension.</p>
 <p>Then, after gathering all that information I searched msfvenom for windows payloads to make a payload in the aspx extention and uploaded it to the server using ftp put command and used msfconsole to lesson for sessions using the multihandler.</p>
-<p><img src="../../images/htb/pic1.png" alt="Shell"></p>
-<p><img src="../../images/htb/pic2.png" alt="Shell"></p>
+<p><img src="../../../images/htb/pic1.png" alt="Shell"></p>
+<p><img src="../../../images/htb/pic2.png" alt="Shell"></p>
 <p>I faced an issue, where the msfconsole wasn&rsquo;t able to connect and the two reasons why are 1- I was using windows/x64/meterpreter/reverse_tcp instead of windows/meterpreter/reverse_tcp and 2-I forgot to set the payload in msfconsole, but now it works fine</p>
-<p><img src="../../images/htb/pic3.png" alt="Shell"></p>
+<p><img src="../../../images/htb/pic3.png" alt="Shell"></p>
 <p>After getting access, I typed the command sysinfo to check for the architecture of the machine and after that shell followed with systeminfo to check to learn about the hotfixes installed which
 turned out to be never updated</p>
-<p><img src="../../images/htb/pic4.png" alt="Shell"></p>
-<p><img src="../../images/htb/pic5.png" alt="Shell"></p>
+<p><img src="../../../images/htb/pic4.png" alt="Shell"></p>
+<p><img src="../../../images/htb/pic5.png" alt="Shell"></p>
 <p>Then using the command background, I set the session to keep running in the background and then searched for suggester, which is used to suggest exploits for a specific machine then set my session and run the suggester, which gave me multiple exploits to use, so
 I picked the first option and setup all required options</p>
-<p><img src="../../images/htb/pic6.png" alt="Shell"></p>
+<p><img src="../../../images/htb/pic6.png" alt="Shell"></p>
 <p>And finally, I had privilege escalated to root user and navigated from windows file to users file and got the flags using type command to display the flag on the screen.</p>
-<p><img src="../../images/htb/pic7.png" alt="Shell"></p>
+<p><img src="../../../images/htb/pic7.png" alt="Shell"></p>
 
       </div></div>
 
