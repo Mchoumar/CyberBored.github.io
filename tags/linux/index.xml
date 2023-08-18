@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Linux on CyberBored Blog</title>
-    <link>https://cyberbored.site/tags/linux/</link>
+    <link>https://Mchoumar/CyberBored.github.io/tags/linux/</link>
     <description>Recent content in Linux on CyberBored Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 10 Aug 2023 04:32:52 +0200</lastBuildDate><atom:link href="https://cyberbored.site/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 10 Aug 2023 04:32:52 +0200</lastBuildDate><atom:link href="https://Mchoumar/CyberBored.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Bash Shell Scripting</title>
-      <link>https://cyberbored.site/posts/bashscript/</link>
+      <link>https://Mchoumar/CyberBored.github.io/posts/bashscript/</link>
       <pubDate>Thu, 10 Aug 2023 04:32:52 +0200</pubDate>
       
-      <guid>https://cyberbored.site/posts/bashscript/</guid>
+      <guid>https://Mchoumar/CyberBored.github.io/posts/bashscript/</guid>
       <description>Introduction: I started by checking out what shell is running in our terminal using echo $SHELL.
 Then using the command ls I listed the available files and directories in our working directory, and after that I listed the long format of the directories and files including the hidden ones using -la. After checking the current data available using ls, I typed pwd to check my current working directory. Next using cd / I navigated to the root directory which is located at the top of all directories, which contains sensitive files.</description>
       <content>&lt;h1 id=&#34;introduction&#34;&gt;Introduction:&lt;/h1&gt;

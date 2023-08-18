@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Networking on CyberBored Blog</title>
-    <link>https://cyberbored.site/tags/networking/</link>
+    <link>https://Mchoumar/CyberBored.github.io/tags/networking/</link>
     <description>Recent content in Networking on CyberBored Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 15 Aug 2023 14:43:22 +0200</lastBuildDate><atom:link href="https://cyberbored.site/tags/networking/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 15 Aug 2023 14:43:22 +0200</lastBuildDate><atom:link href="https://Mchoumar/CyberBored.github.io/tags/networking/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Nmap</title>
-      <link>https://cyberbored.site/posts/nmap/</link>
+      <link>https://Mchoumar/CyberBored.github.io/posts/nmap/</link>
       <pubDate>Tue, 15 Aug 2023 14:43:22 +0200</pubDate>
       
-      <guid>https://cyberbored.site/posts/nmap/</guid>
+      <guid>https://Mchoumar/CyberBored.github.io/posts/nmap/</guid>
       <description>Today I am starting Nmap project, testing and playing around scanning devices.
 First, there are 65535 open ports available on any network-enabled computer, and 1024 of them are well-known.
 Key flags to keep in mind:
