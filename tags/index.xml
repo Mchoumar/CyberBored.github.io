@@ -2,67 +2,67 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on CyberBored Blog</title>
-    <link>https://Mchoumar/CyberBored.github.io/tags/</link>
+    <link>https://cyberbored.site/tags/</link>
     <description>Recent content in Tags on CyberBored Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 17 Aug 2023 22:33:51 +0200</lastBuildDate><atom:link href="https://Mchoumar/CyberBored.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 17 Aug 2023 22:33:51 +0200</lastBuildDate><atom:link href="https://cyberbored.site/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CTF</title>
-      <link>https://Mchoumar/CyberBored.github.io/tags/ctf/</link>
+      <link>https://cyberbored.site/tags/ctf/</link>
       <pubDate>Thu, 17 Aug 2023 22:33:51 +0200</pubDate>
       
-      <guid>https://Mchoumar/CyberBored.github.io/tags/ctf/</guid>
+      <guid>https://cyberbored.site/tags/ctf/</guid>
       <description></description>
       <content></content>
     </item>
     
     <item>
       <title>HTB</title>
-      <link>https://Mchoumar/CyberBored.github.io/tags/htb/</link>
+      <link>https://cyberbored.site/tags/htb/</link>
       <pubDate>Thu, 17 Aug 2023 22:33:51 +0200</pubDate>
       
-      <guid>https://Mchoumar/CyberBored.github.io/tags/htb/</guid>
+      <guid>https://cyberbored.site/tags/htb/</guid>
       <description></description>
       <content></content>
     </item>
     
     <item>
       <title>Networking</title>
-      <link>https://Mchoumar/CyberBored.github.io/tags/networking/</link>
+      <link>https://cyberbored.site/tags/networking/</link>
       <pubDate>Tue, 15 Aug 2023 14:43:22 +0200</pubDate>
       
-      <guid>https://Mchoumar/CyberBored.github.io/tags/networking/</guid>
+      <guid>https://cyberbored.site/tags/networking/</guid>
       <description></description>
       <content></content>
     </item>
     
     <item>
       <title>Red-Team</title>
-      <link>https://Mchoumar/CyberBored.github.io/tags/red-team/</link>
+      <link>https://cyberbored.site/tags/red-team/</link>
       <pubDate>Tue, 15 Aug 2023 14:43:22 +0200</pubDate>
       
-      <guid>https://Mchoumar/CyberBored.github.io/tags/red-team/</guid>
+      <guid>https://cyberbored.site/tags/red-team/</guid>
       <description></description>
       <content></content>
     </item>
     
     <item>
       <title>Linux</title>
-      <link>https://Mchoumar/CyberBored.github.io/tags/linux/</link>
+      <link>https://cyberbored.site/tags/linux/</link>
       <pubDate>Thu, 10 Aug 2023 04:32:52 +0200</pubDate>
       
-      <guid>https://Mchoumar/CyberBored.github.io/tags/linux/</guid>
+      <guid>https://cyberbored.site/tags/linux/</guid>
       <description></description>
       <content></content>
     </item>
     
     <item>
       <title>Scripting</title>
-      <link>https://Mchoumar/CyberBored.github.io/tags/scripting/</link>
+      <link>https://cyberbored.site/tags/scripting/</link>
       <pubDate>Thu, 10 Aug 2023 04:32:52 +0200</pubDate>
       
-      <guid>https://Mchoumar/CyberBored.github.io/tags/scripting/</guid>
+      <guid>https://cyberbored.site/tags/scripting/</guid>
       <description></description>
       <content></content>
     </item>

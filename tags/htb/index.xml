@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>HTB on CyberBored Blog</title>
-    <link>https://Mchoumar/CyberBored.github.io/tags/htb/</link>
+    <link>https://cyberbored.site/tags/htb/</link>
     <description>Recent content in HTB on CyberBored Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 17 Aug 2023 22:33:51 +0200</lastBuildDate><atom:link href="https://Mchoumar/CyberBored.github.io/tags/htb/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 17 Aug 2023 22:33:51 +0200</lastBuildDate><atom:link href="https://cyberbored.site/tags/htb/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Devil Machine</title>
-      <link>https://Mchoumar/CyberBored.github.io/posts/htb/devil/</link>
+      <link>https://cyberbored.site/posts/htb/devil/</link>
       <pubDate>Thu, 17 Aug 2023 22:33:51 +0200</pubDate>
       
-      <guid>https://Mchoumar/CyberBored.github.io/posts/htb/devil/</guid>
+      <guid>https://cyberbored.site/posts/htb/devil/</guid>
       <description>My personal walk through: I started today with my first ever machine after the starting point training. I first connected to the htb openvpn service and started searching the ports and versions of the port using nmap:
 After that, I accessed the ftp open port and tried downloading and uploading some files using get and put, which allowed me to learn that I am on root privilege. Then, I started searching and learning about BurpSuit Reference which I used to intercept the websites requests.</description>
       <content>&lt;h1 id=&#34;my-personal-walk-through&#34;&gt;My personal walk through:&lt;/h1&gt;
