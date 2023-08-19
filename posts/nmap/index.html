@@ -6,7 +6,7 @@
   
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="I learned how to use different types of nmap scans to scan and monitor ports, and in addition the script flag that is used in nmap to further enhance your scans." />
+<meta name="description" content="In my quest for network mastery, I&#39;ve delved into the intricacies of nmap scanning. This journey led me to grasp the utilization of diverse nmap scans, a powerful arsenal to meticulously scan and monitor ports. But there&#39;s more to this story—a fascinating twist that involves the script flag. This ingenious addition in nmap adds an extra layer of depth to your scans, opening doors to advanced reconnaissance and heightened understanding of network vulnerabilities. Together, we&#39;ll unravel the art of these scans and script-based enhancements, equipping you with an invaluable skill set to navigate the digital realm with confidence." />
 <meta name="keywords" content="" />
 
   <meta name="robots" content="noodp" />
@@ -43,7 +43,7 @@
 <meta property="og:locale" content="en" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="Nmap">
-<meta property="og:description" content="I learned how to use different types of nmap scans to scan and monitor ports, and in addition the script flag that is used in nmap to further enhance your scans." />
+<meta property="og:description" content="In my quest for network mastery, I&#39;ve delved into the intricacies of nmap scanning. This journey led me to grasp the utilization of diverse nmap scans, a powerful arsenal to meticulously scan and monitor ports. But there&#39;s more to this story—a fascinating twist that involves the script flag. This ingenious addition in nmap adds an extra layer of depth to your scans, opening doors to advanced reconnaissance and heightened understanding of network vulnerabilities. Together, we&#39;ll unravel the art of these scans and script-based enhancements, equipping you with an invaluable skill set to navigate the digital realm with confidence." />
 <meta property="og:url" content="https://cyberbored.site/posts/nmap/" />
 <meta property="og:site_name" content="CyberBored Blog" />
 
@@ -151,8 +151,8 @@
   
 
   <div class="post-content"><div>
-        <p>Today I am starting Nmap project, testing and playing around scanning devices.</p>
-<p>First, there are 65535 open ports available on any network-enabled computer, and 1024 of them are well-known.</p>
+        <p>Embarking on a new Nmap project today, I&rsquo;m diving into the realm of testing and exploring device scanning.</p>
+<p>To kick things off, it&rsquo;s fascinating to note that every network-enabled computer boasts a whopping 65535 open ports. Out of these, 1024 are well-known ports that add an intriguing layer to our journey.</p>
 <p>Key flags to keep in mind:</p>
 <table>
 <thead>
@@ -256,8 +256,8 @@
 </tr>
 </tbody>
 </table>
-<p>The Nmap Scripting Engine (NSE) is an incredibly powerful addition to Nmap, extending its functionality quite considerably. NSE Scripts are written in the Lua programming language, and can be used to do a variety of things:
-from scanning for vulnerabilities, to automating exploits for them. The NSE is particularly useful for reconnaissance, however, it is well worth bearing in mind how extensive the script library is.</p>
+<p>The Nmap Scripting Engine (NSE) serves as a potent augmentation to Nmap, significantly expanding its capabilities. Written in the Lua programming language, NSE Scripts empower a wide spectrum of functionalities, ranging from vulnerability scanning to automated exploit deployment. While its applications are diverse, NSE&rsquo;s remarkable utility lies in reconnaissance, yet it&rsquo;s crucial to acknowledge the extensive script library at play.</p>
+<p>The NSE scripts can be classified into different categories:</p>
 <pre><code>• safe: Won't affect the target
 • intrusive: Not safe: likely to affect the target
 • vuln: Scan for vulnerabilities
@@ -266,27 +266,21 @@ from scanning for vulnerabilities, to automating exploits for them. The NSE is p
 • brute: Attempt to brute force credentials for running services
 • discovery: Attempt to query running services for further information about the network (e.g. query an SNMP server).
 </code></pre>
-<p>Example: &ndash;script=<!-- raw HTML omitted --> or &ndash;script=vuln.
-Multiple scripts can be run at the same time using the following command: &lt;&ndash;script=smb-enum-users,smb-enum-shares&gt;.</p>
-<p>Some scripts requires arguments to run, like credentials, if they&rsquo;re exploiting an authenticated vulnerability. Which can be done using &ndash;script-args Nmap switch.
-Example, nmap -p 80 &ndash;script http-put &ndash;script-args http-put.url=&rsquo;/dav/shell.php&rsquo;,http-put.file&rsquo;./shell.php'.</p>
-<p><strong>Note</strong> that the arguments are separated by commas, and connected to the
-corresponding script with periods <!-- raw HTML omitted -->.<!-- raw HTML omitted -->.
-For extra help regarding scripts, you can type the following command nmap &ndash;script-help <!-- raw HTML omitted -->.</p>
-<p>Nmap has a formatted text file containing filenames and categories for each available script, which we can search for and find in the following directory: /usr/share/nmap/scripts/script.db. There are two ways to search for scripts in the Nmap script.db, either grep &ldquo;gtp&rdquo; /usr/share/nmap/scripts/script.db or ls -l /usr/share/nmap/scripts/<em>ftp</em>.
-The following reference is to search for all nmap scripts and libraries: <a href="https://nmap.org/nsedoc/">https://nmap.org/nsedoc/</a>.</p>
-<p>Ways to install/update script list:
-1-sudo apt update &amp;&amp; sudo apt install nmap
-2-sudo wget -O /usr/share/nmap/scripts/<!-- raw HTML omitted -->.nse https:/svb.nmap.org/nmap/scripts/<!-- raw HTML omitted -->.nse follow by nmap &ndash;script-updatedb.</p>
+<p>For instance, to execute a script, use the command &lsquo;&ndash;script=<!-- raw HTML omitted -->&rsquo; or &lsquo;&ndash;script=vuln&rsquo;. Multiple scripts can run concurrently with a command like &lsquo;&ndash;script=smb-enum-users,smb-enum-shares&rsquo;.</p>
+<p>Certain scripts require arguments, such as credentials for authenticated vulnerabilities, which can be provided using the &ndash;script-args Nmap switch. Example: &rsquo;nmap -p 80 &ndash;script http-put &ndash;script-args http-put.url=&rsquo;/dav/shell.php&rsquo;,http-put.file=&rsquo;./shell.php&rsquo;&rsquo;.</p>
+<p>For further assistance with scripts, utilize &rsquo;nmap &ndash;script-help <!-- raw HTML omitted -->&rsquo;.</p>
+<p>Nmap offers a formatted text file detailing filenames and categories for available scripts, which can be located at &lsquo;/usr/share/nmap/scripts/script.db&rsquo;. To search for scripts, you can use commands like &lsquo;grep &ldquo;gtp&rdquo; /usr/share/nmap/scripts/script.db&rsquo; or &rsquo;ls -l /usr/share/nmap/scripts/<em>ftp</em>&rsquo;. Comprehensive scripts and libraries can be explored via this reference: <a href="https://nmap.org/nsedoc/">https://nmap.org/nsedoc/</a>.</p>
+<p>To install/update the script list, consider these approaches:</p>
+<p>1-Run &lsquo;sudo apt update &amp;&amp; sudo apt install nmap&rsquo;.
+2-Use &lsquo;sudo wget -O /usr/share/nmap/scripts/<!-- raw HTML omitted -->.nse <a href="https://svb.nmap.org/nmap/scripts/">https://svb.nmap.org/nmap/scripts/</a><!-- raw HTML omitted -->.nse&rsquo;, followed by &rsquo;nmap &ndash;script-updatedb&rsquo;.</p>
 <h1 id="practical-lab">Practical Lab:<a href="#practical-lab" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
-<p>First, I pinged the target using ping -c 5 10.10.239.246 to check if the target responds with an ICMP message, after using ping -h to check all available flags. -c flag is used to stop pinging the target after a certain number of replied, which in that case I chose 5.</p>
+<p>To initiate, I commenced by sending a ping to the target using the command &lsquo;ping -c 5 10.10.239.246&rsquo;. The purpose was to discern if the target would reciprocate with an ICMP response—a standard practice in network diagnostics. Subsequently, I employed &lsquo;ping -h&rsquo; to explore the array of available flags. Notably, the -c flag came into play, dictating the halt of pinging after five responses were received from the target. This parameter was selected to govern the desired extent of the ping operation.</p>
 <p><img src="../../images/nmap/pic0.png" alt="Xmas scan"></p>
-<p>And according to the results shown, the target didn&rsquo;t even receive the packets. Next, I checked if the
-first 999 ports are open/filtered using Xmas scan and specifying the number of ports to be scanned using -p.</p>
+<p>Based on the displayed outcomes, it was evident that the target did not acknowledge the receipt of packets. Moving forward, I conducted an assessment to determine the status of the first 999 ports through an Xmas scan. The endeavor involved specifying the range of ports to be examined using the &lsquo;-p&rsquo; flag.</p>
 <p><img src="../../images/nmap/pic1.png" alt="TCP scan"></p>
-<p>Which showed the ports to be open, but in ignored state. Then, I noticed that I was facing issue with my openvpn, which was resolved by regenerating a new openvpn file configuration on TryHackMe. Next, I rerun the nmap scans again to check the open ports using TCP scan, which revealed 5 open ports:</p>
+<p>The scan revealed the ports in an open but disregarded state. Subsequently, I identified an issue with my openvpn setup, which was rectified by generating a fresh openvpn configuration file via TryHackMe. With the hurdle overcome, I proceeded to re-execute the nmap scans for open ports, this time employing a TCP scan. The result brought to light the presence of 5 accessible ports:</p>
 <p><img src="../../images/nmap/pic2.png" alt="Script"></p>
-<p>For the final part, I used nmap &ndash;script to check port 21 FTP and check if I can possible use it to login into the target, and then logged in using anonymous username.</p>
+<p>Concluding the process, I harnessed &rsquo;nmap &ndash;script&rsquo; to scrutinize port 21 FTP, assessing its potential for facilitating access to the target. As a culmination, I successfully employed the anonymous username to establish a login into the target&rsquo;s FTP server.</p>
 <p><img src="../../images/nmap/pic3.png" alt="result"></p>
 <p><img src="../../images/nmap/pic4.png" alt="login"></p>
 <p><img src="../../images/nmap/pic5.png" alt="login"></p>

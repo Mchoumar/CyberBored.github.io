@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Networkservice 1 :: CyberBored Blog</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Introduction: Server Message Block(SMB) is a client-server communication protocol used for sharing access to files, printers, serial ports and other resources on a network.
+Enum4linux is a tool used to enumerate SMB shares on both Windows and Linux systems. It is basically a wrapper around the tools in the Samba package and makes it easy to quickly extract information from the target pertaining to SMB. This tool is always used after conducting port scan and SMB port is open." />
+<meta name="keywords" content=", " />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="https://cyberbored.site/posts/networkservice1/" />
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://cyberbored.site/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="https://cyberbored.site/img/theme-colors/blue.png">
+  <link rel="apple-touch-icon" href="https://cyberbored.site/img/theme-colors/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Networkservice 1">
+<meta property="og:description" content="Introduction: Server Message Block(SMB) is a client-server communication protocol used for sharing access to files, printers, serial ports and other resources on a network.
+Enum4linux is a tool used to enumerate SMB shares on both Windows and Linux systems. It is basically a wrapper around the tools in the Samba package and makes it easy to quickly extract information from the target pertaining to SMB. This tool is always used after conducting port scan and SMB port is open." />
+<meta property="og:url" content="https://cyberbored.site/posts/networkservice1/" />
+<meta property="og:site_name" content="CyberBored Blog" />
+
+  
+    <meta property="og:image" content="https://cyberbored.site/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2023-08-19 16:30:33 &#43;0200 CEST" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="blue">
+
+
+<div class="container full headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    CyberBored
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/resources">Resources</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/about" >About</a></li>
+        
+      
+        
+          <li><a href="/resources" >Resources</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="https://cyberbored.site/posts/networkservice1/">Networkservice 1</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2023-08-19</time><span class="post-author">Mahmoud Choumar</span></div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="https://cyberbored.site/tags/networking/">Networking</a>&nbsp;
+      
+      #<a href="https://cyberbored.site/tags/red-team/">Red-Team</a>&nbsp;
+      
+    </span>
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <h1 id="introduction">Introduction:<a href="#introduction" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Server Message Block(SMB) is a client-server communication protocol used for sharing access to files, printers, serial ports and other resources on a network.</p>
+<p>Enum4linux is a tool used to enumerate SMB shares on both Windows and Linux systems. It is basically a wrapper around the tools in the Samba package and makes it easy to quickly extract information from the target pertaining to SMB. This tool is always used after conducting port scan and SMB port is open.
+The syntax of Enum4linux: enum3linux [flag] ip.
+Flags for Enum4linux:
+|TAG| FUNCTION|
+|-U |Get userlist.|
+|-M| Get machine list.|
+|-N |Get namelist dump (different from -U and -M).|
+|-S |Get sharelist.|
+|-P |Get password policy information.|
+|-G |Get group and member list.|
+|-a |All of the above (full basic enumeration).|</p>
+<h1 id="practical">Practical:<a href="#practical" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>First, I started by scanning the open ports using nmap.</p>
+<p><img src="../../images/networkservice/pic0.png" alt="Shell"></p>
+<p>Then I searched for the group name, OS version, and the machine name using the following command:</p>
+<p><img src="../../images/networkservice/pic1.png" alt="Shell"></p>
+<p><img src="../../images/networkservice/pic2.png" alt="Shell"></p>
+<p><img src="../../images/networkservice/pic3.png" alt="Shell"></p>
+<p>After finding the OS version and important sharenames:</p>
+<p><img src="../../images/networkservice/pic4.png" alt="Shell"></p>
+<p>Which I used to connect to the target using the group name, share name, and anonymous username:</p>
+<p><img src="../../images/networkservice/pic5.png" alt="Shell"></p>
+<p>I tried all the available files in the directory by downloading them using get and printing the results inside the file using cat, and the only file I was able to get information from was the Working text file.</p>
+<p><img src="../../images/networkservice/pic6.png" alt="Shell"></p>
+<p><img src="../../images/networkservice/pic7.png" alt="Shell"></p>
+<p>Which also allowed me to learn that the target was using SSH to connect to the company&rsquo;s network from his home due to the pandemic. After gathering this information, I navigated to a directory called .ssh which contained few important files.</p>
+<p><img src="../../images/networkservice/pic8.png" alt="Shell"></p>
+<p>After downloading the file id_rsa and moving it to the .ssh file and then using the more command to access the name of the target through the id_rsa.pub file, which is cactus.</p>
+<p><img src="../../images/networkservice/pic9.png" alt="Shell"></p>
+<p><img src="../../images/networkservice/pic10.png" alt="Shell"></p>
+<p><img src="../../images/networkservice/pic11.png" alt="Shell"></p>
+<p><img src="../../images/networkservice/pic12.png" alt="Shell"></p>
+<p>After getting the name and the private key, I accessed the target through ssh and immediately found the flag.</p>
+<p><img src="../../images/networkservice/pic13.png" alt="Shell"></p>
+<h1 id="brief-summary-about-telnet">Brief Summary about Telnet:<a href="#brief-summary-about-telnet" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Telnet is a network protocol that allows users to establish a command-line connection to a remote device over a network. A key note to keep in mind about Telnet is that it runs its transmitted packets unencrypted, which makes it easy and simple to capture and read all the plain text packets. Best practice is to replace Telnet with the more secure option SSH. Telnet can be run using the following command: &rsquo;telnet[ip][port]'</p>
+<h1 id="practical-1">Practical:<a href="#practical-1" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>I started by scanning the target using nmap to check for open ports, but I wasn&rsquo;t able to find any of the 1000 well known ports opened.</p>
+<p><img src="../../images/networkservice/pic14.png" alt="Shell"></p>
+<p><img src="../../images/networkservice/pic15.png" alt="Shell"></p>
+<p>So I switched to a different flag, which is the all port scanning flag to get a wider range of ports to scan, which found 1 port opened that I have never seen before.</p>
+<p><img src="../../images/networkservice/pic16.png" alt="Shell"></p>
+<p><img src="../../images/networkservice/pic17.png" alt="Shell"></p>
+<p>I tried figuring out what this service was used for, but it was a little bit of a brain scratch so I searched up port 8012 to learn what is it used for and apparently it is used for a trojan or a backdoor.</p>
+<p><img src="../../images/networkservice/pic18.png" alt="Shell"></p>
+<p>So I scanned again the port using nmap, but only port 8012 to get detailed information about it and its version.</p>
+<p><img src="../../images/networkservice/pic19.png" alt="Shell"></p>
+<p><img src="../../images/networkservice/pic20.png" alt="Shell"></p>
+<p>I learned from the scan that it is called SKIDY&rsquo;S BACKDOOR. After learning these information, I used the opened port 8012 to connect to the target machine using telnet, and it immediately I was in, but all commands I input doesn&rsquo;t return any output. I ran tcpdump in the background to listen to any ICMP message and used ping to check if the target is active.</p>
+<p><img src="../../images/networkservice/pic21.png" alt="Shell"></p>
+<p><img src="../../images/networkservice/pic22.png" alt="Shell"></p>
+<p><img src="../../images/networkservice/pic23.png" alt="Shell"></p>
+<p>Since the machine is online and reachable, I am able to execute commands. Which why I used msfvenom to generate a reverse shell payload.</p>
+<p><img src="../../images/networkservice/pic24.png" alt="Shell"></p>
+<pre><code>• -p = payload.
+• lhost = our local host IP address (this is your machine's IP address).
+• lport = the port to listen on (this is the port on your machine).
+• R = export the payload in raw format.
+</code></pre>
+<p>Then, using netcat to listen to port 4444, I connected again to the target using telnet and ran the command that msfvenom generated to gain access to the target and get the flag.</p>
+<p><img src="../../images/networkservice/pic25.png" alt="Shell"></p>
+<p><img src="../../images/networkservice/pic26.png" alt="Shell"></p>
+<p><img src="../../images/networkservice/pic27.png" alt="Shell"></p>
+<h1 id="brief-summary-about-ftp">Brief Summary about FTP:<a href="#brief-summary-about-ftp" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>File Transfer Protocol is a standard network protocol used for transferring files between a client and a server on a computer network. FTP allows users to authenticate themselves using a username and password to access files stored on a remote server. While FTP is convenient for file sharing, it has security vulnerabilities, such as transmitting data, including login credentials, in plain text. To address these security concerns, Secure FTP (SFTP) and FTPS (FTP Secure) protocols have been developed, which provide encryption and enhanced security for file transfers.</p>
+<h1 id="practical-2">Practical:<a href="#practical-2" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>For the FTP practical lab, as tradition I scanned the target ports using nmap to find open ports, and only 2 ports were available 21 and 80. We can see that there is a file called PUBLIC_NOTICE.txt on FTP.</p>
+<p><img src="../../images/networkservice/28.png" alt="Shell"></p>
+<p><img src="../../images/networkservice/29.png" alt="Shell"></p>
+<p><img src="../../images/networkservice/30.png" alt="Shell">
+And using ftp, I connected to the target using anonymous username and downloaded the file that was available.</p>
+<p><img src="../../images/networkservice/31.png" alt="Shell"></p>
+<p>But it isn&rsquo;t really useful, I needed to gain privilege escalation on the target.</p>
+<p><em>Note:</em> Hydra is a very fast online password cracking tool, which can perform rapid dictionary attacks against more than 50 Protocols, including Telnet, RDP, SSH, FTP, HTTP, HTTPS, SMB, several databases and much more. Hydra comes by default on both Parrot and Kali, however if you need it, you can find the GitHub here.</p>
+<p>Some important flags that we will use:
+|Section |Function|
+|hydra |Runs the hydra tool.|
+|-t 4 |Number of parallel connections per target.|
+|-l [user] |Points to the user who&rsquo;s account you are trying to compromise.|
+|-P[path to dictionary]| Points to the file containing the list of possible passwords.|
+|-vV |Sets verbose mode to very verbose, shows the login+pass combination for each attempt.|
+|[machine IP]| |The IP address of the target machine.|
+|Ftp / protocol |Set the protocol.</p>
+<p><img src="../../images/networkservice/32.png" alt="Shell"></p>
+<p>By simply setting up the username number of parallel connections, path of the password lists, verberose to be able to see the passwords used, IP address of the target and protocol we want to run it on, hydra tool started spraying passwords on FTP username mike and I just waited for the tool to find the correct password. Depending on your device it might take some time. Fortunately for me, mike had an easy and well-known password. For the next step, I used the new found credentials to login to the target and gain access.</p>
+<p><img src="../../images/networkservice/33.png" alt="Shell"></p>
+<p><img src="../../images/networkservice/34.png" alt="Shell"></p>
+<p>And I finally gained the final flag, which allowed me to complete the room.</p>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        
+        <span class="button next">
+            <a href="https://cyberbored.site/posts/htb/devil/">
+                <span class="button__text">Devil Machine</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2023 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>
