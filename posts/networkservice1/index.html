@@ -6,9 +6,8 @@
   
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Introduction: Server Message Block(SMB) is a client-server communication protocol used for sharing access to files, printers, serial ports and other resources on a network.
-Enum4linux is a tool used to enumerate SMB shares on both Windows and Linux systems. It is basically a wrapper around the tools in the Samba package and makes it easy to quickly extract information from the target pertaining to SMB. This tool is always used after conducting port scan and SMB port is open." />
-<meta name="keywords" content=", " />
+<meta name="description" content="Diving into the TryHackMe Network Services room was an electrifying adventure! Unveiling the intricacies of network services, troubleshooting vulnerabilities, and triumphing over challenges added a surge of excitement to my cybersecurity journey. Join me as I share insights, strategies, and the thrill of conquering this virtual landscape." />
+<meta name="keywords" content="" />
 
   <meta name="robots" content="noodp" />
 
@@ -44,8 +43,7 @@ Enum4linux is a tool used to enumerate SMB shares on both Windows and Linux syst
 <meta property="og:locale" content="en" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="Networkservice 1">
-<meta property="og:description" content="Introduction: Server Message Block(SMB) is a client-server communication protocol used for sharing access to files, printers, serial ports and other resources on a network.
-Enum4linux is a tool used to enumerate SMB shares on both Windows and Linux systems. It is basically a wrapper around the tools in the Samba package and makes it easy to quickly extract information from the target pertaining to SMB. This tool is always used after conducting port scan and SMB port is open." />
+<meta property="og:description" content="Diving into the TryHackMe Network Services room was an electrifying adventure! Unveiling the intricacies of network services, troubleshooting vulnerabilities, and triumphing over challenges added a surge of excitement to my cybersecurity journey. Join me as I share insights, strategies, and the thrill of conquering this virtual landscape." />
 <meta property="og:url" content="https://cyberbored.site/posts/networkservice1/" />
 <meta property="og:site_name" content="CyberBored Blog" />
 
@@ -136,7 +134,7 @@ Enum4linux is a tool used to enumerate SMB shares on both Windows and Linux syst
   <h1 class="post-title">
     <a href="https://cyberbored.site/posts/networkservice1/">Networkservice 1</a>
   </h1>
-  <div class="post-meta"><time class="post-date">2023-08-19</time><span class="post-author">Mahmoud Choumar</span></div>
+  <div class="post-meta"><time class="post-date">2023-08-19</time></div>
 
   
     <span class="post-tags">
@@ -157,15 +155,45 @@ Enum4linux is a tool used to enumerate SMB shares on both Windows and Linux syst
 <p>Server Message Block(SMB) is a client-server communication protocol used for sharing access to files, printers, serial ports and other resources on a network.</p>
 <p>Enum4linux is a tool used to enumerate SMB shares on both Windows and Linux systems. It is basically a wrapper around the tools in the Samba package and makes it easy to quickly extract information from the target pertaining to SMB. This tool is always used after conducting port scan and SMB port is open.
 The syntax of Enum4linux: enum3linux [flag] ip.
-Flags for Enum4linux:
-|TAG| FUNCTION|
-|-U |Get userlist.|
-|-M| Get machine list.|
-|-N |Get namelist dump (different from -U and -M).|
-|-S |Get sharelist.|
-|-P |Get password policy information.|
-|-G |Get group and member list.|
-|-a |All of the above (full basic enumeration).|</p>
+Flags for Enum4linux:</p>
+<table>
+<thead>
+<tr>
+<th>TAG</th>
+<th>FUNCTION</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-U</td>
+<td>Get userlist.</td>
+</tr>
+<tr>
+<td>-M</td>
+<td>Get machine list.</td>
+</tr>
+<tr>
+<td>-N</td>
+<td>Get namelist dump (different from -U and -M).</td>
+</tr>
+<tr>
+<td>-S</td>
+<td>Get sharelist.</td>
+</tr>
+<tr>
+<td>-P</td>
+<td>Get password policy information.</td>
+</tr>
+<tr>
+<td>-G</td>
+<td>Get group and member list.</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>All of the above (full basic enumeration).</td>
+</tr>
+</tbody>
+</table>
 <h1 id="practical">Practical:<a href="#practical" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
 <p>First, I started by scanning the open ports using nmap.</p>
 <p><img src="../../images/networkservice/pic0.png" alt="Shell"></p>
@@ -222,22 +250,52 @@ Flags for Enum4linux:
 <p>File Transfer Protocol is a standard network protocol used for transferring files between a client and a server on a computer network. FTP allows users to authenticate themselves using a username and password to access files stored on a remote server. While FTP is convenient for file sharing, it has security vulnerabilities, such as transmitting data, including login credentials, in plain text. To address these security concerns, Secure FTP (SFTP) and FTPS (FTP Secure) protocols have been developed, which provide encryption and enhanced security for file transfers.</p>
 <h1 id="practical-2">Practical:<a href="#practical-2" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
 <p>For the FTP practical lab, as tradition I scanned the target ports using nmap to find open ports, and only 2 ports were available 21 and 80. We can see that there is a file called PUBLIC_NOTICE.txt on FTP.</p>
-<p><img src="../../images/networkservice/28.png" alt="Shell"></p>
+<p><img src="../../images/networkservice/pic28.png" alt="Shell"></p>
 <p><img src="../../images/networkservice/29.png" alt="Shell"></p>
 <p><img src="../../images/networkservice/30.png" alt="Shell">
 And using ftp, I connected to the target using anonymous username and downloaded the file that was available.</p>
 <p><img src="../../images/networkservice/31.png" alt="Shell"></p>
 <p>But it isn&rsquo;t really useful, I needed to gain privilege escalation on the target.</p>
-<p><em>Note:</em> Hydra is a very fast online password cracking tool, which can perform rapid dictionary attacks against more than 50 Protocols, including Telnet, RDP, SSH, FTP, HTTP, HTTPS, SMB, several databases and much more. Hydra comes by default on both Parrot and Kali, however if you need it, you can find the GitHub here.</p>
-<p>Some important flags that we will use:
-|Section |Function|
-|hydra |Runs the hydra tool.|
-|-t 4 |Number of parallel connections per target.|
-|-l [user] |Points to the user who&rsquo;s account you are trying to compromise.|
-|-P[path to dictionary]| Points to the file containing the list of possible passwords.|
-|-vV |Sets verbose mode to very verbose, shows the login+pass combination for each attempt.|
-|[machine IP]| |The IP address of the target machine.|
-|Ftp / protocol |Set the protocol.</p>
+<p><strong>Note:</strong> Hydra is a very fast online password cracking tool, which can perform rapid dictionary attacks against more than 50 Protocols, including Telnet, RDP, SSH, FTP, HTTP, HTTPS, SMB, several databases and much more. Hydra comes by default on both Parrot and Kali, however if you need it, you can find the GitHub here.</p>
+<p>Some important flags that we will use:</p>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hydra</td>
+<td>Runs the hydra tool.</td>
+</tr>
+<tr>
+<td>-t 4</td>
+<td>Number of parallel connections per target.</td>
+</tr>
+<tr>
+<td>-l [user]</td>
+<td>Points to the user who&rsquo;s account you are trying to compromise.</td>
+</tr>
+<tr>
+<td>-P[path to dictionary]</td>
+<td>Points to the file containing the list of possible passwords.</td>
+</tr>
+<tr>
+<td>-vV</td>
+<td>Sets verbose mode to very verbose, shows the login+pass combination for each attempt.</td>
+</tr>
+<tr>
+<td>[machine IP]</td>
+<td></td>
+</tr>
+<tr>
+<td>Ftp / protocol</td>
+<td>Set the protocol.</td>
+</tr>
+</tbody>
+</table>
 <p><img src="../../images/networkservice/32.png" alt="Shell"></p>
 <p>By simply setting up the username number of parallel connections, path of the password lists, verberose to be able to see the passwords used, IP address of the target and protocol we want to run it on, hydra tool started spraying passwords on FTP username mike and I just waited for the tool to find the correct password. Depending on your device it might take some time. Fortunately for me, mike had an easy and well-known password. For the next step, I used the new found credentials to login to the target and gain access.</p>
 <p><img src="../../images/networkservice/33.png" alt="Shell"></p>
@@ -254,6 +312,13 @@ And using ftp, I connected to the target using anonymous username and downloaded
         <hr />
     </div>
     <div class="pagination__buttons">
+        
+        <span class="button previous">
+            <a href="https://cyberbored.site/posts/ad/">
+                <span class="button__icon">←</span>
+                <span class="button__text">Active Directory</span>
+            </a>
+        </span>
         
         
         <span class="button next">

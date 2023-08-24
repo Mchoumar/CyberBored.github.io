@@ -19,15 +19,45 @@ Enum4linux is a tool used to enumerate SMB shares on both Windows and Linux syst
 &lt;p&gt;Server Message Block(SMB) is a client-server communication protocol used for sharing access to files, printers, serial ports and other resources on a network.&lt;/p&gt;
 &lt;p&gt;Enum4linux is a tool used to enumerate SMB shares on both Windows and Linux systems. It is basically a wrapper around the tools in the Samba package and makes it easy to quickly extract information from the target pertaining to SMB. This tool is always used after conducting port scan and SMB port is open.
 The syntax of Enum4linux: enum3linux [flag] ip.
-Flags for Enum4linux:
-|TAG| FUNCTION|
-|-U |Get userlist.|
-|-M| Get machine list.|
-|-N |Get namelist dump (different from -U and -M).|
-|-S |Get sharelist.|
-|-P |Get password policy information.|
-|-G |Get group and member list.|
-|-a |All of the above (full basic enumeration).|&lt;/p&gt;
+Flags for Enum4linux:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;TAG&lt;/th&gt;
+&lt;th&gt;FUNCTION&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;-U&lt;/td&gt;
+&lt;td&gt;Get userlist.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-M&lt;/td&gt;
+&lt;td&gt;Get machine list.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-N&lt;/td&gt;
+&lt;td&gt;Get namelist dump (different from -U and -M).&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-S&lt;/td&gt;
+&lt;td&gt;Get sharelist.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-P&lt;/td&gt;
+&lt;td&gt;Get password policy information.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-G&lt;/td&gt;
+&lt;td&gt;Get group and member list.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-a&lt;/td&gt;
+&lt;td&gt;All of the above (full basic enumeration).&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;h1 id=&#34;practical&#34;&gt;Practical:&lt;/h1&gt;
 &lt;p&gt;First, I started by scanning the open ports using nmap.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic0.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
@@ -84,22 +114,52 @@ Flags for Enum4linux:
 &lt;p&gt;File Transfer Protocol is a standard network protocol used for transferring files between a client and a server on a computer network. FTP allows users to authenticate themselves using a username and password to access files stored on a remote server. While FTP is convenient for file sharing, it has security vulnerabilities, such as transmitting data, including login credentials, in plain text. To address these security concerns, Secure FTP (SFTP) and FTPS (FTP Secure) protocols have been developed, which provide encryption and enhanced security for file transfers.&lt;/p&gt;
 &lt;h1 id=&#34;practical-2&#34;&gt;Practical:&lt;/h1&gt;
 &lt;p&gt;For the FTP practical lab, as tradition I scanned the target ports using nmap to find open ports, and only 2 ports were available 21 and 80. We can see that there is a file called PUBLIC_NOTICE.txt on FTP.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../images/networkservice/28.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic28.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/networkservice/29.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/networkservice/30.png&#34; alt=&#34;Shell&#34;&gt;
 And using ftp, I connected to the target using anonymous username and downloaded the file that was available.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/networkservice/31.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
 &lt;p&gt;But it isn&amp;rsquo;t really useful, I needed to gain privilege escalation on the target.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Note:&lt;/em&gt; Hydra is a very fast online password cracking tool, which can perform rapid dictionary attacks against more than 50 Protocols, including Telnet, RDP, SSH, FTP, HTTP, HTTPS, SMB, several databases and much more. Hydra comes by default on both Parrot and Kali, however if you need it, you can find the GitHub here.&lt;/p&gt;
-&lt;p&gt;Some important flags that we will use:
-|Section |Function|
-|hydra |Runs the hydra tool.|
-|-t 4 |Number of parallel connections per target.|
-|-l [user] |Points to the user who&amp;rsquo;s account you are trying to compromise.|
-|-P[path to dictionary]| Points to the file containing the list of possible passwords.|
-|-vV |Sets verbose mode to very verbose, shows the login+pass combination for each attempt.|
-|[machine IP]| |The IP address of the target machine.|
-|Ftp / protocol |Set the protocol.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Hydra is a very fast online password cracking tool, which can perform rapid dictionary attacks against more than 50 Protocols, including Telnet, RDP, SSH, FTP, HTTP, HTTPS, SMB, several databases and much more. Hydra comes by default on both Parrot and Kali, however if you need it, you can find the GitHub here.&lt;/p&gt;
+&lt;p&gt;Some important flags that we will use:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Section&lt;/th&gt;
+&lt;th&gt;Function&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;hydra&lt;/td&gt;
+&lt;td&gt;Runs the hydra tool.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-t 4&lt;/td&gt;
+&lt;td&gt;Number of parallel connections per target.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-l [user]&lt;/td&gt;
+&lt;td&gt;Points to the user who&amp;rsquo;s account you are trying to compromise.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-P[path to dictionary]&lt;/td&gt;
+&lt;td&gt;Points to the file containing the list of possible passwords.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-vV&lt;/td&gt;
+&lt;td&gt;Sets verbose mode to very verbose, shows the login+pass combination for each attempt.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;[machine IP]&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ftp / protocol&lt;/td&gt;
+&lt;td&gt;Set the protocol.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/networkservice/32.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
 &lt;p&gt;By simply setting up the username number of parallel connections, path of the password lists, verberose to be able to see the passwords used, IP address of the target and protocol we want to run it on, hydra tool started spraying passwords on FTP username mike and I just waited for the tool to find the correct password. Depending on your device it might take some time. Fortunately for me, mike had an easy and well-known password. For the next step, I used the new found credentials to login to the target and gain access.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/networkservice/33.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
