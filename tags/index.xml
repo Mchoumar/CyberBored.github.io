@@ -6,23 +6,24 @@
     <description>Recent content in Tags on CyberBored Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 19 Aug 2023 16:30:33 +0200</lastBuildDate><atom:link href="https://cyberbored.site/tags/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>CyberBored, Inc. Copyright</copyright>
+    <lastBuildDate>Thu, 24 Aug 2023 10:31:35 +0200</lastBuildDate><atom:link href="https://cyberbored.site/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Networking</title>
-      <link>https://cyberbored.site/tags/networking/</link>
-      <pubDate>Sat, 19 Aug 2023 16:30:33 +0200</pubDate>
+      <title>Projects</title>
+      <link>https://cyberbored.site/tags/projects/</link>
+      <pubDate>Thu, 24 Aug 2023 10:31:35 +0200</pubDate>
       
-      <guid>https://cyberbored.site/tags/networking/</guid>
+      <guid>https://cyberbored.site/tags/projects/</guid>
       <description></description>
       <content></content>
     </item>
     
     <item>
-      <title>Red-Team</title>
-      <link>https://cyberbored.site/tags/red-team/</link>
+      <title>Blogs</title>
+      <link>https://cyberbored.site/tags/blogs/</link>
       <pubDate>Sat, 19 Aug 2023 16:30:33 +0200</pubDate>
       
-      <guid>https://cyberbored.site/tags/red-team/</guid>
+      <guid>https://cyberbored.site/tags/blogs/</guid>
       <description></description>
       <content></content>
     </item>
@@ -43,26 +44,6 @@
       <pubDate>Thu, 17 Aug 2023 22:33:51 +0200</pubDate>
       
       <guid>https://cyberbored.site/tags/htb/</guid>
-      <description></description>
-      <content></content>
-    </item>
-    
-    <item>
-      <title>Linux</title>
-      <link>https://cyberbored.site/tags/linux/</link>
-      <pubDate>Thu, 10 Aug 2023 04:32:52 +0200</pubDate>
-      
-      <guid>https://cyberbored.site/tags/linux/</guid>
-      <description></description>
-      <content></content>
-    </item>
-    
-    <item>
-      <title>Scripting</title>
-      <link>https://cyberbored.site/tags/scripting/</link>
-      <pubDate>Thu, 10 Aug 2023 04:32:52 +0200</pubDate>
-      
-      <guid>https://cyberbored.site/tags/scripting/</guid>
       <description></description>
       <content></content>
     </item>

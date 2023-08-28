@@ -6,13 +6,14 @@
     <description>Recent content on CyberBored Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
+    <copyright>CyberBored, Inc. Copyright</copyright>
     <lastBuildDate>Thu, 24 Aug 2023 10:31:35 +0200</lastBuildDate><atom:link href="https://cyberbored.site/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Active Directory</title>
-      <link>https://cyberbored.site/posts/ad/</link>
+      <title>Active Directory Home Lab</title>
+      <link>https://cyberbored.site/projects/ad/</link>
       <pubDate>Thu, 24 Aug 2023 10:31:35 +0200</pubDate>
       
-      <guid>https://cyberbored.site/posts/ad/</guid>
+      <guid>https://cyberbored.site/projects/ad/</guid>
       <description>Introduction: Today I will be starting my first ever Active Directory Home Lab.
 Requirements: - Virtual machine from any vendor of your choice.- Windows Server 2019 ISO.- Window 10 ISO.Requirements Installation: -VMware: Installation Link, Either press the provided link or search for Vmware Player Workstation, then simply scroll down and you will see the following picture:
 Choose which version you want depending on the OS you are using and press download and simply install the app.</description>
@@ -355,10 +356,10 @@ And using ftp, I connected to the target using anonymous username and downloaded
     
     <item>
       <title>Devil Machine</title>
-      <link>https://cyberbored.site/posts/htb/devil/</link>
+      <link>https://cyberbored.site/ctf/devil/</link>
       <pubDate>Thu, 17 Aug 2023 22:33:51 +0200</pubDate>
       
-      <guid>https://cyberbored.site/posts/htb/devil/</guid>
+      <guid>https://cyberbored.site/ctf/devil/</guid>
       <description>My personal walk through: I started today with my first ever machine after the starting point training. I first connected to the htb openvpn service and started searching the ports and versions of the port using nmap:
 After that, I accessed the ftp open port and tried downloading and uploading some files using get and put, which allowed me to learn that I am on root privilege. Then, I started searching and learning about BurpSuit Reference which I used to intercept the websites requests.</description>
       <content>&lt;h1 id=&#34;my-personal-walk-through&#34;&gt;My personal walk through:&lt;/h1&gt;
@@ -591,8 +592,6 @@ As a passionate cybersecurity enthusiast, I&amp;rsquo;ve embarked on a journey t
 &lt;p&gt;Whether you&amp;rsquo;re a fellow cybersecurity enthusiast, a curious beginner, or someone looking to enhance their digital security, there&amp;rsquo;s something here for you. Join me as I navigate the ever-changing landscape of cybersecurity, and together, let&amp;rsquo;s stay one step ahead of the digital adversaries.&lt;/p&gt;
 &lt;p&gt;When I&amp;rsquo;m not immersed in lines of code or researching the latest vulnerabilities, you might find me engaging in hands-on labs on platforms like TryHackMe or HackTheBox. Feel free to explore the blog, engage in discussions, and connect with me on &lt;a href=&#34;https://www.linkedin.com/in/mahmoud-choumar-3b446b20b/&#34;&gt;Linkedin&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Thank you for being a part of this cybersecurity journey. Let&amp;rsquo;s explore, learn, and secure together!&lt;/p&gt;
-&lt;p&gt;Stay safe,
-&lt;strong&gt;Mahmoud Choumar&lt;/strong&gt;.&lt;/p&gt;
 </content>
     </item>
     

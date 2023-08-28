@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blogs on CyberBored Blog</title>
+    <link>https://cyberbored.site/tags/blogs/</link>
+    <description>Recent content in Blogs on CyberBored Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>CyberBored, Inc. Copyright</copyright>
+    <lastBuildDate>Sat, 19 Aug 2023 16:30:33 +0200</lastBuildDate><atom:link href="https://cyberbored.site/tags/blogs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Networkservice 1</title>
+      <link>https://cyberbored.site/posts/networkservice1/</link>
+      <pubDate>Sat, 19 Aug 2023 16:30:33 +0200</pubDate>
+      
+      <guid>https://cyberbored.site/posts/networkservice1/</guid>
+      <description>Introduction: Server Message Block(SMB) is a client-server communication protocol used for sharing access to files, printers, serial ports and other resources on a network.
+Enum4linux is a tool used to enumerate SMB shares on both Windows and Linux systems. It is basically a wrapper around the tools in the Samba package and makes it easy to quickly extract information from the target pertaining to SMB. This tool is always used after conducting port scan and SMB port is open.</description>
+      <content>&lt;h1 id=&#34;introduction&#34;&gt;Introduction:&lt;/h1&gt;
+&lt;p&gt;Server Message Block(SMB) is a client-server communication protocol used for sharing access to files, printers, serial ports and other resources on a network.&lt;/p&gt;
+&lt;p&gt;Enum4linux is a tool used to enumerate SMB shares on both Windows and Linux systems. It is basically a wrapper around the tools in the Samba package and makes it easy to quickly extract information from the target pertaining to SMB. This tool is always used after conducting port scan and SMB port is open.
+The syntax of Enum4linux: enum3linux [flag] ip.
+Flags for Enum4linux:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;TAG&lt;/th&gt;
+&lt;th&gt;FUNCTION&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;-U&lt;/td&gt;
+&lt;td&gt;Get userlist.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-M&lt;/td&gt;
+&lt;td&gt;Get machine list.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-N&lt;/td&gt;
+&lt;td&gt;Get namelist dump (different from -U and -M).&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-S&lt;/td&gt;
+&lt;td&gt;Get sharelist.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-P&lt;/td&gt;
+&lt;td&gt;Get password policy information.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-G&lt;/td&gt;
+&lt;td&gt;Get group and member list.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-a&lt;/td&gt;
+&lt;td&gt;All of the above (full basic enumeration).&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;practical&#34;&gt;Practical:&lt;/h1&gt;
+&lt;p&gt;First, I started by scanning the open ports using nmap.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic0.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Then I searched for the group name, OS version, and the machine name using the following command:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic1.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic2.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic3.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;After finding the OS version and important sharenames:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic4.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Which I used to connect to the target using the group name, share name, and anonymous username:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic5.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;I tried all the available files in the directory by downloading them using get and printing the results inside the file using cat, and the only file I was able to get information from was the Working text file.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic6.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic7.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Which also allowed me to learn that the target was using SSH to connect to the company&amp;rsquo;s network from his home due to the pandemic. After gathering this information, I navigated to a directory called .ssh which contained few important files.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic8.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;After downloading the file id_rsa and moving it to the .ssh file and then using the more command to access the name of the target through the id_rsa.pub file, which is cactus.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic9.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic10.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic11.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic12.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;After getting the name and the private key, I accessed the target through ssh and immediately found the flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic13.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;brief-summary-about-telnet&#34;&gt;Brief Summary about Telnet:&lt;/h1&gt;
+&lt;p&gt;Telnet is a network protocol that allows users to establish a command-line connection to a remote device over a network. A key note to keep in mind about Telnet is that it runs its transmitted packets unencrypted, which makes it easy and simple to capture and read all the plain text packets. Best practice is to replace Telnet with the more secure option SSH. Telnet can be run using the following command: &amp;rsquo;telnet[ip][port]&#39;&lt;/p&gt;
+&lt;h1 id=&#34;practical-1&#34;&gt;Practical:&lt;/h1&gt;
+&lt;p&gt;I started by scanning the target using nmap to check for open ports, but I wasn&amp;rsquo;t able to find any of the 1000 well known ports opened.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic14.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic15.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;So I switched to a different flag, which is the all port scanning flag to get a wider range of ports to scan, which found 1 port opened that I have never seen before.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic16.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic17.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;I tried figuring out what this service was used for, but it was a little bit of a brain scratch so I searched up port 8012 to learn what is it used for and apparently it is used for a trojan or a backdoor.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic18.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;So I scanned again the port using nmap, but only port 8012 to get detailed information about it and its version.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic19.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic20.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;I learned from the scan that it is called SKIDY&amp;rsquo;S BACKDOOR. After learning these information, I used the opened port 8012 to connect to the target machine using telnet, and it immediately I was in, but all commands I input doesn&amp;rsquo;t return any output. I ran tcpdump in the background to listen to any ICMP message and used ping to check if the target is active.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic21.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic22.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic23.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Since the machine is online and reachable, I am able to execute commands. Which why I used msfvenom to generate a reverse shell payload.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic24.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;• -p = payload.
+• lhost = our local host IP address (this is your machine&#39;s IP address).
+• lport = the port to listen on (this is the port on your machine).
+• R = export the payload in raw format.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then, using netcat to listen to port 4444, I connected again to the target using telnet and ran the command that msfvenom generated to gain access to the target and get the flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic25.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic26.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic27.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;brief-summary-about-ftp&#34;&gt;Brief Summary about FTP:&lt;/h1&gt;
+&lt;p&gt;File Transfer Protocol is a standard network protocol used for transferring files between a client and a server on a computer network. FTP allows users to authenticate themselves using a username and password to access files stored on a remote server. While FTP is convenient for file sharing, it has security vulnerabilities, such as transmitting data, including login credentials, in plain text. To address these security concerns, Secure FTP (SFTP) and FTPS (FTP Secure) protocols have been developed, which provide encryption and enhanced security for file transfers.&lt;/p&gt;
+&lt;h1 id=&#34;practical-2&#34;&gt;Practical:&lt;/h1&gt;
+&lt;p&gt;For the FTP practical lab, as tradition I scanned the target ports using nmap to find open ports, and only 2 ports were available 21 and 80. We can see that there is a file called PUBLIC_NOTICE.txt on FTP.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/pic28.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/29.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/30.png&#34; alt=&#34;Shell&#34;&gt;
+And using ftp, I connected to the target using anonymous username and downloaded the file that was available.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/31.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;But it isn&amp;rsquo;t really useful, I needed to gain privilege escalation on the target.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Hydra is a very fast online password cracking tool, which can perform rapid dictionary attacks against more than 50 Protocols, including Telnet, RDP, SSH, FTP, HTTP, HTTPS, SMB, several databases and much more. Hydra comes by default on both Parrot and Kali, however if you need it, you can find the GitHub here.&lt;/p&gt;
+&lt;p&gt;Some important flags that we will use:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Section&lt;/th&gt;
+&lt;th&gt;Function&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;hydra&lt;/td&gt;
+&lt;td&gt;Runs the hydra tool.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-t 4&lt;/td&gt;
+&lt;td&gt;Number of parallel connections per target.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-l [user]&lt;/td&gt;
+&lt;td&gt;Points to the user who&amp;rsquo;s account you are trying to compromise.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-P[path to dictionary]&lt;/td&gt;
+&lt;td&gt;Points to the file containing the list of possible passwords.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-vV&lt;/td&gt;
+&lt;td&gt;Sets verbose mode to very verbose, shows the login+pass combination for each attempt.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;[machine IP]&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ftp / protocol&lt;/td&gt;
+&lt;td&gt;Set the protocol.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/32.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;By simply setting up the username number of parallel connections, path of the password lists, verberose to be able to see the passwords used, IP address of the target and protocol we want to run it on, hydra tool started spraying passwords on FTP username mike and I just waited for the tool to find the correct password. Depending on your device it might take some time. Fortunately for me, mike had an easy and well-known password. For the next step, I used the new found credentials to login to the target and gain access.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/33.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice/34.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;And I finally gained the final flag, which allowed me to complete the room.&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Nmap</title>
+      <link>https://cyberbored.site/posts/nmap/</link>
+      <pubDate>Tue, 15 Aug 2023 14:43:22 +0200</pubDate>
+      
+      <guid>https://cyberbored.site/posts/nmap/</guid>
+      <description>Embarking on a new Nmap project today, I&amp;rsquo;m diving into the realm of testing and exploring device scanning.
+To kick things off, it&amp;rsquo;s fascinating to note that every network-enabled computer boasts a whopping 65535 open ports. Out of these, 1024 are well-known ports that add an intriguing layer to our journey.
+Key flags to keep in mind:
+Flags Description -sS Half-open or stealth scan, which has similar function to TCP scan.</description>
+      <content>&lt;p&gt;Embarking on a new Nmap project today, I&amp;rsquo;m diving into the realm of testing and exploring device scanning.&lt;/p&gt;
+&lt;p&gt;To kick things off, it&amp;rsquo;s fascinating to note that every network-enabled computer boasts a whopping 65535 open ports. Out of these, 1024 are well-known ports that add an intriguing layer to our journey.&lt;/p&gt;
+&lt;p&gt;Key flags to keep in mind:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Flags&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;-sS&lt;/td&gt;
+&lt;td&gt;Half-open or stealth scan, which has similar function to TCP scan. Key difference between the two scan is that TCP scan performs.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-sT&lt;/td&gt;
+&lt;td&gt;TCP connect scans, which performs 3-way handshake.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-sU&lt;/td&gt;
+&lt;td&gt;UDP connect scans, which doesn&amp;rsquo;t rely on the handshake.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-sN&lt;/td&gt;
+&lt;td&gt;NULL scans, TCP request is sent with no flag set at all, and receives RST if port is closed.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-sX&lt;/td&gt;
+&lt;td&gt;Xmas scans, sends malformed TCP packet and expects RST response for closed ports. It is called Xmas, as it sends(PSH, URG and FIN) which give it the appearance of a blinking Christmas tree.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-sF&lt;/td&gt;
+&lt;td&gt;FIN scans, similar to the NULL scan, but sends with a FIN flag.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-O&lt;/td&gt;
+&lt;td&gt;Detects which operating system the target is running.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-sV&lt;/td&gt;
+&lt;td&gt;Detects the version of the services running on the target.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-v, vv, vvv&lt;/td&gt;
+&lt;td&gt;Verbosity is used to scan with in depth details.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-oA&lt;/td&gt;
+&lt;td&gt;Outputs Nmap results in three major formats.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-oN&lt;/td&gt;
+&lt;td&gt;Saves Nmap results in normal format.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-oG&lt;/td&gt;
+&lt;td&gt;Saves Nmap results in gerpable format.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-A&lt;/td&gt;
+&lt;td&gt;Aggressive mode, which activates service detection, operating system, traceroute, and script scanning.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-T1-5&lt;/td&gt;
+&lt;td&gt;Timer template from level 1-5.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-p&lt;/td&gt;
+&lt;td&gt;Port scan, can be used to specify the ports to be scanned.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-p-&lt;/td&gt;
+&lt;td&gt;All ports scan, as the name suggest it scans all open ports.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;ndash;script&lt;/td&gt;
+&lt;td&gt;Activates Nmap scripts.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-sn&lt;/td&gt;
+&lt;td&gt;Ping sweep, depends on ICMP message, which is sent to all specified IP addresses.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-Pn&lt;/td&gt;
+&lt;td&gt;Tells Nmap to scan without pinging the target in other words Nmap assumes that the target is alive.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-f&lt;/td&gt;
+&lt;td&gt;Used to fragment the packets.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;ndash;mtu &lt;!-- raw HTML omitted --&gt;&lt;/td&gt;
+&lt;td&gt;Similar to the use of fragmented packet, but allows you to control the size of the packet.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;ndash;scan-delay &lt;!-- raw HTML omitted --&gt;ms&lt;/td&gt;
+&lt;td&gt;Used to add a delay between packets sent.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;ndash;badsum&lt;/td&gt;
+&lt;td&gt;Used to generate in invalid checksum for packets. However, firewalls might respond automatically, without bothering to check the checksum of the packet. Which allows this flag to check the presence of firewall/IDS.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;The Nmap Scripting Engine (NSE) serves as a potent augmentation to Nmap, significantly expanding its capabilities. Written in the Lua programming language, NSE Scripts empower a wide spectrum of functionalities, ranging from vulnerability scanning to automated exploit deployment. While its applications are diverse, NSE&amp;rsquo;s remarkable utility lies in reconnaissance, yet it&amp;rsquo;s crucial to acknowledge the extensive script library at play.&lt;/p&gt;
+&lt;p&gt;The NSE scripts can be classified into different categories:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;• safe: Won&#39;t affect the target
+• intrusive: Not safe: likely to affect the target
+• vuln: Scan for vulnerabilities
+• exploit: Attempt to exploit a vulnerability
+• auth: Attempt to bypass authentication for running services (e.g. Log into an FTP server anonymously)
+• brute: Attempt to brute force credentials for running services
+• discovery: Attempt to query running services for further information about the network (e.g. query an SNMP server).
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For instance, to execute a script, use the command &amp;lsquo;&amp;ndash;script=&lt;!-- raw HTML omitted --&gt;&amp;rsquo; or &amp;lsquo;&amp;ndash;script=vuln&amp;rsquo;. Multiple scripts can run concurrently with a command like &amp;lsquo;&amp;ndash;script=smb-enum-users,smb-enum-shares&amp;rsquo;.&lt;/p&gt;
+&lt;p&gt;Certain scripts require arguments, such as credentials for authenticated vulnerabilities, which can be provided using the &amp;ndash;script-args Nmap switch. Example: &amp;rsquo;nmap -p 80 &amp;ndash;script http-put &amp;ndash;script-args http-put.url=&amp;rsquo;/dav/shell.php&amp;rsquo;,http-put.file=&amp;rsquo;./shell.php&amp;rsquo;&amp;rsquo;.&lt;/p&gt;
+&lt;p&gt;For further assistance with scripts, utilize &amp;rsquo;nmap &amp;ndash;script-help &lt;!-- raw HTML omitted --&gt;&amp;rsquo;.&lt;/p&gt;
+&lt;p&gt;Nmap offers a formatted text file detailing filenames and categories for available scripts, which can be located at &amp;lsquo;/usr/share/nmap/scripts/script.db&amp;rsquo;. To search for scripts, you can use commands like &amp;lsquo;grep &amp;ldquo;gtp&amp;rdquo; /usr/share/nmap/scripts/script.db&amp;rsquo; or &amp;rsquo;ls -l /usr/share/nmap/scripts/&lt;em&gt;ftp&lt;/em&gt;&amp;rsquo;. Comprehensive scripts and libraries can be explored via this reference: &lt;a href=&#34;https://nmap.org/nsedoc/&#34;&gt;https://nmap.org/nsedoc/&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To install/update the script list, consider these approaches:&lt;/p&gt;
+&lt;p&gt;1-Run &amp;lsquo;sudo apt update &amp;amp;&amp;amp; sudo apt install nmap&amp;rsquo;.
+2-Use &amp;lsquo;sudo wget -O /usr/share/nmap/scripts/&lt;!-- raw HTML omitted --&gt;.nse &lt;a href=&#34;https://svb.nmap.org/nmap/scripts/&#34;&gt;https://svb.nmap.org/nmap/scripts/&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;.nse&amp;rsquo;, followed by &amp;rsquo;nmap &amp;ndash;script-updatedb&amp;rsquo;.&lt;/p&gt;
+&lt;h1 id=&#34;practical-lab&#34;&gt;Practical Lab:&lt;/h1&gt;
+&lt;p&gt;To initiate, I commenced by sending a ping to the target using the command &amp;lsquo;ping -c 5 10.10.239.246&amp;rsquo;. The purpose was to discern if the target would reciprocate with an ICMP response—a standard practice in network diagnostics. Subsequently, I employed &amp;lsquo;ping -h&amp;rsquo; to explore the array of available flags. Notably, the -c flag came into play, dictating the halt of pinging after five responses were received from the target. This parameter was selected to govern the desired extent of the ping operation.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/nmap/pic0.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Based on the displayed outcomes, it was evident that the target did not acknowledge the receipt of packets. Moving forward, I conducted an assessment to determine the status of the first 999 ports through an Xmas scan. The endeavor involved specifying the range of ports to be examined using the &amp;lsquo;-p&amp;rsquo; flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/nmap/pic1.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;The scan revealed the ports in an open but disregarded state. Subsequently, I identified an issue with my openvpn setup, which was rectified by generating a fresh openvpn configuration file via TryHackMe. With the hurdle overcome, I proceeded to re-execute the nmap scans for open ports, this time employing a TCP scan. The result brought to light the presence of 5 accessible ports:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/nmap/pic2.png&#34; alt=&#34;Script&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Concluding the process, I harnessed &amp;rsquo;nmap &amp;ndash;script&amp;rsquo; to scrutinize port 21 FTP, assessing its potential for facilitating access to the target. As a culmination, I successfully employed the anonymous username to establish a login into the target&amp;rsquo;s FTP server.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/nmap/pic3.png&#34; alt=&#34;result&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/nmap/pic4.png&#34; alt=&#34;login&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/nmap/pic5.png&#34; alt=&#34;login&#34;&gt;&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Bash Shell Scripting</title>
+      <link>https://cyberbored.site/posts/bashscript/</link>
+      <pubDate>Thu, 10 Aug 2023 04:32:52 +0200</pubDate>
+      
+      <guid>https://cyberbored.site/posts/bashscript/</guid>
+      <description>Introduction: I started by checking out what shell is running in our terminal using echo $SHELL.
+Then using the command ls I listed the available files and directories in our working directory, and after that I listed the long format of the directories and files including the hidden ones using -la. After checking the current data available using ls, I typed pwd to check my current working directory. Next using cd / I navigated to the root directory which is located at the top of all directories, which contains sensitive files.</description>
+      <content>&lt;h1 id=&#34;introduction&#34;&gt;Introduction:&lt;/h1&gt;
+&lt;p&gt;I started by checking out what shell is running in our terminal using echo $SHELL.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/bash/pic0.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Then using the command &lt;strong&gt;ls&lt;/strong&gt; I listed the available files and directories in our working directory, and after that I listed the long format of the directories and files including the hidden ones using &lt;strong&gt;-la&lt;/strong&gt;.
+After checking the current data available using ls, I typed &lt;strong&gt;pwd&lt;/strong&gt; to check my current working directory. Next using &lt;strong&gt;cd /&lt;/strong&gt; I navigated to the root directory which is located at the top of all directories, which contains sensitive files.&lt;/p&gt;
+&lt;h1 id=&#34;manipulating-files&#34;&gt;Manipulating files:&lt;/h1&gt;
+&lt;p&gt;I used &lt;strong&gt;touch&lt;/strong&gt; command to create a file name myBashScript then used &lt;strong&gt;ls -l myBashScript&lt;/strong&gt; to list my new file and check that it was created successfully, I decided next that I would like to change the name of the file using the command &lt;strong&gt;mv myBashScript muchBetterName&lt;/strong&gt;. Finally, I removed the file using rm muchBetterName.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/bash/pic1.png&#34; alt=&#34;Commands&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Next, I tried cat command which stands for concatenate, to list the contents of a file and redirect the contents into another file. First, I made a file called myNewFile.txt and using the command &lt;strong&gt;echo &amp;ldquo;Hello World&amp;rdquo; &amp;gt; myNewFile.txt&lt;/strong&gt; to output the phrase hello world into the file, then &lt;strong&gt;cat myNewFile.txt&lt;/strong&gt; to output the content on the screen. Next, I used the command &lt;strong&gt;cat myNewFile.txt &amp;gt; test.txt&lt;/strong&gt; and finally displayed it using cat.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/bash/pic2.png&#34; alt=&#34;Commands1&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Using more and less you can view all the content of the file or portion of them. I used nano to edit the contents of the files I created.&lt;/p&gt;
+&lt;h1 id=&#34;finding-information&#34;&gt;Finding Information:&lt;/h1&gt;
+&lt;p&gt;I tried creating a new directory using mkdir and moved it to a new directory called backups and created two new files into it, then we deleted the whole file using rm -r backups because rmdir only deletes empty directories.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/bash/pic3.png&#34; alt=&#34;create&#34;&gt;&lt;/p&gt;
+&lt;p&gt;I tried to find a directory using find command, which displayed a bunch of errors then tried it again but I added 2&amp;gt;dev/null which outputs all the errors into the file called null. By using * to be able to get all files and directories that has backup in their names.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/bash/pic4.png&#34; alt=&#34;find&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Next I tried the grep command to find specific files that contains regular expressions.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/bash/pic5.png&#34; alt=&#34;grep&#34;&gt;&lt;/p&gt;
+&lt;p&gt;I learned that using &lt;strong&gt;!ls&lt;/strong&gt; I can access the content since last time I used ls. Using &lt;strong&gt;history&lt;/strong&gt; I can check the history of all commands I used in my CLI and &lt;strong&gt;man&lt;/strong&gt; is used to check the manual of a specific command.&lt;/p&gt;
+&lt;h1 id=&#34;aliases&#34;&gt;Aliases:&lt;/h1&gt;
+&lt;p&gt;Alias is a shortcut we can use to access a command that is frequently used, for example, &lt;strong&gt;ll&lt;/strong&gt; which is an alias for the command ls &lt;strong&gt;-alF&lt;/strong&gt;, we can check what an alias is for by typing &lt;strong&gt;alias ll&lt;/strong&gt;. We can create aliases by going to the file called &lt;strong&gt;.bash_aliases&lt;/strong&gt; which is checked when the shell is first lunched and checks the &lt;strong&gt;.bashrc&lt;/strong&gt; file. To create the aliase, we should run the following into the &lt;strong&gt;.bash_aliases&lt;/strong&gt; file:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/bash/pic6.png&#34; alt=&#34;alias&#34;&gt;&lt;/p&gt;
+&lt;p&gt;And replace the command that is after fbackup with the command you want to create an aliase for, and replace fbackup with the name that you desire for the alias command.
+Note: When you first create an alias the shell won&amp;rsquo;t recognize it, since it only looks into the file once when it is first lunched, to make it look into the file and recognize the new alias we can type &lt;strong&gt;source .bash_aliases&lt;/strong&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;writing-a-shell-script&#34;&gt;Writing a Shell Script:&lt;/h1&gt;
+&lt;p&gt;I started writing my first bash script. First, I created a file using nano and then using #!/bin/bash also known as the Shebang which specifies that the shell type is bash. Next, I wrote a comment to specify what this script is for so that in the future I can understand what it is made for. Then I set up variables and stored directory path into them. After that, to make sure that the file names aren&amp;rsquo;t the same, I assigned a variable that stores the date and I used back tick to let the shell know that it should execute the command that is inside of the back ticks, file name, and the file extension type, then combined them into a variable called FILE_NAME. After the script was create, I changed the file user permission using chmod to be able to execute the script.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/bash/pic7.png&#34; alt=&#34;bash script&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/bash/pic8.png&#34; alt=&#34;script output&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Then I added tar to my script, which stands for tape archive and is used to create Archive and extract the Archive files. Using the command bellow allowed me to create and extracted the archived file using the following flags:
+&lt;strong&gt;-c&lt;/strong&gt; which creates an archive by bundling files and directories together.
+&lt;strong&gt;-f&lt;/strong&gt; Specifies the filename of the archive to be created or extracted.
+&lt;strong&gt;-z&lt;/strong&gt; Uses gzip compression when creating a tar file.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/bash/pic9.png&#34; alt=&#34;zip file&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Reference used: &lt;a href=&#34;https://www.geeksforgeeks.org/tar-command-linux-examples/&#34;&gt;https://www.geeksforgeeks.org/tar-command-linux-examples/&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;bash-scripting-and-creating-a-cron-job-with-crontab&#34;&gt;Bash Scripting and Creating a Cron Job With Crontab:&lt;/h1&gt;
+&lt;p&gt;Final step, I started by creating an if else statement to check if the script is working and sends it to the specified email using the mail command else it will output that at that date something went wrong into the error.log file. Then, I used &lt;strong&gt;crontab -e&lt;/strong&gt; to automate the process.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/bash/pic10.png&#34; alt=&#34;extra code&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/bash/pic11.png&#34; alt=&#34;crontab&#34;&gt;&lt;/p&gt;
+</content>
+    </item>
+    
+  </channel>
+</rss>

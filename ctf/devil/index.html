@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Devil Machine :: CyberBored Blog</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="I took on the challenge of hacking and capturing the flag from a retired machine on HTB. This experience exposed me to privilege escalation, reconnaissance, exploiting, and much more. I found it incredibly engaging, and it became a rich learning opportunity that expanded my knowledge significantly." />
+<meta name="keywords" content="CyebrSecurity, Blog, CyberBored" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="https://cyberbored.site/ctf/devil/" />
+
+
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="https://cyberbored.site/css/green-local.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="https://cyberbored.site/img/theme-colors/green.png">
+  <link rel="apple-touch-icon" href="https://cyberbored.site/img/theme-colors/green.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Devil Machine">
+<meta property="og:description" content="I took on the challenge of hacking and capturing the flag from a retired machine on HTB. This experience exposed me to privilege escalation, reconnaissance, exploiting, and much more. I found it incredibly engaging, and it became a rich learning opportunity that expanded my knowledge significantly." />
+<meta property="og:url" content="https://cyberbored.site/ctf/devil/" />
+<meta property="og:site_name" content="CyberBored Blog" />
+
+  
+    <meta property="og:image" content="https://cyberbored.site/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2023-08-17 22:33:51 &#43;0200 CEST" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="green">
+
+
+<div class="container full headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    CyberBored
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/posts">Blog</a></li>
+        
+      
+        
+          <li><a href="/ctf">CTF</a></li>
+        
+      
+        
+          <li><a href="/projects">Projects</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/posts" >Blog</a></li>
+        
+      
+        
+          <li><a href="/ctf" >CTF</a></li>
+        
+      
+        
+          <li><a href="/projects" >Projects</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="https://cyberbored.site/ctf/devil/">Devil Machine</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2023-08-17</time></div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="https://cyberbored.site/tags/ctf/">CTF</a>&nbsp;
+      
+      #<a href="https://cyberbored.site/tags/htb/">HTB</a>&nbsp;
+      
+    </span>
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <h1 id="my-personal-walk-through">My personal walk through:<a href="#my-personal-walk-through" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>I started today with my first ever machine after the starting point training. I first connected to the htb openvpn service and started searching the ports and versions of the port using nmap:</p>
+<p><img src="../../../images/htb/pic0.png" alt="Shell"></p>
+<p>After that, I accessed the ftp open port and tried downloading and uploading some files using get and put, which allowed me to learn that I am on root privilege. Then, I started searching and learning about BurpSuit Reference which I used to intercept the websites requests. I learned then that the website version is Microsoft IIS httpd 7.5, which after doing a little research I learned that it uses aspx file extension.</p>
+<p>Then, after gathering all that information I searched msfvenom for windows payloads to make a payload in the aspx extention and uploaded it to the server using ftp put command and used msfconsole to lesson for sessions using the multihandler.</p>
+<p><img src="../../../images/htb/pic1.png" alt="Shell"></p>
+<p><img src="../../../images/htb/pic2.png" alt="Shell"></p>
+<p>I faced an issue, where the msfconsole wasn&rsquo;t able to connect and the two reasons why are 1- I was using windows/x64/meterpreter/reverse_tcp instead of windows/meterpreter/reverse_tcp and 2-I forgot to set the payload in msfconsole, but now it works fine</p>
+<p><img src="../../../images/htb/pic3.png" alt="Shell"></p>
+<p>After getting access, I typed the command sysinfo to check for the architecture of the machine and after that shell followed with systeminfo to check to learn about the hotfixes installed which
+turned out to be never updated</p>
+<p><img src="../../../images/htb/pic4.png" alt="Shell"></p>
+<p><img src="../../../images/htb/pic5.png" alt="Shell"></p>
+<p>Then using the command background, I set the session to keep running in the background and then searched for suggester, which is used to suggest exploits for a specific machine then set my session and run the suggester, which gave me multiple exploits to use, so
+I picked the first option and setup all required options</p>
+<p><img src="../../../images/htb/pic6.png" alt="Shell"></p>
+<p>And finally, I had privilege escalated to root user and navigated from windows file to users file and got the flags using type command to display the flag on the screen.</p>
+<p><img src="../../../images/htb/pic7.png" alt="Shell"></p>
+
+      </div></div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">
+        <span>CyberBored, Inc. Copyright</span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

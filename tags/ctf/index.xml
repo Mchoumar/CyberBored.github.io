@@ -6,13 +6,14 @@
     <description>Recent content in CTF on CyberBored Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
+    <copyright>CyberBored, Inc. Copyright</copyright>
     <lastBuildDate>Thu, 17 Aug 2023 22:33:51 +0200</lastBuildDate><atom:link href="https://cyberbored.site/tags/ctf/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Devil Machine</title>
-      <link>https://cyberbored.site/posts/htb/devil/</link>
+      <link>https://cyberbored.site/ctf/devil/</link>
       <pubDate>Thu, 17 Aug 2023 22:33:51 +0200</pubDate>
       
-      <guid>https://cyberbored.site/posts/htb/devil/</guid>
+      <guid>https://cyberbored.site/ctf/devil/</guid>
       <description>My personal walk through: I started today with my first ever machine after the starting point training. I first connected to the htb openvpn service and started searching the ports and versions of the port using nmap:
 After that, I accessed the ftp open port and tried downloading and uploading some files using get and put, which allowed me to learn that I am on root privilege. Then, I started searching and learning about BurpSuit Reference which I used to intercept the websites requests.</description>
       <content>&lt;h1 id=&#34;my-personal-walk-through&#34;&gt;My personal walk through:&lt;/h1&gt;
