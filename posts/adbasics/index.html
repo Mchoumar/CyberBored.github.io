@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Active Directory Fundamentals :: CyberBored Blog</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="-Fundamental Concepts Unveiled: I grasped the core building blocks of Active Directory, from domains and trees to forests and trusts. The significance of schema and organizational units clicked, and I honed my skills in managing objects and groups using the Active Directory Users and Computers tool.
+
+-Mastering Groups and Users: I explored the diversity of groups and users in Active Directory, from security groups to domain admins, local administrators, and guests. With newfound knowledge, I discovered the art of delegating permissions and privileges to users and groups, ensuring efficient management.
+
+-Navigating Authentication Techniques: The world of authentication methods unfolded before me, featuring Kerberos, NetNTLM, and Certificate Services. Armed with tools like Get-NetComputer, Get-NetLocalGroup, and Get-NetUser, I embarked on the journey of enumerating information from domain controllers." />
+<meta name="keywords" content="CyebrSecurity, Blog, CyberBored" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="https://cyberbored.site/posts/adbasics/" />
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://cyberbored.site/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="https://cyberbored.site/img/theme-colors/blue.png">
+  <link rel="apple-touch-icon" href="https://cyberbored.site/img/theme-colors/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Active Directory Fundamentals">
+<meta property="og:description" content="-Fundamental Concepts Unveiled: I grasped the core building blocks of Active Directory, from domains and trees to forests and trusts. The significance of schema and organizational units clicked, and I honed my skills in managing objects and groups using the Active Directory Users and Computers tool.
+
+-Mastering Groups and Users: I explored the diversity of groups and users in Active Directory, from security groups to domain admins, local administrators, and guests. With newfound knowledge, I discovered the art of delegating permissions and privileges to users and groups, ensuring efficient management.
+
+-Navigating Authentication Techniques: The world of authentication methods unfolded before me, featuring Kerberos, NetNTLM, and Certificate Services. Armed with tools like Get-NetComputer, Get-NetLocalGroup, and Get-NetUser, I embarked on the journey of enumerating information from domain controllers." />
+<meta property="og:url" content="https://cyberbored.site/posts/adbasics/" />
+<meta property="og:site_name" content="CyberBored Blog" />
+
+  
+    <meta property="og:image" content="https://cyberbored.site/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2023-08-29 14:45:29 &#43;0200 CEST" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="blue">
+
+
+<div class="container full headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    CyberBored
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/posts">Blog</a></li>
+        
+      
+        
+          <li><a href="/ctf">CTF</a></li>
+        
+      
+        
+          <li><a href="/projects">Projects</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/posts" >Blog</a></li>
+        
+      
+        
+          <li><a href="/ctf" >CTF</a></li>
+        
+      
+        
+          <li><a href="/projects" >Projects</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="https://cyberbored.site/posts/adbasics/">Active Directory Fundamentals</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2023-08-29</time></div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="https://cyberbored.site/tags/blog/">Blog</a>&nbsp;
+      
+    </span>
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <h1 id="introduction">Introduction:<a href="#introduction" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p><strong>Active Directory (AD)</strong> is a directory service developed by Microsoft that is used to manage and organize resources in a network. It provides a centralized database for managing and authenticating users, computers, printers, and other network resources within a Windows-based network environment. Active Directory is commonly used in enterprise environments to streamline network management and improve security.</p>
+<p><strong>A Domain Controller (DC)</strong> is a critical component of Microsoft&rsquo;s Active Directory (AD) service. It serves as a central repository for user accounts, security policies, authentication, and other directory-related services in a Windows network environment. The primary role of a Domain Controller is to manage and maintain the Active Directory database, which includes information about users, groups, computers, and other network resources within a specific domain.</p>
+<table>
+<thead>
+<tr>
+<th>Security Group</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Domain Admins</td>
+<td>Users of this group have administrative privileges over the entire domain. By default, they can administer any computer on the domain, including the DCs.</td>
+</tr>
+<tr>
+<td>Server Operators</td>
+<td>Users in this group can administer Domain Controllers. They cannot change any administrative group memberships.</td>
+</tr>
+<tr>
+<td>Backup Operators</td>
+<td>Users in this group are allowed to access any file, ignoring permissions. They are used to perform backups of data on computers.</td>
+</tr>
+<tr>
+<td>Account Operators</td>
+<td>Users in this group can create or modify other accounts in the domain.</td>
+</tr>
+<tr>
+<td>Domain Users</td>
+<td>Includes all existing user accounts in the domain.</td>
+</tr>
+<tr>
+<td>Domain Computers</td>
+<td>Includes all existing computers in the domain.</td>
+</tr>
+<tr>
+<td>Domain Controllers</td>
+<td>Includes all existing DCs on the domain.</td>
+</tr>
+</tbody>
+</table>
+<p>To group users in one place that policies apply to all of them, create organizational unit on Active Directory Users and Computers. By default, Organizational Units are protected from being deleted, to enable deleting option, hover on view tab in Active Directory Users and Computers &ndash;&gt; select Advanced Features. This will unlock the object feature located in properties of the OU that will allow you to turn off the protection.</p>
+<p><img src="../../images/adbasics/0.png" alt="Xmas scan"></p>
+<h1 id="delegation">Delegation:<a href="#delegation" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p><strong>Delegation</strong> in the context of Active Directory refers to the process of assigning specific administrative tasks and responsibilities to non-administrative users or groups. It allows administrators to distribute management duties while maintaining overall control and security over the network environment. Delegation is particularly useful in large organizations where multiple individuals or teams need to manage specific aspects of the Active Directory infrastructure.
+Steps to add a Delegate control to a user:</p>
+<p><img src="../../images/adbasics/1.png" alt="Xmas scan"></p>
+<p><img src="../../images/adbasics/2.png" alt="Xmas scan"></p>
+<p><img src="../../images/adbasics/3.png" alt="Xmas scan"></p>
+<p>When you add the permissions to the specified user, they will have the ability to use the given permissions or commands without needing administrator permissions. Example, using Phillip&rsquo;s account to reset Sophie&rsquo;s account password since she forgot her password using PowerShell.
+To reset the password:</p>
+<pre><code>Set-ADAccountPassword sophie -Reset -NewPassword (Read-Host -AsSecureString -Prompt 'New Password') -Verbose.
+</code></pre>
+<p>To reset force the user to reset their password on next login to prevent anyone else from knowing the password:</p>
+<pre><code>Set-ADUser -ChangePasswordAtLogon $true -Identity sophie -Verbose.
+</code></pre>
+<p><img src="../../images/adbasics/4.png" alt="Xmas scan"></p>
+<p>When you first create machines on AD they are stored by default on Computers container, it is recommended to separate machines depending on their job in different OUs. Types of OUs categories:</p>
+<pre><code>- Workstations are common devices in an Active Directory domain where users log in for work and browsing. Using privileged accounts for logging into workstations is strongly discouraged.
+- Servers are the second most common devices in an Active Directory domain, providing services to users or other servers.
+- Domain Controllers are essential components in an Active Directory domain, allowing for centralized management. They hold hashed passwords for all user accounts, making them critical and sensitive devices within the network.
+</code></pre>
+<h1 id="group-policy">Group Policy:<a href="#group-policy" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p><strong>Group Policy Objects (GPOs)</strong> are a powerful feature of Microsoft Windows operating systems that enable administrators to manage and control user and computer configurations in an Active Directory environment. GPOs define specific settings, policies, and preferences that apply to users and computers within a domain. These policies are applied in a hierarchical manner, allowing administrators to maintain consistent configurations and security settings across the network.</p>
+<p>To customize Group Policies, you&rsquo;ll start off by crafting a GPO within the Group Policy Objects section. Afterward, you can establish a connection between this GPO and the specific location where you intend the policies to take effect.</p>
+<p><img src="../../images/adbasics/5.png" alt="Xmas scan"></p>
+<p>In the provided image above, we can observe the existence of 3 GPOs that have been generated. The Default Domain Policy and RDP Policy are buddies with the whole thm.local domain, while the Default Domain Controllers Policy hangs out solely with the Domain Controllers OU. Just a heads-up: any GPO you set up doesn&rsquo;t just do its thing in the linked OU, but also in any baby OUs under it. So, even the Sales OU will catch some of that Default Domain Policy vibe.</p>
+<p>The setting tabs of the any chosen Policy shows us actual GPO content and let us know what specific configurations it applies. To edit the policy configurations, right click the chosen policy &ndash;&gt; Edit &ndash;&gt; Computer/User Configurations.</p>
+<p><strong>GPO distribution</strong> involves using Group Policy Objects (GPOs) in Active Directory to centrally manage settings, security, and software for computers and users across a network. GPOs are typically distributed through something called the SYSVOL folder. It&rsquo;s like a shared hub on domain controllers in our Active Directory setup. This special folder ensures that all our GPO stuff is available and the same across our whole domain.</p>
+<h4 id="note">Note:<a href="#note" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<p>Once a change has been made to any GPOs, it may take some time for computers to catchup. You can force the change to update immediately by running the following command on Windows PowerShell:</p>
+<pre><code>gpudate /force.
+</code></pre>
+<p>To create and link specific configuration to specific groups, we can create a new GPO in the GPO directory, configure it and then drag and drop it in the groups we want to apply it too.</p>
+<p><img src="../../images/adbasics/6.png" alt="Xmas scan"></p>
+<h1 id="authentication">Authentication:<a href="#authentication" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>When we are using AD, all credentials are stored in the Domain Controllers. Two major protocols use by windows are:</p>
+<pre><code>- Kerberos is a clever security protocol that lets systems verify their identities over networks without sharing passwords directly. It's all about using tickets and a Key Distribution Center to keep things safe from unauthorized access and eavesdropping.
+- NetNTLM is one of those old-school authentication methods. It's been around for a while and was used in Windows to help users access network stuff without shouting out their passwords. But, just a heads-up, it's considered kinda outdated now.
+</code></pre>
+<h1 id="tree-and-forest">Tree and Forest:<a href="#tree-and-forest" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p><strong>Tree</strong> is a hierarchical structure of domains, with a root domain at the top, containing child and sub-child domains. This arrangement streamlines network management and resource organization.</p>
+<p><strong>Forest</strong> is a collection of interconnected Active Directory Trees, sharing a common schema and configuration, suitable for large organizations or collaborations among separate domains.</p>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        <span class="button previous">
+            <a href="https://cyberbored.site/posts/wireshark101/">
+                <span class="button__icon">←</span>
+                <span class="button__text">Wireshark</span>
+            </a>
+        </span>
+        
+        
+        <span class="button next">
+            <a href="https://cyberbored.site/posts/netowrkservice2/">
+                <span class="button__text">Network Ports 2</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">
+        <span>CyberBored, Inc. Copyright</span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

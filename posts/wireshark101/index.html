@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Wireshark :: CyberBored Blog</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="-Getting Started with Wireshark: I delved into the basics of Wireshark, installing it on my device and uncovering the ropes of initiating and halting packet captures across various interfaces. The power of saving and accessing PCAP files for future analysis was a game-changer.
+
+-Mastering Filtering Techniques: Filtering became my ally as I learned both basic and advanced techniques to streamline my packet capture. Equipped with operators, keywords, and expressions, I honed the art of crafting intricate filters to pinpoint pertinent data.
+
+-Unveiling Packet Dissection: Packet dissection revealed a world of insight. I cracked open packets to comprehend their structure and content, while also diving into the depths of diverse network protocols. From ARP and ICMP to TCP, UDP, HTTP, and DNS, I gained expertise in analyzing network dynamics." />
+<meta name="keywords" content="CyebrSecurity, Blog, CyberBored" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="https://cyberbored.site/posts/wireshark101/" />
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://cyberbored.site/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="https://cyberbored.site/img/theme-colors/blue.png">
+  <link rel="apple-touch-icon" href="https://cyberbored.site/img/theme-colors/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Wireshark">
+<meta property="og:description" content="-Getting Started with Wireshark: I delved into the basics of Wireshark, installing it on my device and uncovering the ropes of initiating and halting packet captures across various interfaces. The power of saving and accessing PCAP files for future analysis was a game-changer.
+
+-Mastering Filtering Techniques: Filtering became my ally as I learned both basic and advanced techniques to streamline my packet capture. Equipped with operators, keywords, and expressions, I honed the art of crafting intricate filters to pinpoint pertinent data.
+
+-Unveiling Packet Dissection: Packet dissection revealed a world of insight. I cracked open packets to comprehend their structure and content, while also diving into the depths of diverse network protocols. From ARP and ICMP to TCP, UDP, HTTP, and DNS, I gained expertise in analyzing network dynamics." />
+<meta property="og:url" content="https://cyberbored.site/posts/wireshark101/" />
+<meta property="og:site_name" content="CyberBored Blog" />
+
+  
+    <meta property="og:image" content="https://cyberbored.site/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2023-08-29 14:58:35 &#43;0200 CEST" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="blue">
+
+
+<div class="container full headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    CyberBored
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/posts">Blog</a></li>
+        
+      
+        
+          <li><a href="/ctf">CTF</a></li>
+        
+      
+        
+          <li><a href="/projects">Projects</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/posts" >Blog</a></li>
+        
+      
+        
+          <li><a href="/ctf" >CTF</a></li>
+        
+      
+        
+          <li><a href="/projects" >Projects</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="https://cyberbored.site/posts/wireshark101/">Wireshark</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2023-08-29</time></div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="https://cyberbored.site/tags/blog/">Blog</a>&nbsp;
+      
+    </span>
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <h1 id="introduction">Introduction:<a href="#introduction" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Wireshark, a renowned application utilized to generate and assess PCAPs (network packet capture files), stands out as a premier packet analysis solution. In this session, we will delve into the fundamentals of Wireshark installation and utilization, focusing on executing elementary packet analysis tasks, while also delving deeply into the intricacies of each prevalent networking protocol.</p>
+<h4 id="collection-methods">Collection Methods:<a href="#collection-methods" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<pre><code>-Network Taps are a physical implant in which you physically tap between a cable, these techniques are commonly used by Threat Hunting/DFIR teams and red teams in an engagement to sniff and capture packets.
+
+-MAC Floods are a tactic commonly used by red teams as a way of actively sniffing packets. MAC Flooding is intended to stress the switch and fill the CAM (Content Addressable Memory) table. Once the CAM table is filled the switch will no longer accept new MAC addresses and so in order to keep the network alive, the switch will send out packets to all ports of the switch.
+
+-ARP Poisoning is another technique used by red teams to actively sniff packets. By ARP Poisoning you can redirect the traffic from the host(s) to the machine you're monitoring from. This technique will not stress network equipment like MAC Flooding however should still be used with caution and only if other techniques like network taps are unavailable.
+</code></pre>
+<h1 id="filtering-captures">Filtering Captures:<a href="#filtering-captures" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Wireshark is a great tool to capture and read through the PCAP, but it can get confusing very fast once you are connected to a network and capture all the traffic. That&rsquo;s where the importance of filtering operators comes in, by using the operators you can narrow down your search field to make it easier and clear for analyzing.</p>
+<h4 id="filtering-operators">Filtering operators:<a href="#filtering-operators" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<pre><code>- and - operators: and/&amp;&amp;
+- or - operator: or/||
+- equals - operator: eq/==
+- not equal - operator: ne/!=
+- greater than - operator: gt/&gt;
+- less than - operator: it/&lt;
+</code></pre>
+<h1 id="packets">Packets:<a href="#packets" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p><img src="../../images/wireshark/0.png" alt="Xmas scan"></p>
+<p>packets are units of data that are transmitted over a network. They contain the actual data being sent along with necessary information for routing and delivering the data to its destination. In the context of cybersecurity, understanding network packets is crucial for analyzing network traffic, identifying security threats, and ensuring the smooth operation of networked systems.</p>
+<p><img src="../../images/wireshark/1.png" alt="Xmas scan"></p>
+<p><strong>Address Resolution Protocol (ARP)</strong> is a fundamental networking protocol used to map an IP address to a physical (MAC) address on a local network. It plays a critical role in enabling communication between devices within the
+same subnet.</p>
+<p><img src="../../images/wireshark/2.png" alt="Xmas scan"></p>
+<p>By filtering the protocol to only show me arp protocols, I was able to identify reply packets from the ARP.</p>
+<p><img src="../../images/wireshark/3.png" alt="Xmas scan"></p>
+<p>You can find data and date that the packet was sent in the internet protocol section of the packet.</p>
+<p><img src="../../images/wireshark/4.png" alt="Xmas scan"></p>
+<p><img src="../../images/wireshark/5.png" alt="Xmas scan"></p>
+<p><strong>Domain Name System (DNS)</strong> is a fundamental protocol in computer networking that translates human-readable domain names into IP addresses, making it easier to access resources on the internet.</p>
+<p><img src="../../images/wireshark/6.png" alt="Xmas scan"></p>
+<p><strong>Hypertext Transfer Protocol (HTTP)</strong> is a foundational protocol used for transmitting and receiving data over the World Wide Web. It&rsquo;s the protocol that enables communication between web clients (such as web browsers) and web servers.</p>
+<p>Wireshark have some features that helps us analyze the packet information. Statistics is one of Wireshark feature that can help you visualize the packet better.</p>
+<p><img src="../../images/wireshark/7.png" alt="Xmas scan"></p>
+<p>HTTPS, is the same as HTTP but secured running on SSL/TLS. When you have an HTTPS packet that is fully encrypted, you can decrypt the packet if you have the private RSA key.</p>
+<pre><code>Edit --&gt; Preference --&gt; Protocol --&gt; TLS --&gt; RSA keys list.
+</code></pre>
+<p><img src="../../images/wireshark/8.png" alt="Xmas scan"></p>
+<p><img src="../../images/wireshark/9.png" alt="Xmas scan"></p>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        <span class="button previous">
+            <a href="https://cyberbored.site/posts/overpass/">
+                <span class="button__icon">←</span>
+                <span class="button__text">Overpass 2</span>
+            </a>
+        </span>
+        
+        
+        <span class="button next">
+            <a href="https://cyberbored.site/posts/adbasics/">
+                <span class="button__text">Active Directory Fundamentals</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">
+        <span>CyberBored, Inc. Copyright</span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

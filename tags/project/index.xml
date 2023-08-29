@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Projects on CyberBored Blog</title>
-    <link>https://cyberbored.site/projects/</link>
-    <description>Recent content in Projects on CyberBored Blog</description>
+    <title>Project on CyberBored Blog</title>
+    <link>https://cyberbored.site/tags/project/</link>
+    <description>Recent content in Project on CyberBored Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>CyberBored, Inc. Copyright</copyright>
-    <lastBuildDate>Thu, 24 Aug 2023 10:31:35 +0200</lastBuildDate><atom:link href="https://cyberbored.site/projects/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 24 Aug 2023 10:31:35 +0200</lastBuildDate><atom:link href="https://cyberbored.site/tags/project/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Active Directory Home Lab</title>
       <link>https://cyberbored.site/projects/ad/</link>

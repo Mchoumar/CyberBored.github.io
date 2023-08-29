@@ -7,7 +7,297 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>CyberBored, Inc. Copyright</copyright>
-    <lastBuildDate>Thu, 24 Aug 2023 10:31:35 +0200</lastBuildDate><atom:link href="https://cyberbored.site/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 29 Aug 2023 15:09:15 +0200</lastBuildDate><atom:link href="https://cyberbored.site/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overpass 2</title>
+      <link>https://cyberbored.site/posts/overpass/</link>
+      <pubDate>Tue, 29 Aug 2023 15:09:15 +0200</pubDate>
+      
+      <guid>https://cyberbored.site/posts/overpass/</guid>
+      <description>Introduction: Today I will be attempting to analyze a packet file for a hacked server.
+Requirements: - Linux fundamentals- Network Fundamentals- Wireshark FundamentalsAfter going through the requirements for this lab, we can go ahead and download the file and make sure that the hash given to us is equal to the hash of the file to be sure that the file didn&amp;rsquo;t get tampered with. md5sum of PCAP file:</description>
+      <content>&lt;h1 id=&#34;introduction&#34;&gt;Introduction:&lt;/h1&gt;
+&lt;p&gt;Today I will be attempting to analyze a packet file for a hacked server.&lt;/p&gt;
+&lt;h4 id=&#34;requirements&#34;&gt;Requirements:&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;- Linux fundamentals
+- Network Fundamentals
+- Wireshark Fundamentals
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After going through the requirements for this lab, we can go ahead and download the file and make sure that the hash given to us is equal to the hash of the file to be sure that the file didn&amp;rsquo;t get tampered with.
+md5sum of PCAP file:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;11c3b2e9221865580295bc662c35c6dc
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/Overpass/0.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;I checked the complete hash, and it was compatible with the one given. And now it is time for the fun. I loaded the file into wireshark and made a quick scan to all IP addresses, protocols…etc, which I learned from immediately that there was a 3 way handshake to establish a connection between the attacker and the victim on the following url.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/Overpass/1.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/Overpass/2.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Next, I searched for the payload used by filtering http protocols and searching for a post request.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/Overpass/3.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/Overpass/4.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/Overpass/5.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;After checking the http follow stream, I learned that the attacker used netcat to listen to the target &lt;strong&gt;nc 192.168.170.145 4242&lt;/strong&gt; on &lt;strong&gt;port 4242&lt;/strong&gt;, so I started searching for a packet that was sent to &lt;strong&gt;port 4242&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/Overpass/6.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/Overpass/7.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;By following the TCP stream, I found the commands and file the attacker used plus the password. I also noticed that there was some users and hash next to them, so using johntheripper I was able to crack the hash and got some passwords that the attacker used.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/Overpass/8.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/Overpass/9.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Next, I searched for the repository that the attacker used &lt;a href=&#34;https://github.com/NinjaJc01/ssh-backdoor/blob/master/main.go&#34;&gt;GitHub Payload&lt;/a&gt;, which helped me find the salt and format used that I used with combination with the hash I found to crack the attacker&amp;rsquo;s password using hashcat.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Hashcat&lt;/strong&gt; is a powerful and widely used open-source password recovery and hash cracking tool. It&amp;rsquo;s designed for security professionals, penetration testers, and researchers to assess and evaluate the security of passwords and cryptographic hashes. Hashcat is known for its speed, flexibility, and support for a wide range of hash algorithms and attack methods.&lt;/p&gt;
+&lt;p&gt;Using the following command I was able to crack the password:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;hashcat -m 1710 -a 0 -o cracked.txt hash.txt /usr/share/wordlists/rockyou.txt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/Overpass/10.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;attack-phase&#34;&gt;Attack Phase:&lt;/h1&gt;
+&lt;p&gt;After all the information gathered, now it is time to attack back. I used nmap to scan open ports using the following command:
+sudo nmap -sC -sV 10.10.145.160 -vv&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/Overpass/11.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;From wireshark I learned the user&amp;rsquo;s name james, and from the cracked password which allowed me to connect to the target using ssh port 2222.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/Overpass/12.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;After finding the user flag, I tried to use sudo to navigate to the root file but I wasn&amp;rsquo;t able too, so I started searching between directories for hidden files and I found .suid_bash which from a previous lab I learned that it is used to create a new shell on root privilege and it worked.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/Overpass/13.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Wireshark</title>
+      <link>https://cyberbored.site/posts/wireshark101/</link>
+      <pubDate>Tue, 29 Aug 2023 14:58:35 +0200</pubDate>
+      
+      <guid>https://cyberbored.site/posts/wireshark101/</guid>
+      <description>Introduction: Wireshark, a renowned application utilized to generate and assess PCAPs (network packet capture files), stands out as a premier packet analysis solution. In this session, we will delve into the fundamentals of Wireshark installation and utilization, focusing on executing elementary packet analysis tasks, while also delving deeply into the intricacies of each prevalent networking protocol.
+Collection Methods: -Network Taps are a physical implant in which you physically tap between a cable, these techniques are commonly used by Threat Hunting/DFIR teams and red teams in an engagement to sniff and capture packets.</description>
+      <content>&lt;h1 id=&#34;introduction&#34;&gt;Introduction:&lt;/h1&gt;
+&lt;p&gt;Wireshark, a renowned application utilized to generate and assess PCAPs (network packet capture files), stands out as a premier packet analysis solution. In this session, we will delve into the fundamentals of Wireshark installation and utilization, focusing on executing elementary packet analysis tasks, while also delving deeply into the intricacies of each prevalent networking protocol.&lt;/p&gt;
+&lt;h4 id=&#34;collection-methods&#34;&gt;Collection Methods:&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;-Network Taps are a physical implant in which you physically tap between a cable, these techniques are commonly used by Threat Hunting/DFIR teams and red teams in an engagement to sniff and capture packets.
+
+-MAC Floods are a tactic commonly used by red teams as a way of actively sniffing packets. MAC Flooding is intended to stress the switch and fill the CAM (Content Addressable Memory) table. Once the CAM table is filled the switch will no longer accept new MAC addresses and so in order to keep the network alive, the switch will send out packets to all ports of the switch.
+
+-ARP Poisoning is another technique used by red teams to actively sniff packets. By ARP Poisoning you can redirect the traffic from the host(s) to the machine you&#39;re monitoring from. This technique will not stress network equipment like MAC Flooding however should still be used with caution and only if other techniques like network taps are unavailable.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;filtering-captures&#34;&gt;Filtering Captures:&lt;/h1&gt;
+&lt;p&gt;Wireshark is a great tool to capture and read through the PCAP, but it can get confusing very fast once you are connected to a network and capture all the traffic. That&amp;rsquo;s where the importance of filtering operators comes in, by using the operators you can narrow down your search field to make it easier and clear for analyzing.&lt;/p&gt;
+&lt;h4 id=&#34;filtering-operators&#34;&gt;Filtering operators:&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;- and - operators: and/&amp;amp;&amp;amp;
+- or - operator: or/||
+- equals - operator: eq/==
+- not equal - operator: ne/!=
+- greater than - operator: gt/&amp;gt;
+- less than - operator: it/&amp;lt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;packets&#34;&gt;Packets:&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/wireshark/0.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;packets are units of data that are transmitted over a network. They contain the actual data being sent along with necessary information for routing and delivering the data to its destination. In the context of cybersecurity, understanding network packets is crucial for analyzing network traffic, identifying security threats, and ensuring the smooth operation of networked systems.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/wireshark/1.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Address Resolution Protocol (ARP)&lt;/strong&gt; is a fundamental networking protocol used to map an IP address to a physical (MAC) address on a local network. It plays a critical role in enabling communication between devices within the
+same subnet.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/wireshark/2.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;By filtering the protocol to only show me arp protocols, I was able to identify reply packets from the ARP.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/wireshark/3.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;You can find data and date that the packet was sent in the internet protocol section of the packet.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/wireshark/4.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/wireshark/5.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Domain Name System (DNS)&lt;/strong&gt; is a fundamental protocol in computer networking that translates human-readable domain names into IP addresses, making it easier to access resources on the internet.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/wireshark/6.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Hypertext Transfer Protocol (HTTP)&lt;/strong&gt; is a foundational protocol used for transmitting and receiving data over the World Wide Web. It&amp;rsquo;s the protocol that enables communication between web clients (such as web browsers) and web servers.&lt;/p&gt;
+&lt;p&gt;Wireshark have some features that helps us analyze the packet information. Statistics is one of Wireshark feature that can help you visualize the packet better.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/wireshark/7.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;HTTPS, is the same as HTTP but secured running on SSL/TLS. When you have an HTTPS packet that is fully encrypted, you can decrypt the packet if you have the private RSA key.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Edit --&amp;gt; Preference --&amp;gt; Protocol --&amp;gt; TLS --&amp;gt; RSA keys list.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/wireshark/8.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/wireshark/9.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Active Directory Fundamentals</title>
+      <link>https://cyberbored.site/posts/adbasics/</link>
+      <pubDate>Tue, 29 Aug 2023 14:45:29 +0200</pubDate>
+      
+      <guid>https://cyberbored.site/posts/adbasics/</guid>
+      <description>Introduction: Active Directory (AD) is a directory service developed by Microsoft that is used to manage and organize resources in a network. It provides a centralized database for managing and authenticating users, computers, printers, and other network resources within a Windows-based network environment. Active Directory is commonly used in enterprise environments to streamline network management and improve security.
+A Domain Controller (DC) is a critical component of Microsoft&amp;rsquo;s Active Directory (AD) service.</description>
+      <content>&lt;h1 id=&#34;introduction&#34;&gt;Introduction:&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Active Directory (AD)&lt;/strong&gt; is a directory service developed by Microsoft that is used to manage and organize resources in a network. It provides a centralized database for managing and authenticating users, computers, printers, and other network resources within a Windows-based network environment. Active Directory is commonly used in enterprise environments to streamline network management and improve security.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;A Domain Controller (DC)&lt;/strong&gt; is a critical component of Microsoft&amp;rsquo;s Active Directory (AD) service. It serves as a central repository for user accounts, security policies, authentication, and other directory-related services in a Windows network environment. The primary role of a Domain Controller is to manage and maintain the Active Directory database, which includes information about users, groups, computers, and other network resources within a specific domain.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Security Group&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Domain Admins&lt;/td&gt;
+&lt;td&gt;Users of this group have administrative privileges over the entire domain. By default, they can administer any computer on the domain, including the DCs.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Server Operators&lt;/td&gt;
+&lt;td&gt;Users in this group can administer Domain Controllers. They cannot change any administrative group memberships.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Backup Operators&lt;/td&gt;
+&lt;td&gt;Users in this group are allowed to access any file, ignoring permissions. They are used to perform backups of data on computers.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Account Operators&lt;/td&gt;
+&lt;td&gt;Users in this group can create or modify other accounts in the domain.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Domain Users&lt;/td&gt;
+&lt;td&gt;Includes all existing user accounts in the domain.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Domain Computers&lt;/td&gt;
+&lt;td&gt;Includes all existing computers in the domain.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Domain Controllers&lt;/td&gt;
+&lt;td&gt;Includes all existing DCs on the domain.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;To group users in one place that policies apply to all of them, create organizational unit on Active Directory Users and Computers. By default, Organizational Units are protected from being deleted, to enable deleting option, hover on view tab in Active Directory Users and Computers &amp;ndash;&amp;gt; select Advanced Features. This will unlock the object feature located in properties of the OU that will allow you to turn off the protection.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/adbasics/0.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;delegation&#34;&gt;Delegation:&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Delegation&lt;/strong&gt; in the context of Active Directory refers to the process of assigning specific administrative tasks and responsibilities to non-administrative users or groups. It allows administrators to distribute management duties while maintaining overall control and security over the network environment. Delegation is particularly useful in large organizations where multiple individuals or teams need to manage specific aspects of the Active Directory infrastructure.
+Steps to add a Delegate control to a user:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/adbasics/1.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/adbasics/2.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/adbasics/3.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;When you add the permissions to the specified user, they will have the ability to use the given permissions or commands without needing administrator permissions. Example, using Phillip&amp;rsquo;s account to reset Sophie&amp;rsquo;s account password since she forgot her password using PowerShell.
+To reset the password:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Set-ADAccountPassword sophie -Reset -NewPassword (Read-Host -AsSecureString -Prompt &#39;New Password&#39;) -Verbose.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To reset force the user to reset their password on next login to prevent anyone else from knowing the password:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Set-ADUser -ChangePasswordAtLogon $true -Identity sophie -Verbose.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/adbasics/4.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;When you first create machines on AD they are stored by default on Computers container, it is recommended to separate machines depending on their job in different OUs. Types of OUs categories:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- Workstations are common devices in an Active Directory domain where users log in for work and browsing. Using privileged accounts for logging into workstations is strongly discouraged.
+- Servers are the second most common devices in an Active Directory domain, providing services to users or other servers.
+- Domain Controllers are essential components in an Active Directory domain, allowing for centralized management. They hold hashed passwords for all user accounts, making them critical and sensitive devices within the network.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;group-policy&#34;&gt;Group Policy:&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Group Policy Objects (GPOs)&lt;/strong&gt; are a powerful feature of Microsoft Windows operating systems that enable administrators to manage and control user and computer configurations in an Active Directory environment. GPOs define specific settings, policies, and preferences that apply to users and computers within a domain. These policies are applied in a hierarchical manner, allowing administrators to maintain consistent configurations and security settings across the network.&lt;/p&gt;
+&lt;p&gt;To customize Group Policies, you&amp;rsquo;ll start off by crafting a GPO within the Group Policy Objects section. Afterward, you can establish a connection between this GPO and the specific location where you intend the policies to take effect.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/adbasics/5.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;In the provided image above, we can observe the existence of 3 GPOs that have been generated. The Default Domain Policy and RDP Policy are buddies with the whole thm.local domain, while the Default Domain Controllers Policy hangs out solely with the Domain Controllers OU. Just a heads-up: any GPO you set up doesn&amp;rsquo;t just do its thing in the linked OU, but also in any baby OUs under it. So, even the Sales OU will catch some of that Default Domain Policy vibe.&lt;/p&gt;
+&lt;p&gt;The setting tabs of the any chosen Policy shows us actual GPO content and let us know what specific configurations it applies. To edit the policy configurations, right click the chosen policy &amp;ndash;&amp;gt; Edit &amp;ndash;&amp;gt; Computer/User Configurations.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;GPO distribution&lt;/strong&gt; involves using Group Policy Objects (GPOs) in Active Directory to centrally manage settings, security, and software for computers and users across a network. GPOs are typically distributed through something called the SYSVOL folder. It&amp;rsquo;s like a shared hub on domain controllers in our Active Directory setup. This special folder ensures that all our GPO stuff is available and the same across our whole domain.&lt;/p&gt;
+&lt;h4 id=&#34;note&#34;&gt;Note:&lt;/h4&gt;
+&lt;p&gt;Once a change has been made to any GPOs, it may take some time for computers to catchup. You can force the change to update immediately by running the following command on Windows PowerShell:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;gpudate /force.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To create and link specific configuration to specific groups, we can create a new GPO in the GPO directory, configure it and then drag and drop it in the groups we want to apply it too.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/adbasics/6.png&#34; alt=&#34;Xmas scan&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;authentication&#34;&gt;Authentication:&lt;/h1&gt;
+&lt;p&gt;When we are using AD, all credentials are stored in the Domain Controllers. Two major protocols use by windows are:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- Kerberos is a clever security protocol that lets systems verify their identities over networks without sharing passwords directly. It&#39;s all about using tickets and a Key Distribution Center to keep things safe from unauthorized access and eavesdropping.
+- NetNTLM is one of those old-school authentication methods. It&#39;s been around for a while and was used in Windows to help users access network stuff without shouting out their passwords. But, just a heads-up, it&#39;s considered kinda outdated now.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;tree-and-forest&#34;&gt;Tree and Forest:&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Tree&lt;/strong&gt; is a hierarchical structure of domains, with a root domain at the top, containing child and sub-child domains. This arrangement streamlines network management and resource organization.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Forest&lt;/strong&gt; is a collection of interconnected Active Directory Trees, sharing a common schema and configuration, suitable for large organizations or collaborations among separate domains.&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Network Ports 2</title>
+      <link>https://cyberbored.site/posts/netowrkservice2/</link>
+      <pubDate>Tue, 29 Aug 2023 14:04:43 +0200</pubDate>
+      
+      <guid>https://cyberbored.site/posts/netowrkservice2/</guid>
+      <description>Brief summary about Network File System: Network File System (NFS) is a distributed file protocol that allows remote access and sharing of files between computers over a network. It enables clients to access files and directories on a remote server as if they were local, making it possible to share data and resources seamlessly across different systems.
+A very important tool to consider while using NFS is nfs-common. It includes programs such as: lockd, statd, showmount, nfsstat, gssd, idmapd and mount.</description>
+      <content>&lt;h1 id=&#34;brief-summary-about-network-file-system&#34;&gt;Brief summary about Network File System:&lt;/h1&gt;
+&lt;p&gt;Network File System (NFS) is a distributed file protocol that allows remote access and sharing of files between computers over a network. It enables clients to access files and directories on a remote server as if they were local, making it possible to share data and resources seamlessly across different systems.&lt;/p&gt;
+&lt;p&gt;A very important tool to consider while using NFS is nfs-common. It includes programs such as: lockd, statd, showmount, nfsstat, gssd, idmapd and mount.nfs.&lt;/p&gt;
+&lt;p&gt;Note: to install nfs on your system, simply type the following command:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- sudo apt update
+- sudo apt install nfs-kernel-server
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and to install nfs-common simply add:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- sudo apt install nfs-common.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;practical&#34;&gt;Practical:&lt;/h1&gt;
+&lt;p&gt;As per tradition, I started by scanning the open ports using nmap to do a full port scan.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/0.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/1.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;After finding out the open ports, I saw that port 2049 is running nfs_acl service, which can be used to enumerate our attack. Then I wanted to check the NFS shares list using the showmount command.
+Showmount flags:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/2.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/3.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;After finding out the shared directory, I created a mount directory in the tmp file so that it automatically gets deleted after reboot and mounted the directory on the newly created directory.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/4.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/5.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/6.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;After navigating to the mounted directory, I checked for all available files/directories but it appeared that there was not files/directories, so I tried checking for all files/directories including hidden ones and I saw one that caught my attention which is .ssh. As we know from previous lab this file usually contains the private key which could be used to access the target through ssh easily and gain privilege escalation depending on the time of user this refers too.&lt;/p&gt;
+&lt;h1 id=&#34;brief-summary-about-root-squash&#34;&gt;Brief summary about Root Squash:&lt;/h1&gt;
+&lt;p&gt;Root squash&amp;quot; is a security feature implemented in Network File System (NFS) to enhance the security of file sharing. When root squash is enabled, it prevents the root user (superuser) on the NFS client from exercising root privileges on the NFS server. Instead, any attempts by the root user on the client to access NFS resources are mapped to a less privileged user, typically the &amp;ldquo;nobody&amp;rdquo; user or a similar user with restricted access.&lt;/p&gt;
+&lt;p&gt;SUID stands for &amp;ldquo;Set User ID&amp;rdquo; and is a permission bit in Unix-like operating systems that allows users to execute a file with the privileges of the file&amp;rsquo;s owner or group, rather than with their own privileges. When the SUID bit is set on an executable file, it enables users to perform certain actions that they wouldn&amp;rsquo;t normally have the permission to execute.&lt;/p&gt;
+&lt;h1 id=&#34;practicaly&#34;&gt;Practicaly:&lt;/h1&gt;
+&lt;p&gt;I connected to the target using ssh private key. Then, I installed a script provided by TryHackMe to run on the target and gain privilege escalation Reference. After downloading the file, I simply changed the user permission using chmod +s bash to allow me to be able to execute the file even on a low level privilege account. Because the permissions didn&amp;rsquo;t apply to the other user group, I had to also add the execute permission using chmod +x bash.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/11.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/8.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/12.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/13.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/10.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;brief-summary-about-smtp-pop3-and-imap&#34;&gt;Brief summary about SMTP, POP3, and IMAP:&lt;/h1&gt;
+&lt;p&gt;SMTP (Simple Mail Transfer Protocol) is a widely used protocol for sending and receiving emails. It&amp;rsquo;s the standard method by which email clients and servers communicate to deliver messages. SMTP focuses on the transmission of emails, while other protocols like IMAP and POP3 handle the retrieval of emails from a server.&lt;/p&gt;
+&lt;p&gt;SMTP operates on port 25, and it works by relaying emails from the sender&amp;rsquo;s mail server to the recipient&amp;rsquo;s mail server. This process involves a series of commands and responses between the sending and receiving servers, ultimately resulting in the successful delivery of the email message.&lt;/p&gt;
+&lt;p&gt;POP3 (Post Office Protocol 3) is a protocol used for retrieving emails from a mail server to an email client. Unlike SMTP, which focuses on sending emails, POP3 is responsible for downloading messages from the server to the recipient&amp;rsquo;s device, allowing users to access their emails offline.&lt;/p&gt;
+&lt;p&gt;IMAP (Internet Message Access Protocol) is a protocol used for accessing and managing emails stored on a mail server. Unlike POP3, which simply downloads emails to the client, IMAP offers more advanced features that allow users to organize, synchronize, and manage their emails across multiple devices while keeping them stored on the server.&lt;/p&gt;
+&lt;h1 id=&#34;practical-1&#34;&gt;Practical:&lt;/h1&gt;
+&lt;p&gt;After learning a brief summary about SMTP, POP3, and IMAP, I wanted to start testing and trying to enumerate them on a virtual lab. As the usual ritual, I started by scanning the ports using nmap and found 2 ports opened.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/14.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Next, after learning about the open ports, I lunched metasploit using msfconsole to attempt finding the current version running. I ran the command search smtp_version and it showed me the following result.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/15.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;After finding the payload I needed, I set it up and executed the payload against the target which got me system mail name and agent that is running .&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/16.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/17.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;As you can see in the picture above I found out about the system mail name which is polosmtp.home and Mail Transfer Agent (MTA) PostFix. I had to search on the internet about MTAs to learn that PostFix is an MTA using the following link Reference Link. After finding all the necessary information about the target, I can now start on the next step which is exploiting. I searched for the payload smtp_enum to get the payload directory.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/18.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Then started setting up the payload and options necessary for the attack.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/19.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- RHOSTS: The target we want to exploit
+- USER_FILE: A file that contains the users we want to search for.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;These are the options we need to set. The USER_FILE can be found in the seclists directory that contains a lot of built files for usernames, passwords, directories…&lt;/p&gt;
+&lt;p&gt;Now all that&amp;rsquo;s left is to get the name of the user.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/20.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Now it is time to brute force the password after finding out the username. To get the password we can use hydra to brute force port 22.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/21.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/22.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Which allowed me to get into the target&amp;rsquo;s system and get the flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/23.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/24.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;brief-summary-about-mysql-rdbms-and-sql&#34;&gt;Brief Summary about MySQL, RDBMS, and SQL:&lt;/h1&gt;
+&lt;p&gt;MySQL is an open-source relational database management system (RDBMS) known for its speed, reliability, and ease of use. It is widely used for various applications, from small websites to large enterprise systems, due to its scalability and robust features.&lt;/p&gt;
+&lt;p&gt;A Relational Database Management System (RDBMS) is a type of database management system that stores and manages data in a structured manner using tables with predefined relationships. RDBMS is designed to efficiently organize, retrieve, and manipulate data based on the principles of the relational model.&lt;/p&gt;
+&lt;p&gt;SQL, which stands for Structured Query Language, is a domain-specific programming language used to manage and manipulate relational databases. SQL is essential for interacting with databases and performing various operations, such as querying, inserting, updating, and deleting data. It provides a standardized way to communicate with relational database management systems (RDBMS).&lt;/p&gt;
+&lt;h1 id=&#34;practical-2&#34;&gt;Practical:&lt;/h1&gt;
+&lt;p&gt;I scanned first the available ports, and found two open ports 22, and 3306 which is for MySQL.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/25.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Using the provided credentials root:password, I logged into the server to check if it is on and running and I was able to connect. mysql -h 10.10.192.208 -u root -p.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/26.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;To enumerate the open port of mysql we use metasploit. I searched for mysql_sql on msfconsole which gave me this playload auxiliary/admin/mysql/mysql_sql which allows you to excute commands on admin level after you set up the necessary options for the payload.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/27.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/28.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;And as you can see on row 4 SQL allows you to execute commands that you set.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/29.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;And now it is time to exploit the server after finding out all necessary information. I searched for the payload called mysql_schemadump and copy pasted the payload that was given by the search. Then setup the options necessary just like before. What this payload does, is basically dumps all available tables on the server with column names and types since schema is synonymous with a database.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/30.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Next, I searched for the payload mysql_hashdump to find out the users available with their hashed password.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/31.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Finding the hash can be helpful since you can brute force using johntheripper to crack the password, it just takes time.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/networkservice2/32.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;In my case it didn&amp;rsquo;t take any time, as john was able to get it with minimum effort. Thanks john! The password for carl is doggie. And using the credentials we obtained, I logged into the target using ssh and got the flag.&lt;/p&gt;
+</content>
+    </item>
+    
     <item>
       <title>Active Directory Home Lab</title>
       <link>https://cyberbored.site/projects/ad/</link>
@@ -194,7 +484,7 @@ Now all that&amp;rsquo;s left for us to do is just configure the windows 10 clie
     </item>
     
     <item>
-      <title>Networkservice 1</title>
+      <title>Network Ports 1</title>
       <link>https://cyberbored.site/posts/networkservice1/</link>
       <pubDate>Sat, 19 Aug 2023 16:30:33 +0200</pubDate>
       
@@ -531,10 +821,10 @@ Flags Description -sS Half-open or stealth scan, which has similar function to T
     
     <item>
       <title>Bash Shell Scripting</title>
-      <link>https://cyberbored.site/posts/bashscript/</link>
+      <link>https://cyberbored.site/projects/bashscript/</link>
       <pubDate>Thu, 10 Aug 2023 04:32:52 +0200</pubDate>
       
-      <guid>https://cyberbored.site/posts/bashscript/</guid>
+      <guid>https://cyberbored.site/projects/bashscript/</guid>
       <description>Introduction: I started by checking out what shell is running in our terminal using echo $SHELL.
 Then using the command ls I listed the available files and directories in our working directory, and after that I listed the long format of the directories and files including the hidden ones using -la. After checking the current data available using ls, I typed pwd to check my current working directory. Next using cd / I navigated to the root directory which is located at the top of all directories, which contains sensitive files.</description>
       <content>&lt;h1 id=&#34;introduction&#34;&gt;Introduction:&lt;/h1&gt;
@@ -584,9 +874,9 @@ Note: When you first create an alias the shell won&amp;rsquo;t recognize it, sin
       <pubDate>Thu, 10 Aug 2023 04:30:37 +0200</pubDate>
       
       <guid>https://cyberbored.site/about/</guid>
-      <description>I&amp;rsquo;m Mahmoud Choumar, and I&amp;rsquo;m thrilled to have you join me on my cybersecurity journey. This blog is a window into my world of digital defense, where I share my experiences, projects, and insights in the realm of cybersecurity.
+      <description>I&amp;rsquo;m thrilled to have you join me on my cybersecurity journey. This blog is a window into my world of digital defense, where I share my experiences, projects, and insights in the realm of cybersecurity.
 As a passionate cybersecurity enthusiast, I&amp;rsquo;ve embarked on a journey to understand the intricacies of the digital landscape and the ever-evolving threats that surround us. Through this blog, I aim to not only document my personal journey but also provide valuable resources, insights, and discussions about the fascinating world of cybersecurity.</description>
-      <content>&lt;p&gt;I&amp;rsquo;m &lt;strong&gt;Mahmoud Choumar&lt;/strong&gt;, and I&amp;rsquo;m thrilled to have you join me on my cybersecurity journey. This blog is a window into my world of digital defense, where I share my experiences, projects, and insights in the realm of cybersecurity.&lt;/p&gt;
+      <content>&lt;p&gt;I&amp;rsquo;m thrilled to have you join me on my cybersecurity journey. This blog is a window into my world of digital defense, where I share my experiences, projects, and insights in the realm of cybersecurity.&lt;/p&gt;
 &lt;p&gt;As a passionate cybersecurity enthusiast, I&amp;rsquo;ve embarked on a journey to understand the intricacies of the digital landscape and the ever-evolving threats that surround us. Through this blog, I aim to not only document my personal journey but also provide valuable resources, insights, and discussions about the fascinating world of cybersecurity.&lt;/p&gt;
 &lt;p&gt;Here, you&amp;rsquo;ll find a variety of content ranging from in-depth analyses of the latest cyber threats to hands-on tutorials for securing your digital presence. I&amp;rsquo;ll also be sharing my ongoing projects, and experiments in the cybersecurity field, giving you a glimpse into the practical side of safeguarding our digital lives.&lt;/p&gt;
 &lt;p&gt;Whether you&amp;rsquo;re a fellow cybersecurity enthusiast, a curious beginner, or someone looking to enhance their digital security, there&amp;rsquo;s something here for you. Join me as I navigate the ever-changing landscape of cybersecurity, and together, let&amp;rsquo;s stay one step ahead of the digital adversaries.&lt;/p&gt;

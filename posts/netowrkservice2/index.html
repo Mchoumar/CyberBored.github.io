@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Network Ports 2 :: CyberBored Blog</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content=" -NFS Insights: I got hands-on with showmount, unraveling NFS shares on a target system, and then flexed my skills by locally mounting them using the mount command. Additionally, I dove into exploiting weak SSH keys, securing a foothold on the target.
+
+-Metasploit Marvels: Metasploit became my partner for scanning SMTP servers, revealing their versions. With the smtp_version and smtp_enum modules, I identified potential vulnerabilities and skillfully enumerated valid users on the SMTP server.
+
+-Mastering MySQL: Delving into MySQL, I learned the ropes of remotely connecting to databases and executing SQL queries. Plus, hydra showcased its prowess in a brute-force MySQL attack, cracking passwords like a champ." />
+<meta name="keywords" content="CyebrSecurity, Blog, CyberBored" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="https://cyberbored.site/posts/netowrkservice2/" />
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://cyberbored.site/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="https://cyberbored.site/img/theme-colors/blue.png">
+  <link rel="apple-touch-icon" href="https://cyberbored.site/img/theme-colors/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Network Ports 2">
+<meta property="og:description" content=" -NFS Insights: I got hands-on with showmount, unraveling NFS shares on a target system, and then flexed my skills by locally mounting them using the mount command. Additionally, I dove into exploiting weak SSH keys, securing a foothold on the target.
+
+-Metasploit Marvels: Metasploit became my partner for scanning SMTP servers, revealing their versions. With the smtp_version and smtp_enum modules, I identified potential vulnerabilities and skillfully enumerated valid users on the SMTP server.
+
+-Mastering MySQL: Delving into MySQL, I learned the ropes of remotely connecting to databases and executing SQL queries. Plus, hydra showcased its prowess in a brute-force MySQL attack, cracking passwords like a champ." />
+<meta property="og:url" content="https://cyberbored.site/posts/netowrkservice2/" />
+<meta property="og:site_name" content="CyberBored Blog" />
+
+  
+    <meta property="og:image" content="https://cyberbored.site/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2023-08-29 14:04:43 &#43;0200 CEST" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="blue">
+
+
+<div class="container full headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    CyberBored
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/posts">Blog</a></li>
+        
+      
+        
+          <li><a href="/ctf">CTF</a></li>
+        
+      
+        
+          <li><a href="/projects">Projects</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/posts" >Blog</a></li>
+        
+      
+        
+          <li><a href="/ctf" >CTF</a></li>
+        
+      
+        
+          <li><a href="/projects" >Projects</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="https://cyberbored.site/posts/netowrkservice2/">Network Ports 2</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2023-08-29</time></div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="https://cyberbored.site/tags/blog/">Blog</a>&nbsp;
+      
+    </span>
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <h1 id="brief-summary-about-network-file-system">Brief summary about Network File System:<a href="#brief-summary-about-network-file-system" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Network File System (NFS) is a distributed file protocol that allows remote access and sharing of files between computers over a network. It enables clients to access files and directories on a remote server as if they were local, making it possible to share data and resources seamlessly across different systems.</p>
+<p>A very important tool to consider while using NFS is nfs-common. It includes programs such as: lockd, statd, showmount, nfsstat, gssd, idmapd and mount.nfs.</p>
+<p>Note: to install nfs on your system, simply type the following command:</p>
+<pre><code>- sudo apt update
+- sudo apt install nfs-kernel-server
+</code></pre>
+<p>and to install nfs-common simply add:</p>
+<pre><code>- sudo apt install nfs-common.
+</code></pre>
+<h1 id="practical">Practical:<a href="#practical" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>As per tradition, I started by scanning the open ports using nmap to do a full port scan.</p>
+<p><img src="../../images/networkservice2/0.png" alt="TCP scan"></p>
+<p><img src="../../images/networkservice2/1.png" alt="TCP scan"></p>
+<p>After finding out the open ports, I saw that port 2049 is running nfs_acl service, which can be used to enumerate our attack. Then I wanted to check the NFS shares list using the showmount command.
+Showmount flags:</p>
+<p><img src="../../images/networkservice2/2.png" alt="TCP scan"></p>
+<p><img src="../../images/networkservice2/3.png" alt="TCP scan"></p>
+<p>After finding out the shared directory, I created a mount directory in the tmp file so that it automatically gets deleted after reboot and mounted the directory on the newly created directory.</p>
+<p><img src="../../images/networkservice2/4.png" alt="TCP scan"></p>
+<p><img src="../../images/networkservice2/5.png" alt="TCP scan"></p>
+<p><img src="../../images/networkservice2/6.png" alt="TCP scan"></p>
+<p>After navigating to the mounted directory, I checked for all available files/directories but it appeared that there was not files/directories, so I tried checking for all files/directories including hidden ones and I saw one that caught my attention which is .ssh. As we know from previous lab this file usually contains the private key which could be used to access the target through ssh easily and gain privilege escalation depending on the time of user this refers too.</p>
+<h1 id="brief-summary-about-root-squash">Brief summary about Root Squash:<a href="#brief-summary-about-root-squash" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Root squash&quot; is a security feature implemented in Network File System (NFS) to enhance the security of file sharing. When root squash is enabled, it prevents the root user (superuser) on the NFS client from exercising root privileges on the NFS server. Instead, any attempts by the root user on the client to access NFS resources are mapped to a less privileged user, typically the &ldquo;nobody&rdquo; user or a similar user with restricted access.</p>
+<p>SUID stands for &ldquo;Set User ID&rdquo; and is a permission bit in Unix-like operating systems that allows users to execute a file with the privileges of the file&rsquo;s owner or group, rather than with their own privileges. When the SUID bit is set on an executable file, it enables users to perform certain actions that they wouldn&rsquo;t normally have the permission to execute.</p>
+<h1 id="practicaly">Practicaly:<a href="#practicaly" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>I connected to the target using ssh private key. Then, I installed a script provided by TryHackMe to run on the target and gain privilege escalation Reference. After downloading the file, I simply changed the user permission using chmod +s bash to allow me to be able to execute the file even on a low level privilege account. Because the permissions didn&rsquo;t apply to the other user group, I had to also add the execute permission using chmod +x bash.</p>
+<p><img src="../../images/networkservice2/11.png" alt="TCP scan"></p>
+<p><img src="../../images/networkservice2/8.png" alt="TCP scan"></p>
+<p><img src="../../images/networkservice2/12.png" alt="TCP scan"></p>
+<p><img src="../../images/networkservice2/13.png" alt="TCP scan"></p>
+<p><img src="../../images/networkservice2/10.png" alt="TCP scan"></p>
+<h1 id="brief-summary-about-smtp-pop3-and-imap">Brief summary about SMTP, POP3, and IMAP:<a href="#brief-summary-about-smtp-pop3-and-imap" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>SMTP (Simple Mail Transfer Protocol) is a widely used protocol for sending and receiving emails. It&rsquo;s the standard method by which email clients and servers communicate to deliver messages. SMTP focuses on the transmission of emails, while other protocols like IMAP and POP3 handle the retrieval of emails from a server.</p>
+<p>SMTP operates on port 25, and it works by relaying emails from the sender&rsquo;s mail server to the recipient&rsquo;s mail server. This process involves a series of commands and responses between the sending and receiving servers, ultimately resulting in the successful delivery of the email message.</p>
+<p>POP3 (Post Office Protocol 3) is a protocol used for retrieving emails from a mail server to an email client. Unlike SMTP, which focuses on sending emails, POP3 is responsible for downloading messages from the server to the recipient&rsquo;s device, allowing users to access their emails offline.</p>
+<p>IMAP (Internet Message Access Protocol) is a protocol used for accessing and managing emails stored on a mail server. Unlike POP3, which simply downloads emails to the client, IMAP offers more advanced features that allow users to organize, synchronize, and manage their emails across multiple devices while keeping them stored on the server.</p>
+<h1 id="practical-1">Practical:<a href="#practical-1" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>After learning a brief summary about SMTP, POP3, and IMAP, I wanted to start testing and trying to enumerate them on a virtual lab. As the usual ritual, I started by scanning the ports using nmap and found 2 ports opened.</p>
+<p><img src="../../images/networkservice2/14.png" alt="TCP scan"></p>
+<p>Next, after learning about the open ports, I lunched metasploit using msfconsole to attempt finding the current version running. I ran the command search smtp_version and it showed me the following result.</p>
+<p><img src="../../images/networkservice2/15.png" alt="TCP scan"></p>
+<p>After finding the payload I needed, I set it up and executed the payload against the target which got me system mail name and agent that is running .</p>
+<p><img src="../../images/networkservice2/16.png" alt="TCP scan"></p>
+<p><img src="../../images/networkservice2/17.png" alt="TCP scan"></p>
+<p>As you can see in the picture above I found out about the system mail name which is polosmtp.home and Mail Transfer Agent (MTA) PostFix. I had to search on the internet about MTAs to learn that PostFix is an MTA using the following link Reference Link. After finding all the necessary information about the target, I can now start on the next step which is exploiting. I searched for the payload smtp_enum to get the payload directory.</p>
+<p><img src="../../images/networkservice2/18.png" alt="TCP scan"></p>
+<p>Then started setting up the payload and options necessary for the attack.</p>
+<p><img src="../../images/networkservice2/19.png" alt="TCP scan"></p>
+<pre><code>- RHOSTS: The target we want to exploit
+- USER_FILE: A file that contains the users we want to search for.
+</code></pre>
+<p>These are the options we need to set. The USER_FILE can be found in the seclists directory that contains a lot of built files for usernames, passwords, directories…</p>
+<p>Now all that&rsquo;s left is to get the name of the user.</p>
+<p><img src="../../images/networkservice2/20.png" alt="TCP scan"></p>
+<p>Now it is time to brute force the password after finding out the username. To get the password we can use hydra to brute force port 22.</p>
+<p><img src="../../images/networkservice2/21.png" alt="TCP scan"></p>
+<p><img src="../../images/networkservice2/22.png" alt="TCP scan"></p>
+<p>Which allowed me to get into the target&rsquo;s system and get the flag.</p>
+<p><img src="../../images/networkservice2/23.png" alt="TCP scan"></p>
+<p><img src="../../images/networkservice2/24.png" alt="TCP scan"></p>
+<h1 id="brief-summary-about-mysql-rdbms-and-sql">Brief Summary about MySQL, RDBMS, and SQL:<a href="#brief-summary-about-mysql-rdbms-and-sql" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>MySQL is an open-source relational database management system (RDBMS) known for its speed, reliability, and ease of use. It is widely used for various applications, from small websites to large enterprise systems, due to its scalability and robust features.</p>
+<p>A Relational Database Management System (RDBMS) is a type of database management system that stores and manages data in a structured manner using tables with predefined relationships. RDBMS is designed to efficiently organize, retrieve, and manipulate data based on the principles of the relational model.</p>
+<p>SQL, which stands for Structured Query Language, is a domain-specific programming language used to manage and manipulate relational databases. SQL is essential for interacting with databases and performing various operations, such as querying, inserting, updating, and deleting data. It provides a standardized way to communicate with relational database management systems (RDBMS).</p>
+<h1 id="practical-2">Practical:<a href="#practical-2" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>I scanned first the available ports, and found two open ports 22, and 3306 which is for MySQL.</p>
+<p><img src="../../images/networkservice2/25.png" alt="TCP scan"></p>
+<p>Using the provided credentials root:password, I logged into the server to check if it is on and running and I was able to connect. mysql -h 10.10.192.208 -u root -p.</p>
+<p><img src="../../images/networkservice2/26.png" alt="TCP scan"></p>
+<p>To enumerate the open port of mysql we use metasploit. I searched for mysql_sql on msfconsole which gave me this playload auxiliary/admin/mysql/mysql_sql which allows you to excute commands on admin level after you set up the necessary options for the payload.</p>
+<p><img src="../../images/networkservice2/27.png" alt="TCP scan"></p>
+<p><img src="../../images/networkservice2/28.png" alt="TCP scan"></p>
+<p>And as you can see on row 4 SQL allows you to execute commands that you set.</p>
+<p><img src="../../images/networkservice2/29.png" alt="TCP scan"></p>
+<p>And now it is time to exploit the server after finding out all necessary information. I searched for the payload called mysql_schemadump and copy pasted the payload that was given by the search. Then setup the options necessary just like before. What this payload does, is basically dumps all available tables on the server with column names and types since schema is synonymous with a database.</p>
+<p><img src="../../images/networkservice2/30.png" alt="TCP scan"></p>
+<p>Next, I searched for the payload mysql_hashdump to find out the users available with their hashed password.</p>
+<p><img src="../../images/networkservice2/31.png" alt="TCP scan"></p>
+<p>Finding the hash can be helpful since you can brute force using johntheripper to crack the password, it just takes time.</p>
+<p><img src="../../images/networkservice2/32.png" alt="TCP scan"></p>
+<p>In my case it didn&rsquo;t take any time, as john was able to get it with minimum effort. Thanks john! The password for carl is doggie. And using the credentials we obtained, I logged into the target using ssh and got the flag.</p>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        <span class="button previous">
+            <a href="https://cyberbored.site/posts/adbasics/">
+                <span class="button__icon">←</span>
+                <span class="button__text">Active Directory Fundamentals</span>
+            </a>
+        </span>
+        
+        
+        <span class="button next">
+            <a href="https://cyberbored.site/posts/networkservice1/">
+                <span class="button__text">Network Ports 1</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">
+        <span>CyberBored, Inc. Copyright</span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

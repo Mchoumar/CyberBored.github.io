@@ -7,23 +7,23 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>CyberBored, Inc. Copyright</copyright>
-    <lastBuildDate>Thu, 24 Aug 2023 10:31:35 +0200</lastBuildDate><atom:link href="https://cyberbored.site/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 29 Aug 2023 15:09:15 +0200</lastBuildDate><atom:link href="https://cyberbored.site/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Projects</title>
-      <link>https://cyberbored.site/tags/projects/</link>
-      <pubDate>Thu, 24 Aug 2023 10:31:35 +0200</pubDate>
+      <title>Blog</title>
+      <link>https://cyberbored.site/tags/blog/</link>
+      <pubDate>Tue, 29 Aug 2023 15:09:15 +0200</pubDate>
       
-      <guid>https://cyberbored.site/tags/projects/</guid>
+      <guid>https://cyberbored.site/tags/blog/</guid>
       <description></description>
       <content></content>
     </item>
     
     <item>
-      <title>Blogs</title>
-      <link>https://cyberbored.site/tags/blogs/</link>
-      <pubDate>Sat, 19 Aug 2023 16:30:33 +0200</pubDate>
+      <title>Project</title>
+      <link>https://cyberbored.site/tags/project/</link>
+      <pubDate>Thu, 24 Aug 2023 10:31:35 +0200</pubDate>
       
-      <guid>https://cyberbored.site/tags/blogs/</guid>
+      <guid>https://cyberbored.site/tags/project/</guid>
       <description></description>
       <content></content>
     </item>
