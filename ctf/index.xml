@@ -7,7 +7,58 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>CyberBored, Inc. Copyright</copyright>
-    <lastBuildDate>Thu, 17 Aug 2023 22:33:51 +0200</lastBuildDate><atom:link href="https://cyberbored.site/ctf/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 25 Sep 2023 12:56:32 +0200</lastBuildDate><atom:link href="https://cyberbored.site/ctf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Simplectf</title>
+      <link>https://cyberbored.site/ctf/simplectf/</link>
+      <pubDate>Mon, 25 Sep 2023 12:56:32 +0200</pubDate>
+      
+      <guid>https://cyberbored.site/ctf/simplectf/</guid>
+      <description>I am attempting now my first TryHackMe CTF.
+Reconnaissance: I started first by scanning the first 1000 ports
+using nmap:
+nmap -sC -sV -v -oN simple 10.10.13.112 Which gave me the results above. I learned that there are 3 ports opened and one of them is port 80 http, so I searched for the targets url http://10.10.13.112 and found an apache page. Then, I wanted to learn if there is any hidden common directory that I can find, so I brute forced the directories using gobuster, you can also use fuff to brute force DNS subdomains, URLS, Virtual hosts&amp;hellip;etc.</description>
+      <content>&lt;p&gt;I am attempting now my first TryHackMe CTF.&lt;/p&gt;
+&lt;h1 id=&#34;reconnaissance&#34;&gt;Reconnaissance:&lt;/h1&gt;
+&lt;p&gt;I started first by scanning the first 1000 ports&lt;/p&gt;
+&lt;p&gt;using nmap:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nmap -sC -sV -v -oN simple 10.10.13.112
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/simplectf/0.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Which gave me the results above. I learned that there are 3 ports opened and one of them is port 80 http, so I searched for the targets url http://10.10.13.112 and found an apache page. Then, I wanted to learn if there is any hidden common directory that I can find, so I brute forced the directories using gobuster, you can also use fuff to brute force DNS subdomains, URLS, Virtual hosts&amp;hellip;etc. I also utilized seclist with gobuster, since seclist is a repository that hosts various security-related lists and resources.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/simplectf/1.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;enumeration&#34;&gt;Enumeration:&lt;/h1&gt;
+&lt;p&gt;Gobuster was able to find 3 domain directories index.html, robots.txt, and simple. Simple is a Content Management System (CMS) that manages the creation and modification of digital content. This discovery helped me find the version of the CMS being used, which helps me find vulnerabilities to exploit.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/simplectf/2.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/simplectf/3.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;setting-up-the-payload&#34;&gt;Setting up the payload:&lt;/h1&gt;
+&lt;p&gt;I searched for CMS Made Simple version 2.2.8 and found an SQL-Injection exploit on &lt;a href=&#34;https://www.exploit-db.com/exploits/46635&#34;&gt;Exploit-DB&lt;/a&gt; that contains a python file which helps to exploit this CMS. I faced an issue an issue when I tried to run the python file from Exploit-DB. First attempt, I tried running the file using python3 after fixing some syntax error since the file is written in python2 syntax and it gave me an typeerror: unicode-objects must be encoded before hashing, which I tried searching for a solution to fix and I wasn&amp;rsquo;t able too. Second attempt, I tried running it on python2 and it gave me missing modules error, which I tried installing using pip, but I also showed an error since pip wasn&amp;rsquo;t available for python2. Fortunately, I found a solution to fix the pip install error on this &lt;a href=&#34;https://stackoverflow.com/questions/64187581/e-package-python-pip-has-no-installation-candidate&#34;&gt;stackoverflow&lt;/a&gt; post or simply type the following commands:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;• curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py
+• python get-pip.py
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And to check if it was installed correctly type the following command and you should receive a pip version:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;• pip2 --version
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then install all missing modules using the following command:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;• Python2 -m pip install [module]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After installing the requirements, I made a quick scan for the python file and learned how the script is programmed and saw an example how to run the script:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/simplectf/4.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;exploiting&#34;&gt;Exploiting:&lt;/h1&gt;
+&lt;p&gt;So, I used the example to run the script and got the credentials of the target:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;• python2 exploit.py -u http://10.10.13.112/simple --crack -w /usr/share/seclists/Passwords/Common-Credentials/best110.txt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/simplectf/5.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Now I am able to login into ssh using the credentials I got:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;• ssh -p2222 mitch@10.10.13.112
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now it is time to try and get privilege escalation. I made some research and learned multiple things, using sudo -l you can get a list of commands that the current user can use, &lt;a href=&#34;https://gtfobins.github.io/&#34;&gt;gtdobins&lt;/a&gt; is a website that contains commands that can bypass the restrictions and gain privilege escalation.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/simplectf/6.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/simplectf/7.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/simplectf/8.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+</content>
+    </item>
+    
     <item>
       <title>Devil Machine</title>
       <link>https://cyberbored.site/ctf/devil/</link>

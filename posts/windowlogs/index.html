@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Windowlogs :: CyberBored Blog</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content=" -Navigating Windows Event Viewer: Gain hands-on experience in exploring and understanding different types of logs through the Windows Event Viewer interface.
+
+-Mastering Log Filtering Techniques: Learn essential skills for efficiently filtering and extracting valuable information from Windows logs.
+
+-Practical Log Analysis: Put your knowledge to the test with guided exercises using recorded logs, honing your ability to effectively analyze and interpret event data." />
+<meta name="keywords" content="CyebrSecurity, Blog, CyberBored" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="https://cyberbored.site/posts/windowlogs/" />
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://cyberbored.site/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="https://cyberbored.site/img/theme-colors/blue.png">
+  <link rel="apple-touch-icon" href="https://cyberbored.site/img/theme-colors/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Windowlogs">
+<meta property="og:description" content=" -Navigating Windows Event Viewer: Gain hands-on experience in exploring and understanding different types of logs through the Windows Event Viewer interface.
+
+-Mastering Log Filtering Techniques: Learn essential skills for efficiently filtering and extracting valuable information from Windows logs.
+
+-Practical Log Analysis: Put your knowledge to the test with guided exercises using recorded logs, honing your ability to effectively analyze and interpret event data." />
+<meta property="og:url" content="https://cyberbored.site/posts/windowlogs/" />
+<meta property="og:site_name" content="CyberBored Blog" />
+
+  
+    <meta property="og:image" content="https://cyberbored.site/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2023-09-25 11:51:45 &#43;0200 CEST" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="blue">
+
+
+<div class="container full headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    CyberBored
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/posts">Blog</a></li>
+        
+      
+        
+          <li><a href="/ctf">CTF</a></li>
+        
+      
+        
+          <li><a href="/projects">Projects</a></li>
+        
+      
+        
+          <li><a href="/resources">Resources</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/posts" >Blog</a></li>
+        
+      
+        
+          <li><a href="/ctf" >CTF</a></li>
+        
+      
+        
+          <li><a href="/projects" >Projects</a></li>
+        
+      
+        
+          <li><a href="/resources" >Resources</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="https://cyberbored.site/posts/windowlogs/">Windowlogs</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2023-09-25</time></div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="https://cyberbored.site/tags/blog/">Blog</a>&nbsp;
+      
+    </span>
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <h1 id="introduction">Introduction:<a href="#introduction" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Think of logs as digital diaries that jot down what&rsquo;s happening in systems, apps, or networks. They&rsquo;re like a timeline of events, helping us figure out problems, spot weird stuff, and understand how things behave. In the cybersecurity world, logs are like detectives – they help us solve mysteries, catch bad guys, and keep things safe. They&rsquo;re the key to knowing what&rsquo;s going on in our digital world!</p>
+<p>The Event Viewer is like a detective&rsquo;s notebook for your computer. Which will prove to be an important component for us to investigate anything on our computer.</p>
+<p><img src="../../images/eventviewer/0.png" alt="TCP scan"></p>
+<p>Once you lunch the event viewer, you can see multiple windows:</p>
+<pre><code>• The left side is the directories that stores all different types of logs.
+
+• The middle displays the general summary of the selected log.
+
+• The right is the action window.
+</code></pre>
+<p><img src="../../images/eventviewer/1.png" alt="TCP scan"></p>
+<p>On the logs property, you can see the log location, log size, and when it was created, modified and last accessed. You can also notice the max size of the log and the type of action that should be taken once the max size is reached. Keep an eye on the right bottom corner where it says clear log, this is a crucial options that can be used during security maintenance, or an adversary trying to stay undetected.</p>
+<p><img src="../../images/eventviewer/2.png" alt="TCP scan"></p>
+<p>You can see on the overview window some columns:
+• Level highlights the log recorded type based on the identified event.
+• Data and Time highlight the time when the event was logged.
+• Source highlights the name of the software that it was originated from.
+• Event ID is a predefined numerical value that maps to a specific operation based on the log source.
+• Task Category highlights the event category.</p>
+<p>Once you choose any of the logged events you will see a new windows like the one in the picture about in the light grey, you can see details about the event and general explanation.</p>
+<p><img src="../../images/eventviewer/3.png" alt="TCP scan"></p>
+<p>By pressing on the column category that you want you can filter them in descending or ascending order. Example, by pressing on Date and Time I filtered the time of each event to check the earliest event on my Event Viewer.</p>
+<p><img src="../../images/eventviewer/4.png" alt="TCP scan"></p>
+<p>On Action window we can perform several tasks like opening a saved log, which is usually used when working remotely, or creating custom view/filter current log to help you make your search easier. In this example I needed to search for a specific event in my current log file, so I chose filter current log and added the ID of the event to filter it out of the other events.</p>
+<h1 id="powershell-automation-tools">PowerShell Automation tools:<a href="#powershell-automation-tools" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<h3 id="wevtutilexe">Wevtutil.exe:<a href="#wevtutilexe" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>Even with the filtering help it is still inconvenient to be going through thousands of logs, that&rsquo;s why there are some tools in PowerShell that can help us automate the process. Example, <strong>wevtutil.exe</strong> is a tool that can help us enumerate through the logs automatically, to find the list of flags that can be used with this tools simply add <strong>wevtutil.exe /?</strong>.</p>
+<p><img src="../../images/eventviewer/5.png" alt="TCP scan"></p>
+<p>To find more information about the flags you can visit this link <a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/wevtutil">Reference Link</a></p>
+<p>I needed to count the log names available on the machine, but since I am not very familiar with PowerShell commands it proved to be a difficult, so I looked into the provided hint that says we need to combine enum-logs with Measure-Object cmdlet to count the event names.</p>
+<h1 id="get-winevent">Get-WinEvent:<a href="#get-winevent" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Get-WinEvent is a PowerShell cmdlet used to retrieve events from event logs on a Windows computer. It allows you to access and analyze event log data programmatically.
+<a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.diagnostics/get-winevent?view=powershell-5.1">Reference Link</a></p>
+<p>Top Get-WinEvent Flags:</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-ListLog</td>
+<td>Obtains all event logs locally.</td>
+</tr>
+<tr>
+<td>-ListProvider</td>
+<td>Obtain event log providers and their associated logs.</td>
+</tr>
+<tr>
+<td>-LogName</td>
+<td>Obtain the selected events from an event log.</td>
+</tr>
+<tr>
+<td>-FilterHashtable @{LogName=&rsquo;&rsquo; ProviderName=&rsquo;'}</td>
+<td>Obtain filtered event logs.</td>
+</tr>
+<tr>
+<td>-Path</td>
+<td>Obtains logs in a specific path.</td>
+</tr>
+</tbody>
+</table>
+<p>Where-Object cmdlet allows you to filter event logs, but when working with large event logs, it&rsquo;s inefficient to send objects down the pipeline to a Where-Object command, It is recommended to use FilterHashtable instead.</p>
+<p><img src="../../images/eventviewer/6.png" alt="TCP scan"></p>
+<h1 id="xpath-queries">XPath Queries:<a href="#xpath-queries" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>XPath (XML Path Language) queries are used to navigate and query XML documents, including event logs in PowerShell. In PowerShell, XPath queries are often used with cmdlets like wevtutil and Get-WinEvent to filter and extract specific elements from XML-based data.
+<a href="https://learn.microsoft.com/en-us/windows/win32/wes/consuming-events#xpath-10-limitations">Reference Link</a></p>
+<p>XPath Query Example:</p>
+<pre><code>*[System[(Level &lt;= 3) and TimeCreated[timediff(@SystemTime) &lt;= 86400000]]] or replace * with Event.
+</code></pre>
+<p><strong>Note</strong>: Event viewer can help us with constructing XPath query.</p>
+<p><img src="../../images/eventviewer/7.png" alt="TCP scan"></p>
+<p>Example:</p>
+<pre><code>1.Get-WinEvent -LogName Application -FilterXPath '*/System/EventID=800'. You can replace the keyword System with * or Event.
+2.wevtutil.exe qe Application /q:*/System[EventID=100] /f:text /c:1.
+3.Get-WinEvent -LogName Application -FilterXPath '*/System/Provider[@Name=&quot;WLMS&quot;]'.
+4. Get-WinEvent -LogName Application -FilterXPath '*/System/EventID=101 and */System/Provider[@Name=&quot;WLMS&quot;]'.
+</code></pre>
+<p><img src="../../images/eventviewer/8.png" alt="TCP scan">
+<img src="../../images/eventviewer/9.png" alt="TCP scan"></p>
+<h1 id="event-ids">Event IDs:<a href="#event-ids" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>When we are working logs, it is very important to know what we are looking for under the pile of thousands of events:
+• Here is an outdate cheat sheet that will help us in determining what we are looking for <a href="https://static1.squarespace.com/static/552092d5e4b0661088167e5c/t/580595db9f745688bc7477f6/1476761074992/Windows+Logging+Cheat+Sheet_ver_Oct_2016.pdf">Reference Link</a>.
+• There is also a guide made by NSA also outdate, but it can build your foundation <a href="https://web.archive.org/web/20190115215749/https:/apps.nsa.gov/iaarchive/customcf/openAttachment.cfm?FilePath=/iad/library/ia-guidance/security-configuration/applications/assets/public/upload/Spotting-the-Adversary-with-Windows-Event-Log-Monitoring.pdf&amp;WpKes=aF6woL7fQp3dJiqyJL2LenrLxuHC7ztGtVNK3x">Reference Link</a>.
+• Another source is MITRE Attack website <a href="https://attack.mitre.org/">https://attack.mitre.org/</a>.
+• Two other important sources <a href="https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/appendix-l--events-to-monitor">Events to View</a> and <a href="https://www.microsoft.com/en-us/download/confirmation.aspx?id=52630">Windows 10 and Windows server 2016 auditing</a>.
+<strong>Note</strong>: Some events will not be generated by default, and certain features will need to be enabled/configured on the endpoint, such as PowerShell logging. This feature can be enabled via Group Policy or the Registry. Local Computer Policy &ndash;&gt; Computer Configuration &ndash;&gt; Administrative Templates &ndash;&gt; Windows Components &ndash;&gt; Windows PowerShell</p>
+<p>Other sources that provide more information about enabling more features:</p>
+<p>• <a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_logging_windows?view=powershell-7.3&amp;viewFallbackFrom=powershell-7.1">About Logging windows</a>.</p>
+<p>• <a href="https://www.mandiant.com/resources/blog/greater-visibility">Greater Visibility Through PowerShell Logging</a>.</p>
+<p>• <a href="https://docs.splunk.com/Documentation/UBA/5.0.4/GetDataIn/AddPowerShell">Configure PowerShell</a>.</p>
+<p>Another feature to enable/configure is Audit Process Creation, which will generate event ID 4688. This will allow command-line process auditing. This setting is NOT enabled in the virtual machine but feel free to enable it and observe the events generated after executing some commands <a href="https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/component-updates/command-line-process-auditing#try-this-explore-command-line-process-auditing">Reference Link</a>.</p>
+<pre><code>Local Computer Policy --&gt; Computer Configuration --&gt; Administrative Templates --&gt; System --&gt; Audit Process Creation.
+</code></pre>
+<h1 id="practical">Practical:<a href="#practical" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>I have a saved log file called merged and I am tasked to search through the file and solve multiple different scenarios.
+First scenario, Admins complained about PowerShell being blocked and now I need to monitor it. I searched for the PowerShell Event and found some information on this website <a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_logging?view=powershell-5.1">Reference Link</a>, but I needed to search for a PowerShell downgrade attack. I searched on google to find some info about it and found a repository that explains about the event <a href="https://github.com/CyberSift/CyberSift-Alerts/blob/master/powershell/PowerShell%20Downgrade%20Attack.md">Reference Link</a>, which helped me filter the events and pinpoint the downgrade attack and I simply searched for the entry where the HostVerion was changed.</p>
+<p><img src="../../images/eventviewer/10.png" alt="TCP scan"></p>
+<p><img src="../../images/eventviewer/11.png" alt="TCP scan"></p>
+<p>Second Scenario, someone cleared the system logs and we need to find the Event Record ID and the Computer name. To find the log clear I filtered the source to event log and immediately found the log clear task category.</p>
+<p><img src="../../images/eventviewer/12.png" alt="TCP scan"></p>
+<p><img src="../../images/eventviewer/13.png" alt="TCP scan"></p>
+<p>Third scenario, The threat intel team shared its research on Emotet and advised searching for event ID 4101 and the text &ldquo;ScriptBlockText&rdquo;. I Tried to filter using the event ID given 4101 but for some odd reason it displayed that it wasn&rsquo;t found, so then I tried searching for the event ID using Get-WinEvent -Path C:\Users\Administrator\Desktop\merged.evtx -FilterXPath &lsquo;*/System/EventID=4101&rsquo; and it displayed an error. I also tried using wevtutil and it also gave me errors, so I looked into the given hint which told me to use -Oldest -MaxEvents 1 and pipe to Format-List, but I didn&rsquo;t notice the Format-List when I wrote the command.</p>
+<p><img src="../../images/eventviewer/14.png" alt="TCP scan"></p>
+<p>Once I knew the time created, I filtered using the time and found the event I am looking for.</p>
+<p><img src="../../images/eventviewer/15.png" alt="TCP scan"></p>
+<p><img src="../../images/eventviewer/16.png" alt="TCP scan"></p>
+<p>Fourth and final scenario, an intern suspected of running an unusual command on her machine. We are recommended to search for &ldquo;C:\Windows\System32\net1.exe&rdquo;. I searched for user enumeration and found two results that I used as a clue.</p>
+<p><img src="../../images/eventviewer/17.png" alt="TCP scan"></p>
+<p>Since my objective was to find security group information, I filtered for event ID 4799 and found all the required information, which concluded the room.</p>
+<p><img src="../../images/eventviewer/18.png" alt="TCP scan"></p>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        <span class="button previous">
+            <a href="https://cyberbored.site/posts/sysmon/">
+                <span class="button__icon">←</span>
+                <span class="button__text">Sysmon</span>
+            </a>
+        </span>
+        
+        
+        <span class="button next">
+            <a href="https://cyberbored.site/posts/nessus/">
+                <span class="button__text">Nessus</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">
+        <span>CyberBored, Inc. Copyright</span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

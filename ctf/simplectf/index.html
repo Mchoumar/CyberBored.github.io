@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Simplectf :: CyberBored Blog</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="I am attempting now my first TryHackMe CTF.
+Reconnaissance: I started first by scanning the first 1000 ports
+using nmap:
+nmap -sC -sV -v -oN simple 10.10.13.112 Which gave me the results above. I learned that there are 3 ports opened and one of them is port 80 http, so I searched for the targets url http://10.10.13.112 and found an apache page. Then, I wanted to learn if there is any hidden common directory that I can find, so I brute forced the directories using gobuster, you can also use fuff to brute force DNS subdomains, URLS, Virtual hosts&amp;hellip;etc." />
+<meta name="keywords" content="CyebrSecurity, Blog, CyberBored" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="https://cyberbored.site/ctf/simplectf/" />
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://cyberbored.site/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="https://cyberbored.site/img/theme-colors/blue.png">
+  <link rel="apple-touch-icon" href="https://cyberbored.site/img/theme-colors/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Simplectf">
+<meta property="og:description" content="I am attempting now my first TryHackMe CTF.
+Reconnaissance: I started first by scanning the first 1000 ports
+using nmap:
+nmap -sC -sV -v -oN simple 10.10.13.112 Which gave me the results above. I learned that there are 3 ports opened and one of them is port 80 http, so I searched for the targets url http://10.10.13.112 and found an apache page. Then, I wanted to learn if there is any hidden common directory that I can find, so I brute forced the directories using gobuster, you can also use fuff to brute force DNS subdomains, URLS, Virtual hosts&amp;hellip;etc." />
+<meta property="og:url" content="https://cyberbored.site/ctf/simplectf/" />
+<meta property="og:site_name" content="CyberBored Blog" />
+
+  
+    <meta property="og:image" content="https://cyberbored.site/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2023-09-25 12:56:32 &#43;0200 CEST" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="blue">
+
+
+<div class="container full headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    CyberBored
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/posts">Blog</a></li>
+        
+      
+        
+          <li><a href="/ctf">CTF</a></li>
+        
+      
+        
+          <li><a href="/projects">Projects</a></li>
+        
+      
+        
+          <li><a href="/resources">Resources</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/posts" >Blog</a></li>
+        
+      
+        
+          <li><a href="/ctf" >CTF</a></li>
+        
+      
+        
+          <li><a href="/projects" >Projects</a></li>
+        
+      
+        
+          <li><a href="/resources" >Resources</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="https://cyberbored.site/ctf/simplectf/">Simplectf</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2023-09-25</time></div>
+
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <p>I am attempting now my first TryHackMe CTF.</p>
+<h1 id="reconnaissance">Reconnaissance:<a href="#reconnaissance" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>I started first by scanning the first 1000 ports</p>
+<p>using nmap:</p>
+<pre><code>nmap -sC -sV -v -oN simple 10.10.13.112
+</code></pre>
+<p><img src="../../images/simplectf/0.png" alt="TCP scan"></p>
+<p>Which gave me the results above. I learned that there are 3 ports opened and one of them is port 80 http, so I searched for the targets url http://10.10.13.112 and found an apache page. Then, I wanted to learn if there is any hidden common directory that I can find, so I brute forced the directories using gobuster, you can also use fuff to brute force DNS subdomains, URLS, Virtual hosts&hellip;etc. I also utilized seclist with gobuster, since seclist is a repository that hosts various security-related lists and resources.</p>
+<p><img src="../../images/simplectf/1.png" alt="TCP scan"></p>
+<h1 id="enumeration">Enumeration:<a href="#enumeration" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Gobuster was able to find 3 domain directories index.html, robots.txt, and simple. Simple is a Content Management System (CMS) that manages the creation and modification of digital content. This discovery helped me find the version of the CMS being used, which helps me find vulnerabilities to exploit.</p>
+<p><img src="../../images/simplectf/2.png" alt="TCP scan"></p>
+<p><img src="../../images/simplectf/3.png" alt="TCP scan"></p>
+<h1 id="setting-up-the-payload">Setting up the payload:<a href="#setting-up-the-payload" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>I searched for CMS Made Simple version 2.2.8 and found an SQL-Injection exploit on <a href="https://www.exploit-db.com/exploits/46635">Exploit-DB</a> that contains a python file which helps to exploit this CMS. I faced an issue an issue when I tried to run the python file from Exploit-DB. First attempt, I tried running the file using python3 after fixing some syntax error since the file is written in python2 syntax and it gave me an typeerror: unicode-objects must be encoded before hashing, which I tried searching for a solution to fix and I wasn&rsquo;t able too. Second attempt, I tried running it on python2 and it gave me missing modules error, which I tried installing using pip, but I also showed an error since pip wasn&rsquo;t available for python2. Fortunately, I found a solution to fix the pip install error on this <a href="https://stackoverflow.com/questions/64187581/e-package-python-pip-has-no-installation-candidate">stackoverflow</a> post or simply type the following commands:</p>
+<pre><code>• curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py
+• python get-pip.py
+</code></pre>
+<p>And to check if it was installed correctly type the following command and you should receive a pip version:</p>
+<pre><code>• pip2 --version
+</code></pre>
+<p>Then install all missing modules using the following command:</p>
+<pre><code>• Python2 -m pip install [module]
+</code></pre>
+<p>After installing the requirements, I made a quick scan for the python file and learned how the script is programmed and saw an example how to run the script:</p>
+<p><img src="../../images/simplectf/4.png" alt="TCP scan"></p>
+<h1 id="exploiting">Exploiting:<a href="#exploiting" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>So, I used the example to run the script and got the credentials of the target:</p>
+<pre><code>• python2 exploit.py -u http://10.10.13.112/simple --crack -w /usr/share/seclists/Passwords/Common-Credentials/best110.txt
+</code></pre>
+<p><img src="../../images/simplectf/5.png" alt="TCP scan"></p>
+<p>Now I am able to login into ssh using the credentials I got:</p>
+<pre><code>• ssh -p2222 mitch@10.10.13.112
+</code></pre>
+<p>Now it is time to try and get privilege escalation. I made some research and learned multiple things, using sudo -l you can get a list of commands that the current user can use, <a href="https://gtfobins.github.io/">gtdobins</a> is a website that contains commands that can bypass the restrictions and gain privilege escalation.</p>
+<p><img src="../../images/simplectf/6.png" alt="TCP scan"></p>
+<p><img src="../../images/simplectf/7.png" alt="TCP scan"></p>
+<p><img src="../../images/simplectf/8.png" alt="TCP scan"></p>
+
+      </div></div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">
+        <span>CyberBored, Inc. Copyright</span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

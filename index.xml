@@ -7,7 +7,700 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>CyberBored, Inc. Copyright</copyright>
-    <lastBuildDate>Tue, 29 Aug 2023 15:09:15 +0200</lastBuildDate><atom:link href="https://cyberbored.site/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 25 Sep 2023 13:42:50 +0200</lastBuildDate><atom:link href="https://cyberbored.site/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Openvas</title>
+      <link>https://cyberbored.site/posts/openvas/</link>
+      <pubDate>Mon, 25 Sep 2023 13:42:50 +0200</pubDate>
+      
+      <guid>https://cyberbored.site/posts/openvas/</guid>
+      <description>Introduction: OpenVAS (Open Vulnerability Assessment System) is an open-source vulnerability scanner used for assessing and managing security vulnerabilities in computer systems and networks. It is designed to identify potential security issues and weaknesses in software, servers, and network devices.
+The Greenbone Vulnerability Management (GVM) framework is an open-source platform used for vulnerability scanning and management. It&amp;rsquo;s designed to help organizations identify and mitigate security risks within their networks and systems. The architecture of GVM comprises several key components:</description>
+      <content>&lt;h1 id=&#34;introduction&#34;&gt;Introduction:&lt;/h1&gt;
+&lt;p&gt;OpenVAS (Open Vulnerability Assessment System) is an open-source vulnerability scanner used for assessing and managing security vulnerabilities in computer systems and networks. It is designed to identify potential security issues and weaknesses in software, servers, and network devices.&lt;/p&gt;
+&lt;p&gt;The Greenbone Vulnerability Management (GVM) framework is an open-source platform used for vulnerability scanning and management. It&amp;rsquo;s designed to help organizations identify and mitigate security risks within their networks and systems.
+The architecture of GVM comprises several key components:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. Greenbone Security Assistant (GSA): GSA is the web interface of GVM that allows users to interact with the platform. It provides a user-friendly graphical interface for configuring scans, viewing scan results, and generating reports. GSA also facilitates user authentication and access control.
+
+2. OpenVAS Scanner: This component is responsible for performing vulnerability scans. It uses the Network Vulnerability Tests (NVTs) database to identify vulnerabilities in target systems. The OpenVAS Scanner coordinates with the GSA for task configuration and receives instructions for conducting scans.
+
+3. GVM Libraries (gvm-libs): These libraries provide an interface for accessing the GVM services and database. They facilitate programmatic interaction with GVM, enabling automation, integration, and customization of vulnerability management processes.
+
+4. Greenbone Security Manager (GSM): The GSM acts as the central management system for GVM. It orchestrates various components, including the scanner, and provides functionalities for managing tasks, scheduling scans, and storing scan results. The GSM also maintains the database where scan results and configuration data are stored.
+
+5. PostgreSQL Database: GVM relies on a PostgreSQL database to store configuration data, scan results, user information, and other relevant information. This database is crucial for maintaining a comprehensive record of security assessments.
+
+6. OpenVAS Manager: This component is responsible for consolidating scan results from the OpenVAS Scanner. It organizes and manages the data before storing it in the PostgreSQL database. The OpenVAS Manager also handles user authentication and authorization.
+
+7. NVTs Database: The Network Vulnerability Tests database contains a vast collection of security checks that the OpenVAS Scanner uses during vulnerability scans. These checks help identify known vulnerabilities in target systems.
+
+8. Security Feed: The Security Feed provides regular updates to the NVTs database. It ensures that the scanner has the most current information about vulnerabilities and security issues.
+
+9. Feed Services: These services manage the synchronization of the NVTs database with the Security Feed. They ensure that the scanner has the latest vulnerability data for effective scanning.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;installation&#34;&gt;Installation:&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;• Dependencies: sudo apt install -y build-essential cmake pkg-config libglib2.0-dev libgnutls28-dev libssh-gcrypt-dev libldap2-dev doxygen libpcap-dev bison libksba-dev libsnmp-dev libgcrypt-dev libsqlite3-dev libical-dev postgresql postgresql-contrib postgresql-server-dev-all libmicrohttpd-dev libxml2-dev libxslt1-dev xsltproc clang rsync python3-polib redis-server texlive-full
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;• &lt;a href=&#34;https://github.com/greenbone/openvas-scanner&#34;&gt;https://github.com/greenbone/openvas-scanner&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;OR run it using docker:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;• apt install docker.io
+
+• docker run -d -p 443:443 --name openvas mikesplain/openvas
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then open the site https://127.0.0.1/ and login using username: admin and password: admin.&lt;/p&gt;
+&lt;h1 id=&#34;scan&#34;&gt;Scan:&lt;/h1&gt;
+&lt;p&gt;To start a scan using openvas:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;navigate to Scans --&amp;gt; Tasks --&amp;gt; Task wizard located under the purple wand --&amp;gt; enter the target IP to scan.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To start a new scan under the blue star press new task.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;• Name: Allows us to set the name the scan will be known as inside of OpenVAS
+
+• Scan Targets: The targets to scan, can include Hosts, Ports, and Credentials. To create a new target you will need to follow another pop-up, this will be covered later in this task.
+
+• Scanner: The scanner to use by default will use the OpenVAS architecture however you can set this to any scanner of your choosing in the settings menu.
+
+• Scan Config: OpenVAS has seven different scan types you can select from and will be used based on how you aggressive or what information you want to collect from your scan.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The most important options for the scan configuration are Name, Event, Condition, and To Address.&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Burpsuite</title>
+      <link>https://cyberbored.site/posts/burpsuite/</link>
+      <pubDate>Mon, 25 Sep 2023 13:35:54 +0200</pubDate>
+      
+      <guid>https://cyberbored.site/posts/burpsuite/</guid>
+      <description>Introduction: Burp Suit is a web vulnerability scanner and security testing platform developed by PortSwigger. It captures and enables manipulation of all the HTTP/HTTPS traffic between a browser and a web server.
+Burp Suite Community Tools: • Proxy intercept and modify of requests and responses while interacting with web applications.• Repeater allows us to capture, modify, and resend the same request multiple times. It is useful when crafting payloads or testing the functionality of an endpoint for vulnerabilities.</description>
+      <content>&lt;h1 id=&#34;introduction&#34;&gt;Introduction:&lt;/h1&gt;
+&lt;p&gt;Burp Suit is a web vulnerability scanner and security testing platform developed by PortSwigger. It captures and enables manipulation of all the HTTP/HTTPS traffic between a browser and a web server.&lt;/p&gt;
+&lt;h1 id=&#34;burp-suite-community-tools&#34;&gt;Burp Suite Community Tools:&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;• Proxy intercept and modify of requests and responses while interacting with web applications.
+
+• Repeater allows us to capture, modify, and resend the same request multiple times. It is useful when crafting payloads or testing the functionality of an endpoint for vulnerabilities.
+
+• Intruder allows for spraying endpoints with requests. It is commonly utilized for brute-force attacks or fuzzing endpoints.
+
+• Decoder offers a valuable service for data transformation. It can decode captured information or encode payloads before sending them to target.
+
+• Comparer enables the comparison of two pieces of data at either the word or byte level.
+
+• Sequencer is typically employed when assessing the randomness of tokens, such as session cookie values or other supposedly randomly generated data. If the algorithm used for generating these values lacks secure randomness, it can expose avenues for devastating attacks.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;installation&#34;&gt;Installation:&lt;/h1&gt;
+&lt;p&gt;Burp Suite installation &lt;a href=&#34;https://portswigger.net/burp/releases&#34;&gt;Link&lt;/a&gt;, choose the proper operating system and install the zip file. On windows run the executable, and on Linux by simply running the scripting in the terminal, by giving it the necessary privelge and running it using ./and the file name.&lt;/p&gt;
+&lt;h1 id=&#34;dashboard&#34;&gt;DashBoard:&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;1. Tasks: The Tasks menu allows you to define background tasks that Burp Suite will perform while you use the application. In Burp Suite Community, the default “Live Passive Crawl” task, which automatically logs the pages visited, is sufficient for our purposes in this module. Burp Suite Professional offers additional features like on-demand scans.
+
+2. Event log: The Event log provides information about the actions performed by Burp Suite, such as starting the proxy, as well as details about connections made through Burp.
+
+3. Issue Activity: This section is specific to Burp Suite Professional. It displays the vulnerabilities identified by the automated scanner, ranked by severity and filterable based on the certainty of the vulnerability.
+
+4. Advisory: The Advisory section provides more detailed information about the identified vulnerabilities, including references and suggested remediations. This information can be exported into a report. In Burp Suite Community, this section may not show any vulnerabilities.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;shortcuts&#34;&gt;Shortcuts:&lt;/h4&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Shortcut&lt;/th&gt;
+&lt;th&gt;Tab&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl + Shift + D&lt;/td&gt;
+&lt;td&gt;Dashboard&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl + Shift + T&lt;/td&gt;
+&lt;td&gt;Target tab&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl + Shift + P&lt;/td&gt;
+&lt;td&gt;Proxy tab&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl + Shift + I&lt;/td&gt;
+&lt;td&gt;Intruder tab&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl + Shift + R&lt;/td&gt;
+&lt;td&gt;Repeater tab&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;burp-suite-proxy&#34;&gt;Burp Suite Proxy:&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;• Intercepting Requests: Intercept options allows us to intercept requests using Burp Suite, which allows us to modify the request or analyze it. To allow the request to pass you should turn off the intercept option.
+
+• WebSocket Support: Burp Suite also captures and logs WebSocket communication, providing additional assistance when analyzing web applications.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;All captured logs can be found in the history sub-category.
+While intercepting requests you are able to play the man in the middle and change the request sent.&lt;/p&gt;
+&lt;h1 id=&#34;proxy-settings&#34;&gt;Proxy settings:&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;• Response Interceptions isn&#39;t active by default unless explicitly requested on a per-request basis.
+
+• Match and Replace section in the proxy settings enables the use of regular expressions (regex) to modify incoming and outgoing requests.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;foxyproxy&#34;&gt;FoxyProxy:&lt;/h1&gt;
+&lt;p&gt;FoxyProxy is a browser extension that facilitates the management and switching of proxy servers within web browsers. It is available for popular web browsers like Mozilla Firefox and Google Chrome. Install the extension and configure it. You can configure it by going to FoxyProxy options and adding the IP and port of the Proxy then on the extension press on burp and it will be activated and it will start intercepting the websites.&lt;/p&gt;
+&lt;h1 id=&#34;decoder&#34;&gt;Decoder:&lt;/h1&gt;
+&lt;p&gt;Once you find Authorisation code on the site map, you can use the code with Decoder to get the clear text of the message.&lt;/p&gt;
+&lt;h1 id=&#34;repeater&#34;&gt;Repeater:&lt;/h1&gt;
+&lt;p&gt;You can use shellshock attack using repeater to change the request sent and embed an attack.&lt;/p&gt;
+&lt;p&gt;Practical Video of me using Burpsuite on &lt;a href=&#34;http://testphp.vulnweb.com/&#34;&gt;http://testphp.vulnweb.com/&lt;/a&gt; website:&lt;/p&gt;
+&lt;p&gt;• &lt;a href=&#34;https://www.linkedin.com/feed/update/urn:li:activity:7110033657838374912/?originTrackingId=Yep8vmejQtGznAgKJ1SdtA%3D%3D&#34;&gt;Practical Video&lt;/a&gt;&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Yara</title>
+      <link>https://cyberbored.site/posts/yara/</link>
+      <pubDate>Mon, 25 Sep 2023 13:24:44 +0200</pubDate>
+      
+      <guid>https://cyberbored.site/posts/yara/</guid>
+      <description>Introduction: YARA (Yet Another Recursive Ancronym) it is a tool used for pattern matching and identifying specific characteristics in files and processes.
+How to install YARA:
+sudo apt install yara -yAfter installing the tool we need to setup a file that contains the rules/conditions that we need to compare against. Standard file extension for YARA is .yar. The tool takes two arguments to work, The rule file we created, and Name of the file, directory, or process ID to use the rule for.</description>
+      <content>&lt;h1 id=&#34;introduction&#34;&gt;Introduction:&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/InQuest/awesome-yara&#34;&gt;YARA&lt;/a&gt; (Yet Another Recursive Ancronym) it is a tool used for pattern matching and identifying specific characteristics in files and processes.&lt;/p&gt;
+&lt;p&gt;How to install YARA:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo apt install yara -y
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After installing the tool we need to setup a file that contains the rules/conditions that we need to compare against. Standard file extension for YARA is .yar. The tool takes two arguments to work, The rule file we created, and Name of the file, directory, or process ID to use the rule for.&lt;/p&gt;
+&lt;h2 id=&#34;few-arguments-for-yara-rules&#34;&gt;Few arguments for YARA rules:&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Arguments&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Keywords&lt;/td&gt;
+&lt;td&gt;Allows you to specify one or more keywords or tags associated with the rule. These keywords can be used to categorize and search for rules.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Desc&lt;/td&gt;
+&lt;td&gt;Used to provide description of the rule, it is similar to commenting in programming.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Meta&lt;/td&gt;
+&lt;td&gt;Provides information about the rule itself. This can include things like a rule&amp;rsquo;s name, description, and author.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Strings&lt;/td&gt;
+&lt;td&gt;Can be used to search for specific text or hexadecimal in files or prohrams.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Conditions&lt;/td&gt;
+&lt;td&gt;Conditions are used in a similar fashion to programming conditions, like &amp;lt;=, &amp;gt;=, and != or booleans, or any of them.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Weight&lt;/td&gt;
+&lt;td&gt;Allows us to assign a numerical value, similar to integer, float, or double.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;For more example you can use either of the provided links &lt;a href=&#34;https://yara.readthedocs.io/en/stable/writingrules.html&#34;&gt;YARA Docs&lt;/a&gt; or &lt;a href=&#34;https://blog.securitybreak.io/security-infographics-9c4d3bd891ef?gi=d1154aad04b8#18dd&#34;&gt;Cheat Sheet&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;There are some frameworkds that allow us to improve the technicality of YARA rules ten-fold like:
+• &lt;strong&gt;&lt;a href=&#34;https://cuckoosandbox.org/&#34;&gt;Cuckoo&lt;/a&gt;&lt;/strong&gt; an automated sandbox for malware analysis. It allows you to generate YARA rules based upon the behaviours discovered from Cuckoo sandbox.
+• **&lt;a href=&#34;https://pypi.org/project/pefile/&#34;&gt;Python PE&lt;/a&gt; **is a python module that allows you to create Yara rules from the various sections and elements of the windows portable executable (PE) structure.&lt;/p&gt;
+&lt;h1 id=&#34;other-yara-tools-to-keep-in-mind&#34;&gt;Other YARA tools to keep in mind:&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;https://github.com/Neo23x0/Loki&#34;&gt;Loki&lt;/a&gt;&lt;/strong&gt; is an open-source IOC (Indicator of Compromise) scanner based on 4 methods:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;• File Name IOC  Check
+
+• Yara Rule Check
+
+• Hash Check
+
+• C2 Back Connect Check
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Thor&lt;/strong&gt; is a multi-platform IOC and Yara scanner. Thor also has a &lt;a href=&#34;https://www.nextron-systems.com/thor-lite/&#34;&gt;lite&lt;/a&gt; version that scans throttling to limit exhausting CPU resources.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;https://github.com/Neo23x0/Fenrir&#34;&gt;FENRIR&lt;/a&gt;&lt;/strong&gt; is made by the same creator of Thor and Loki. It is an updated version from its predecessors, where requirements must be met for them to function. Fenrir is a bash script; it will run on any system capable of running bash.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;YAYA&lt;/strong&gt; is an open-source tool that helps researchers manage multiple Yara rule repositories. Yaya starts by importing a set of high quality Yara rules then lets researchers add their own rules disable specific rulesets, and run scans of files.&lt;/p&gt;
+&lt;h1 id=&#34;scoping-and-targeting&#34;&gt;Scoping and Targeting:&lt;/h1&gt;
+&lt;p&gt;When capturing and logging traffic on burp suite it can become overwhelming and annoying, which why we can add scopes to specify what gets proxied and logged in burp suite. To add a scope we can navigate to Target tab &amp;ndash;&amp;gt; right-click on the target from the list on the left &amp;ndash;&amp;gt; select add to scope.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Valhalla&lt;/strong&gt; is an online Yara feed created and hosted by &lt;a href=&#34;https://www.nextron-systems.com/valhalla/&#34;&gt;Nextron-Systems&lt;/a&gt; (erm, Florian Roth). By now, you should be aware of the ridiculous amount of time and energy Florian has dedicated to creating these tools for the community.&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Sysmon</title>
+      <link>https://cyberbored.site/posts/sysmon/</link>
+      <pubDate>Mon, 25 Sep 2023 13:06:53 +0200</pubDate>
+      
+      <guid>https://cyberbored.site/posts/sysmon/</guid>
+      <description>Introduction: System Monitor (Sysmon) is a Windows tool for enhanced security monitoring. It logs critical system events like process creation, file changes, and network activity, providing valuable insights for threat detection and analysis. Highly configurable to meet specific security needs. Sysmon depends on config file in order to tell the binary how to analyze the events that is receiving. Also note that you can either create your own Sysmon config file or download it Example.</description>
+      <content>&lt;h1 id=&#34;introduction&#34;&gt;Introduction:&lt;/h1&gt;
+&lt;p&gt;System Monitor (Sysmon) is a Windows tool for enhanced security monitoring. It logs critical system events like process creation, file changes, and network activity, providing valuable insights for threat detection and analysis. Highly configurable to meet specific security needs. Sysmon depends on config file in order to tell the binary how to analyze the events that is receiving. Also note that you can either create your own Sysmon config file or download it &lt;a href=&#34;https://github.com/SwiftOnSecurity/sysmon-config&#34;&gt;Example&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;sysmon-event-ids&#34;&gt;Sysmon Event IDs:&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Event ID 1: Process Creation looks for any process that have been create. It uses the CommandLine and Image XML tags.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;RuleGroup name=&amp;quot;&amp;quot; groupRelation=&amp;quot;or&amp;quot;&amp;gt;
+    &amp;lt;ProcessCreate onmatch=&amp;quot;exclude&amp;quot;&amp;gt;
+        &amp;lt;CommandLine condition=&amp;quot;is&amp;quot;&amp;gt;C:\Windows\system32\svchost.exe -k appmodel -p -s camsvc&amp;lt;/CommandLine&amp;gt;
+    &amp;lt;/ProcessCreate&amp;gt;
+&amp;lt;/RuleGroup&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Event ID 3: Network Connect looks for any event occuring remotely. It uses the Image and DestinationPort XML tags.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;RuleGroup name=&amp;quot;&amp;quot; groupRelation=&amp;quot;or&amp;quot;&amp;gt;
+    &amp;lt;NetworkConnect onmatch=&amp;quot;include&amp;quot;&amp;gt;
+        &amp;lt;Image condition=&amp;quot;image&amp;quot;&amp;gt;nmap.exe&amp;lt;/Image&amp;gt;
+        &amp;lt;DestinationPort name=&amp;quot;Alert,Metasploit&amp;quot; condition=&amp;quot;is&amp;quot;&amp;gt;4444&amp;lt;/DestinationPort&amp;gt;
+    &amp;lt;/NetworkConnect&amp;gt;
+&amp;lt;/RuleGroup&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Event ID 7: Image Loaded looks for DLLs loaded by processes, which can be used to hunt for DLL injection and DLL hijacking attacks. It uses the Image, Signed, ImageLoaded, and signature XML tags.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;RuleGroup name=&amp;quot;&amp;quot; groupRelation=&amp;quot;or&amp;quot;&amp;gt;
+    &amp;lt;ImageLoad onmatch=&amp;quot;include&amp;quot;&amp;gt;
+        &amp;lt;ImageLoaded condition=&amp;quot;contains&amp;quot;&amp;gt;\Temp\&amp;lt;/ImageLoaded&amp;gt;
+    &amp;lt;/ImageLoad&amp;gt;
+&amp;lt;/RuleGroup&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Event ID 8: CreateRemoteThread looks for processes that are injecting codes into other processes. It uses SourceImage, TargetImage, StartAddress, and StartFunction XML tags.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;RuleGroup name=&amp;quot;&amp;quot; groupRelation=&amp;quot;or&amp;quot;&amp;gt;
+    &amp;lt;CreateRemoteThread onmatch=&amp;quot;include&amp;quot;&amp;gt;
+        &amp;lt;StartAddress name=&amp;quot;Alert,Cobalt Strike&amp;quot; condition=&amp;quot;end with&amp;quot;&amp;gt;0B80&amp;lt;/StartAddress&amp;gt;
+        &amp;lt;SourceImage condition=&amp;quot;contains&amp;quot;&amp;gt;\&amp;lt;/SourceImage&amp;gt;
+    &amp;lt;/CreateRemoteThread&amp;gt;
+&amp;lt;/RuleGroup&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Event ID 11: File Created looks for any file that is created or overwritten the endpoint. It uses TargetFilename XML tags.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;RuleGroup name=&amp;quot;&amp;quot; groupRelation=&amp;quot;or&amp;quot;&amp;gt;
+    &amp;lt;FileCreate onmatch=&amp;quot;include&amp;quot;&amp;gt;
+    &amp;lt;TargetFilename name=&amp;quot;Alert,Ransomware&amp;quot; condition=&amp;quot;contains&amp;quot;&amp;gt;HELP_TO_SAVE_FILES&amp;lt;/TargetFilename&amp;gt;
+    &amp;lt;/FileCreate&amp;gt;
+&amp;lt;/RuleGroup&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Event ID 12/13/14: Registry Event looks for any changes or modifications to the registry. It uses TargetObject XML tags.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;RuleGroup name=&amp;quot;&amp;quot; groupRelation=&amp;quot;or&amp;quot;&amp;gt;
+    &amp;lt;RegistryEvent onmatch=&amp;quot;include&amp;quot;&amp;gt;
+        &amp;lt;TargetObject name=&amp;quot;T1484&amp;quot; condition=&amp;quot;contains&amp;quot;&amp;gt;Windows\System\Scripts&amp;lt;/TargetObject&amp;gt;
+    &amp;lt;/RegistryEvent&amp;gt;
+&amp;lt;/RuleGroup&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Event ID 15: FileCreateStreamHash looks for any files created in alternate data stream. It uses TargetFilename XML tags.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;RuleGroup name=&amp;quot;&amp;quot; groupRelation=&amp;quot;or&amp;quot;&amp;gt;
+    &amp;lt;FileCreateStreamHash onmatch=&amp;quot;include&amp;quot;&amp;gt;
+        &amp;lt;TargetFilename condition=&amp;quot;end with&amp;quot;&amp;gt;.hta&amp;lt;/TargetFilename&amp;gt;
+    &amp;lt;/FileCreateStreamHash&amp;gt;
+&amp;lt;/RuleGroup&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Event ID 22: DNS Event looks for DNS queries and events for analysis. It uses QueryName XML tags.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;RuleGroup name=&amp;quot;&amp;quot; groupRelation=&amp;quot;or&amp;quot;&amp;gt;
+    &amp;lt;DnsQuery onmatch=&amp;quot;exclude&amp;quot;&amp;gt;
+        &amp;lt;QueryName condition=&amp;quot;end with&amp;quot;&amp;gt;.microsoft.com&amp;lt;/QueryName&amp;gt;
+    &amp;lt;/DnsQuery&amp;gt;
+&amp;lt;/RuleGroup&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;download-sysmon&#34;&gt;Download Sysmon:&lt;/h1&gt;
+&lt;p&gt;You can Either use Sysmon binary from &lt;a href=&#34;https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite&#34;&gt;Microsoft Sysinternals&lt;/a&gt; website, or download &lt;a href=&#34;https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon&#34;&gt;Microsoft Sysinternal Suite&lt;/a&gt; or use the following command in PowerShell to&lt;/p&gt;
+&lt;p&gt;install it:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Download-SysInternalsTools C:\Sysinternals
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After installation is done, to run Sysmon we can use the following command:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Sysmon.exe -accepteula -i ..\Configuration\swift.xml
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;practical&#34;&gt;Practical:&lt;/h1&gt;
+&lt;p&gt;Now, after getting a brief explanation about Sysmon it&amp;rsquo;s time to use it with some logs that contains various attacks. To find all events with ID 3, we can simply use what we learned from the Windows Event Viewer lab and use Get-WinEvent or wevutil.exe.
+Get-WinEvent -Path C:\Users\THM-Analyst\Desktop\Scenarios\Practice\Filtering.evtx -FilterXPath &amp;lsquo;*/System/EventID=3&amp;rsquo; | Measure-Object&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/sysmon/0.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Next, to find the first network event I sorted the events on event viewer by pressing on the data column and navigating on Details XML View tab. I also learned that you can use Format-List, which would do the same effect as navigating to Details XML View tab for the oldest event.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/sysmon/1.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/sysmon/2.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Now, I will be searching for events that are related to Metasploit meterpreter shell connections, usually meterpreter default ports are 4444 and 5555.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Get-WinEvent -Path C:\Users\THM-Analyst\Desktop\Scenarios\Practice\Hunting_Metasploit.evtx -FilterXPath &#39;*/System/EventID=3 and */EventData/Data[@Name=&amp;quot;DestinationPort&amp;quot;] and */EventData/Data=4444&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Mimikatz is a well-known and commonly used to dump credentials from memory along with other Windows post-exploitation activity. Mimikatz is mainly known for dumping LSASS. Now we need to try and hunt for events related to this attack by searching for a file created remotely.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Get-WinEvent -Path C:\Users\THM-Analyst\Desktop\Scenarios\Practice\Hunting_Mimikatz.evtx -FilterXPath &#39;*/System/EventID=10 and */EventData/Data[@Name=&amp;quot;TargetImage&amp;quot;] and */EventData/Data=&amp;quot;C:\Windows\system32\lsass.exe&amp;quot;&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now, we will be focusing on searching for RATs and backdoors. RAT example, Xeexe and Quasar. To help search for the malware we need to detect and identify ways to modify configuration files, this is known as hypothesis-based hunting. We can use a similar method for hunting malwares as the process we used to hunt for Metasploit, by searching for well-known ports. The file that is setup for Sysmon Ion-Storm alerts us when specific ports like 1034 and 1604 as well as exclude common network connections like OneDrive, by excluding events we still see everything that we want without missing anything and cutting down on noise.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Get-WinEvent -Path C:\Users\THM-Analyst\Desktop\Scenarios\Practice\Hunting_Rats.evtx -FilterXPath &#39;*/System/EventID=3 and */EventData/Data[@Name=&amp;quot;DestinationPort&amp;quot;] and */EventData/Data=8080&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Persistence is used by attackers especially Advanced Persistent Threat(ATP) to maintain access to a machine that they compromised. There are multiple ways to detect persistence on a machine, but I will hunt registry modification by looking for File Creation events and Registry Modification. We need to first look for SwiftOnSecurity detections for files being placed in the \Startup\ or \Start Menu directories. Or searching for rule names.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/sysmon/3.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/sysmon/4.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Evasion techniques are used by malware authors to evade both anti-virus and detections. Examples of evasion techniques are alternate Data Streams, Injections, Masquerading, Packing/Compression, Recompiling, Obfuscation, Anti-Reversing Techniques. First technique to find data stream by looking at hidden files using alternate data streams using Event ID 15.&lt;/p&gt;
+&lt;p&gt;Detecting Remote Threads, Adversaries commonly use remote threads to evade detections in combination with other techniques. Remote threads are created using the Windows API createRemoteThread and can be accessed using OpenThread and ResumeThread.&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Simplectf</title>
+      <link>https://cyberbored.site/ctf/simplectf/</link>
+      <pubDate>Mon, 25 Sep 2023 12:56:32 +0200</pubDate>
+      
+      <guid>https://cyberbored.site/ctf/simplectf/</guid>
+      <description>I am attempting now my first TryHackMe CTF.
+Reconnaissance: I started first by scanning the first 1000 ports
+using nmap:
+nmap -sC -sV -v -oN simple 10.10.13.112 Which gave me the results above. I learned that there are 3 ports opened and one of them is port 80 http, so I searched for the targets url http://10.10.13.112 and found an apache page. Then, I wanted to learn if there is any hidden common directory that I can find, so I brute forced the directories using gobuster, you can also use fuff to brute force DNS subdomains, URLS, Virtual hosts&amp;hellip;etc.</description>
+      <content>&lt;p&gt;I am attempting now my first TryHackMe CTF.&lt;/p&gt;
+&lt;h1 id=&#34;reconnaissance&#34;&gt;Reconnaissance:&lt;/h1&gt;
+&lt;p&gt;I started first by scanning the first 1000 ports&lt;/p&gt;
+&lt;p&gt;using nmap:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nmap -sC -sV -v -oN simple 10.10.13.112
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/simplectf/0.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Which gave me the results above. I learned that there are 3 ports opened and one of them is port 80 http, so I searched for the targets url http://10.10.13.112 and found an apache page. Then, I wanted to learn if there is any hidden common directory that I can find, so I brute forced the directories using gobuster, you can also use fuff to brute force DNS subdomains, URLS, Virtual hosts&amp;hellip;etc. I also utilized seclist with gobuster, since seclist is a repository that hosts various security-related lists and resources.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/simplectf/1.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;enumeration&#34;&gt;Enumeration:&lt;/h1&gt;
+&lt;p&gt;Gobuster was able to find 3 domain directories index.html, robots.txt, and simple. Simple is a Content Management System (CMS) that manages the creation and modification of digital content. This discovery helped me find the version of the CMS being used, which helps me find vulnerabilities to exploit.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/simplectf/2.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/simplectf/3.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;setting-up-the-payload&#34;&gt;Setting up the payload:&lt;/h1&gt;
+&lt;p&gt;I searched for CMS Made Simple version 2.2.8 and found an SQL-Injection exploit on &lt;a href=&#34;https://www.exploit-db.com/exploits/46635&#34;&gt;Exploit-DB&lt;/a&gt; that contains a python file which helps to exploit this CMS. I faced an issue an issue when I tried to run the python file from Exploit-DB. First attempt, I tried running the file using python3 after fixing some syntax error since the file is written in python2 syntax and it gave me an typeerror: unicode-objects must be encoded before hashing, which I tried searching for a solution to fix and I wasn&amp;rsquo;t able too. Second attempt, I tried running it on python2 and it gave me missing modules error, which I tried installing using pip, but I also showed an error since pip wasn&amp;rsquo;t available for python2. Fortunately, I found a solution to fix the pip install error on this &lt;a href=&#34;https://stackoverflow.com/questions/64187581/e-package-python-pip-has-no-installation-candidate&#34;&gt;stackoverflow&lt;/a&gt; post or simply type the following commands:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;• curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py
+• python get-pip.py
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And to check if it was installed correctly type the following command and you should receive a pip version:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;• pip2 --version
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then install all missing modules using the following command:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;• Python2 -m pip install [module]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After installing the requirements, I made a quick scan for the python file and learned how the script is programmed and saw an example how to run the script:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/simplectf/4.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;exploiting&#34;&gt;Exploiting:&lt;/h1&gt;
+&lt;p&gt;So, I used the example to run the script and got the credentials of the target:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;• python2 exploit.py -u http://10.10.13.112/simple --crack -w /usr/share/seclists/Passwords/Common-Credentials/best110.txt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/simplectf/5.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Now I am able to login into ssh using the credentials I got:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;• ssh -p2222 mitch@10.10.13.112
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now it is time to try and get privilege escalation. I made some research and learned multiple things, using sudo -l you can get a list of commands that the current user can use, &lt;a href=&#34;https://gtfobins.github.io/&#34;&gt;gtdobins&lt;/a&gt; is a website that contains commands that can bypass the restrictions and gain privilege escalation.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/simplectf/6.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/simplectf/7.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/simplectf/8.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Windowlogs</title>
+      <link>https://cyberbored.site/posts/windowlogs/</link>
+      <pubDate>Mon, 25 Sep 2023 11:51:45 +0200</pubDate>
+      
+      <guid>https://cyberbored.site/posts/windowlogs/</guid>
+      <description>Introduction: Think of logs as digital diaries that jot down what&amp;rsquo;s happening in systems, apps, or networks. They&amp;rsquo;re like a timeline of events, helping us figure out problems, spot weird stuff, and understand how things behave. In the cybersecurity world, logs are like detectives – they help us solve mysteries, catch bad guys, and keep things safe. They&amp;rsquo;re the key to knowing what&amp;rsquo;s going on in our digital world!
+The Event Viewer is like a detective&amp;rsquo;s notebook for your computer.</description>
+      <content>&lt;h1 id=&#34;introduction&#34;&gt;Introduction:&lt;/h1&gt;
+&lt;p&gt;Think of logs as digital diaries that jot down what&amp;rsquo;s happening in systems, apps, or networks. They&amp;rsquo;re like a timeline of events, helping us figure out problems, spot weird stuff, and understand how things behave. In the cybersecurity world, logs are like detectives – they help us solve mysteries, catch bad guys, and keep things safe. They&amp;rsquo;re the key to knowing what&amp;rsquo;s going on in our digital world!&lt;/p&gt;
+&lt;p&gt;The Event Viewer is like a detective&amp;rsquo;s notebook for your computer. Which will prove to be an important component for us to investigate anything on our computer.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/eventviewer/0.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Once you lunch the event viewer, you can see multiple windows:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;• The left side is the directories that stores all different types of logs.
+
+• The middle displays the general summary of the selected log.
+
+• The right is the action window.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/eventviewer/1.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;On the logs property, you can see the log location, log size, and when it was created, modified and last accessed. You can also notice the max size of the log and the type of action that should be taken once the max size is reached. Keep an eye on the right bottom corner where it says clear log, this is a crucial options that can be used during security maintenance, or an adversary trying to stay undetected.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/eventviewer/2.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;You can see on the overview window some columns:
+• Level highlights the log recorded type based on the identified event.
+• Data and Time highlight the time when the event was logged.
+• Source highlights the name of the software that it was originated from.
+• Event ID is a predefined numerical value that maps to a specific operation based on the log source.
+• Task Category highlights the event category.&lt;/p&gt;
+&lt;p&gt;Once you choose any of the logged events you will see a new windows like the one in the picture about in the light grey, you can see details about the event and general explanation.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/eventviewer/3.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;By pressing on the column category that you want you can filter them in descending or ascending order. Example, by pressing on Date and Time I filtered the time of each event to check the earliest event on my Event Viewer.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/eventviewer/4.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;On Action window we can perform several tasks like opening a saved log, which is usually used when working remotely, or creating custom view/filter current log to help you make your search easier. In this example I needed to search for a specific event in my current log file, so I chose filter current log and added the ID of the event to filter it out of the other events.&lt;/p&gt;
+&lt;h1 id=&#34;powershell-automation-tools&#34;&gt;PowerShell Automation tools:&lt;/h1&gt;
+&lt;h3 id=&#34;wevtutilexe&#34;&gt;Wevtutil.exe:&lt;/h3&gt;
+&lt;p&gt;Even with the filtering help it is still inconvenient to be going through thousands of logs, that&amp;rsquo;s why there are some tools in PowerShell that can help us automate the process. Example, &lt;strong&gt;wevtutil.exe&lt;/strong&gt; is a tool that can help us enumerate through the logs automatically, to find the list of flags that can be used with this tools simply add &lt;strong&gt;wevtutil.exe /?&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/eventviewer/5.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;To find more information about the flags you can visit this link &lt;a href=&#34;https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/wevtutil&#34;&gt;Reference Link&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I needed to count the log names available on the machine, but since I am not very familiar with PowerShell commands it proved to be a difficult, so I looked into the provided hint that says we need to combine enum-logs with Measure-Object cmdlet to count the event names.&lt;/p&gt;
+&lt;h1 id=&#34;get-winevent&#34;&gt;Get-WinEvent:&lt;/h1&gt;
+&lt;p&gt;Get-WinEvent is a PowerShell cmdlet used to retrieve events from event logs on a Windows computer. It allows you to access and analyze event log data programmatically.
+&lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.diagnostics/get-winevent?view=powershell-5.1&#34;&gt;Reference Link&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Top Get-WinEvent Flags:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Command&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;-ListLog&lt;/td&gt;
+&lt;td&gt;Obtains all event logs locally.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-ListProvider&lt;/td&gt;
+&lt;td&gt;Obtain event log providers and their associated logs.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-LogName&lt;/td&gt;
+&lt;td&gt;Obtain the selected events from an event log.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-FilterHashtable @{LogName=&amp;rsquo;&amp;rsquo; ProviderName=&amp;rsquo;&#39;}&lt;/td&gt;
+&lt;td&gt;Obtain filtered event logs.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-Path&lt;/td&gt;
+&lt;td&gt;Obtains logs in a specific path.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Where-Object cmdlet allows you to filter event logs, but when working with large event logs, it&amp;rsquo;s inefficient to send objects down the pipeline to a Where-Object command, It is recommended to use FilterHashtable instead.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/eventviewer/6.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;xpath-queries&#34;&gt;XPath Queries:&lt;/h1&gt;
+&lt;p&gt;XPath (XML Path Language) queries are used to navigate and query XML documents, including event logs in PowerShell. In PowerShell, XPath queries are often used with cmdlets like wevtutil and Get-WinEvent to filter and extract specific elements from XML-based data.
+&lt;a href=&#34;https://learn.microsoft.com/en-us/windows/win32/wes/consuming-events#xpath-10-limitations&#34;&gt;Reference Link&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;XPath Query Example:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;*[System[(Level &amp;lt;= 3) and TimeCreated[timediff(@SystemTime) &amp;lt;= 86400000]]] or replace * with Event.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Event viewer can help us with constructing XPath query.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/eventviewer/7.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1.Get-WinEvent -LogName Application -FilterXPath &#39;*/System/EventID=800&#39;. You can replace the keyword System with * or Event.
+2.wevtutil.exe qe Application /q:*/System[EventID=100] /f:text /c:1.
+3.Get-WinEvent -LogName Application -FilterXPath &#39;*/System/Provider[@Name=&amp;quot;WLMS&amp;quot;]&#39;.
+4. Get-WinEvent -LogName Application -FilterXPath &#39;*/System/EventID=101 and */System/Provider[@Name=&amp;quot;WLMS&amp;quot;]&#39;.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/eventviewer/8.png&#34; alt=&#34;TCP scan&#34;&gt;
+&lt;img src=&#34;../../images/eventviewer/9.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;event-ids&#34;&gt;Event IDs:&lt;/h1&gt;
+&lt;p&gt;When we are working logs, it is very important to know what we are looking for under the pile of thousands of events:
+• Here is an outdate cheat sheet that will help us in determining what we are looking for &lt;a href=&#34;https://static1.squarespace.com/static/552092d5e4b0661088167e5c/t/580595db9f745688bc7477f6/1476761074992/Windows+Logging+Cheat+Sheet_ver_Oct_2016.pdf&#34;&gt;Reference Link&lt;/a&gt;.
+• There is also a guide made by NSA also outdate, but it can build your foundation &lt;a href=&#34;https://web.archive.org/web/20190115215749/https:/apps.nsa.gov/iaarchive/customcf/openAttachment.cfm?FilePath=/iad/library/ia-guidance/security-configuration/applications/assets/public/upload/Spotting-the-Adversary-with-Windows-Event-Log-Monitoring.pdf&amp;amp;WpKes=aF6woL7fQp3dJiqyJL2LenrLxuHC7ztGtVNK3x&#34;&gt;Reference Link&lt;/a&gt;.
+• Another source is MITRE Attack website &lt;a href=&#34;https://attack.mitre.org/&#34;&gt;https://attack.mitre.org/&lt;/a&gt;.
+• Two other important sources &lt;a href=&#34;https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/appendix-l--events-to-monitor&#34;&gt;Events to View&lt;/a&gt; and &lt;a href=&#34;https://www.microsoft.com/en-us/download/confirmation.aspx?id=52630&#34;&gt;Windows 10 and Windows server 2016 auditing&lt;/a&gt;.
+&lt;strong&gt;Note&lt;/strong&gt;: Some events will not be generated by default, and certain features will need to be enabled/configured on the endpoint, such as PowerShell logging. This feature can be enabled via Group Policy or the Registry. Local Computer Policy &amp;ndash;&amp;gt; Computer Configuration &amp;ndash;&amp;gt; Administrative Templates &amp;ndash;&amp;gt; Windows Components &amp;ndash;&amp;gt; Windows PowerShell&lt;/p&gt;
+&lt;p&gt;Other sources that provide more information about enabling more features:&lt;/p&gt;
+&lt;p&gt;• &lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_logging_windows?view=powershell-7.3&amp;amp;viewFallbackFrom=powershell-7.1&#34;&gt;About Logging windows&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;• &lt;a href=&#34;https://www.mandiant.com/resources/blog/greater-visibility&#34;&gt;Greater Visibility Through PowerShell Logging&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;• &lt;a href=&#34;https://docs.splunk.com/Documentation/UBA/5.0.4/GetDataIn/AddPowerShell&#34;&gt;Configure PowerShell&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Another feature to enable/configure is Audit Process Creation, which will generate event ID 4688. This will allow command-line process auditing. This setting is NOT enabled in the virtual machine but feel free to enable it and observe the events generated after executing some commands &lt;a href=&#34;https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/component-updates/command-line-process-auditing#try-this-explore-command-line-process-auditing&#34;&gt;Reference Link&lt;/a&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Local Computer Policy --&amp;gt; Computer Configuration --&amp;gt; Administrative Templates --&amp;gt; System --&amp;gt; Audit Process Creation.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;practical&#34;&gt;Practical:&lt;/h1&gt;
+&lt;p&gt;I have a saved log file called merged and I am tasked to search through the file and solve multiple different scenarios.
+First scenario, Admins complained about PowerShell being blocked and now I need to monitor it. I searched for the PowerShell Event and found some information on this website &lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_logging?view=powershell-5.1&#34;&gt;Reference Link&lt;/a&gt;, but I needed to search for a PowerShell downgrade attack. I searched on google to find some info about it and found a repository that explains about the event &lt;a href=&#34;https://github.com/CyberSift/CyberSift-Alerts/blob/master/powershell/PowerShell%20Downgrade%20Attack.md&#34;&gt;Reference Link&lt;/a&gt;, which helped me filter the events and pinpoint the downgrade attack and I simply searched for the entry where the HostVerion was changed.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/eventviewer/10.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/eventviewer/11.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Second Scenario, someone cleared the system logs and we need to find the Event Record ID and the Computer name. To find the log clear I filtered the source to event log and immediately found the log clear task category.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/eventviewer/12.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/eventviewer/13.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Third scenario, The threat intel team shared its research on Emotet and advised searching for event ID 4101 and the text &amp;ldquo;ScriptBlockText&amp;rdquo;. I Tried to filter using the event ID given 4101 but for some odd reason it displayed that it wasn&amp;rsquo;t found, so then I tried searching for the event ID using Get-WinEvent -Path C:\Users\Administrator\Desktop\merged.evtx -FilterXPath &amp;lsquo;*/System/EventID=4101&amp;rsquo; and it displayed an error. I also tried using wevtutil and it also gave me errors, so I looked into the given hint which told me to use -Oldest -MaxEvents 1 and pipe to Format-List, but I didn&amp;rsquo;t notice the Format-List when I wrote the command.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/eventviewer/14.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Once I knew the time created, I filtered using the time and found the event I am looking for.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/eventviewer/15.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/eventviewer/16.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Fourth and final scenario, an intern suspected of running an unusual command on her machine. We are recommended to search for &amp;ldquo;C:\Windows\System32\net1.exe&amp;rdquo;. I searched for user enumeration and found two results that I used as a clue.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/eventviewer/17.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Since my objective was to find security group information, I filtered for event ID 4799 and found all the required information, which concluded the room.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/eventviewer/18.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Nessus</title>
+      <link>https://cyberbored.site/posts/nessus/</link>
+      <pubDate>Mon, 25 Sep 2023 11:42:15 +0200</pubDate>
+      
+      <guid>https://cyberbored.site/posts/nessus/</guid>
+      <description>Introduction: Nessus is a widely used vulnerability assessment tool that helps organizations identify and address security issues within their networks, systems, and applications.
+Installation and setup:
+To install and setup Nessus, we need first the installation package found on their website by searching for Nessus download or you can use this link Reference Link, which will take you to the website in the picture bellow.
+Choose which version and platform of your choice then press download.</description>
+      <content>&lt;h1 id=&#34;introduction&#34;&gt;Introduction:&lt;/h1&gt;
+&lt;p&gt;Nessus is a widely used vulnerability assessment tool that helps organizations identify and address security issues within their networks, systems, and applications.&lt;/p&gt;
+&lt;p&gt;Installation and setup:&lt;/p&gt;
+&lt;p&gt;To install and setup Nessus, we need first the installation package found on their website by searching for Nessus download or you can use this link &lt;a href=&#34;https://www.tenable.com/downloads/nessus?loginAttempted=true&#34;&gt;Reference Link&lt;/a&gt;, which will take you to the website in the picture bellow.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/nessus/0.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Choose which version and platform of your choice then press download. For Linux you can use the following command to install Nessus after you download the package:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo dpkg -i Nessus-10.6.0-debian10_amd64.deb
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/nessus/1.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;When the installation is successfully done, you should enable nessus.service and head to the website provided on your CLI:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/bin/systemctl start nessusd.service
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/nessus/2.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;When the service is enabled, we can go ahead and access the link provided to us and setup Nessus.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/nessus/3.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Choose Register for Nessus Essentials.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/nessus/4.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Register using your credentials for an activation code, then copy paste the code on the specified text box, then wait for the installation to finish.&lt;/p&gt;
+&lt;h1 id=&#34;key-nessus-components&#34;&gt;Key Nessus components:&lt;/h1&gt;
+&lt;p&gt;On the left side, you can find Recourses section and under it 3 tabs:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- Policies can be used to create custom templates.
+- Plugin Rules define the behavior of these plugins during a vulnerability scan.
+- Terrascan can be used as static code analyzer for infrastructure as code.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;New scan is used to lunch a scan on a target using various vulnerability scans.&lt;/p&gt;
+&lt;h1 id=&#34;scan&#34;&gt;Scan:&lt;/h1&gt;
+&lt;p&gt;Once you choose the type of scan you would like to perform, you need to setup the scan setting. General tab, you can setup the details for the target you want to scan. Discovery tab, you can choose the type of ports you would like to scan for. Assessment tab, you can choose the scan type, like for known web vulnerabilities or quick scan. Report tab, the type of reports you would like to be displayed. Advanced tab, can be used to setup the bandwidth of the scan.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/nessus/5.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;I chose basic scan and lunched the scan after setting up the necessary settings. I received various information like port scan, website version…etc.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/nessus/6.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Resources</title>
+      <link>https://cyberbored.site/resources/</link>
+      <pubDate>Mon, 25 Sep 2023 11:09:46 +0200</pubDate>
+      
+      <guid>https://cyberbored.site/resources/</guid>
+      <description>Top recourses to get started with Cybersecurity: Websites: Networking: • CISCO Academy
+• Network Academy
+Cybersecurity: • TryHackMe
+• HTB
+• BlueTeamLabs
+• CyberDefenders
+• LetsDefend
+• PortSwigger
+• RangeForce
+• EC-Council
+• StationX
+• CyberWox
+• MyDFIR
+• INFOSEC
+• Hacker-Arise
+Programming: • W3School
+• FreeCodeCamp
+• Programiz
+• TutorialsPoint
+Others: • Udemy
+• ZTM
+• Cheatography
+• EDX
+• Coursera
+• DionTraining
+• Cybrary
+• Linkedin Learning
+• Professor Messer</description>
+      <content>&lt;h1 id=&#34;top-recourses-to-get-started-with-cybersecurity&#34;&gt;Top recourses to get started with Cybersecurity:&lt;/h1&gt;
+&lt;h2 id=&#34;websites&#34;&gt;Websites:&lt;/h2&gt;
+&lt;h4 id=&#34;networking&#34;&gt;Networking:&lt;/h4&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.netacad.com/&#34;&gt;CISCO Academy&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.networkacademy.io/&#34;&gt;Network Academy&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;h4 id=&#34;cybersecurity&#34;&gt;Cybersecurity:&lt;/h4&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://tryhackme.com/&#34;&gt;TryHackMe&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://academy.hackthebox.com/login&#34;&gt;HTB&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://blueteamlabs.online/&#34;&gt;BlueTeamLabs&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://cyberdefenders.org/&#34;&gt;CyberDefenders&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://letsdefend.io/&#34;&gt;LetsDefend&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://portswigger.net/&#34;&gt;PortSwigger&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.rangeforce.com/&#34;&gt;RangeForce&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.eccouncil.org/&#34;&gt;EC-Council&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.stationx.net/&#34;&gt;StationX&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://cyberwoxacademy.com/&#34;&gt;CyberWox&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://mydfir.com/&#34;&gt;MyDFIR&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.infosecinstitute.com/&#34;&gt;INFOSEC&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.hackers-arise.com/&#34;&gt;Hacker-Arise&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;h4 id=&#34;programming&#34;&gt;Programming:&lt;/h4&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.w3schools.com/&#34;&gt;W3School&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.freecodecamp.org/&#34;&gt;FreeCodeCamp&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.programiz.com/&#34;&gt;Programiz&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.tutorialspoint.com/index.htm&#34;&gt;TutorialsPoint&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;h4 id=&#34;others&#34;&gt;Others:&lt;/h4&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.udemy.com/&#34;&gt;Udemy&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://zerotomastery.io/&#34;&gt;ZTM&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://cheatography.com/&#34;&gt;Cheatography&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.edx.org/&#34;&gt;EDX&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.coursera.org/&#34;&gt;Coursera&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.diontraining.com/&#34;&gt;DionTraining&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.cybrary.it/&#34;&gt;Cybrary&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.linkedin.com/learning/&#34;&gt;Linkedin Learning&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.professormesser.com/&#34;&gt;Professor Messer&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://hub.totalsem.com/&#34;&gt;Total Seminars&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://learn.microsoft.com/en-us/training/&#34;&gt;Microsoft Learn&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/&#34;&gt;GeeksForGeeks&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://academy.tcm-sec.com/&#34;&gt;TCM&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://learn.networkchuck.com/&#34;&gt;NetworkChuck&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.itpro.tv/&#34;&gt;ITPRO&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&#34;youtube-channels&#34;&gt;Youtube Channels:&lt;/h2&gt;
+&lt;h4 id=&#34;networking-1&#34;&gt;Networking:&lt;/h4&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@JeremysITLab&#34;&gt;Jeremy&amp;rsquo;s IT Lab&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@DalcoNetworking&#34;&gt;Dalco Networking | Cybersecurity &amp;amp; Networking&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;h4 id=&#34;cybersecurity-1&#34;&gt;Cybersecurity:&lt;/h4&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@zSecurity&#34;&gt;zSecurity&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@collinsinfosec&#34;&gt;Grant Collins&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@TCMSecurityAcademy&#34;&gt;The Cyber Mentor&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@pcsecuritychannel&#34;&gt;The PC Security Channel&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@UnixGuy&#34;&gt;UnixGuy&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@HackerSploit&#34;&gt;HackerSploit&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@DayCyberwox&#34;&gt;CYBERWOX&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@JoshMadakor&#34;&gt;Josh Madakor&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@ITSecurityLabs&#34;&gt;I.T Security Labs&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@MyDFIR&#34;&gt;MyDFIR&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@NetworkChuck&#34;&gt;NetworkChuck&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@_JohnHammond&#34;&gt;John Hammond&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@0dayCTF&#34;&gt;Ryan Montgomery&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;h4 id=&#34;programming-1&#34;&gt;Programming:&lt;/h4&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@NetNinja&#34;&gt;Net Ninja&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@learningsoftwareskills&#34;&gt;Learning Software&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@programmingwithmosh&#34;&gt;Programming with Mosh&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@AlexTheAnalyst&#34;&gt;Alex The Analyst&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@freecodecamp&#34;&gt;freeCodeCamp.org&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@Fireship&#34;&gt;Fireship&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;h4 id=&#34;other&#34;&gt;Other:&lt;/h4&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@Seytonic&#34;&gt;Seytonic&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@ZeroToMastery&#34;&gt;ZTM&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@davidbombal&#34;&gt;David Bombal&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@yanivhoffman&#34;&gt;Yaniv Hoffman&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@Sumsubcom&#34;&gt;Sumsub&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@TheHatedOne&#34;&gt;The Hated One&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@n2kcyber&#34;&gt;CyberWire&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@madhatistaken&#34;&gt;Mad Hat&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@professormesser&#34;&gt;Professor Messer&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&#34;labstopractice&#34;&gt;LabsToPractice:&lt;/h2&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.hacksplaining.com/lessons&#34;&gt;HackSplaining&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://capturetheflag.withgoogle.com/&#34;&gt;Google CTF&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://defendtheweb.net/&#34;&gt;DefendTheWeb&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.smashthestack.org/&#34;&gt;SmashTheStack&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://pwn.college/&#34;&gt;PwnCollege&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://ctftime.org/&#34;&gt;CTFTime&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.root-me.org/?lang=en&#34;&gt;RootMe&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://lab.pentestit.ru/&#34;&gt;Pentestit&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://pentesterlab.com/&#34;&gt;PentesterLab&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.picoctf.org/&#34;&gt;PicoCTF&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://malware-traffic-analysis.net/&#34;&gt;Malware-Traffic&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://overthewire.org/wargames/&#34;&gt;OverTheWire&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.hacker101.com/&#34;&gt;Hacker101&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://attackdefense.com/&#34;&gt;AttackDefense&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://w3challs.com/&#34;&gt;W3challs&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://cryptohack.org/&#34;&gt;CryptoHack&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://cmdchallenge.com/&#34;&gt;CMDChallenge&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://exploit.education/&#34;&gt;ExploitEducation&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.vulnhub.com/&#34;&gt;VulnHub&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.zenk-security.com/&#34;&gt;ZenkSecurity&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://vulnmachines.com/&#34;&gt;VulnMachines&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://mysterytwister.org/home/welcome/&#34;&gt;MysteryTwister&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://hackersec.com/ctf/&#34;&gt;HackerSec&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://hacking-lab.com/services/&#34;&gt;HackingLab&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://pwnable.kr/play.php&#34;&gt;PWNAble&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+</content>
+    </item>
+    
     <item>
       <title>Overpass 2</title>
       <link>https://cyberbored.site/posts/overpass/</link>
@@ -226,20 +919,20 @@ A very important tool to consider while using NFS is nfs-common. It includes pro
 &lt;p&gt;As per tradition, I started by scanning the open ports using nmap to do a full port scan.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/networkservice2/0.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/networkservice2/1.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
-&lt;p&gt;After finding out the open ports, I saw that port 2049 is running nfs_acl service, which can be used to enumerate our attack. Then I wanted to check the NFS shares list using the showmount command.
-Showmount flags:&lt;/p&gt;
+&lt;p&gt;I found out the available ports and noticed that port 2049 is running nfs_acl service, which can be used to enumerate our attack. Then, I wanted to check the NFS share list using the showmount command.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/networkservice2/2.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Showmount flags:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/networkservice2/3.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
 &lt;p&gt;After finding out the shared directory, I created a mount directory in the tmp file so that it automatically gets deleted after reboot and mounted the directory on the newly created directory.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/networkservice2/4.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/networkservice2/5.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/networkservice2/6.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
-&lt;p&gt;After navigating to the mounted directory, I checked for all available files/directories but it appeared that there was not files/directories, so I tried checking for all files/directories including hidden ones and I saw one that caught my attention which is .ssh. As we know from previous lab this file usually contains the private key which could be used to access the target through ssh easily and gain privilege escalation depending on the time of user this refers too.&lt;/p&gt;
+&lt;p&gt;Then, I navigating to the mounted directory, and checked for all available files/directories but it appeared that there was not files/directories, so I tried checking for all files/directories including hidden ones and I saw one that caught my attention which is .ssh. As we know from previous lab this file usually contains the private key which could be used to access the target through ssh easily and gain privilege escalation depending on the time of user this refers too.&lt;/p&gt;
 &lt;h1 id=&#34;brief-summary-about-root-squash&#34;&gt;Brief summary about Root Squash:&lt;/h1&gt;
 &lt;p&gt;Root squash&amp;quot; is a security feature implemented in Network File System (NFS) to enhance the security of file sharing. When root squash is enabled, it prevents the root user (superuser) on the NFS client from exercising root privileges on the NFS server. Instead, any attempts by the root user on the client to access NFS resources are mapped to a less privileged user, typically the &amp;ldquo;nobody&amp;rdquo; user or a similar user with restricted access.&lt;/p&gt;
 &lt;p&gt;SUID stands for &amp;ldquo;Set User ID&amp;rdquo; and is a permission bit in Unix-like operating systems that allows users to execute a file with the privileges of the file&amp;rsquo;s owner or group, rather than with their own privileges. When the SUID bit is set on an executable file, it enables users to perform certain actions that they wouldn&amp;rsquo;t normally have the permission to execute.&lt;/p&gt;
-&lt;h1 id=&#34;practicaly&#34;&gt;Practicaly:&lt;/h1&gt;
-&lt;p&gt;I connected to the target using ssh private key. Then, I installed a script provided by TryHackMe to run on the target and gain privilege escalation Reference. After downloading the file, I simply changed the user permission using chmod +s bash to allow me to be able to execute the file even on a low level privilege account. Because the permissions didn&amp;rsquo;t apply to the other user group, I had to also add the execute permission using chmod +x bash.&lt;/p&gt;
+&lt;h1 id=&#34;practical-1&#34;&gt;Practical:&lt;/h1&gt;
+&lt;p&gt;I connected to the target using ssh private key. Then, I installed a script provided by TryHackMe to run on the target and gain privilege escalation &lt;a href=&#34;https://github.com/polo-sec/writing/raw/master/Security%20Challenge%20Walkthroughs/Networks%202/bashhttps://github.com/polo-sec/writing/raw/master/Security%20Challenge%20Walkthroughs/Networks%202/bash&#34;&gt;Reference&lt;/a&gt;. After downloading the file, I simply changed the user permission using chmod +s bash to allow me to be able to execute the file even on a low level privilege account. Because the permissions didn&amp;rsquo;t apply to the other user group, I had to also add the execute permission using chmod +x bash.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/networkservice2/11.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/networkservice2/8.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/networkservice2/12.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
@@ -250,7 +943,7 @@ Showmount flags:&lt;/p&gt;
 &lt;p&gt;SMTP operates on port 25, and it works by relaying emails from the sender&amp;rsquo;s mail server to the recipient&amp;rsquo;s mail server. This process involves a series of commands and responses between the sending and receiving servers, ultimately resulting in the successful delivery of the email message.&lt;/p&gt;
 &lt;p&gt;POP3 (Post Office Protocol 3) is a protocol used for retrieving emails from a mail server to an email client. Unlike SMTP, which focuses on sending emails, POP3 is responsible for downloading messages from the server to the recipient&amp;rsquo;s device, allowing users to access their emails offline.&lt;/p&gt;
 &lt;p&gt;IMAP (Internet Message Access Protocol) is a protocol used for accessing and managing emails stored on a mail server. Unlike POP3, which simply downloads emails to the client, IMAP offers more advanced features that allow users to organize, synchronize, and manage their emails across multiple devices while keeping them stored on the server.&lt;/p&gt;
-&lt;h1 id=&#34;practical-1&#34;&gt;Practical:&lt;/h1&gt;
+&lt;h1 id=&#34;practical-2&#34;&gt;Practical:&lt;/h1&gt;
 &lt;p&gt;After learning a brief summary about SMTP, POP3, and IMAP, I wanted to start testing and trying to enumerate them on a virtual lab. As the usual ritual, I started by scanning the ports using nmap and found 2 ports opened.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/networkservice2/14.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Next, after learning about the open ports, I lunched metasploit using msfconsole to attempt finding the current version running. I ran the command search smtp_version and it showed me the following result.&lt;/p&gt;
@@ -258,7 +951,7 @@ Showmount flags:&lt;/p&gt;
 &lt;p&gt;After finding the payload I needed, I set it up and executed the payload against the target which got me system mail name and agent that is running .&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/networkservice2/16.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/networkservice2/17.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
-&lt;p&gt;As you can see in the picture above I found out about the system mail name which is polosmtp.home and Mail Transfer Agent (MTA) PostFix. I had to search on the internet about MTAs to learn that PostFix is an MTA using the following link Reference Link. After finding all the necessary information about the target, I can now start on the next step which is exploiting. I searched for the payload smtp_enum to get the payload directory.&lt;/p&gt;
+&lt;p&gt;As you can see in the picture above I found out about the system mail name which is polosmtp.home and Mail Transfer Agent (MTA) PostFix. I had to search on the internet about MTAs to learn that PostFix is an MTA using the following link &lt;a href=&#34;https://www.tecmint.com/best-mail-transfer-agents-mta-for-linux/&#34;&gt;Reference Link&lt;/a&gt;. After finding all the necessary information about the target, I can now start on the next step which is exploiting. I searched for the payload smtp_enum to get the payload directory.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/networkservice2/18.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Then started setting up the payload and options necessary for the attack.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/networkservice2/19.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
@@ -278,7 +971,7 @@ Showmount flags:&lt;/p&gt;
 &lt;p&gt;MySQL is an open-source relational database management system (RDBMS) known for its speed, reliability, and ease of use. It is widely used for various applications, from small websites to large enterprise systems, due to its scalability and robust features.&lt;/p&gt;
 &lt;p&gt;A Relational Database Management System (RDBMS) is a type of database management system that stores and manages data in a structured manner using tables with predefined relationships. RDBMS is designed to efficiently organize, retrieve, and manipulate data based on the principles of the relational model.&lt;/p&gt;
 &lt;p&gt;SQL, which stands for Structured Query Language, is a domain-specific programming language used to manage and manipulate relational databases. SQL is essential for interacting with databases and performing various operations, such as querying, inserting, updating, and deleting data. It provides a standardized way to communicate with relational database management systems (RDBMS).&lt;/p&gt;
-&lt;h1 id=&#34;practical-2&#34;&gt;Practical:&lt;/h1&gt;
+&lt;h1 id=&#34;practical-3&#34;&gt;Practical:&lt;/h1&gt;
 &lt;p&gt;I scanned first the available ports, and found two open ports 22, and 3306 which is for MySQL.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/networkservice2/25.png&#34; alt=&#34;TCP scan&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Using the provided credentials root:password, I logged into the server to check if it is on and running and I was able to connect. mysql -h 10.10.192.208 -u root -p.&lt;/p&gt;
@@ -305,8 +998,8 @@ Showmount flags:&lt;/p&gt;
       
       <guid>https://cyberbored.site/projects/ad/</guid>
       <description>Introduction: Today I will be starting my first ever Active Directory Home Lab.
-Requirements: - Virtual machine from any vendor of your choice.- Windows Server 2019 ISO.- Window 10 ISO.Requirements Installation: -VMware: Installation Link, Either press the provided link or search for Vmware Player Workstation, then simply scroll down and you will see the following picture:
-Choose which version you want depending on the OS you are using and press download and simply install the app.</description>
+Requirements: - Virtual machine from any vendor of your choice.- Windows Server 2019 ISO.- Window 10 ISO.Requirements Installation: -VMware: Note: using VMware Player Workstation won&amp;rsquo;t support internal network option. Either use Virtual Box or VMware Pro Workstation.
+Installation Link, Either press the provided link or search for Vmware Player Workstation, then simply scroll down and you will see the following picture:</description>
       <content>&lt;h1 id=&#34;introduction&#34;&gt;Introduction:&lt;/h1&gt;
 &lt;p&gt;Today I will be starting my first ever Active Directory Home Lab.&lt;/p&gt;
 &lt;h4 id=&#34;requirements&#34;&gt;Requirements:&lt;/h4&gt;
@@ -316,6 +1009,7 @@ Choose which version you want depending on the OS you are using and press downlo
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h1 id=&#34;requirements-installation&#34;&gt;Requirements Installation:&lt;/h1&gt;
 &lt;h2 id=&#34;-vmware&#34;&gt;-VMware:&lt;/h2&gt;
+&lt;p&gt;Note: using VMware Player Workstation won&amp;rsquo;t support internal network option. Either use Virtual Box or VMware Pro Workstation.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html&#34;&gt;Installation Link&lt;/a&gt;, Either press the provided link or search for Vmware Player Workstation, then simply scroll down and you will see the following picture:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/vmware/0.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Choose which version you want depending on the OS you are using and press download and simply install the app.&lt;/p&gt;
@@ -367,7 +1061,7 @@ Choose which version you want depending on the OS you are using and press downlo
 &lt;p&gt;&lt;img src=&#34;../../images/windows%2010/10.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
 &lt;p&gt;The system configurations can be changed depending on your PC. After the setup is complete, lunch the machine and proceed with the setup&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/windows%2010/4.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
-&lt;p&gt;You can choose either Windows 10 Home or Windows 10 Pro. Then proceed with the installation normally and setup a random Microsoft account or proceed without one by choosing limited options.&lt;/p&gt;
+&lt;p&gt;You should choose Windows 10 Pro as choosing windows 10 Home doesn&amp;rsquo;t allow us to connect to DC. Then proceed with the installation normally and setup a random Microsoft account or proceed without one by choosing limited options.&lt;/p&gt;
 &lt;h1 id=&#34;windows-server-2019-setup&#34;&gt;Windows Server 2019 setup:&lt;/h1&gt;
 &lt;p&gt;After installing the requirements, we should setup everything to be able to start. We will start first by setting up windows server 2019 by creating a new virtual machine on your Virtual Machine, I chose VMware since it get updated more often, which is more secure and less vulnerable. Next, we should configure the network adapter setting for the internal network. To configure the network, we open control panel &amp;ndash;&amp;gt; Network and Internet &amp;ndash;&amp;gt; Network and Sharing Center &amp;ndash;&amp;gt; Change adapter settings and you should have the following page.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/windows%20server/16.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
@@ -456,7 +1150,7 @@ After setting up your IP address the subnet mask should be assigned automaticall
 &lt;p&gt;&lt;img src=&#34;../../images/windows%20server/60.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/windows%20server/61.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/windows%20server/62.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Next, we need to download a PowerShell script which Josh Madakor provide us that will help us to create all users Link Reference. After the installation is finished, save the zip file somewhere easy to access and extract the files inside. Navigate to the name.txt and add a name of a user you want to create (Optional). After you setup the name of users you would like to add, navigate to the windows icon &amp;ndash;&amp;gt; Windows PowerShell Folder &amp;ndash;&amp;gt; PowerShell ISE (Run as administrator).&lt;/p&gt;
+&lt;p&gt;Next, we need to download a PowerShell script which Josh Madakor provide us that will help us to create all users &lt;a href=&#34;https://github.com/joshmadakor1/AD_PS/archive/master.zip&#34;&gt;Link Reference&lt;/a&gt;. After the installation is finished, save the zip file somewhere easy to access and extract the files inside. Navigate to the name.txt and add a name of a user you want to create (Optional). After you setup the name of users you would like to add, navigate to the windows icon &amp;ndash;&amp;gt; Windows PowerShell Folder &amp;ndash;&amp;gt; PowerShell ISE (Run as administrator).&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/windows%20server/63.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
 &lt;p&gt;After you lunch the PowerShell, open 1_CREATE_USERS file that we downloaded by opening the folder button that has a red circle in the picture bellow and run the command in the picture bellow &amp;lsquo;Set-ExecutionPolicy Unrestricted&amp;rsquo; and press yes to all. Note: in a real environment don&amp;rsquo;t allow any unknown PowerShell file to run unrestricted, as this would cause security breach in case of a malware was present.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/windows%20server/64.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
@@ -596,7 +1290,7 @@ Flags for Enum4linux:&lt;/p&gt;
 And using ftp, I connected to the target using anonymous username and downloaded the file that was available.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/networkservice/31.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
 &lt;p&gt;But it isn&amp;rsquo;t really useful, I needed to gain privilege escalation on the target.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Hydra is a very fast online password cracking tool, which can perform rapid dictionary attacks against more than 50 Protocols, including Telnet, RDP, SSH, FTP, HTTP, HTTPS, SMB, several databases and much more. Hydra comes by default on both Parrot and Kali, however if you need it, you can find the GitHub here.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Hydra is a very fast online password cracking tool, which can perform rapid dictionary attacks against more than 50 Protocols, including Telnet, RDP, SSH, FTP, HTTP, HTTPS, SMB, several databases and much more. Hydra comes by default on both Parrot and Kali, however if you need it, you can find the GitHub &lt;a href=&#34;https://github.com/vanhauser-thc/thc-hydra&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Some important flags that we will use:&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -880,7 +1574,7 @@ As a passionate cybersecurity enthusiast, I&amp;rsquo;ve embarked on a journey t
 &lt;p&gt;As a passionate cybersecurity enthusiast, I&amp;rsquo;ve embarked on a journey to understand the intricacies of the digital landscape and the ever-evolving threats that surround us. Through this blog, I aim to not only document my personal journey but also provide valuable resources, insights, and discussions about the fascinating world of cybersecurity.&lt;/p&gt;
 &lt;p&gt;Here, you&amp;rsquo;ll find a variety of content ranging from in-depth analyses of the latest cyber threats to hands-on tutorials for securing your digital presence. I&amp;rsquo;ll also be sharing my ongoing projects, and experiments in the cybersecurity field, giving you a glimpse into the practical side of safeguarding our digital lives.&lt;/p&gt;
 &lt;p&gt;Whether you&amp;rsquo;re a fellow cybersecurity enthusiast, a curious beginner, or someone looking to enhance their digital security, there&amp;rsquo;s something here for you. Join me as I navigate the ever-changing landscape of cybersecurity, and together, let&amp;rsquo;s stay one step ahead of the digital adversaries.&lt;/p&gt;
-&lt;p&gt;When I&amp;rsquo;m not immersed in lines of code or researching the latest vulnerabilities, you might find me engaging in hands-on labs on platforms like TryHackMe or HackTheBox. Feel free to explore the blog, engage in discussions, and connect with me on &lt;a href=&#34;https://www.linkedin.com/in/mahmoud-choumar-3b446b20b/&#34;&gt;Linkedin&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;When I&amp;rsquo;m not immersed in lines of code or researching the latest vulnerabilities, you might find me engaging in hands-on labs on platforms like TryHackMe or HackTheBox. Feel free to explore the blog, engage in discussions, and connect with me on &lt;a href=&#34;https://www.linkedin.com/in/mahmoudchoumar/&#34;&gt;Linkedin&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Thank you for being a part of this cybersecurity journey. Let&amp;rsquo;s explore, learn, and secure together!&lt;/p&gt;
 </content>
     </item>

@@ -15,8 +15,8 @@
       
       <guid>https://cyberbored.site/projects/ad/</guid>
       <description>Introduction: Today I will be starting my first ever Active Directory Home Lab.
-Requirements: - Virtual machine from any vendor of your choice.- Windows Server 2019 ISO.- Window 10 ISO.Requirements Installation: -VMware: Installation Link, Either press the provided link or search for Vmware Player Workstation, then simply scroll down and you will see the following picture:
-Choose which version you want depending on the OS you are using and press download and simply install the app.</description>
+Requirements: - Virtual machine from any vendor of your choice.- Windows Server 2019 ISO.- Window 10 ISO.Requirements Installation: -VMware: Note: using VMware Player Workstation won&amp;rsquo;t support internal network option. Either use Virtual Box or VMware Pro Workstation.
+Installation Link, Either press the provided link or search for Vmware Player Workstation, then simply scroll down and you will see the following picture:</description>
       <content>&lt;h1 id=&#34;introduction&#34;&gt;Introduction:&lt;/h1&gt;
 &lt;p&gt;Today I will be starting my first ever Active Directory Home Lab.&lt;/p&gt;
 &lt;h4 id=&#34;requirements&#34;&gt;Requirements:&lt;/h4&gt;
@@ -26,6 +26,7 @@ Choose which version you want depending on the OS you are using and press downlo
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h1 id=&#34;requirements-installation&#34;&gt;Requirements Installation:&lt;/h1&gt;
 &lt;h2 id=&#34;-vmware&#34;&gt;-VMware:&lt;/h2&gt;
+&lt;p&gt;Note: using VMware Player Workstation won&amp;rsquo;t support internal network option. Either use Virtual Box or VMware Pro Workstation.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html&#34;&gt;Installation Link&lt;/a&gt;, Either press the provided link or search for Vmware Player Workstation, then simply scroll down and you will see the following picture:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/vmware/0.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Choose which version you want depending on the OS you are using and press download and simply install the app.&lt;/p&gt;
@@ -77,7 +78,7 @@ Choose which version you want depending on the OS you are using and press downlo
 &lt;p&gt;&lt;img src=&#34;../../images/windows%2010/10.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
 &lt;p&gt;The system configurations can be changed depending on your PC. After the setup is complete, lunch the machine and proceed with the setup&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/windows%2010/4.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
-&lt;p&gt;You can choose either Windows 10 Home or Windows 10 Pro. Then proceed with the installation normally and setup a random Microsoft account or proceed without one by choosing limited options.&lt;/p&gt;
+&lt;p&gt;You should choose Windows 10 Pro as choosing windows 10 Home doesn&amp;rsquo;t allow us to connect to DC. Then proceed with the installation normally and setup a random Microsoft account or proceed without one by choosing limited options.&lt;/p&gt;
 &lt;h1 id=&#34;windows-server-2019-setup&#34;&gt;Windows Server 2019 setup:&lt;/h1&gt;
 &lt;p&gt;After installing the requirements, we should setup everything to be able to start. We will start first by setting up windows server 2019 by creating a new virtual machine on your Virtual Machine, I chose VMware since it get updated more often, which is more secure and less vulnerable. Next, we should configure the network adapter setting for the internal network. To configure the network, we open control panel &amp;ndash;&amp;gt; Network and Internet &amp;ndash;&amp;gt; Network and Sharing Center &amp;ndash;&amp;gt; Change adapter settings and you should have the following page.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/windows%20server/16.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
@@ -166,7 +167,7 @@ After setting up your IP address the subnet mask should be assigned automaticall
 &lt;p&gt;&lt;img src=&#34;../../images/windows%20server/60.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/windows%20server/61.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/windows%20server/62.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Next, we need to download a PowerShell script which Josh Madakor provide us that will help us to create all users Link Reference. After the installation is finished, save the zip file somewhere easy to access and extract the files inside. Navigate to the name.txt and add a name of a user you want to create (Optional). After you setup the name of users you would like to add, navigate to the windows icon &amp;ndash;&amp;gt; Windows PowerShell Folder &amp;ndash;&amp;gt; PowerShell ISE (Run as administrator).&lt;/p&gt;
+&lt;p&gt;Next, we need to download a PowerShell script which Josh Madakor provide us that will help us to create all users &lt;a href=&#34;https://github.com/joshmadakor1/AD_PS/archive/master.zip&#34;&gt;Link Reference&lt;/a&gt;. After the installation is finished, save the zip file somewhere easy to access and extract the files inside. Navigate to the name.txt and add a name of a user you want to create (Optional). After you setup the name of users you would like to add, navigate to the windows icon &amp;ndash;&amp;gt; Windows PowerShell Folder &amp;ndash;&amp;gt; PowerShell ISE (Run as administrator).&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/windows%20server/63.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
 &lt;p&gt;After you lunch the PowerShell, open 1_CREATE_USERS file that we downloaded by opening the folder button that has a red circle in the picture bellow and run the command in the picture bellow &amp;lsquo;Set-ExecutionPolicy Unrestricted&amp;rsquo; and press yes to all. Note: in a real environment don&amp;rsquo;t allow any unknown PowerShell file to run unrestricted, as this would cause security breach in case of a malware was present.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/windows%20server/64.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;

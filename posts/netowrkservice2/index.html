@@ -110,6 +110,10 @@
           <li><a href="/projects">Projects</a></li>
         
       
+        
+          <li><a href="/resources">Resources</a></li>
+        
+      
       
     </ul>
   </li>
@@ -133,6 +137,10 @@
       
         
           <li><a href="/projects" >Projects</a></li>
+        
+      
+        
+          <li><a href="/resources" >Resources</a></li>
         
       
       
@@ -179,20 +187,20 @@
 <p>As per tradition, I started by scanning the open ports using nmap to do a full port scan.</p>
 <p><img src="../../images/networkservice2/0.png" alt="TCP scan"></p>
 <p><img src="../../images/networkservice2/1.png" alt="TCP scan"></p>
-<p>After finding out the open ports, I saw that port 2049 is running nfs_acl service, which can be used to enumerate our attack. Then I wanted to check the NFS shares list using the showmount command.
-Showmount flags:</p>
+<p>I found out the available ports and noticed that port 2049 is running nfs_acl service, which can be used to enumerate our attack. Then, I wanted to check the NFS share list using the showmount command.</p>
 <p><img src="../../images/networkservice2/2.png" alt="TCP scan"></p>
+<p>Showmount flags:</p>
 <p><img src="../../images/networkservice2/3.png" alt="TCP scan"></p>
 <p>After finding out the shared directory, I created a mount directory in the tmp file so that it automatically gets deleted after reboot and mounted the directory on the newly created directory.</p>
 <p><img src="../../images/networkservice2/4.png" alt="TCP scan"></p>
 <p><img src="../../images/networkservice2/5.png" alt="TCP scan"></p>
 <p><img src="../../images/networkservice2/6.png" alt="TCP scan"></p>
-<p>After navigating to the mounted directory, I checked for all available files/directories but it appeared that there was not files/directories, so I tried checking for all files/directories including hidden ones and I saw one that caught my attention which is .ssh. As we know from previous lab this file usually contains the private key which could be used to access the target through ssh easily and gain privilege escalation depending on the time of user this refers too.</p>
+<p>Then, I navigating to the mounted directory, and checked for all available files/directories but it appeared that there was not files/directories, so I tried checking for all files/directories including hidden ones and I saw one that caught my attention which is .ssh. As we know from previous lab this file usually contains the private key which could be used to access the target through ssh easily and gain privilege escalation depending on the time of user this refers too.</p>
 <h1 id="brief-summary-about-root-squash">Brief summary about Root Squash:<a href="#brief-summary-about-root-squash" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
 <p>Root squash&quot; is a security feature implemented in Network File System (NFS) to enhance the security of file sharing. When root squash is enabled, it prevents the root user (superuser) on the NFS client from exercising root privileges on the NFS server. Instead, any attempts by the root user on the client to access NFS resources are mapped to a less privileged user, typically the &ldquo;nobody&rdquo; user or a similar user with restricted access.</p>
 <p>SUID stands for &ldquo;Set User ID&rdquo; and is a permission bit in Unix-like operating systems that allows users to execute a file with the privileges of the file&rsquo;s owner or group, rather than with their own privileges. When the SUID bit is set on an executable file, it enables users to perform certain actions that they wouldn&rsquo;t normally have the permission to execute.</p>
-<h1 id="practicaly">Practicaly:<a href="#practicaly" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
-<p>I connected to the target using ssh private key. Then, I installed a script provided by TryHackMe to run on the target and gain privilege escalation Reference. After downloading the file, I simply changed the user permission using chmod +s bash to allow me to be able to execute the file even on a low level privilege account. Because the permissions didn&rsquo;t apply to the other user group, I had to also add the execute permission using chmod +x bash.</p>
+<h1 id="practical-1">Practical:<a href="#practical-1" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>I connected to the target using ssh private key. Then, I installed a script provided by TryHackMe to run on the target and gain privilege escalation <a href="https://github.com/polo-sec/writing/raw/master/Security%20Challenge%20Walkthroughs/Networks%202/bashhttps://github.com/polo-sec/writing/raw/master/Security%20Challenge%20Walkthroughs/Networks%202/bash">Reference</a>. After downloading the file, I simply changed the user permission using chmod +s bash to allow me to be able to execute the file even on a low level privilege account. Because the permissions didn&rsquo;t apply to the other user group, I had to also add the execute permission using chmod +x bash.</p>
 <p><img src="../../images/networkservice2/11.png" alt="TCP scan"></p>
 <p><img src="../../images/networkservice2/8.png" alt="TCP scan"></p>
 <p><img src="../../images/networkservice2/12.png" alt="TCP scan"></p>
@@ -203,7 +211,7 @@ Showmount flags:</p>
 <p>SMTP operates on port 25, and it works by relaying emails from the sender&rsquo;s mail server to the recipient&rsquo;s mail server. This process involves a series of commands and responses between the sending and receiving servers, ultimately resulting in the successful delivery of the email message.</p>
 <p>POP3 (Post Office Protocol 3) is a protocol used for retrieving emails from a mail server to an email client. Unlike SMTP, which focuses on sending emails, POP3 is responsible for downloading messages from the server to the recipient&rsquo;s device, allowing users to access their emails offline.</p>
 <p>IMAP (Internet Message Access Protocol) is a protocol used for accessing and managing emails stored on a mail server. Unlike POP3, which simply downloads emails to the client, IMAP offers more advanced features that allow users to organize, synchronize, and manage their emails across multiple devices while keeping them stored on the server.</p>
-<h1 id="practical-1">Practical:<a href="#practical-1" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<h1 id="practical-2">Practical:<a href="#practical-2" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
 <p>After learning a brief summary about SMTP, POP3, and IMAP, I wanted to start testing and trying to enumerate them on a virtual lab. As the usual ritual, I started by scanning the ports using nmap and found 2 ports opened.</p>
 <p><img src="../../images/networkservice2/14.png" alt="TCP scan"></p>
 <p>Next, after learning about the open ports, I lunched metasploit using msfconsole to attempt finding the current version running. I ran the command search smtp_version and it showed me the following result.</p>
@@ -211,7 +219,7 @@ Showmount flags:</p>
 <p>After finding the payload I needed, I set it up and executed the payload against the target which got me system mail name and agent that is running .</p>
 <p><img src="../../images/networkservice2/16.png" alt="TCP scan"></p>
 <p><img src="../../images/networkservice2/17.png" alt="TCP scan"></p>
-<p>As you can see in the picture above I found out about the system mail name which is polosmtp.home and Mail Transfer Agent (MTA) PostFix. I had to search on the internet about MTAs to learn that PostFix is an MTA using the following link Reference Link. After finding all the necessary information about the target, I can now start on the next step which is exploiting. I searched for the payload smtp_enum to get the payload directory.</p>
+<p>As you can see in the picture above I found out about the system mail name which is polosmtp.home and Mail Transfer Agent (MTA) PostFix. I had to search on the internet about MTAs to learn that PostFix is an MTA using the following link <a href="https://www.tecmint.com/best-mail-transfer-agents-mta-for-linux/">Reference Link</a>. After finding all the necessary information about the target, I can now start on the next step which is exploiting. I searched for the payload smtp_enum to get the payload directory.</p>
 <p><img src="../../images/networkservice2/18.png" alt="TCP scan"></p>
 <p>Then started setting up the payload and options necessary for the attack.</p>
 <p><img src="../../images/networkservice2/19.png" alt="TCP scan"></p>
@@ -231,7 +239,7 @@ Showmount flags:</p>
 <p>MySQL is an open-source relational database management system (RDBMS) known for its speed, reliability, and ease of use. It is widely used for various applications, from small websites to large enterprise systems, due to its scalability and robust features.</p>
 <p>A Relational Database Management System (RDBMS) is a type of database management system that stores and manages data in a structured manner using tables with predefined relationships. RDBMS is designed to efficiently organize, retrieve, and manipulate data based on the principles of the relational model.</p>
 <p>SQL, which stands for Structured Query Language, is a domain-specific programming language used to manage and manipulate relational databases. SQL is essential for interacting with databases and performing various operations, such as querying, inserting, updating, and deleting data. It provides a standardized way to communicate with relational database management systems (RDBMS).</p>
-<h1 id="practical-2">Practical:<a href="#practical-2" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<h1 id="practical-3">Practical:<a href="#practical-3" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
 <p>I scanned first the available ports, and found two open ports 22, and 3306 which is for MySQL.</p>
 <p><img src="../../images/networkservice2/25.png" alt="TCP scan"></p>
 <p>Using the provided credentials root:password, I logged into the server to check if it is on and running and I was able to connect. mysql -h 10.10.192.208 -u root -p.</p>

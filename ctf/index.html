@@ -102,6 +102,10 @@
           <li><a href="/projects">Projects</a></li>
         
       
+        
+          <li><a href="/resources">Resources</a></li>
+        
+      
       
     </ul>
   </li>
@@ -127,6 +131,10 @@
           <li><a href="/projects" >Projects</a></li>
         
       
+        
+          <li><a href="/resources" >Resources</a></li>
+        
+      
       
     
   </ul>
@@ -140,6 +148,33 @@
     
   
   <div class="posts">
+    
+      <article class="post on-list">
+        <h1 class="post-title">
+          <a href="https://cyberbored.site/ctf/simplectf/">Simplectf</a>
+        </h1>
+        <div class="post-meta"><time class="post-date">2023-09-25</time></div>
+
+        
+
+        
+
+
+        <div class="post-content">
+          
+            I am attempting now my first TryHackMe CTF.
+Reconnaissance: I started first by scanning the first 1000 ports
+using nmap:
+nmap -sC -sV -v -oN simple 10.10.13.112 Which gave me the results above. I learned that there are 3 ports opened and one of them is port 80 http, so I searched for the targets url http://10.10.13.112 and found an apache page. Then, I wanted to learn if there is any hidden common directory that I can find, so I brute forced the directories using gobuster, you can also use fuff to brute force DNS subdomains, URLS, Virtual hosts&hellip;etc.
+          
+        </div>
+
+        
+          <div>
+            <a class="read-more button" href="/ctf/simplectf/">Read more →</a>
+          </div>
+        
+      </article>
     
       <article class="post on-list">
         <h1 class="post-title">

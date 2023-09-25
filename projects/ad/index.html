@@ -102,6 +102,10 @@
           <li><a href="/projects">Projects</a></li>
         
       
+        
+          <li><a href="/resources">Resources</a></li>
+        
+      
       
     </ul>
   </li>
@@ -125,6 +129,10 @@
       
         
           <li><a href="/projects" >Projects</a></li>
+        
+      
+        
+          <li><a href="/resources" >Resources</a></li>
         
       
       
@@ -166,6 +174,7 @@
 </code></pre>
 <h1 id="requirements-installation">Requirements Installation:<a href="#requirements-installation" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
 <h2 id="-vmware">-VMware:<a href="#-vmware" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>Note: using VMware Player Workstation won&rsquo;t support internal network option. Either use Virtual Box or VMware Pro Workstation.</p>
 <p><a href="https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html">Installation Link</a>, Either press the provided link or search for Vmware Player Workstation, then simply scroll down and you will see the following picture:</p>
 <p><img src="../../images/vmware/0.png" alt="Shell"></p>
 <p>Choose which version you want depending on the OS you are using and press download and simply install the app.</p>
@@ -217,7 +226,7 @@
 <p><img src="../../images/windows%2010/10.png" alt="Shell"></p>
 <p>The system configurations can be changed depending on your PC. After the setup is complete, lunch the machine and proceed with the setup</p>
 <p><img src="../../images/windows%2010/4.png" alt="Shell"></p>
-<p>You can choose either Windows 10 Home or Windows 10 Pro. Then proceed with the installation normally and setup a random Microsoft account or proceed without one by choosing limited options.</p>
+<p>You should choose Windows 10 Pro as choosing windows 10 Home doesn&rsquo;t allow us to connect to DC. Then proceed with the installation normally and setup a random Microsoft account or proceed without one by choosing limited options.</p>
 <h1 id="windows-server-2019-setup">Windows Server 2019 setup:<a href="#windows-server-2019-setup" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
 <p>After installing the requirements, we should setup everything to be able to start. We will start first by setting up windows server 2019 by creating a new virtual machine on your Virtual Machine, I chose VMware since it get updated more often, which is more secure and less vulnerable. Next, we should configure the network adapter setting for the internal network. To configure the network, we open control panel &ndash;&gt; Network and Internet &ndash;&gt; Network and Sharing Center &ndash;&gt; Change adapter settings and you should have the following page.</p>
 <p><img src="../../images/windows%20server/16.png" alt="Shell"></p>
@@ -306,7 +315,7 @@ After setting up your IP address the subnet mask should be assigned automaticall
 <p><img src="../../images/windows%20server/60.png" alt="Shell"></p>
 <p><img src="../../images/windows%20server/61.png" alt="Shell"></p>
 <p><img src="../../images/windows%20server/62.png" alt="Shell"></p>
-<p>Next, we need to download a PowerShell script which Josh Madakor provide us that will help us to create all users Link Reference. After the installation is finished, save the zip file somewhere easy to access and extract the files inside. Navigate to the name.txt and add a name of a user you want to create (Optional). After you setup the name of users you would like to add, navigate to the windows icon &ndash;&gt; Windows PowerShell Folder &ndash;&gt; PowerShell ISE (Run as administrator).</p>
+<p>Next, we need to download a PowerShell script which Josh Madakor provide us that will help us to create all users <a href="https://github.com/joshmadakor1/AD_PS/archive/master.zip">Link Reference</a>. After the installation is finished, save the zip file somewhere easy to access and extract the files inside. Navigate to the name.txt and add a name of a user you want to create (Optional). After you setup the name of users you would like to add, navigate to the windows icon &ndash;&gt; Windows PowerShell Folder &ndash;&gt; PowerShell ISE (Run as administrator).</p>
 <p><img src="../../images/windows%20server/63.png" alt="Shell"></p>
 <p>After you lunch the PowerShell, open 1_CREATE_USERS file that we downloaded by opening the folder button that has a red circle in the picture bellow and run the command in the picture bellow &lsquo;Set-ExecutionPolicy Unrestricted&rsquo; and press yes to all. Note: in a real environment don&rsquo;t allow any unknown PowerShell file to run unrestricted, as this would cause security breach in case of a malware was present.</p>
 <p><img src="../../images/windows%20server/64.png" alt="Shell"></p>

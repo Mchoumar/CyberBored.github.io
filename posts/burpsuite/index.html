@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Burpsuite :: CyberBored Blog</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content=" -Embracing Burp Suite: Follow my journey as I install Burp Suite and delve into its powerful arsenal of tools including Proxy, Repeater, Intruder, Decoder, Comparer, and Sequencer, gaining insights into their diverse functionalities.
+
+-Navigating the Dashboard: Explore the Dashboard windows of Burp Suite, uncovering features like Tasks, Event Logs, Issue Activity, and Advisory, providing a comprehensive view of your security testing activities.
+
+-Optimizing Settings and Interception: Learn how to fine-tune configurations, make the most of the built-in Burp Suite browser, and set up alternatives like FoxyProxy for efficient traffic interception. Put this knowledge into action by intercepting and modifying requests on testphp.vulnweb.com for a hands-on experience." />
+<meta name="keywords" content="CyebrSecurity, Blog, CyberBored" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="https://cyberbored.site/posts/burpsuite/" />
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://cyberbored.site/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="https://cyberbored.site/img/theme-colors/blue.png">
+  <link rel="apple-touch-icon" href="https://cyberbored.site/img/theme-colors/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Burpsuite">
+<meta property="og:description" content=" -Embracing Burp Suite: Follow my journey as I install Burp Suite and delve into its powerful arsenal of tools including Proxy, Repeater, Intruder, Decoder, Comparer, and Sequencer, gaining insights into their diverse functionalities.
+
+-Navigating the Dashboard: Explore the Dashboard windows of Burp Suite, uncovering features like Tasks, Event Logs, Issue Activity, and Advisory, providing a comprehensive view of your security testing activities.
+
+-Optimizing Settings and Interception: Learn how to fine-tune configurations, make the most of the built-in Burp Suite browser, and set up alternatives like FoxyProxy for efficient traffic interception. Put this knowledge into action by intercepting and modifying requests on testphp.vulnweb.com for a hands-on experience." />
+<meta property="og:url" content="https://cyberbored.site/posts/burpsuite/" />
+<meta property="og:site_name" content="CyberBored Blog" />
+
+  
+    <meta property="og:image" content="https://cyberbored.site/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2023-09-25 13:35:54 &#43;0200 CEST" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="blue">
+
+
+<div class="container full headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    CyberBored
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/posts">Blog</a></li>
+        
+      
+        
+          <li><a href="/ctf">CTF</a></li>
+        
+      
+        
+          <li><a href="/projects">Projects</a></li>
+        
+      
+        
+          <li><a href="/resources">Resources</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/posts" >Blog</a></li>
+        
+      
+        
+          <li><a href="/ctf" >CTF</a></li>
+        
+      
+        
+          <li><a href="/projects" >Projects</a></li>
+        
+      
+        
+          <li><a href="/resources" >Resources</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="https://cyberbored.site/posts/burpsuite/">Burpsuite</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2023-09-25</time></div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="https://cyberbored.site/tags/blog/">Blog</a>&nbsp;
+      
+    </span>
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <h1 id="introduction">Introduction:<a href="#introduction" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Burp Suit is a web vulnerability scanner and security testing platform developed by PortSwigger. It captures and enables manipulation of all the HTTP/HTTPS traffic between a browser and a web server.</p>
+<h1 id="burp-suite-community-tools">Burp Suite Community Tools:<a href="#burp-suite-community-tools" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<pre><code>• Proxy intercept and modify of requests and responses while interacting with web applications.
+
+• Repeater allows us to capture, modify, and resend the same request multiple times. It is useful when crafting payloads or testing the functionality of an endpoint for vulnerabilities.
+
+• Intruder allows for spraying endpoints with requests. It is commonly utilized for brute-force attacks or fuzzing endpoints.
+
+• Decoder offers a valuable service for data transformation. It can decode captured information or encode payloads before sending them to target.
+
+• Comparer enables the comparison of two pieces of data at either the word or byte level.
+
+• Sequencer is typically employed when assessing the randomness of tokens, such as session cookie values or other supposedly randomly generated data. If the algorithm used for generating these values lacks secure randomness, it can expose avenues for devastating attacks.
+</code></pre>
+<h1 id="installation">Installation:<a href="#installation" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Burp Suite installation <a href="https://portswigger.net/burp/releases">Link</a>, choose the proper operating system and install the zip file. On windows run the executable, and on Linux by simply running the scripting in the terminal, by giving it the necessary privelge and running it using ./and the file name.</p>
+<h1 id="dashboard">DashBoard:<a href="#dashboard" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<pre><code>1. Tasks: The Tasks menu allows you to define background tasks that Burp Suite will perform while you use the application. In Burp Suite Community, the default “Live Passive Crawl” task, which automatically logs the pages visited, is sufficient for our purposes in this module. Burp Suite Professional offers additional features like on-demand scans.
+
+2. Event log: The Event log provides information about the actions performed by Burp Suite, such as starting the proxy, as well as details about connections made through Burp.
+
+3. Issue Activity: This section is specific to Burp Suite Professional. It displays the vulnerabilities identified by the automated scanner, ranked by severity and filterable based on the certainty of the vulnerability.
+
+4. Advisory: The Advisory section provides more detailed information about the identified vulnerabilities, including references and suggested remediations. This information can be exported into a report. In Burp Suite Community, this section may not show any vulnerabilities.
+</code></pre>
+<h4 id="shortcuts">Shortcuts:<a href="#shortcuts" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<table>
+<thead>
+<tr>
+<th>Shortcut</th>
+<th>Tab</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ctrl + Shift + D</td>
+<td>Dashboard</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + T</td>
+<td>Target tab</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + P</td>
+<td>Proxy tab</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + I</td>
+<td>Intruder tab</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + R</td>
+<td>Repeater tab</td>
+</tr>
+</tbody>
+</table>
+<h1 id="burp-suite-proxy">Burp Suite Proxy:<a href="#burp-suite-proxy" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<pre><code>• Intercepting Requests: Intercept options allows us to intercept requests using Burp Suite, which allows us to modify the request or analyze it. To allow the request to pass you should turn off the intercept option.
+
+• WebSocket Support: Burp Suite also captures and logs WebSocket communication, providing additional assistance when analyzing web applications.
+</code></pre>
+<p>All captured logs can be found in the history sub-category.
+While intercepting requests you are able to play the man in the middle and change the request sent.</p>
+<h1 id="proxy-settings">Proxy settings:<a href="#proxy-settings" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<pre><code>• Response Interceptions isn't active by default unless explicitly requested on a per-request basis.
+
+• Match and Replace section in the proxy settings enables the use of regular expressions (regex) to modify incoming and outgoing requests.
+</code></pre>
+<h1 id="foxyproxy">FoxyProxy:<a href="#foxyproxy" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>FoxyProxy is a browser extension that facilitates the management and switching of proxy servers within web browsers. It is available for popular web browsers like Mozilla Firefox and Google Chrome. Install the extension and configure it. You can configure it by going to FoxyProxy options and adding the IP and port of the Proxy then on the extension press on burp and it will be activated and it will start intercepting the websites.</p>
+<h1 id="decoder">Decoder:<a href="#decoder" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Once you find Authorisation code on the site map, you can use the code with Decoder to get the clear text of the message.</p>
+<h1 id="repeater">Repeater:<a href="#repeater" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>You can use shellshock attack using repeater to change the request sent and embed an attack.</p>
+<p>Practical Video of me using Burpsuite on <a href="http://testphp.vulnweb.com/">http://testphp.vulnweb.com/</a> website:</p>
+<p>• <a href="https://www.linkedin.com/feed/update/urn:li:activity:7110033657838374912/?originTrackingId=Yep8vmejQtGznAgKJ1SdtA%3D%3D">Practical Video</a></p>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        <span class="button previous">
+            <a href="https://cyberbored.site/posts/openvas/">
+                <span class="button__icon">←</span>
+                <span class="button__text">Openvas</span>
+            </a>
+        </span>
+        
+        
+        <span class="button next">
+            <a href="https://cyberbored.site/posts/yara/">
+                <span class="button__text">Yara</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">
+        <span>CyberBored, Inc. Copyright</span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>
