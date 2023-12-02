@@ -178,127 +178,127 @@ Create a new Virtual Machine, choose a name, Type: other and Version: Other/Unkn
 <p>PFsense is a free network firewall distribution. I will be using it as a firewall on my network to protect and segment my private network.</p>
 <h3 id="installation">Installation<a href="#installation" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
 <p>Head to <a href="https://www.pfsense.org/download/">pfsense</a> website and install an AMD64, ISOimage.</p>
-<p><img src="../../images/pfsense/0.png" alt="0.png"></p>
+<p><img src="../../../images/pfsense/0.png" alt="0.png"></p>
 <p>Extract the ZIP file that contains PFsense ISO image and head to Virtual Box or VMware to create a new virtual machine:</p>
 <ul>
 <li>Create a new Virtual Machine, choose a name, Type: other and Version: Other/Unknown (64-bit). Note: It is better to add the ISO image after the machine is created.
-<img src="../../images/pfsense/Untitled.png" alt="Untitled"></li>
+<img src="../../../images/pfsense/Untitled.png" alt="Untitled"></li>
 <li>Hardware Options:
 <ul>
 <li>Base memory (2048 MB)</li>
 <li>Processors (2 CPUs)
-<img src="../../images/pfsense/Untitled%201.png" alt="Untitled"></li>
+<img src="../../../images/pfsense/Untitled%201.png" alt="Untitled"></li>
 </ul>
 </li>
 <li>Virtual Hard Disk 20 GB
-<img src="../../images/pfsense/Untitled%202.png" alt="Untitled"></li>
+<img src="../../../images/pfsense/Untitled%202.png" alt="Untitled"></li>
 <li>Finish.</li>
 </ul>
 <p><strong>Optional: Setting up extra NIC interfaces, for reference <a href="https://www.virtualbox.org/manual/ch08.html">Oracle</a> or</strong> <a href="https://forums.virtualbox.org/viewtopic.php?t=88463">Forum</a> <strong>or <a href="https://www.youtube.com/shorts/aPtAOC2LBmA">Video</a>.</strong></p>
 <ul>
 <li>Navigate using CMD to the directory that contains the VirtualBox installation.</li>
 <li>Check how many NICs can your Machine access using the following command “VBoxManage.exe showvminfo [Machine name]”.
-<img src="../../images/pfsense/Untitled%203.png" alt="Untitled"></li>
+<img src="../../../images/pfsense/Untitled%203.png" alt="Untitled"></li>
 <li>To enable the interface “VBoxManage.exe modifyvm PFsense &ndash;nic[5-8]=[Type] &ndash;macaddress5=[auto or mac nb]”</li>
 <li>To choose the type of host only adapter or name “VBoxManage.exe modifyvm PFsense &ndash;hostonlyadapter5=&ldquo;VirtualBox Host-Only Ethernet Adapter #3””
-<img src="../../images/pfsense/Untitled%204.png" alt="Untitled"></li>
+<img src="../../../images/pfsense/Untitled%204.png" alt="Untitled"></li>
 </ul>
 <p>When the machine is created, navigate to the PFsense machine settings to add the ISO image and Configure few settings:</p>
 <ul>
 <li>Create two new Host-Only Ethernet Adapter by navigating to Tools —&gt; Network —&gt; Host-only Networks create —&gt; Create.
-<img src="../../images/pfsense/Screenshot_2023-11-27_204331.png" alt="Screenshot 2023-11-27 204331.png">
-<img src="../../images/pfsense/Screenshot_2023-11-28_091221.png" alt="Screenshot 2023-11-28 091221.png">
-<img src="../../images/pfsense/Screenshot_2023-11-28_091229.png" alt="Screenshot 2023-11-28 091229.png"></li>
+<img src="../../../images/pfsense/Screenshot_2023-11-27_204331.png" alt="Screenshot 2023-11-27 204331.png">
+<img src="../../../images/pfsense/Screenshot_2023-11-28_091221.png" alt="Screenshot 2023-11-28 091221.png">
+<img src="../../../images/pfsense/Screenshot_2023-11-28_091229.png" alt="Screenshot 2023-11-28 091229.png"></li>
 <li>Head to the machines Settings and turn off the Floppy Disk from the boot order.
-<img src="../../images/pfsense/Untitled%205.png" alt="Untitled"></li>
+<img src="../../../images/pfsense/Untitled%205.png" alt="Untitled"></li>
 <li>Navigate to Storage tab and select the empty disk to insert the ISO image.
-<img src="../../images/pfsense/Untitled%206.png" alt="Untitled"></li>
+<img src="../../../images/pfsense/Untitled%206.png" alt="Untitled"></li>
 <li>Enable the network adapters under Network tab.
 <ul>
 <li>Adapter 1.
-<img src="../../images/pfsense/Untitled%207.png" alt="Untitled"></li>
+<img src="../../../images/pfsense/Untitled%207.png" alt="Untitled"></li>
 <li>Adapter 2.
-<img src="../../images/pfsense/Untitled%208.png" alt="Untitled"></li>
+<img src="../../../images/pfsense/Untitled%208.png" alt="Untitled"></li>
 <li>Adapter 3.
-<img src="../../images/pfsense/Untitled%209.png" alt="Untitled"></li>
+<img src="../../../images/pfsense/Untitled%209.png" alt="Untitled"></li>
 </ul>
 </li>
 <li>Finally, turn of the sound adapter.
-<img src="../../images/pfsense/Untitled%2010.png" alt="Untitled"></li>
+<img src="../../../images/pfsense/Untitled%2010.png" alt="Untitled"></li>
 <li>Apply and start the machine.</li>
 </ul>
 <p>Once the machine is lunched you will be greeted with Copyright distribution, just accept it.</p>
-<p><img src="../../images/pfsense/Untitled%2011.png" alt="Untitled"></p>
+<p><img src="../../../images/pfsense/Untitled%2011.png" alt="Untitled"></p>
 <ul>
 <li>Choose install pfSense and ok.
-<img src="../../images/pfsense/Untitled%2012.png" alt="Untitled"></li>
+<img src="../../../images/pfsense/Untitled%2012.png" alt="Untitled"></li>
 <li>Choose Guided Root-on-ZFS.
-<img src="../../images/pfsense/Untitled%2013.png" alt="Untitled"></li>
+<img src="../../../images/pfsense/Untitled%2013.png" alt="Untitled"></li>
 <li>Keep the default settings and continue.
-<img src="../../images/pfsense/Untitled%2014.png" alt="Untitled"></li>
+<img src="../../../images/pfsense/Untitled%2014.png" alt="Untitled"></li>
 <li>Keep the same default settings and press Enter.
-<img src="../../images/pfsense/Untitled%2015.png" alt="Untitled"></li>
+<img src="../../../images/pfsense/Untitled%2015.png" alt="Untitled"></li>
 <li>Keep the default and press Space, then press Enter.
-<img src="../../images/pfsense/Untitled%2016.png" alt="Untitled"></li>
+<img src="../../../images/pfsense/Untitled%2016.png" alt="Untitled"></li>
 <li>Choose yes and Enter to start the installation.
-<img src="../../images/pfsense/Untitled%2017.png" alt="Untitled"></li>
+<img src="../../../images/pfsense/Untitled%2017.png" alt="Untitled"></li>
 <li>Finally, reboot the machine.
-<img src="../../images/pfsense/Untitled%2018.png" alt="Untitled"></li>
+<img src="../../../images/pfsense/Untitled%2018.png" alt="Untitled"></li>
 </ul>
 <p>Note: if the machine asks you again to redo the settings or configuration we just did. Close the machine —&gt; Navigate to machine settings —&gt; Remove the ISO Image disk, OR Hover over devices —&gt; Optical Drives —&gt; Check the disk you want to disable or remove it.</p>
-<p><img src="../../images/pfsense/Untitled%2019.png" alt="Untitled"></p>
+<p><img src="../../../images/pfsense/Untitled%2019.png" alt="Untitled"></p>
 <p>After the machine is rebooted, you need to assign NIC to the Network adapters:</p>
 <ul>
 <li>Type le2 (Adapter 3) and press Enter to assign the NIC to the WAN-1 Network adapter.
-<img src="../../images/pfsense/Untitled%2020.png" alt="Untitled"></li>
+<img src="../../../images/pfsense/Untitled%2020.png" alt="Untitled"></li>
 <li>Type le0 (Adapter 1) and press Enter to assign the NIC to LAN(LAN 11) Interface.
-<img src="../../images/pfsense/Untitled%2021.png" alt="Untitled"></li>
+<img src="../../../images/pfsense/Untitled%2021.png" alt="Untitled"></li>
 <li>Type Le1 (Adapter 2) and press Enter to assign the NIC to OPT (LAN 12) Interface.
-<img src="../../images/pfsense/Untitled%2022.png" alt="Untitled"></li>
+<img src="../../../images/pfsense/Untitled%2022.png" alt="Untitled"></li>
 <li>Type Y and press Enter to proceed with the configuration.
-<img src="../../images/pfsense/Untitled%2023.png" alt="Untitled"></li>
+<img src="../../../images/pfsense/Untitled%2023.png" alt="Untitled"></li>
 <li>If everything was setup correctly, you should receive IP for le2 and le0.</li>
 <li>Now, we want to setup a static IP address for le1 and le0. Type 2 and press Enter.
-<img src="../../images/pfsense/Untitled%2024.png" alt="Untitled"></li>
+<img src="../../../images/pfsense/Untitled%2024.png" alt="Untitled"></li>
 <li>Type 2 and press Enter —&gt; type n and press Enter —&gt; type the IP address and press Enter —&gt; type the Subnet and press Enter.
-<img src="../../images/pfsense/Untitled%2025.png" alt="Untitled"></li>
+<img src="../../../images/pfsense/Untitled%2025.png" alt="Untitled"></li>
 <li>Type n and press Enter —&gt; Press Enter —&gt; Type n and press Enter —&gt; Type y and press Enter —&gt; Press Enter.
-<img src="../../images/pfsense/Untitled%2026.png" alt="Untitled"></li>
+<img src="../../../images/pfsense/Untitled%2026.png" alt="Untitled"></li>
 <li>To configure the le1 interface. Type 2 and press Enter —&gt; Type 3 and press Enter —&gt; Type n and press Enter —&gt; Type the IP address and press Enter —&gt; Type Subnet number and Press Enter.
-<img src="../../images/pfsense/Untitled%2027.png" alt="Untitled"></li>
+<img src="../../../images/pfsense/Untitled%2027.png" alt="Untitled"></li>
 <li>The rest of the steps are the same as before.</li>
 </ul>
 <p>Search for the IP address we setup for adapter 1 (192.168.1.1) in your web browser. You should find a login page, login using the following credentials: Username - admin; Password - pfsense.</p>
-<p><img src="../../images/pfsense/Untitled%2028.png" alt="Untitled"></p>
+<p><img src="../../../images/pfsense/Untitled%2028.png" alt="Untitled"></p>
 <p>After logging in, you will be greeted with the setup wizard. Press Next —&gt; and Next again until you reach step 2.</p>
-<p><img src="../../images/pfsense/Untitled%2029.png" alt="Untitled"></p>
+<p><img src="../../../images/pfsense/Untitled%2029.png" alt="Untitled"></p>
 <p>On step two, setup the Primary DNS server to “8.8.8.8” &amp; Secondary to “4.4.4.4”, then hit Next.</p>
-<p><img src="../../images/pfsense/Untitled%2030.png" alt="Untitled"></p>
+<p><img src="../../../images/pfsense/Untitled%2030.png" alt="Untitled"></p>
 <p><strong>Optional:</strong> for 3rd step, you can setup your time zone.</p>
-<p><img src="../../images/pfsense/Screenshot_2023-11-30_101739.png" alt="Screenshot 2023-11-30 101739.png"></p>
+<p><img src="../../../images/pfsense/Screenshot_2023-11-30_101739.png" alt="Screenshot 2023-11-30 101739.png"></p>
 <p>On step 4 you can turn off both “Block RFC1918 Private Network” &amp; “Block bogon networks” to generate some interesting alerts. <strong>Warning:</strong> Only if you are confident with turning it off, as it might result in some dangerous activities. Press Next for step 5.</p>
-<p><img src="../../images/pfsense/Untitled%2031.png" alt="Untitled"></p>
+<p><img src="../../../images/pfsense/Untitled%2031.png" alt="Untitled"></p>
 <p>On step 6, we need to create a new password. <strong>Warning:</strong> it’s very important to change the password, as the default can be cracked easily.</p>
-<p><img src="../../images/pfsense/Untitled%2032.png" alt="Untitled"></p>
+<p><img src="../../../images/pfsense/Untitled%2032.png" alt="Untitled"></p>
 <p>Press Next after setting a password on. On step 7, we need to press reload to restart pfsense.</p>
-<p><img src="../../images/pfsense/Untitled%2033.png" alt="Untitled"></p>
+<p><img src="../../../images/pfsense/Untitled%2033.png" alt="Untitled"></p>
 <p>On step 8, wait for the reload to be over. On step 9, press finish and everything should be setup.</p>
 <p>When you complete all the steps, you will have this page that allows you to configure the firewall further more.</p>
-<p><img src="../../images/pfsense/Untitled%2034.png" alt="Untitled"></p>
+<p><img src="../../../images/pfsense/Untitled%2034.png" alt="Untitled"></p>
 <p>You can do some system changes, like making the theme into dark mode under System tab —&gt; General setup. What we mainly need to do first is change the description of the interfaces we setup, to make it easier to navigate. Under the tab Interfaces either choose Assignments (Contains all interfaces that we setup on PFsense.) or directly the interface you wish to change.</p>
-<p><img src="../../images/pfsense/Untitled%2035.png" alt="Untitled"></p>
+<p><img src="../../../images/pfsense/Untitled%2035.png" alt="Untitled"></p>
 <p>Change the description, then scroll down save and apply changes.</p>
-<p><img src="../../images/pfsense/Untitled%2036.png" alt="Untitled"></p>
-<p><img src="../../images/pfsense/Untitled%2037.png" alt="Untitled"></p>
-<p><img src="../../images/pfsense/Untitled%2038.png" alt="Untitled"></p>
+<p><img src="../../../images/pfsense/Untitled%2036.png" alt="Untitled"></p>
+<p><img src="../../../images/pfsense/Untitled%2037.png" alt="Untitled"></p>
+<p><img src="../../../images/pfsense/Untitled%2038.png" alt="Untitled"></p>
 <p>Now, we need to connect a span port or bridge to the private network to be able to intercept all of the packets and data transmitted to log them for suspicious activities. Navigate to Interfaces —&gt; Assignments —&gt; Bridges —&gt; Press Add —&gt; Choose the Private Network for Member Interface —&gt; Choose the SpanPort for Span Port —&gt; Save.</p>
-<p><img src="../../images/pfsense/Untitled%2039.png" alt="Untitled"></p>
-<p><img src="../../images/pfsense/Untitled%2040.png" alt="Untitled"></p>
-<p><img src="../../images/pfsense/Untitled%2041.png" alt="Untitled"></p>
+<p><img src="../../../images/pfsense/Untitled%2039.png" alt="Untitled"></p>
+<p><img src="../../../images/pfsense/Untitled%2040.png" alt="Untitled"></p>
+<p><img src="../../../images/pfsense/Untitled%2041.png" alt="Untitled"></p>
 <p>To generate some logs on our network, navigate to Firewall —&gt; Rules —&gt; Add a new rule —&gt; Choose Protocol “Any” —&gt; Save —&gt; Apply Changes.</p>
-<p><img src="../../images/pfsense/Untitled%2042.png" alt="Untitled"></p>
-<p><img src="../../images/pfsense/Untitled%2043.png" alt="Untitled"></p>
-<p><img src="../../images/pfsense/Untitled%2044.png" alt="Untitled"></p>
+<p><img src="../../../images/pfsense/Untitled%2042.png" alt="Untitled"></p>
+<p><img src="../../../images/pfsense/Untitled%2043.png" alt="Untitled"></p>
+<p><img src="../../../images/pfsense/Untitled%2044.png" alt="Untitled"></p>
 
       </div></div>
 
