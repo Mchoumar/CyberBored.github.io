@@ -7,18 +7,48 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>CyberBored, Inc. Copyright</copyright>
-    <lastBuildDate>Thu, 24 Aug 2023 10:31:35 +0200</lastBuildDate><atom:link href="https://cyberbored.site/tags/project/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 27 Nov 2023 18:47:43 +0100</lastBuildDate><atom:link href="https://cyberbored.site/tags/project/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hacking Machine Lab</title>
+      <link>https://cyberbored.site/projects/monitoringlab/attack/</link>
+      <pubDate>Mon, 27 Nov 2023 18:47:43 +0100</pubDate>
+      
+      <guid>https://cyberbored.site/projects/monitoringlab/attack/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
     <item>
       <title>Active Directory Home Lab</title>
-      <link>https://cyberbored.site/projects/ad/</link>
+      <link>https://cyberbored.site/projects/monitoringlab/ad/</link>
       <pubDate>Thu, 24 Aug 2023 10:31:35 +0200</pubDate>
       
-      <guid>https://cyberbored.site/projects/ad/</guid>
+      <guid>https://cyberbored.site/projects/monitoringlab/ad/</guid>
       <description>Introduction: Today I will be starting my first ever Active Directory Home Lab.
-Requirements: - Virtual machine from any vendor of your choice.- Windows Server 2019 ISO.- Window 10 ISO.Requirements Installation: -VMware: Note: using VMware Player Workstation won&amp;rsquo;t support internal network option. Either use Virtual Box or VMware Pro Workstation.
-Installation Link, Either press the provided link or search for Vmware Player Workstation, then simply scroll down and you will see the following picture:</description>
+Video reference: -Setting up Virtual machines
+-Setting up Active Directory and Endusers
+Active Directory: AD is used by companies to organize company&amp;rsquo;s users and enforce policies, rules and organize hierarchy of all users on the network. Active Directory uses valid TLD(Top Level Domain) registered to the company. It&amp;rsquo;s comprised of three main components: Domains, Trees, and Forest. A Tree is a collection of domains whereas a Forest is a collection of Trees.</description>
       <content>&lt;h1 id=&#34;introduction&#34;&gt;Introduction:&lt;/h1&gt;
 &lt;p&gt;Today I will be starting my first ever Active Directory Home Lab.&lt;/p&gt;
+&lt;h3 id=&#34;video-reference&#34;&gt;Video reference:&lt;/h3&gt;
+&lt;p&gt;-&lt;a href=&#34;https://www.youtube.com/watch?v=SFb7MUfeqSE&amp;amp;t=45s&#34;&gt;Setting up Virtual machines&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;-&lt;a href=&#34;https://www.youtube.com/watch?v=3NEyWDyUykw&amp;amp;t=21s&#34;&gt;Setting up Active Directory and Endusers&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;active-directory&#34;&gt;&lt;strong&gt;Active Directory:&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;AD is used by companies to organize company&amp;rsquo;s users and enforce policies, rules and organize hierarchy of all users on the network. Active Directory uses valid TLD(Top Level Domain) registered to the company. It&amp;rsquo;s comprised of three main components: Domains, Trees, and Forest. A Tree is a collection of domains whereas a Forest is a collection of Trees.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Key Features:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;-Domain / AD DS:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- Active Directory Domain is a collection of objects. An object can be a single user or a group or it can be a hardware component, such as a computer or a printer. It will be used to create users for our organization.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;-AD Certificate Services:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- AD Certificate Services help enhance security by binding the identity of a person, computer, or service to a corresponding private key.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;-RAS / NAT:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- Remote Access Service (RAT) will be used to connect all endpoint users to our DC to reach internet through our DC.
+- Network Address Translation (NAT) will be used to map our private IP address into one public IP address to connect to the internet and transfer information.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;-DHCP:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- Dynamic Host Configuration Protocol (DHCP) will be used to automate the process of configuring devices on IP network, to allow them to be able to use network services like DNS, NTP, and any communication protocol based on UDP or TCP.
+&lt;/code&gt;&lt;/pre&gt;
 &lt;h4 id=&#34;requirements&#34;&gt;Requirements:&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;- Virtual machine from any vendor of your choice.
 - Windows Server 2019 ISO.
@@ -26,7 +56,7 @@ Installation Link, Either press the provided link or search for Vmware Player Wo
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h1 id=&#34;requirements-installation&#34;&gt;Requirements Installation:&lt;/h1&gt;
 &lt;h2 id=&#34;-vmware&#34;&gt;-VMware:&lt;/h2&gt;
-&lt;p&gt;Note: using VMware Player Workstation won&amp;rsquo;t support internal network option. Either use Virtual Box or VMware Pro Workstation.&lt;/p&gt;
+&lt;p&gt;Note: VMware Player Workstation doesn&amp;rsquo;t support internal network option. Either use Virtual Box or VMware Pro Workstation.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html&#34;&gt;Installation Link&lt;/a&gt;, Either press the provided link or search for Vmware Player Workstation, then simply scroll down and you will see the following picture:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/vmware/0.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Choose which version you want depending on the OS you are using and press download and simply install the app.&lt;/p&gt;
@@ -191,6 +221,36 @@ Now all that&amp;rsquo;s left for us to do is just configure the windows 10 clie
 &lt;p&gt;&lt;img src=&#34;../../images/windows%2010/20.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
 &lt;p&gt;After you setup the user the pc will restart and you have to enter the user name and password, then everything should be setup. You can check if the user is connected by using ipconfig and pinging mydomain.com.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/windows%2010/21.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Monitoring &amp; Detection Lab Project</title>
+      <link>https://cyberbored.site/projects/monitoringlab/overview/</link>
+      <pubDate>Wed, 23 Aug 2023 10:31:35 +0200</pubDate>
+      
+      <guid>https://cyberbored.site/projects/monitoringlab/overview/</guid>
+      <description>Introduction Hello everyone and welcome to my first lab proeject! In this project we are going to cover various aspects of monitoring. It will be divided into 2 chapters and will cover everything related.
+Chapter 1: Video Reference for Chapter 1 Overview.
+In chapter 1 we will cover the following features:
+-Installing and Download the necessary ISO images.-Setting up and Configuring the Active directory, Endusers, and Attacking machines.-Connecting everything together with the Domain Center.</description>
+      <content>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Hello everyone and welcome to my first lab proeject! In this project we are going to cover various aspects of monitoring. It will be divided into 2 chapters and will cover everything related.&lt;/p&gt;
+&lt;h2 id=&#34;chapter-1&#34;&gt;Chapter 1:&lt;/h2&gt;
+&lt;p&gt;Video Reference for Chapter 1 &lt;a href=&#34;https://www.youtube.com/watch?v=Q8uhVvCwPa0&#34;&gt;Overview&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In chapter 1 we will cover the following features:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;-Installing  and Download the necessary ISO images.
+-Setting up and Configuring the Active directory, Endusers, and Attacking machines.
+-Connecting everything together with the Domain Center.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;chapter-2&#34;&gt;Chapter 2:&lt;/h2&gt;
+&lt;p&gt;In chapter 2 we will cover the following features:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;-Install  PFSENSE, and Security Onion.
+-Setup PFSENSE as a Firewall.
+-Setup Security Onion as an IDS, Security Monitoruing, and Log Management Solution.
+-Setting up Group Object Policies.
+-Perform Pen-Testing.
+&lt;/code&gt;&lt;/pre&gt;
 </content>
     </item>
     

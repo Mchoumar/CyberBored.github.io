@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Sysmon :: CyberBored Blog</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content=" -Empowering Security with Sysmon: Dive into the world of Sysmon as I guide you through its installation and leverage its capabilities in conjunction with Windows Event Logger for enhanced event enumeration.
+
+-Hands-On Event Navigation: Join me in a practical lab session as we explore a preloaded event, utilizing powerful tools like Get-WinEvent, XPath, and Sysmon utilities to dissect and understand event data.
+
+-Synergizing Sysmon and Windows Event Logger: Learn how to seamlessly combine the strengths of Sysmon and Windows Event Logger, gaining a comprehensive understanding of event enumeration for robust security monitoring." />
+<meta name="keywords" content="CyebrSecurity, Blog, CyberBored" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="https://cyberbored.site/posts/tryhackme/sysmon/" />
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://cyberbored.site/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="https://cyberbored.site/img/theme-colors/blue.png">
+  <link rel="apple-touch-icon" href="https://cyberbored.site/img/theme-colors/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Sysmon">
+<meta property="og:description" content=" -Empowering Security with Sysmon: Dive into the world of Sysmon as I guide you through its installation and leverage its capabilities in conjunction with Windows Event Logger for enhanced event enumeration.
+
+-Hands-On Event Navigation: Join me in a practical lab session as we explore a preloaded event, utilizing powerful tools like Get-WinEvent, XPath, and Sysmon utilities to dissect and understand event data.
+
+-Synergizing Sysmon and Windows Event Logger: Learn how to seamlessly combine the strengths of Sysmon and Windows Event Logger, gaining a comprehensive understanding of event enumeration for robust security monitoring." />
+<meta property="og:url" content="https://cyberbored.site/posts/tryhackme/sysmon/" />
+<meta property="og:site_name" content="CyberBored Blog" />
+
+  
+    <meta property="og:image" content="https://cyberbored.site/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2023-09-25 13:06:53 &#43;0200 CEST" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="blue">
+
+
+<div class="container full headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    CyberBored
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/posts">Blog</a></li>
+        
+      
+        
+          <li><a href="/ctf">CTF</a></li>
+        
+      
+        
+          <li><a href="/projects">Projects</a></li>
+        
+      
+        
+          <li><a href="/resources">Resources</a></li>
+        
+      
+        
+          <li><a href="/socials">Socials</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/posts" >Blog</a></li>
+        
+      
+        
+          <li><a href="/ctf" >CTF</a></li>
+        
+      
+        
+          <li><a href="/projects" >Projects</a></li>
+        
+      
+        
+          <li><a href="/resources" >Resources</a></li>
+        
+      
+        
+          <li><a href="/socials" >Socials</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="https://cyberbored.site/posts/tryhackme/sysmon/">Sysmon</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2023-09-25</time></div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="https://cyberbored.site/tags/blog/">Blog</a>&nbsp;
+      
+    </span>
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <h1 id="introduction">Introduction:<a href="#introduction" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>System Monitor (Sysmon) is a Windows tool for enhanced security monitoring. It logs critical system events like process creation, file changes, and network activity, providing valuable insights for threat detection and analysis. Highly configurable to meet specific security needs. Sysmon depends on config file in order to tell the binary how to analyze the events that is receiving. Also note that you can either create your own Sysmon config file or download it <a href="https://github.com/SwiftOnSecurity/sysmon-config">Example</a>.</p>
+<h3 id="sysmon-event-ids">Sysmon Event IDs:<a href="#sysmon-event-ids" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<ol>
+<li>
+<p>Event ID 1: Process Creation looks for any process that have been create. It uses the CommandLine and Image XML tags.</p>
+<pre><code>&lt;RuleGroup name=&quot;&quot; groupRelation=&quot;or&quot;&gt;
+    &lt;ProcessCreate onmatch=&quot;exclude&quot;&gt;
+        &lt;CommandLine condition=&quot;is&quot;&gt;C:\Windows\system32\svchost.exe -k appmodel -p -s camsvc&lt;/CommandLine&gt;
+    &lt;/ProcessCreate&gt;
+&lt;/RuleGroup&gt;
+</code></pre>
+</li>
+<li>
+<p>Event ID 3: Network Connect looks for any event occuring remotely. It uses the Image and DestinationPort XML tags.</p>
+<pre><code>&lt;RuleGroup name=&quot;&quot; groupRelation=&quot;or&quot;&gt;
+    &lt;NetworkConnect onmatch=&quot;include&quot;&gt;
+        &lt;Image condition=&quot;image&quot;&gt;nmap.exe&lt;/Image&gt;
+        &lt;DestinationPort name=&quot;Alert,Metasploit&quot; condition=&quot;is&quot;&gt;4444&lt;/DestinationPort&gt;
+    &lt;/NetworkConnect&gt;
+&lt;/RuleGroup&gt;
+</code></pre>
+</li>
+<li>
+<p>Event ID 7: Image Loaded looks for DLLs loaded by processes, which can be used to hunt for DLL injection and DLL hijacking attacks. It uses the Image, Signed, ImageLoaded, and signature XML tags.</p>
+<pre><code>&lt;RuleGroup name=&quot;&quot; groupRelation=&quot;or&quot;&gt;
+    &lt;ImageLoad onmatch=&quot;include&quot;&gt;
+        &lt;ImageLoaded condition=&quot;contains&quot;&gt;\Temp\&lt;/ImageLoaded&gt;
+    &lt;/ImageLoad&gt;
+&lt;/RuleGroup&gt;
+</code></pre>
+</li>
+<li>
+<p>Event ID 8: CreateRemoteThread looks for processes that are injecting codes into other processes. It uses SourceImage, TargetImage, StartAddress, and StartFunction XML tags.</p>
+<pre><code>&lt;RuleGroup name=&quot;&quot; groupRelation=&quot;or&quot;&gt;
+    &lt;CreateRemoteThread onmatch=&quot;include&quot;&gt;
+        &lt;StartAddress name=&quot;Alert,Cobalt Strike&quot; condition=&quot;end with&quot;&gt;0B80&lt;/StartAddress&gt;
+        &lt;SourceImage condition=&quot;contains&quot;&gt;\&lt;/SourceImage&gt;
+    &lt;/CreateRemoteThread&gt;
+&lt;/RuleGroup&gt;
+</code></pre>
+</li>
+<li>
+<p>Event ID 11: File Created looks for any file that is created or overwritten the endpoint. It uses TargetFilename XML tags.</p>
+<pre><code>&lt;RuleGroup name=&quot;&quot; groupRelation=&quot;or&quot;&gt;
+    &lt;FileCreate onmatch=&quot;include&quot;&gt;
+    &lt;TargetFilename name=&quot;Alert,Ransomware&quot; condition=&quot;contains&quot;&gt;HELP_TO_SAVE_FILES&lt;/TargetFilename&gt;
+    &lt;/FileCreate&gt;
+&lt;/RuleGroup&gt;
+</code></pre>
+</li>
+<li>
+<p>Event ID 12/13/14: Registry Event looks for any changes or modifications to the registry. It uses TargetObject XML tags.</p>
+<pre><code>&lt;RuleGroup name=&quot;&quot; groupRelation=&quot;or&quot;&gt;
+    &lt;RegistryEvent onmatch=&quot;include&quot;&gt;
+        &lt;TargetObject name=&quot;T1484&quot; condition=&quot;contains&quot;&gt;Windows\System\Scripts&lt;/TargetObject&gt;
+    &lt;/RegistryEvent&gt;
+&lt;/RuleGroup&gt;
+</code></pre>
+</li>
+<li>
+<p>Event ID 15: FileCreateStreamHash looks for any files created in alternate data stream. It uses TargetFilename XML tags.</p>
+<pre><code>&lt;RuleGroup name=&quot;&quot; groupRelation=&quot;or&quot;&gt;
+    &lt;FileCreateStreamHash onmatch=&quot;include&quot;&gt;
+        &lt;TargetFilename condition=&quot;end with&quot;&gt;.hta&lt;/TargetFilename&gt;
+    &lt;/FileCreateStreamHash&gt;
+&lt;/RuleGroup&gt;
+</code></pre>
+</li>
+<li>
+<p>Event ID 22: DNS Event looks for DNS queries and events for analysis. It uses QueryName XML tags.</p>
+<pre><code>&lt;RuleGroup name=&quot;&quot; groupRelation=&quot;or&quot;&gt;
+    &lt;DnsQuery onmatch=&quot;exclude&quot;&gt;
+        &lt;QueryName condition=&quot;end with&quot;&gt;.microsoft.com&lt;/QueryName&gt;
+    &lt;/DnsQuery&gt;
+&lt;/RuleGroup&gt;
+</code></pre>
+</li>
+</ol>
+<h1 id="download-sysmon">Download Sysmon:<a href="#download-sysmon" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>You can Either use Sysmon binary from <a href="https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite">Microsoft Sysinternals</a> website, or download <a href="https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon">Microsoft Sysinternal Suite</a> or use the following command in PowerShell to</p>
+<p>install it:</p>
+<pre><code>Download-SysInternalsTools C:\Sysinternals
+</code></pre>
+<p>After installation is done, to run Sysmon we can use the following command:</p>
+<pre><code>Sysmon.exe -accepteula -i ..\Configuration\swift.xml
+</code></pre>
+<h1 id="practical">Practical:<a href="#practical" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Now, after getting a brief explanation about Sysmon it&rsquo;s time to use it with some logs that contains various attacks. To find all events with ID 3, we can simply use what we learned from the Windows Event Viewer lab and use Get-WinEvent or wevutil.exe.
+Get-WinEvent -Path C:\Users\THM-Analyst\Desktop\Scenarios\Practice\Filtering.evtx -FilterXPath &lsquo;*/System/EventID=3&rsquo; | Measure-Object</p>
+<p><img src="../../images/sysmon/0.png" alt="TCP scan"></p>
+<p>Next, to find the first network event I sorted the events on event viewer by pressing on the data column and navigating on Details XML View tab. I also learned that you can use Format-List, which would do the same effect as navigating to Details XML View tab for the oldest event.</p>
+<p><img src="../../images/sysmon/1.png" alt="TCP scan"></p>
+<p><img src="../../images/sysmon/2.png" alt="TCP scan"></p>
+<p>Now, I will be searching for events that are related to Metasploit meterpreter shell connections, usually meterpreter default ports are 4444 and 5555.</p>
+<pre><code>Get-WinEvent -Path C:\Users\THM-Analyst\Desktop\Scenarios\Practice\Hunting_Metasploit.evtx -FilterXPath '*/System/EventID=3 and */EventData/Data[@Name=&quot;DestinationPort&quot;] and */EventData/Data=4444'
+</code></pre>
+<p>Mimikatz is a well-known and commonly used to dump credentials from memory along with other Windows post-exploitation activity. Mimikatz is mainly known for dumping LSASS. Now we need to try and hunt for events related to this attack by searching for a file created remotely.</p>
+<pre><code>Get-WinEvent -Path C:\Users\THM-Analyst\Desktop\Scenarios\Practice\Hunting_Mimikatz.evtx -FilterXPath '*/System/EventID=10 and */EventData/Data[@Name=&quot;TargetImage&quot;] and */EventData/Data=&quot;C:\Windows\system32\lsass.exe&quot;'
+</code></pre>
+<p>Now, we will be focusing on searching for RATs and backdoors. RAT example, Xeexe and Quasar. To help search for the malware we need to detect and identify ways to modify configuration files, this is known as hypothesis-based hunting. We can use a similar method for hunting malwares as the process we used to hunt for Metasploit, by searching for well-known ports. The file that is setup for Sysmon Ion-Storm alerts us when specific ports like 1034 and 1604 as well as exclude common network connections like OneDrive, by excluding events we still see everything that we want without missing anything and cutting down on noise.</p>
+<pre><code>Get-WinEvent -Path C:\Users\THM-Analyst\Desktop\Scenarios\Practice\Hunting_Rats.evtx -FilterXPath '*/System/EventID=3 and */EventData/Data[@Name=&quot;DestinationPort&quot;] and */EventData/Data=8080'
+</code></pre>
+<p>Persistence is used by attackers especially Advanced Persistent Threat(ATP) to maintain access to a machine that they compromised. There are multiple ways to detect persistence on a machine, but I will hunt registry modification by looking for File Creation events and Registry Modification. We need to first look for SwiftOnSecurity detections for files being placed in the \Startup\ or \Start Menu directories. Or searching for rule names.</p>
+<p><img src="../../images/sysmon/3.png" alt="TCP scan"></p>
+<p><img src="../../images/sysmon/4.png" alt="TCP scan"></p>
+<p>Evasion techniques are used by malware authors to evade both anti-virus and detections. Examples of evasion techniques are alternate Data Streams, Injections, Masquerading, Packing/Compression, Recompiling, Obfuscation, Anti-Reversing Techniques. First technique to find data stream by looking at hidden files using alternate data streams using Event ID 15.</p>
+<p>Detecting Remote Threads, Adversaries commonly use remote threads to evade detections in combination with other techniques. Remote threads are created using the Windows API createRemoteThread and can be accessed using OpenThread and ResumeThread.</p>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        <span class="button previous">
+            <a href="https://cyberbored.site/posts/tryhackme/yara/">
+                <span class="button__icon">←</span>
+                <span class="button__text">Yara</span>
+            </a>
+        </span>
+        
+        
+        <span class="button next">
+            <a href="https://cyberbored.site/posts/tryhackme/windowlogs/">
+                <span class="button__text">Windowlogs</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div style="text-align: center;">
+    <a href="https://www.youtube.com/@cyberbored">
+      <img src="../../../../images/icons/youtube-icon.png" alt="" style="display: inline-block;margin-left: auto; margin-right: auto;">
+    </a>
+    <a href="https://www.tiktok.com/@cyberbored1">
+      <img src="../../../../images/icons/tiktok-icon.png" alt="" style="display: inline-block; margin-left: auto; margin-right: auto;">
+
+    </a>    
+  </div>
+  <div class="footer__inner">
+
+    
+      <div class="copyright copyright--user">
+        <span>CyberBored, Inc. Copyright</span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

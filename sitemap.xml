@@ -2,28 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://cyberbored.site/tags/blog/</loc>
-    <lastmod>2023-09-25T13:42:50+02:00</lastmod>
-  </url><url>
     <loc>https://cyberbored.site/</loc>
-    <lastmod>2023-09-25T13:42:50+02:00</lastmod>
+    <lastmod>2023-12-02T09:53:49+01:00</lastmod>
   </url><url>
-    <loc>https://cyberbored.site/posts/openvas/</loc>
-    <lastmod>2023-09-25T13:42:50+02:00</lastmod>
+    <loc>https://cyberbored.site/projects/monitoringlab/pfsense/</loc>
+    <lastmod>2023-12-02T09:53:49+01:00</lastmod>
   </url><url>
-    <loc>https://cyberbored.site/posts/</loc>
-    <lastmod>2023-09-25T13:42:50+02:00</lastmod>
+    <loc>https://cyberbored.site/projects/</loc>
+    <lastmod>2023-12-02T09:53:49+01:00</lastmod>
+  </url><url>
+    <loc>https://cyberbored.site/projects/monitoringlab/attack/</loc>
+    <lastmod>2023-11-27T18:47:43+01:00</lastmod>
+  </url><url>
+    <loc>https://cyberbored.site/tags/monitoring-detection/</loc>
+    <lastmod>2023-11-27T18:47:43+01:00</lastmod>
+  </url><url>
+    <loc>https://cyberbored.site/tags/project/</loc>
+    <lastmod>2023-11-27T18:47:43+01:00</lastmod>
   </url><url>
     <loc>https://cyberbored.site/tags/</loc>
+    <lastmod>2023-11-27T18:47:43+01:00</lastmod>
+  </url><url>
+    <loc>https://cyberbored.site/tags/blog/</loc>
+    <lastmod>2023-10-01T11:57:09+02:00</lastmod>
+  </url><url>
+    <loc>https://cyberbored.site/posts/owasp/</loc>
+    <lastmod>2023-10-01T11:57:09+02:00</lastmod>
+  </url><url>
+    <loc>https://cyberbored.site/posts/</loc>
+    <lastmod>2023-10-01T11:57:09+02:00</lastmod>
+  </url><url>
+    <loc>https://cyberbored.site/posts/tryhackme/openvas/</loc>
     <lastmod>2023-09-25T13:42:50+02:00</lastmod>
   </url><url>
     <loc>https://cyberbored.site/posts/burpsuite/</loc>
     <lastmod>2023-09-25T13:35:54+02:00</lastmod>
   </url><url>
-    <loc>https://cyberbored.site/posts/yara/</loc>
+    <loc>https://cyberbored.site/posts/tryhackme/yara/</loc>
     <lastmod>2023-09-25T13:24:44+02:00</lastmod>
   </url><url>
-    <loc>https://cyberbored.site/posts/sysmon/</loc>
+    <loc>https://cyberbored.site/posts/tryhackme/sysmon/</loc>
     <lastmod>2023-09-25T13:06:53+02:00</lastmod>
   </url><url>
     <loc>https://cyberbored.site/ctf/</loc>
@@ -32,37 +50,43 @@
     <loc>https://cyberbored.site/ctf/simplectf/</loc>
     <lastmod>2023-09-25T12:56:32+02:00</lastmod>
   </url><url>
-    <loc>https://cyberbored.site/posts/windowlogs/</loc>
+    <loc>https://cyberbored.site/posts/tryhackme/windowlogs/</loc>
     <lastmod>2023-09-25T11:51:45+02:00</lastmod>
   </url><url>
-    <loc>https://cyberbored.site/posts/nessus/</loc>
+    <loc>https://cyberbored.site/posts/tryhackme/nessus/</loc>
     <lastmod>2023-09-25T11:42:15+02:00</lastmod>
+  </url><url>
+    <loc>https://cyberbored.site/resources/labs/</loc>
+    <lastmod>2023-09-25T11:09:46+02:00</lastmod>
   </url><url>
     <loc>https://cyberbored.site/resources/</loc>
     <lastmod>2023-09-25T11:09:46+02:00</lastmod>
   </url><url>
-    <loc>https://cyberbored.site/posts/overpass/</loc>
+    <loc>https://cyberbored.site/resources/websites/</loc>
+    <lastmod>2023-09-25T11:09:46+02:00</lastmod>
+  </url><url>
+    <loc>https://cyberbored.site/resources/youtube/</loc>
+    <lastmod>2023-09-25T11:09:46+02:00</lastmod>
+  </url><url>
+    <loc>https://cyberbored.site/posts/tryhackme/overpass/</loc>
     <lastmod>2023-08-29T15:09:15+02:00</lastmod>
   </url><url>
-    <loc>https://cyberbored.site/posts/wireshark101/</loc>
+    <loc>https://cyberbored.site/posts/tryhackme/wireshark101/</loc>
     <lastmod>2023-08-29T14:58:35+02:00</lastmod>
   </url><url>
-    <loc>https://cyberbored.site/posts/adbasics/</loc>
+    <loc>https://cyberbored.site/posts/tryhackme/adbasics/</loc>
     <lastmod>2023-08-29T14:45:29+02:00</lastmod>
   </url><url>
-    <loc>https://cyberbored.site/posts/netowrkservice2/</loc>
+    <loc>https://cyberbored.site/posts/tryhackme/netowrkservice2/</loc>
     <lastmod>2023-08-29T14:04:43+02:00</lastmod>
   </url><url>
-    <loc>https://cyberbored.site/projects/ad/</loc>
+    <loc>https://cyberbored.site/projects/monitoringlab/ad/</loc>
     <lastmod>2023-08-24T10:31:35+02:00</lastmod>
   </url><url>
-    <loc>https://cyberbored.site/tags/project/</loc>
-    <lastmod>2023-08-24T10:31:35+02:00</lastmod>
+    <loc>https://cyberbored.site/projects/monitoringlab/overview/</loc>
+    <lastmod>2023-08-23T10:31:35+02:00</lastmod>
   </url><url>
-    <loc>https://cyberbored.site/projects/</loc>
-    <lastmod>2023-08-24T10:31:35+02:00</lastmod>
-  </url><url>
-    <loc>https://cyberbored.site/posts/networkservice1/</loc>
+    <loc>https://cyberbored.site/posts/tryhackme/networkservice1/</loc>
     <lastmod>2023-08-19T16:30:33+02:00</lastmod>
   </url><url>
     <loc>https://cyberbored.site/tags/ctf/</loc>
@@ -74,7 +98,7 @@
     <loc>https://cyberbored.site/tags/htb/</loc>
     <lastmod>2023-08-17T22:33:51+02:00</lastmod>
   </url><url>
-    <loc>https://cyberbored.site/posts/nmap/</loc>
+    <loc>https://cyberbored.site/posts/tryhackme/nmap/</loc>
     <lastmod>2023-08-15T14:43:22+02:00</lastmod>
   </url><url>
     <loc>https://cyberbored.site/projects/bashscript/</loc>
@@ -82,6 +106,8 @@
   </url><url>
     <loc>https://cyberbored.site/about/</loc>
     <lastmod>2023-08-10T04:30:37+02:00</lastmod>
+  </url><url>
+    <loc>https://cyberbored.site/socials/</loc>
   </url><url>
     <loc>https://cyberbored.site/categories/</loc>
   </url>

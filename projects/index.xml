@@ -7,18 +7,187 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>CyberBored, Inc. Copyright</copyright>
-    <lastBuildDate>Thu, 24 Aug 2023 10:31:35 +0200</lastBuildDate><atom:link href="https://cyberbored.site/projects/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 02 Dec 2023 09:53:49 +0100</lastBuildDate><atom:link href="https://cyberbored.site/projects/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PFsense</title>
+      <link>https://cyberbored.site/projects/monitoringlab/pfsense/</link>
+      <pubDate>Sat, 02 Dec 2023 09:53:49 +0100</pubDate>
+      
+      <guid>https://cyberbored.site/projects/monitoringlab/pfsense/</guid>
+      <description>PFsense Installation &amp;amp; Configuration Introduction PFsense is a free network firewall distribution. I will be using it as a firewall on my network to protect and segment my private network.
+Installation Head to pfsense website and install an AMD64, ISOimage.
+Extract the ZIP file that contains PFsense ISO image and head to Virtual Box or VMware to create a new virtual machine:
+Create a new Virtual Machine, choose a name, Type: other and Version: Other/Unknown (64-bit).</description>
+      <content>&lt;h1 id=&#34;pfsense-installation--configuration&#34;&gt;PFsense Installation &amp;amp; Configuration&lt;/h1&gt;
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;PFsense is a free network firewall distribution. I will be using it as a firewall on my network to protect and segment my private network.&lt;/p&gt;
+&lt;h3 id=&#34;installation&#34;&gt;Installation&lt;/h3&gt;
+&lt;p&gt;Head to &lt;a href=&#34;https://www.pfsense.org/download/&#34;&gt;pfsense&lt;/a&gt; website and install an AMD64, ISOimage.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/0.png&#34; alt=&#34;0.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Extract the ZIP file that contains PFsense ISO image and head to Virtual Box or VMware to create a new virtual machine:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Create a new Virtual Machine, choose a name, Type: other and Version: Other/Unknown (64-bit). Note: It is better to add the ISO image after the machine is created.
+&lt;img src=&#34;../../images/pfsense/Untitled.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Hardware Options:
+&lt;ul&gt;
+&lt;li&gt;Base memory (2048 MB)&lt;/li&gt;
+&lt;li&gt;Processors (2 CPUs)
+&lt;img src=&#34;../../images/pfsense/Untitled%201.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Virtual Hard Disk 20 GB
+&lt;img src=&#34;../../images/pfsense/Untitled%202.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Finish.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Optional: Setting up extra NIC interfaces, for reference &lt;a href=&#34;https://www.virtualbox.org/manual/ch08.html&#34;&gt;Oracle&lt;/a&gt; or&lt;/strong&gt; &lt;a href=&#34;https://forums.virtualbox.org/viewtopic.php?t=88463&#34;&gt;Forum&lt;/a&gt; &lt;strong&gt;or &lt;a href=&#34;https://www.youtube.com/shorts/aPtAOC2LBmA&#34;&gt;Video&lt;/a&gt;.&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Navigate using CMD to the directory that contains the VirtualBox installation.&lt;/li&gt;
+&lt;li&gt;Check how many NICs can your Machine access using the following command “VBoxManage.exe showvminfo [Machine name]”.
+&lt;img src=&#34;../../images/pfsense/Untitled%203.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;To enable the interface “VBoxManage.exe modifyvm PFsense &amp;ndash;nic[5-8]=[Type] &amp;ndash;macaddress5=[auto or mac nb]”&lt;/li&gt;
+&lt;li&gt;To choose the type of host only adapter or name “VBoxManage.exe modifyvm PFsense &amp;ndash;hostonlyadapter5=&amp;ldquo;VirtualBox Host-Only Ethernet Adapter #3””
+&lt;img src=&#34;../../images/pfsense/Untitled%204.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;When the machine is created, navigate to the PFsense machine settings to add the ISO image and Configure few settings:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Create two new Host-Only Ethernet Adapter by navigating to Tools —&amp;gt; Network —&amp;gt; Host-only Networks create —&amp;gt; Create.
+&lt;img src=&#34;../../images/pfsense/Screenshot_2023-11-27_204331.png&#34; alt=&#34;Screenshot 2023-11-27 204331.png&#34;&gt;
+&lt;img src=&#34;../../images/pfsense/Screenshot_2023-11-28_091221.png&#34; alt=&#34;Screenshot 2023-11-28 091221.png&#34;&gt;
+&lt;img src=&#34;../../images/pfsense/Screenshot_2023-11-28_091229.png&#34; alt=&#34;Screenshot 2023-11-28 091229.png&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Head to the machines Settings and turn off the Floppy Disk from the boot order.
+&lt;img src=&#34;../../images/pfsense/Untitled%205.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Navigate to Storage tab and select the empty disk to insert the ISO image.
+&lt;img src=&#34;../../images/pfsense/Untitled%206.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Enable the network adapters under Network tab.
+&lt;ul&gt;
+&lt;li&gt;Adapter 1.
+&lt;img src=&#34;../../images/pfsense/Untitled%207.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Adapter 2.
+&lt;img src=&#34;../../images/pfsense/Untitled%208.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Adapter 3.
+&lt;img src=&#34;../../images/pfsense/Untitled%209.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Finally, turn of the sound adapter.
+&lt;img src=&#34;../../images/pfsense/Untitled%2010.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Apply and start the machine.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Once the machine is lunched you will be greeted with Copyright distribution, just accept it.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2011.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Choose install pfSense and ok.
+&lt;img src=&#34;../../images/pfsense/Untitled%2012.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Choose Guided Root-on-ZFS.
+&lt;img src=&#34;../../images/pfsense/Untitled%2013.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Keep the default settings and continue.
+&lt;img src=&#34;../../images/pfsense/Untitled%2014.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Keep the same default settings and press Enter.
+&lt;img src=&#34;../../images/pfsense/Untitled%2015.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Keep the default and press Space, then press Enter.
+&lt;img src=&#34;../../images/pfsense/Untitled%2016.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Choose yes and Enter to start the installation.
+&lt;img src=&#34;../../images/pfsense/Untitled%2017.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Finally, reboot the machine.
+&lt;img src=&#34;../../images/pfsense/Untitled%2018.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Note: if the machine asks you again to redo the settings or configuration we just did. Close the machine —&amp;gt; Navigate to machine settings —&amp;gt; Remove the ISO Image disk, OR Hover over devices —&amp;gt; Optical Drives —&amp;gt; Check the disk you want to disable or remove it.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2019.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;After the machine is rebooted, you need to assign NIC to the Network adapters:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Type le2 (Adapter 3) and press Enter to assign the NIC to the WAN-1 Network adapter.
+&lt;img src=&#34;../../images/pfsense/Untitled%2020.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Type le0 (Adapter 1) and press Enter to assign the NIC to LAN(LAN 11) Interface.
+&lt;img src=&#34;../../images/pfsense/Untitled%2021.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Type Le1 (Adapter 2) and press Enter to assign the NIC to OPT (LAN 12) Interface.
+&lt;img src=&#34;../../images/pfsense/Untitled%2022.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Type Y and press Enter to proceed with the configuration.
+&lt;img src=&#34;../../images/pfsense/Untitled%2023.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;If everything was setup correctly, you should receive IP for le2 and le0.&lt;/li&gt;
+&lt;li&gt;Now, we want to setup a static IP address for le1 and le0. Type 2 and press Enter.
+&lt;img src=&#34;../../images/pfsense/Untitled%2024.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Type 2 and press Enter —&amp;gt; type n and press Enter —&amp;gt; type the IP address and press Enter —&amp;gt; type the Subnet and press Enter.
+&lt;img src=&#34;../../images/pfsense/Untitled%2025.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Type n and press Enter —&amp;gt; Press Enter —&amp;gt; Type n and press Enter —&amp;gt; Type y and press Enter —&amp;gt; Press Enter.
+&lt;img src=&#34;../../images/pfsense/Untitled%2026.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;To configure the le1 interface. Type 2 and press Enter —&amp;gt; Type 3 and press Enter —&amp;gt; Type n and press Enter —&amp;gt; Type the IP address and press Enter —&amp;gt; Type Subnet number and Press Enter.
+&lt;img src=&#34;../../images/pfsense/Untitled%2027.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;The rest of the steps are the same as before.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Search for the IP address we setup for adapter 1 (192.168.1.1) in your web browser. You should find a login page, login using the following credentials: Username - admin; Password - pfsense.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2028.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;After logging in, you will be greeted with the setup wizard. Press Next —&amp;gt; and Next again until you reach step 2.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2029.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;On step two, setup the Primary DNS server to “8.8.8.8” &amp;amp; Secondary to “4.4.4.4”, then hit Next.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2030.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Optional:&lt;/strong&gt; for 3rd step, you can setup your time zone.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Screenshot_2023-11-30_101739.png&#34; alt=&#34;Screenshot 2023-11-30 101739.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;On step 4 you can turn off both “Block RFC1918 Private Network” &amp;amp; “Block bogon networks” to generate some interesting alerts. &lt;strong&gt;Warning:&lt;/strong&gt; Only if you are confident with turning it off, as it might result in some dangerous activities. Press Next for step 5.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2031.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;On step 6, we need to create a new password. &lt;strong&gt;Warning:&lt;/strong&gt; it’s very important to change the password, as the default can be cracked easily.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2032.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Press Next after setting a password on. On step 7, we need to press reload to restart pfsense.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2033.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;On step 8, wait for the reload to be over. On step 9, press finish and everything should be setup.&lt;/p&gt;
+&lt;p&gt;When you complete all the steps, you will have this page that allows you to configure the firewall further more.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2034.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;You can do some system changes, like making the theme into dark mode under System tab —&amp;gt; General setup. What we mainly need to do first is change the description of the interfaces we setup, to make it easier to navigate. Under the tab Interfaces either choose Assignments (Contains all interfaces that we setup on PFsense.) or directly the interface you wish to change.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2035.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Change the description, then scroll down save and apply changes.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2036.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2037.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2038.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Now, we need to connect a span port or bridge to the private network to be able to intercept all of the packets and data transmitted to log them for suspicious activities. Navigate to Interfaces —&amp;gt; Assignments —&amp;gt; Bridges —&amp;gt; Press Add —&amp;gt; Choose the Private Network for Member Interface —&amp;gt; Choose the SpanPort for Span Port —&amp;gt; Save.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2039.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2040.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2041.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;To generate some logs on our network, navigate to Firewall —&amp;gt; Rules —&amp;gt; Add a new rule —&amp;gt; Choose Protocol “Any” —&amp;gt; Save —&amp;gt; Apply Changes.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2042.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2043.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2044.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Hacking Machine Lab</title>
+      <link>https://cyberbored.site/projects/monitoringlab/attack/</link>
+      <pubDate>Mon, 27 Nov 2023 18:47:43 +0100</pubDate>
+      
+      <guid>https://cyberbored.site/projects/monitoringlab/attack/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
     <item>
       <title>Active Directory Home Lab</title>
-      <link>https://cyberbored.site/projects/ad/</link>
+      <link>https://cyberbored.site/projects/monitoringlab/ad/</link>
       <pubDate>Thu, 24 Aug 2023 10:31:35 +0200</pubDate>
       
-      <guid>https://cyberbored.site/projects/ad/</guid>
+      <guid>https://cyberbored.site/projects/monitoringlab/ad/</guid>
       <description>Introduction: Today I will be starting my first ever Active Directory Home Lab.
-Requirements: - Virtual machine from any vendor of your choice.- Windows Server 2019 ISO.- Window 10 ISO.Requirements Installation: -VMware: Note: using VMware Player Workstation won&amp;rsquo;t support internal network option. Either use Virtual Box or VMware Pro Workstation.
-Installation Link, Either press the provided link or search for Vmware Player Workstation, then simply scroll down and you will see the following picture:</description>
+Video reference: -Setting up Virtual machines
+-Setting up Active Directory and Endusers
+Active Directory: AD is used by companies to organize company&amp;rsquo;s users and enforce policies, rules and organize hierarchy of all users on the network. Active Directory uses valid TLD(Top Level Domain) registered to the company. It&amp;rsquo;s comprised of three main components: Domains, Trees, and Forest. A Tree is a collection of domains whereas a Forest is a collection of Trees.</description>
       <content>&lt;h1 id=&#34;introduction&#34;&gt;Introduction:&lt;/h1&gt;
 &lt;p&gt;Today I will be starting my first ever Active Directory Home Lab.&lt;/p&gt;
+&lt;h3 id=&#34;video-reference&#34;&gt;Video reference:&lt;/h3&gt;
+&lt;p&gt;-&lt;a href=&#34;https://www.youtube.com/watch?v=SFb7MUfeqSE&amp;amp;t=45s&#34;&gt;Setting up Virtual machines&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;-&lt;a href=&#34;https://www.youtube.com/watch?v=3NEyWDyUykw&amp;amp;t=21s&#34;&gt;Setting up Active Directory and Endusers&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;active-directory&#34;&gt;&lt;strong&gt;Active Directory:&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;AD is used by companies to organize company&amp;rsquo;s users and enforce policies, rules and organize hierarchy of all users on the network. Active Directory uses valid TLD(Top Level Domain) registered to the company. It&amp;rsquo;s comprised of three main components: Domains, Trees, and Forest. A Tree is a collection of domains whereas a Forest is a collection of Trees.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Key Features:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;-Domain / AD DS:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- Active Directory Domain is a collection of objects. An object can be a single user or a group or it can be a hardware component, such as a computer or a printer. It will be used to create users for our organization.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;-AD Certificate Services:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- AD Certificate Services help enhance security by binding the identity of a person, computer, or service to a corresponding private key.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;-RAS / NAT:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- Remote Access Service (RAT) will be used to connect all endpoint users to our DC to reach internet through our DC.
+- Network Address Translation (NAT) will be used to map our private IP address into one public IP address to connect to the internet and transfer information.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;-DHCP:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- Dynamic Host Configuration Protocol (DHCP) will be used to automate the process of configuring devices on IP network, to allow them to be able to use network services like DNS, NTP, and any communication protocol based on UDP or TCP.
+&lt;/code&gt;&lt;/pre&gt;
 &lt;h4 id=&#34;requirements&#34;&gt;Requirements:&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;- Virtual machine from any vendor of your choice.
 - Windows Server 2019 ISO.
@@ -26,7 +195,7 @@ Installation Link, Either press the provided link or search for Vmware Player Wo
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h1 id=&#34;requirements-installation&#34;&gt;Requirements Installation:&lt;/h1&gt;
 &lt;h2 id=&#34;-vmware&#34;&gt;-VMware:&lt;/h2&gt;
-&lt;p&gt;Note: using VMware Player Workstation won&amp;rsquo;t support internal network option. Either use Virtual Box or VMware Pro Workstation.&lt;/p&gt;
+&lt;p&gt;Note: VMware Player Workstation doesn&amp;rsquo;t support internal network option. Either use Virtual Box or VMware Pro Workstation.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html&#34;&gt;Installation Link&lt;/a&gt;, Either press the provided link or search for Vmware Player Workstation, then simply scroll down and you will see the following picture:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/vmware/0.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Choose which version you want depending on the OS you are using and press download and simply install the app.&lt;/p&gt;
@@ -191,6 +360,36 @@ Now all that&amp;rsquo;s left for us to do is just configure the windows 10 clie
 &lt;p&gt;&lt;img src=&#34;../../images/windows%2010/20.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
 &lt;p&gt;After you setup the user the pc will restart and you have to enter the user name and password, then everything should be setup. You can check if the user is connected by using ipconfig and pinging mydomain.com.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/windows%2010/21.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Monitoring &amp; Detection Lab Project</title>
+      <link>https://cyberbored.site/projects/monitoringlab/overview/</link>
+      <pubDate>Wed, 23 Aug 2023 10:31:35 +0200</pubDate>
+      
+      <guid>https://cyberbored.site/projects/monitoringlab/overview/</guid>
+      <description>Introduction Hello everyone and welcome to my first lab proeject! In this project we are going to cover various aspects of monitoring. It will be divided into 2 chapters and will cover everything related.
+Chapter 1: Video Reference for Chapter 1 Overview.
+In chapter 1 we will cover the following features:
+-Installing and Download the necessary ISO images.-Setting up and Configuring the Active directory, Endusers, and Attacking machines.-Connecting everything together with the Domain Center.</description>
+      <content>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Hello everyone and welcome to my first lab proeject! In this project we are going to cover various aspects of monitoring. It will be divided into 2 chapters and will cover everything related.&lt;/p&gt;
+&lt;h2 id=&#34;chapter-1&#34;&gt;Chapter 1:&lt;/h2&gt;
+&lt;p&gt;Video Reference for Chapter 1 &lt;a href=&#34;https://www.youtube.com/watch?v=Q8uhVvCwPa0&#34;&gt;Overview&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In chapter 1 we will cover the following features:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;-Installing  and Download the necessary ISO images.
+-Setting up and Configuring the Active directory, Endusers, and Attacking machines.
+-Connecting everything together with the Domain Center.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;chapter-2&#34;&gt;Chapter 2:&lt;/h2&gt;
+&lt;p&gt;In chapter 2 we will cover the following features:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;-Install  PFSENSE, and Security Onion.
+-Setup PFSENSE as a Firewall.
+-Setup Security Onion as an IDS, Security Monitoruing, and Log Management Solution.
+-Setting up Group Object Policies.
+-Perform Pen-Testing.
+&lt;/code&gt;&lt;/pre&gt;
 </content>
     </item>
     

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Nmap :: CyberBored Blog</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="-Nmap Magic: I discovered the art of diverse scans using Nmap – from ping scans to SYN and UDP scans, and even service/version detection scans. By mastering various flags and options, I learned how to customize scans and boost performance effectively.
+
+-Unveiling NSE: Nmap Scripting Engine (NSE) was a revelation. I found myself automating tasks, enhancing functionalities, and even exploring vulnerabilities using its scripts. And guess what? I delved even deeper by learning how to craft my own NSE scripts using the Lua programming language.
+
+-Zenmap&#39;s Brilliance: Zenmap, the graphical user interface for Nmap, entered the scene. It allowed me to visualize my scans and generate insightful reports. With the command wizard and profile editor, my scanning process became not only simplified but also more efficient." />
+<meta name="keywords" content="CyebrSecurity, Blog, CyberBored" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="https://cyberbored.site/posts/tryhackme/nmap/" />
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://cyberbored.site/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="https://cyberbored.site/img/theme-colors/blue.png">
+  <link rel="apple-touch-icon" href="https://cyberbored.site/img/theme-colors/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Nmap">
+<meta property="og:description" content="-Nmap Magic: I discovered the art of diverse scans using Nmap – from ping scans to SYN and UDP scans, and even service/version detection scans. By mastering various flags and options, I learned how to customize scans and boost performance effectively.
+
+-Unveiling NSE: Nmap Scripting Engine (NSE) was a revelation. I found myself automating tasks, enhancing functionalities, and even exploring vulnerabilities using its scripts. And guess what? I delved even deeper by learning how to craft my own NSE scripts using the Lua programming language.
+
+-Zenmap&#39;s Brilliance: Zenmap, the graphical user interface for Nmap, entered the scene. It allowed me to visualize my scans and generate insightful reports. With the command wizard and profile editor, my scanning process became not only simplified but also more efficient." />
+<meta property="og:url" content="https://cyberbored.site/posts/tryhackme/nmap/" />
+<meta property="og:site_name" content="CyberBored Blog" />
+
+  
+    <meta property="og:image" content="https://cyberbored.site/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2023-08-15 14:43:22 &#43;0200 CEST" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="blue">
+
+
+<div class="container full headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    CyberBored
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/posts">Blog</a></li>
+        
+      
+        
+          <li><a href="/ctf">CTF</a></li>
+        
+      
+        
+          <li><a href="/projects">Projects</a></li>
+        
+      
+        
+          <li><a href="/resources">Resources</a></li>
+        
+      
+        
+          <li><a href="/socials">Socials</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/posts" >Blog</a></li>
+        
+      
+        
+          <li><a href="/ctf" >CTF</a></li>
+        
+      
+        
+          <li><a href="/projects" >Projects</a></li>
+        
+      
+        
+          <li><a href="/resources" >Resources</a></li>
+        
+      
+        
+          <li><a href="/socials" >Socials</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="https://cyberbored.site/posts/tryhackme/nmap/">Nmap</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2023-08-15</time></div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="https://cyberbored.site/tags/blog/">Blog</a>&nbsp;
+      
+    </span>
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <p>Embarking on a new Nmap project today, I&rsquo;m diving into the realm of testing and exploring device scanning.</p>
+<p>To kick things off, it&rsquo;s fascinating to note that every network-enabled computer boasts a whopping 65535 open ports. Out of these, 1024 are well-known ports that add an intriguing layer to our journey.</p>
+<p>Key flags to keep in mind:</p>
+<table>
+<thead>
+<tr>
+<th>Flags</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-sS</td>
+<td>Half-open or stealth scan, which has similar function to TCP scan. Key difference between the two scan is that TCP scan performs.</td>
+</tr>
+<tr>
+<td>-sT</td>
+<td>TCP connect scans, which performs 3-way handshake.</td>
+</tr>
+<tr>
+<td>-sU</td>
+<td>UDP connect scans, which doesn&rsquo;t rely on the handshake.</td>
+</tr>
+<tr>
+<td>-sN</td>
+<td>NULL scans, TCP request is sent with no flag set at all, and receives RST if port is closed.</td>
+</tr>
+<tr>
+<td>-sX</td>
+<td>Xmas scans, sends malformed TCP packet and expects RST response for closed ports. It is called Xmas, as it sends(PSH, URG and FIN) which give it the appearance of a blinking Christmas tree.</td>
+</tr>
+<tr>
+<td>-sF</td>
+<td>FIN scans, similar to the NULL scan, but sends with a FIN flag.</td>
+</tr>
+<tr>
+<td>-O</td>
+<td>Detects which operating system the target is running.</td>
+</tr>
+<tr>
+<td>-sV</td>
+<td>Detects the version of the services running on the target.</td>
+</tr>
+<tr>
+<td>-v, vv, vvv</td>
+<td>Verbosity is used to scan with in depth details.</td>
+</tr>
+<tr>
+<td>-oA</td>
+<td>Outputs Nmap results in three major formats.</td>
+</tr>
+<tr>
+<td>-oN</td>
+<td>Saves Nmap results in normal format.</td>
+</tr>
+<tr>
+<td>-oG</td>
+<td>Saves Nmap results in gerpable format.</td>
+</tr>
+<tr>
+<td>-A</td>
+<td>Aggressive mode, which activates service detection, operating system, traceroute, and script scanning.</td>
+</tr>
+<tr>
+<td>-T1-5</td>
+<td>Timer template from level 1-5.</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>Port scan, can be used to specify the ports to be scanned.</td>
+</tr>
+<tr>
+<td>-p-</td>
+<td>All ports scan, as the name suggest it scans all open ports.</td>
+</tr>
+<tr>
+<td>&ndash;script</td>
+<td>Activates Nmap scripts.</td>
+</tr>
+<tr>
+<td>-sn</td>
+<td>Ping sweep, depends on ICMP message, which is sent to all specified IP addresses.</td>
+</tr>
+<tr>
+<td>-Pn</td>
+<td>Tells Nmap to scan without pinging the target in other words Nmap assumes that the target is alive.</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>Used to fragment the packets.</td>
+</tr>
+<tr>
+<td>&ndash;mtu <!-- raw HTML omitted --></td>
+<td>Similar to the use of fragmented packet, but allows you to control the size of the packet.</td>
+</tr>
+<tr>
+<td>&ndash;scan-delay <!-- raw HTML omitted -->ms</td>
+<td>Used to add a delay between packets sent.</td>
+</tr>
+<tr>
+<td>&ndash;badsum</td>
+<td>Used to generate in invalid checksum for packets. However, firewalls might respond automatically, without bothering to check the checksum of the packet. Which allows this flag to check the presence of firewall/IDS.</td>
+</tr>
+</tbody>
+</table>
+<p>The Nmap Scripting Engine (NSE) serves as a potent augmentation to Nmap, significantly expanding its capabilities. Written in the Lua programming language, NSE Scripts empower a wide spectrum of functionalities, ranging from vulnerability scanning to automated exploit deployment. While its applications are diverse, NSE&rsquo;s remarkable utility lies in reconnaissance, yet it&rsquo;s crucial to acknowledge the extensive script library at play.</p>
+<p>The NSE scripts can be classified into different categories:</p>
+<pre><code>• safe: Won't affect the target
+• intrusive: Not safe: likely to affect the target
+• vuln: Scan for vulnerabilities
+• exploit: Attempt to exploit a vulnerability
+• auth: Attempt to bypass authentication for running services (e.g. Log into an FTP server anonymously)
+• brute: Attempt to brute force credentials for running services
+• discovery: Attempt to query running services for further information about the network (e.g. query an SNMP server).
+</code></pre>
+<p>For instance, to execute a script, use the command &lsquo;&ndash;script=<!-- raw HTML omitted -->&rsquo; or &lsquo;&ndash;script=vuln&rsquo;. Multiple scripts can run concurrently with a command like &lsquo;&ndash;script=smb-enum-users,smb-enum-shares&rsquo;.</p>
+<p>Certain scripts require arguments, such as credentials for authenticated vulnerabilities, which can be provided using the &ndash;script-args Nmap switch. Example: &rsquo;nmap -p 80 &ndash;script http-put &ndash;script-args http-put.url=&rsquo;/dav/shell.php&rsquo;,http-put.file=&rsquo;./shell.php&rsquo;&rsquo;.</p>
+<p>For further assistance with scripts, utilize &rsquo;nmap &ndash;script-help <!-- raw HTML omitted -->&rsquo;.</p>
+<p>Nmap offers a formatted text file detailing filenames and categories for available scripts, which can be located at &lsquo;/usr/share/nmap/scripts/script.db&rsquo;. To search for scripts, you can use commands like &lsquo;grep &ldquo;gtp&rdquo; /usr/share/nmap/scripts/script.db&rsquo; or &rsquo;ls -l /usr/share/nmap/scripts/<em>ftp</em>&rsquo;. Comprehensive scripts and libraries can be explored via this reference: <a href="https://nmap.org/nsedoc/">https://nmap.org/nsedoc/</a>.</p>
+<p>To install/update the script list, consider these approaches:</p>
+<p>1-Run &lsquo;sudo apt update &amp;&amp; sudo apt install nmap&rsquo;.
+2-Use &lsquo;sudo wget -O /usr/share/nmap/scripts/<!-- raw HTML omitted -->.nse <a href="https://svb.nmap.org/nmap/scripts/">https://svb.nmap.org/nmap/scripts/</a><!-- raw HTML omitted -->.nse&rsquo;, followed by &rsquo;nmap &ndash;script-updatedb&rsquo;.</p>
+<h1 id="practical-lab">Practical Lab:<a href="#practical-lab" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>To initiate, I commenced by sending a ping to the target using the command &lsquo;ping -c 5 10.10.239.246&rsquo;. The purpose was to discern if the target would reciprocate with an ICMP response—a standard practice in network diagnostics. Subsequently, I employed &lsquo;ping -h&rsquo; to explore the array of available flags. Notably, the -c flag came into play, dictating the halt of pinging after five responses were received from the target. This parameter was selected to govern the desired extent of the ping operation.</p>
+<p><img src="../../images/nmap/pic0.png" alt="Xmas scan"></p>
+<p>Based on the displayed outcomes, it was evident that the target did not acknowledge the receipt of packets. Moving forward, I conducted an assessment to determine the status of the first 999 ports through an Xmas scan. The endeavor involved specifying the range of ports to be examined using the &lsquo;-p&rsquo; flag.</p>
+<p><img src="../../images/nmap/pic1.png" alt="TCP scan"></p>
+<p>The scan revealed the ports in an open but disregarded state. Subsequently, I identified an issue with my openvpn setup, which was rectified by generating a fresh openvpn configuration file via TryHackMe. With the hurdle overcome, I proceeded to re-execute the nmap scans for open ports, this time employing a TCP scan. The result brought to light the presence of 5 accessible ports:</p>
+<p><img src="../../images/nmap/pic2.png" alt="Script"></p>
+<p>Concluding the process, I harnessed &rsquo;nmap &ndash;script&rsquo; to scrutinize port 21 FTP, assessing its potential for facilitating access to the target. As a culmination, I successfully employed the anonymous username to establish a login into the target&rsquo;s FTP server.</p>
+<p><img src="../../images/nmap/pic3.png" alt="result"></p>
+<p><img src="../../images/nmap/pic4.png" alt="login"></p>
+<p><img src="../../images/nmap/pic5.png" alt="login"></p>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        <span class="button previous">
+            <a href="https://cyberbored.site/posts/tryhackme/networkservice1/">
+                <span class="button__icon">←</span>
+                <span class="button__text">Network Ports 1</span>
+            </a>
+        </span>
+        
+        
+    </div>
+</div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div style="text-align: center;">
+    <a href="https://www.youtube.com/@cyberbored">
+      <img src="../../../../images/icons/youtube-icon.png" alt="" style="display: inline-block;margin-left: auto; margin-right: auto;">
+    </a>
+    <a href="https://www.tiktok.com/@cyberbored1">
+      <img src="../../../../images/icons/tiktok-icon.png" alt="" style="display: inline-block; margin-left: auto; margin-right: auto;">
+
+    </a>    
+  </div>
+  <div class="footer__inner">
+
+    
+      <div class="copyright copyright--user">
+        <span>CyberBored, Inc. Copyright</span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

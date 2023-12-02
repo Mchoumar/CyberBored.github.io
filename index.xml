@@ -7,13 +7,515 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>CyberBored, Inc. Copyright</copyright>
-    <lastBuildDate>Mon, 25 Sep 2023 13:42:50 +0200</lastBuildDate><atom:link href="https://cyberbored.site/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 02 Dec 2023 09:53:49 +0100</lastBuildDate><atom:link href="https://cyberbored.site/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PFsense</title>
+      <link>https://cyberbored.site/projects/monitoringlab/pfsense/</link>
+      <pubDate>Sat, 02 Dec 2023 09:53:49 +0100</pubDate>
+      
+      <guid>https://cyberbored.site/projects/monitoringlab/pfsense/</guid>
+      <description>PFsense Installation &amp;amp; Configuration Introduction PFsense is a free network firewall distribution. I will be using it as a firewall on my network to protect and segment my private network.
+Installation Head to pfsense website and install an AMD64, ISOimage.
+Extract the ZIP file that contains PFsense ISO image and head to Virtual Box or VMware to create a new virtual machine:
+Create a new Virtual Machine, choose a name, Type: other and Version: Other/Unknown (64-bit).</description>
+      <content>&lt;h1 id=&#34;pfsense-installation--configuration&#34;&gt;PFsense Installation &amp;amp; Configuration&lt;/h1&gt;
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;PFsense is a free network firewall distribution. I will be using it as a firewall on my network to protect and segment my private network.&lt;/p&gt;
+&lt;h3 id=&#34;installation&#34;&gt;Installation&lt;/h3&gt;
+&lt;p&gt;Head to &lt;a href=&#34;https://www.pfsense.org/download/&#34;&gt;pfsense&lt;/a&gt; website and install an AMD64, ISOimage.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/0.png&#34; alt=&#34;0.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Extract the ZIP file that contains PFsense ISO image and head to Virtual Box or VMware to create a new virtual machine:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Create a new Virtual Machine, choose a name, Type: other and Version: Other/Unknown (64-bit). Note: It is better to add the ISO image after the machine is created.
+&lt;img src=&#34;../../images/pfsense/Untitled.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Hardware Options:
+&lt;ul&gt;
+&lt;li&gt;Base memory (2048 MB)&lt;/li&gt;
+&lt;li&gt;Processors (2 CPUs)
+&lt;img src=&#34;../../images/pfsense/Untitled%201.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Virtual Hard Disk 20 GB
+&lt;img src=&#34;../../images/pfsense/Untitled%202.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Finish.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Optional: Setting up extra NIC interfaces, for reference &lt;a href=&#34;https://www.virtualbox.org/manual/ch08.html&#34;&gt;Oracle&lt;/a&gt; or&lt;/strong&gt; &lt;a href=&#34;https://forums.virtualbox.org/viewtopic.php?t=88463&#34;&gt;Forum&lt;/a&gt; &lt;strong&gt;or &lt;a href=&#34;https://www.youtube.com/shorts/aPtAOC2LBmA&#34;&gt;Video&lt;/a&gt;.&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Navigate using CMD to the directory that contains the VirtualBox installation.&lt;/li&gt;
+&lt;li&gt;Check how many NICs can your Machine access using the following command “VBoxManage.exe showvminfo [Machine name]”.
+&lt;img src=&#34;../../images/pfsense/Untitled%203.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;To enable the interface “VBoxManage.exe modifyvm PFsense &amp;ndash;nic[5-8]=[Type] &amp;ndash;macaddress5=[auto or mac nb]”&lt;/li&gt;
+&lt;li&gt;To choose the type of host only adapter or name “VBoxManage.exe modifyvm PFsense &amp;ndash;hostonlyadapter5=&amp;ldquo;VirtualBox Host-Only Ethernet Adapter #3””
+&lt;img src=&#34;../../images/pfsense/Untitled%204.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;When the machine is created, navigate to the PFsense machine settings to add the ISO image and Configure few settings:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Create two new Host-Only Ethernet Adapter by navigating to Tools —&amp;gt; Network —&amp;gt; Host-only Networks create —&amp;gt; Create.
+&lt;img src=&#34;../../images/pfsense/Screenshot_2023-11-27_204331.png&#34; alt=&#34;Screenshot 2023-11-27 204331.png&#34;&gt;
+&lt;img src=&#34;../../images/pfsense/Screenshot_2023-11-28_091221.png&#34; alt=&#34;Screenshot 2023-11-28 091221.png&#34;&gt;
+&lt;img src=&#34;../../images/pfsense/Screenshot_2023-11-28_091229.png&#34; alt=&#34;Screenshot 2023-11-28 091229.png&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Head to the machines Settings and turn off the Floppy Disk from the boot order.
+&lt;img src=&#34;../../images/pfsense/Untitled%205.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Navigate to Storage tab and select the empty disk to insert the ISO image.
+&lt;img src=&#34;../../images/pfsense/Untitled%206.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Enable the network adapters under Network tab.
+&lt;ul&gt;
+&lt;li&gt;Adapter 1.
+&lt;img src=&#34;../../images/pfsense/Untitled%207.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Adapter 2.
+&lt;img src=&#34;../../images/pfsense/Untitled%208.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Adapter 3.
+&lt;img src=&#34;../../images/pfsense/Untitled%209.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Finally, turn of the sound adapter.
+&lt;img src=&#34;../../images/pfsense/Untitled%2010.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Apply and start the machine.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Once the machine is lunched you will be greeted with Copyright distribution, just accept it.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2011.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Choose install pfSense and ok.
+&lt;img src=&#34;../../images/pfsense/Untitled%2012.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Choose Guided Root-on-ZFS.
+&lt;img src=&#34;../../images/pfsense/Untitled%2013.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Keep the default settings and continue.
+&lt;img src=&#34;../../images/pfsense/Untitled%2014.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Keep the same default settings and press Enter.
+&lt;img src=&#34;../../images/pfsense/Untitled%2015.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Keep the default and press Space, then press Enter.
+&lt;img src=&#34;../../images/pfsense/Untitled%2016.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Choose yes and Enter to start the installation.
+&lt;img src=&#34;../../images/pfsense/Untitled%2017.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Finally, reboot the machine.
+&lt;img src=&#34;../../images/pfsense/Untitled%2018.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Note: if the machine asks you again to redo the settings or configuration we just did. Close the machine —&amp;gt; Navigate to machine settings —&amp;gt; Remove the ISO Image disk, OR Hover over devices —&amp;gt; Optical Drives —&amp;gt; Check the disk you want to disable or remove it.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2019.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;After the machine is rebooted, you need to assign NIC to the Network adapters:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Type le2 (Adapter 3) and press Enter to assign the NIC to the WAN-1 Network adapter.
+&lt;img src=&#34;../../images/pfsense/Untitled%2020.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Type le0 (Adapter 1) and press Enter to assign the NIC to LAN(LAN 11) Interface.
+&lt;img src=&#34;../../images/pfsense/Untitled%2021.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Type Le1 (Adapter 2) and press Enter to assign the NIC to OPT (LAN 12) Interface.
+&lt;img src=&#34;../../images/pfsense/Untitled%2022.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Type Y and press Enter to proceed with the configuration.
+&lt;img src=&#34;../../images/pfsense/Untitled%2023.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;If everything was setup correctly, you should receive IP for le2 and le0.&lt;/li&gt;
+&lt;li&gt;Now, we want to setup a static IP address for le1 and le0. Type 2 and press Enter.
+&lt;img src=&#34;../../images/pfsense/Untitled%2024.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Type 2 and press Enter —&amp;gt; type n and press Enter —&amp;gt; type the IP address and press Enter —&amp;gt; type the Subnet and press Enter.
+&lt;img src=&#34;../../images/pfsense/Untitled%2025.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Type n and press Enter —&amp;gt; Press Enter —&amp;gt; Type n and press Enter —&amp;gt; Type y and press Enter —&amp;gt; Press Enter.
+&lt;img src=&#34;../../images/pfsense/Untitled%2026.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;To configure the le1 interface. Type 2 and press Enter —&amp;gt; Type 3 and press Enter —&amp;gt; Type n and press Enter —&amp;gt; Type the IP address and press Enter —&amp;gt; Type Subnet number and Press Enter.
+&lt;img src=&#34;../../images/pfsense/Untitled%2027.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/li&gt;
+&lt;li&gt;The rest of the steps are the same as before.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Search for the IP address we setup for adapter 1 (192.168.1.1) in your web browser. You should find a login page, login using the following credentials: Username - admin; Password - pfsense.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2028.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;After logging in, you will be greeted with the setup wizard. Press Next —&amp;gt; and Next again until you reach step 2.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2029.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;On step two, setup the Primary DNS server to “8.8.8.8” &amp;amp; Secondary to “4.4.4.4”, then hit Next.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2030.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Optional:&lt;/strong&gt; for 3rd step, you can setup your time zone.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Screenshot_2023-11-30_101739.png&#34; alt=&#34;Screenshot 2023-11-30 101739.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;On step 4 you can turn off both “Block RFC1918 Private Network” &amp;amp; “Block bogon networks” to generate some interesting alerts. &lt;strong&gt;Warning:&lt;/strong&gt; Only if you are confident with turning it off, as it might result in some dangerous activities. Press Next for step 5.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2031.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;On step 6, we need to create a new password. &lt;strong&gt;Warning:&lt;/strong&gt; it’s very important to change the password, as the default can be cracked easily.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2032.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Press Next after setting a password on. On step 7, we need to press reload to restart pfsense.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2033.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;On step 8, wait for the reload to be over. On step 9, press finish and everything should be setup.&lt;/p&gt;
+&lt;p&gt;When you complete all the steps, you will have this page that allows you to configure the firewall further more.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2034.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;You can do some system changes, like making the theme into dark mode under System tab —&amp;gt; General setup. What we mainly need to do first is change the description of the interfaces we setup, to make it easier to navigate. Under the tab Interfaces either choose Assignments (Contains all interfaces that we setup on PFsense.) or directly the interface you wish to change.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2035.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Change the description, then scroll down save and apply changes.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2036.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2037.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2038.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Now, we need to connect a span port or bridge to the private network to be able to intercept all of the packets and data transmitted to log them for suspicious activities. Navigate to Interfaces —&amp;gt; Assignments —&amp;gt; Bridges —&amp;gt; Press Add —&amp;gt; Choose the Private Network for Member Interface —&amp;gt; Choose the SpanPort for Span Port —&amp;gt; Save.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2039.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2040.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2041.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;To generate some logs on our network, navigate to Firewall —&amp;gt; Rules —&amp;gt; Add a new rule —&amp;gt; Choose Protocol “Any” —&amp;gt; Save —&amp;gt; Apply Changes.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2042.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2043.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/pfsense/Untitled%2044.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Hacking Machine Lab</title>
+      <link>https://cyberbored.site/projects/monitoringlab/attack/</link>
+      <pubDate>Mon, 27 Nov 2023 18:47:43 +0100</pubDate>
+      
+      <guid>https://cyberbored.site/projects/monitoringlab/attack/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
+    <item>
+      <title>Owasp</title>
+      <link>https://cyberbored.site/posts/owasp/</link>
+      <pubDate>Sun, 01 Oct 2023 11:57:09 +0200</pubDate>
+      
+      <guid>https://cyberbored.site/posts/owasp/</guid>
+      <description>Introduction: Open Web Application Security Project, it is a project part of the OWASP foundation dedicated to enable organization to secure applications.
+Core Values: • Open: Everything at OWASP is radically transparent, from finances to our code.• Innovation: OWASP encourages and supports innovation and experiments for solutions to software security challenges.• Global: Anyone around the world is encouraged to participate in the OWASP community.• Integrity: OWASP is an honest and truthful, vendor-neutral, global community.</description>
+      <content>&lt;h1 id=&#34;introduction&#34;&gt;Introduction:&lt;/h1&gt;
+&lt;p&gt;Open Web Application Security Project, it is a project part of the OWASP foundation dedicated to enable organization to secure applications.&lt;/p&gt;
+&lt;h2 id=&#34;core-values&#34;&gt;Core Values:&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;• Open: Everything at OWASP is radically transparent, from finances to our code.
+• Innovation: OWASP encourages and supports innovation and experiments for solutions to software security challenges.
+• Global: Anyone around the world is encouraged to participate in the OWASP community.
+• Integrity: OWASP is an honest and truthful, vendor-neutral, global community.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;owasp-top-10&#34;&gt;OWASP TOP 10:&lt;/h1&gt;
+&lt;p&gt;Is an awareness document for web application security. It represent a broad consensus about the most critical security risks to web applications.&lt;/p&gt;
+&lt;h2 id=&#34;data-collection&#34;&gt;Data Collection:&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;• Formalized the data collection process at the Open Security Summit in 2017.
+• Published a call for data through social media channels.
+• Asked for data, with no restriction on CWEs.
+• Received donated data for over 500,000 applications to make this the largest and most comprehensive application security data set.
+• Focus on the root cause whenever possible, as it&#39;s more logical for providing identification and remediation guidance.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;methodology&#34;&gt;Methodology:&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;• This installment of the Top 10 is more data-driven than ever but not blindly data-driven.
+• Selected eight of the ten categories from contributed data and two categories from the survey.
+• Previous data collection efforts were focused on a prescribed subset of approximately 30 CWEs.
+• Used OWASP Dependency Check and extracted the CVSS Exploit and Impact scores, grouped by CWEs.
+• Use data for Exploitability and (Technical) Impact.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;common-weakness-enumeration-cwe&#34;&gt;Common Weakness Enumeration (CWE):&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://cwe.mitre.org/&#34;&gt;CWE&lt;/a&gt; is a community-developed list of software and hardware weakness types. It serves as a common language, a measuring stick for security tools, and as a baseline for weakness identification, mitigation, and prevention efforts.&lt;/p&gt;
+&lt;h2 id=&#34;common-vulnerability-and-exposure-cve&#34;&gt;Common Vulnerability and Exposure (CVE):&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://cve.mitre.org/&#34;&gt;CVE&lt;/a&gt; system provides a reference method for publicly known information-security vulnerabilities and exposures.&lt;/p&gt;
+&lt;h2 id=&#34;difference-between-cwe-and-cve&#34;&gt;Difference between CWE and CVE:&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;• CVE is a standard for identifying and naming specific vulnerabilities.
+• CWE is a standard for classifying and describing the types of weakness that can lead to vulnerabilities.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;data-factors&#34;&gt;Data Factors:&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;• CWEs mapped: The number of CWEs mapped to a category by the Top 10 team.
+• Incident rate: Incident rate is the percentage of applications vulnerable to that CWE from the population tested by that org for that year.
+• Weighted exploit: The Exploit sub-score from CVSSv2 and CVSSv3 score assigned to CVEs mapped to CWEs normalized and placed on a ten-point scale.
+• Weighted impact: The Impact sub-score from CVSSv2 and CVSSv3 scores  assigned to CVEs mapped to CWEs normalized and placed on a ten-point scale.
+• (Testing) coverage: The percentage of applications tested by all organizations for given CWE.
+• Total occurrences: Total number of applications found to have the CWEs mapped to a category.
+• Total CVEs: Total number of CVEs in the NVD DB that were mapped to the CWEs, mapped to a category.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;owasp-top-ten-2021&#34;&gt;OWASP Top-Ten 2021:&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Broken Access Control: Applications require strict access control to achieve proper security measures for systems and data. Broken Access Control allows attackers to gain access to sensitive and business critical applications.&lt;/li&gt;
+&lt;li&gt;Cryptographic Failures: Is a critical part of securing web applications. Failures in cryptography can lead to sensitive data exposure and other critical information leakage.&lt;/li&gt;
+&lt;li&gt;Injection flaws, such as SQL, NoSQL, OS and LDAP injection, occur when untrusted data is sent to an interpreter as part of a command or query. The attacker can trick the interpreter into executing unintended commands or accessing data without proper authorization.&lt;/li&gt;
+&lt;li&gt;Insecure Design: This risk Focuses on design flaws and the problems that occur when applications are not designed with security in mind.&lt;/li&gt;
+&lt;li&gt;Security Misconfiguration: Web applications can be easily misconfigured to allow attackers easy access to your data. With more shifts into highly configurable software, this risk has become even more important for applications.&lt;/li&gt;
+&lt;li&gt;Vulnerable and Outdate Components: Many components of modern web applications can commonly present security risks that administrators and managers need to understand. Today&amp;rsquo;s applications rely on third-party libraries and components and it&amp;rsquo;s hard to keep everything updated and patched correctly.&lt;/li&gt;
+&lt;li&gt;Identification and Authentication Failures: User identification and authentication mechanisms can be easily exploited. This risk highlights the need for standardized frameworks.&lt;/li&gt;
+&lt;li&gt;Software and Data Integrity Failures: Many application environments make assumptions related to software updates, critical data and CI/CD pipelines without verifying integrity.&lt;/li&gt;
+&lt;li&gt;Security Logging and Monitoring Failures: Logging and monitoring failures, couples with missing or ineffective integration with incident response, allows attackers to further attack systems, maintain persistence and tamper, extract or destroy data.&lt;/li&gt;
+&lt;li&gt;Server-Side Request Forgery (SSRF): SSRF is a vulnerability that allows an attacker to trick the server-side application to make requests to an arbitrary domain. This can lead to sensitive data leakage or command execution.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;To build a secure web application, you should use the Application Security Verification Standard (ASVS) to follow the detailed documentation about securing your web application Reference Link.&lt;/p&gt;
+&lt;h1 id=&#34;1-broken-access-control&#34;&gt;1-Broken Access Control:&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;• Authorization is the process where requests to access a particular resource should be granted or denied.
+• Authentication is providing and validating identity (Who are you?)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;types-of-access-control&#34;&gt;Types of access control:&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;• Role-Based Control (RBAC): Access decisions are based on an individual&#39;s roles and responsibilities within the organization or user base.
+
+• Discretionary Access Control (DAC): A means of restricting access to information. This is based on the identity of users and/or membership in certain groups. Information owner typically discretion to change access rights at any time.
+
+• Mandatory Access Control (MAC): Ensures the enforcement of security policy doesn&#39;t rely on user compliance. MAC secures information by assigning sensitivity labels on information and comparing this to the level of sensitivity a user is operating at.
+
+• Permission Based Access Control: The abstraction of application actions into a set of permissions. A permission be represented simply as a string-based name, for example, &amp;quot;READ&amp;quot;.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;access-control-should-enforce-policies-that-limit-users-to-their-intended-permissions-common-access-control-vulnerabilities-include&#34;&gt;Access control should enforce policies that limit users to their intended permissions. Common access control vulnerabilities include:&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;• Bypassing access control checks by modifying the URL, internal application state or the HTML page, or simply using a custom API attack tool.
+
+• Allowing the primary key to be changed to another user&#39;s record, permitting viewing or editing someone else&#39;s account.
+
+• Elevation of privilege. Acting as a user without being logged in, or acting as an admin when logged in as a user.
+
+• Metadata manipulation, such as replaying or tampering with a JSON Web Token (JWT) access control taken or a cookie or hidden field manipulate to elevate privilege, or abusing JWT invalidation.
+
+• CORS misconfiguration allows unauthorized API access.
+
+• Force browsing to authenticated pages as an unauthenticated user or to privileged pages as a standard user. Accessing API with missing access controls for POST, PUT, and DELETE.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;to-protect-yourself-form-these-kinds-of-attacks-by-enforcing-access-control-in-trusted-server-side-code-or-serverless-api-where-the-attacker-cannot-modify-the-access-control-check-or-metadata&#34;&gt;To protect yourself form these kinds of attacks by enforcing access control in trusted server-side code or serverless API, where the attacker cannot modify the access control check or metadata.&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;• With the exception of public resources, deny by default.
+• Implement access control mechanisms once and reuse them through the application, including minimizing CORS usage.
+• Access controls should enforce record ownership rather than accepting that the user can create, read, update, delete any record.
+• Disable web server directory listing and ensure file metadata and backup files are not present within web roots.
+• Log access control failures, alert admins when appropriate.
+• Rate limit API and controller access to minimize the harm from automated attack tooling.
+• JSON Web Tokens should be invalidated on the server after logout.
+• Developers and QA staff should include functional access control unit and integration tests.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;2-cryptographic-failures&#34;&gt;2-Cryptographic Failures:&lt;/h1&gt;
+&lt;p&gt;Cryptography is the study/practice of secure communications techniques that allow only the sender and intended recipient of a message to view its contents. The term is derived from Greek word kryptos, which means &amp;lsquo;hidden&amp;rsquo;.&lt;/p&gt;
+&lt;h2 id=&#34;cryptographic-failures&#34;&gt;Cryptographic failures:&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;• The focus of this OWASP risk is on failures related to cryptography (or lack thereof).
+• When cryptography fails (or is not implemented correctly), it can lead to exposure of sensitive data and other serious problems.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;determine-the-protection-needs-of-data-in-transit-and-at-rest&#34;&gt;Determine the protection needs of data in transit and at rest:&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;• Is any data transmitted in cleartext?
+
+• Are any old or weak cryptographic algorithms or protocols used either by default or in older code?
+
+• Are default crypto keys in use? Are weak crypto keys generated or reused? Are proper key management or rotation missing? Are crypto keys checked into source code repositories?
+
+• Is encryption not enforce? Are any HTTP headers (browsers) security directives or headers missing?
+
+• Are the received server certificate and the trust chain properly validated?
+
+• Is randomness used for cryptographic purposes that was not designed to meet cryptographic requirements?
+
+• Are deprecated hash functions such as MD5 or SHA1 in use? Are non-cryptographic hash functions used when cryptographic hash functions are needed?
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Ephemeral is just a word that means it doesn&amp;rsquo;t last for very long, it&amp;rsquo;s very short lived.&lt;/p&gt;
+&lt;h4 id=&#34;to-protect-yourself-from-these-types-of-vulnerabilities-or-attack&#34;&gt;To protect yourself from these types of vulnerabilities or attack:&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;• Classify data processed, stored or transmitted by an application. Identify which data is sensitive according to privacy laws, regulatory requirements or business needs.
+• Don&#39;t store sensitive data unnecessarily. Discard it as soon as possible or use PCI DSS-compliant tokenization or even truncation. Data that is not retained cannot be stolen.
+• Make sure to encrypt all sensitive data at rest.
+• Ensure up-to date and strong standard algorithms, protocols and keys are in place; use proper key management.
+• Encrypt all data in transit with secure protocols such as TLS with forward secrecy (FS) directives like HTTP Strict Transport Security (HSTS).
+• Disable caching for response that contain sensitive data.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;3-injection-attacks&#34;&gt;3-Injection Attacks:&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;• Allows attackers to relay malicious code through an application to another system.
+• Calls to the operation system via system calls, the use of external programs via shell commands as well as calls to backend databases.
+• If application uses an interpreter of any type, there is a danger of introducing an injection vulnerability.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Example attack&lt;/strong&gt;:
+Username: John&amp;rsquo; OR 1=1&amp;rsquo;
+Password: passwd&lt;/p&gt;
+&lt;h4 id=&#34;ldap-overview&#34;&gt;LDAP overview:&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;• Lightweight Directory Access Protocol (LDAP).
+• Open and cross-platform protocol used for directory services authentication.
+• Communication language that applications use to communicate with other directory services servers.
+• Directory services store user IDs, passwords, computer accounts and share that information with other entities on the network.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Example syntax&lt;/strong&gt;: find(&amp;quot;(&amp;amp;(cn=John)userPassword=mypass))&amp;quot;)&lt;/p&gt;
+&lt;h4 id=&#34;ldap-injection&#34;&gt;LDAP injection:&lt;/h4&gt;
+&lt;p&gt;We have this URLL &lt;a href=&#34;http://www.example.com/ldapsearch?user=&#34;&gt;http://www.example.com/ldapsearch?user=&lt;/a&gt;&lt;em&gt;.
+Bcomes this: searchfilter=&amp;quot;(cn=&lt;/em&gt;)&amp;quot;.&lt;/p&gt;
+&lt;p&gt;Suppose a web application uses a filter to match LDAP user/password pair.
+Searchlogin= &amp;ldquo;(&amp;amp;(uid-&amp;quot;+user+&amp;rdquo;)(userPassword={MD5}&amp;quot;+base64(pack(&amp;ldquo;H*&amp;quot;,md5(pass)))+&amp;rdquo;))&amp;quot;;&lt;/p&gt;
+&lt;p&gt;Attacker submits this username: &lt;em&gt;)(uid=&lt;/em&gt;))(|(uid=*
+And this password:password&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Becomes this&lt;/strong&gt;:
+Searchlogin=&amp;quot;(&amp;amp;(uid=&lt;em&gt;)(uid=&lt;/em&gt;))(|(uid=*)(userPassword={MD5}X03MO1qnZdYdgtfeulLPmQ==));&lt;/p&gt;
+&lt;p&gt;This means that when we use the logical operator &amp;amp; it merges (uid=&lt;em&gt;)(uid=&lt;/em&gt;) together and it becomes true, which confuses the protocol and logs us in.&lt;/p&gt;
+&lt;h4 id=&#34;determine-the-protection-needs&#34;&gt;Determine the protection needs:&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;• Search the source code for all calls to external resources.
+• Many languages have multiple ways to run external commands.
+• Review code and search for places where input from HTTP request could get into these calls.
+• An application is vulnerable to attack when:
+	○ User-supplied data is not validated, filtered or sanitized by the application.
+	○ Dynamic queries or non-parameterized calls without context-aware escaping are used in the interpreter.
+	○ Hostile data is used within Object-Relational Mapping (ORM) search parameters to extract additional, sensitive records.
+	○ Hostile data is directly used or concatenated, where the command contains both structure and hostile data in dynamic queries, commands or stored procedures.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;to-protect-yourself-from-these-types-of-vulnerabilities-or-attack-1&#34;&gt;To protect yourself from these types of vulnerabilities or attack:&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;• Avoid accessing external interpreters wherever possible.
+• Carefully validate the data to ensure that it does not contain any malicious content.
+• Structure requests in a way that ensures supplied parameters are treated as data rather than as potentially executable content.
+• A web application should run with only the privileges it needs to perform its function.
+• For any residual dynamic queries, escape special characters using the specific escape syntax for that interpreter.
+• Use LIMIT and other SQL controls within queries to prevent mass disclosure of records case of SQL injection.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;4-insecure-design&#34;&gt;4-Insecure design:&lt;/h1&gt;
+&lt;p&gt;This category focuses on risks related to design and architectural flaws, with a call for more use of threat modeling, secure design patterns and reference architectures.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;• Insecure design is a broad category representing different weaknesses, expressed as &amp;quot;missing or ineffective control design&amp;quot;.
+• Differentiate between design flaws and implementation defects.
+• A secure design can still have implementation defects leading to vulnerabilities that may be exploited.
+• Insecure design cannot be fixed by a perfect implementation as by definition, needed security controls were never created to defend against specific attacks.
+• Lacks of business risk profiling inherent in the software or system being developed leads to insecure design.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;secure-design&#34;&gt;Secure design:&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;• Secure design is a culture and methodology that constantly evaluates threats and ensures code is robustly designed and tested to prevent known attack methods.
+• Threat modeling should be integrated into refinement sessions(or similar activities).
+• In the user story development, determine the correct flow and failures states, ensure they are well understood and agreed upon by responsible and impacted parties.
+• Analyze assumptions and conditions for expected and failures flows, ensure they are still accurate and desirable.
+• Determine how to validate the assumptions and enforce conditions needed for proper behaviors.
+• Secure design is neither an add-on nor a tool that can add to software.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;secure-development&#34;&gt;Secure development:&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;• Secure software requires a secure development life cycle.
+• Engage security specialists from the beginning of a software project throughout the whole project and maintenance of your software.
+• Use tools like the OWASP Software Assurance Maturity Model (SAMM) to help structure your secure software developments efforts.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;determine-the-protection-needs-1&#34;&gt;Determine the protection needs:&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;• Establish and use a secure development life cycle.
+• Establish and use a library of secure design patterns.
+• Use threat modeling for authentication, access control, business logic and key flows.
+• Integrate security language and controls into user stories.
+• Integrate plausibility checks at each tier of your application (from front-end to back-end).
+• Write unit and integration tests to validate that all critical flows are resistant to the threat model. Compile use cases and misuse cases for each tier of your application.
+• Segregate tier layers on the system and network layers, depending on the exposure and protection needs.
+• Limit resource consumption by user or service.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;5-security-misconfiguration&#34;&gt;5-Security Misconfiguration:&lt;/h1&gt;
+&lt;p&gt;Configuring your devices is a major key when it comes to security. Huge majority of attacks happens because a device is kept on default configuration or default username and password or vulnerable port left open or unpatched. These might lead to someone breaking into your system and exposing your data, or making your device into a bot or a zombie under their botnet for DDOS attacks.&lt;/p&gt;
+&lt;h4 id=&#34;determine-the-protection-needs-2&#34;&gt;Determine the protection needs:&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;• Missing appropriate security hardening across any part of the application stack, or improperly configured permissions on cloud services.
+• Unnecessary features are enabled or installed.
+• Default accounts and their passwords still enabled and unchanged.
+• Error handling reveals stack traces or other overly informative error messaged to users.
+• For upgraded systems, latest security features are disabled or not configured securely.
+• The security settings in the applications servers, application frameworks, libraries, databases not set to secure values.
+• The server does not send security headers or directives, or they are not set to secure values.
+• The software is out of date or vulnerable.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;to-protect-yourself-from-these-types-of-vulnerabilities-or-attack-2&#34;&gt;To protect yourself from these types of vulnerabilities or attack:&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;• A segmented application architecture that provides effective, secure separation between components or tenants, with segmentation, containerization or cloud security groups.
+• Sending security directives to clients (content-security-policy, XSS protection, HSTS).
+• Encrypt data at rest to protect from exfiltration.
+• A repeatable hardening process that makes it fast and easy to deploy another environment that is appropriately locked down.
+•  Development, QA and production environments should all be configured identically, with different credentials used in each environment. This process should be automated to minimize the effort required to setup a new secure environment.
+• A minimal platform without any unnecessary features, components, documentation and samples. Remove or do not install unused features and frameworks.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;6-vulnerable-and-outdated-components&#34;&gt;6-Vulnerable and Outdated Components:&lt;/h1&gt;
+&lt;p&gt;Vulnerability is a weakness in the computational logic found in software and hardware components that, when exploited, results in a negative impact to confidentiality, integrity, or availability.&lt;/p&gt;
+&lt;h4 id=&#34;determine-the-protection-needs-3&#34;&gt;Determine the protection needs:&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;• If you do not know the versions of all components you use (both client-side and server side). This includes components you directly use as well as nested dependencies.
+• If software is vulnerable, unsupported or out of date. This includes the OS, web/application server, database management system (DBMS), applications, APIs and all components, runtime environments and libraries.
+• If you do not scan for vulnerabilities regularly and subscribe to security bulletins.
+• If you do not fix or upgrade the underlying platform, frameworks and dependencies in a risk-based, timely fashion. This commonly happens in environments when patching is a days or months of unnecessary exposure to fixed vulnerabilities.
+• If software developers do not test the compatibility of libraries.
+• If you do not secure the components&#39; configurations.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;to-protect-yourself-from-these-types-of-vulnerabilities-or-attack-3&#34;&gt;To protect yourself from these types of vulnerabilities or attack:&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;• Remove unused dependencies, unnecessary features, components, files and documentation.
+• Continuously inventory the version of both client-side and server-side components and their dependencies.
+• Continuously monitor sources like CVE and NVD for vulnerabilities in the components.
+• User software composition analysis tools to automate the process.
+• Subscribe to email alerts for security vulnerabilities related to components you use.
+• Only obtain components from official sources over secure links. Prefer signed packages to reduce the chance of including a modified, malicious component.
+• Monitor for libraries and components that are unmaintained or do not create security patches for older versions. If patching is not possible, consider deploying a virtual patch to monitor, detect or protect against the discovered issue.
+• Every organization must ensure that there is an ongoing plan for monitoring, triaging and applying updates or configuration changes for the lifetime of the application or portfolio.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;7-identification-and-authentication-failures&#34;&gt;7-Identification and Authentication Failures:&lt;/h1&gt;
+&lt;h2 id=&#34;authentication&#34;&gt;Authentication:&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;• The process of verification that an individual, entity or website is who it claims to be.
+• Authentication in the context of web application is commonly performed by submitting a username or ID and one or more items of private information that only a given user knows.
+• Confirmation of the user&#39;s identity, authentication and session management is critical to protect against authentication-related attacks.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;determine-the-protection-needs-4&#34;&gt;Determine the protection needs:&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;• Permit automated attacks such as credential stuffing; attacker has valid usernames and passwords.
+• Permit brute-force or the automated attacks.
+• Permit default, weak or well-known passwords, such as &amp;quot;Password1&amp;quot; or &amp;quot;admin/admin&amp;quot;.
+• User weak or ineffective credential recovery and forgot password processes such as &amp;quot;knowledge-based answers&amp;quot;, which cannot be made safe.
+• User plaintext or weakly-hashed passwords.
+• Have missing or ineffective multi-factor authentication.
+• Expose Session IDs in the URL.
+• Do not rotate Session IDs after successful login.
+• Do not properly invalidate Session IDs.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;to-protect-yourself-from-these-types-of-vulnerabilities-or-attack-4&#34;&gt;To protect yourself from these types of vulnerabilities or attack:&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;• Implement MFA to prevent automated, credential stuffing, brute-force and stolen credential reuse attacks.
+•  Do not ship or deploy with any default credentials, particularly for admin users.
+• Implement weak password checks, such as testing new or changed passwords against a list of the top 10,000 worst passwords.
+• Align password length, complexity and rotation policies with NIST guidelines.
+• Ensure registration, credential recovery and API pathways are hardened against account enumeration attacks by using the same messages for all outcomes.
+• Limit or increasingly delay failed login attempts. Log all failures and alert administrators when credential stuffing, brute-force or other attacks are detected.
+• Use a server-side, secure, built-in session manager that generates a new random session ID with high entropy after login.
+• Session IDs should not be in the URL, should be securely stored and should be invalidated after logout, idle and absolute timeouts.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;8-software-and-data-integrity-failures&#34;&gt;8-Software and Data Integrity Failures:&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;• A new category for 2021 focuses on making assumptions related to software updates, critical data and CI/CD pipelines without verifying integrity.
+• One of the highest weighted impacts from common Vulnerability and Exposures/Common Vulnerability Scoring System (CVE/CVSS) data.
+• Software and data integrity failures relate to code and infrastructure that does not protect against integrity violations.
+• An example of this is where an application relies upon plugins, libraries or modules from untrusted sources, repositories and content delivery networks (CDNs).
+• An insecure CI/CD pipeline can introduce the potential for unauthorized access, malicious code or system compromise.
+• Many applications now include auto-update functionality, where updates are downloaded without sufficient integrity verification and applied to previously trusted application.
+• Attackers could upload their own update to be distributed and run on all installations.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;to-protect-yourself-from-these-types-of-vulnerabilities-or-attack-5&#34;&gt;To protect yourself from these types of vulnerabilities or attack:&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;• Use digital signatures or similar mechanisms to verify the software or data is from expected source and has not been altered.
+• Ensure libraries and dependencies, such as NPM or Marven, are consuming trusted repositories. If you have a higher risk profile, consider hosting an internal known-good repository&#39;s vetted.
+• Ensure that a software supply chain security tool, such as OWASP Dependency Check or OWASP CycloneDX, is used to verify that components do not contain known vulnerabilities.
+• Ensure there is a revies process for code and configuration changes to minimize the chance that malicious code or configuration could be introduced into your software pipeline.
+• Ensure that your CI/CD pipeline has proper segregation, configuration and access control to ensure the integrity of the code flowing the build and deploy processes.
+• Ensure that unsigned or unencrypted serialized data is not sent to untrusted client without some form of integrity check or digital signature to detect tampering or replay of serialized data.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;9-security-logging-and-monitoring-failures&#34;&gt;9-Security Logging and Monitoring Failures:&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;• Security logging and monitoring came from the Top 10 community survey. It&#39;s up slightly from the tenth position in the OWASP Top 10 2017 list.
+• Logging and monitory can be challenging to test and often involves interviews.
+• There isn&#39;t much CVE/CVSS data for this category, but detecting and responding to breaches is critical.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;8-best-log-monitoring-tools&#34;&gt;8 Best Log Monitoring Tools:&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;1. SolarWinds Papertrail.
+2. LogDNA
+3. GrayLog
+4. ManageEngine EventLog Analyzer.
+5. LogFusion.
+6. Netwrix Event Log Manager.
+7. XpoLog.
+8. Sumo Logic.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;determine-the-protection-needs-5&#34;&gt;Determine the protection needs:&lt;/h4&gt;
+&lt;p&gt;Logging, detection, monitoring and active response failures can occur when:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;• Auditable events, such as logins, failed logins and high-value transactions are not logged.
+• Warning and errors generate no, inadequate or unclear log messages.
+• Logs of applications and APIs are not monitored for suspicious activity.
+• Logs are only stored locally.
+• Appropriate alerting thresholds and response escalation processes are not in place or effective.
+• Penetration testing and scans by Dynamic Application Security Testing (DAST) tools do not trigger alerts.
+• The application is unable to detect, escalate or alert for active attacks in real time or near-real time.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;to-protect-yourself-from-these-types-of-vulnerabilities-or-attack-6&#34;&gt;To protect yourself from these types of vulnerabilities or attack:&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;• Ensure all login, access control failures and server-side input validation failures can be logged with sufficient user context to identify suspicious or malicious accounts. Ensure that they are held for sufficient time to allow forensic analysis.
+• Ensure that logs are generated in a format that can be easily consumed by a centralized log management solution.
+• Ensure high-value transactions have an audit trail with integrity controls to prevent tampering or deletion, such as append-only such that suspicious activities are detected and responded to in a timely fashion.
+• Establish or adopt an incident response and recovery plan.
+• Very clear roles, responsibilities and approval processes for all players.
+• Regular training and assessment exercises.
+• A regular means of communicating incident response planning efforts and successes with upper management.
+• A firm understanding of communicating incident response planning efforts and successes with upper management.
+• A firm understanding of the organization&#39;s infrastructure and where the &amp;quot;crown jewels&amp;quot; lie.
+• A feedback loop to ensure that incidents are not just simply cleaned up.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;10-server-side-request-forgery-ssrf&#34;&gt;10-Server-Side Request Forgery (SSRF):&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;• This category is added from the Top 10 community survey.
+• The data shows a relatively low incidence rate with above-average testing coverage and above-average Exploit and Impact potential ratings.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;ssrf-brief-explanation&#34;&gt;SSRF brief explanation:&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;• SSRF flaws occur whenever a web application is fetching a remote resource without validating the user-supplied URL.
+• It allows an attacker to coerce the application to send a crafted request to an unexpected destination, even when protected by a firewall, VPN or another type of network access control list (ACL).
+• As modern web applications provide end users with convenient features, fetching a URL becomes a common scenario.
+• In a typical SSRF attack, the attacker might cause the server to make connection to internal-only services within the organization&#39;s infrastructure.
+• In other cases, they may be able to force the server to connect to arbitrary external systems, potentially leaking sensitive data such as authorization credentials.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;to-protect-yourself-from-these-types-of-vulnerabilities-or-attack-7&#34;&gt;To protect yourself from these types of vulnerabilities or attack:&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;From the network layer&lt;/strong&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;• Segment remote resource access functionality in separate networks to reduce the impact of SSRF.
+• Enforce &amp;quot;deny by default&amp;quot; firewall policies or network access control rules to block all essential intranet traffic.
+• Hints:
+	○ Establish an ownership and life cycle for firewalls rules based on applications.
+	○ Log all accepted and blocked network flows on firewalls.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;From the application layer&lt;/strong&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;• Sanitize and validate all client-supplied input data.
+• Enforce the URL schema, port and destination with a positive allow list.
+• Do not send raw responses to clients.
+• Disable HTTP redirections.
+• Do not mitigate SSRF via the use of a deny list o regular expression. Attackers have payload list, tools and skills to bypass deny lists.
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+    </item>
+    
     <item>
       <title>Openvas</title>
-      <link>https://cyberbored.site/posts/openvas/</link>
+      <link>https://cyberbored.site/posts/tryhackme/openvas/</link>
       <pubDate>Mon, 25 Sep 2023 13:42:50 +0200</pubDate>
       
-      <guid>https://cyberbored.site/posts/openvas/</guid>
+      <guid>https://cyberbored.site/posts/tryhackme/openvas/</guid>
       <description>Introduction: OpenVAS (Open Vulnerability Assessment System) is an open-source vulnerability scanner used for assessing and managing security vulnerabilities in computer systems and networks. It is designed to identify potential security issues and weaknesses in software, servers, and network devices.
 The Greenbone Vulnerability Management (GVM) framework is an open-source platform used for vulnerability scanning and management. It&amp;rsquo;s designed to help organizations identify and mitigate security risks within their networks and systems. The architecture of GVM comprises several key components:</description>
       <content>&lt;h1 id=&#34;introduction&#34;&gt;Introduction:&lt;/h1&gt;
@@ -155,10 +657,10 @@ While intercepting requests you are able to play the man in the middle and chang
     
     <item>
       <title>Yara</title>
-      <link>https://cyberbored.site/posts/yara/</link>
+      <link>https://cyberbored.site/posts/tryhackme/yara/</link>
       <pubDate>Mon, 25 Sep 2023 13:24:44 +0200</pubDate>
       
-      <guid>https://cyberbored.site/posts/yara/</guid>
+      <guid>https://cyberbored.site/posts/tryhackme/yara/</guid>
       <description>Introduction: YARA (Yet Another Recursive Ancronym) it is a tool used for pattern matching and identifying specific characteristics in files and processes.
 How to install YARA:
 sudo apt install yara -yAfter installing the tool we need to setup a file that contains the rules/conditions that we need to compare against. Standard file extension for YARA is .yar. The tool takes two arguments to work, The rule file we created, and Name of the file, directory, or process ID to use the rule for.</description>
@@ -228,10 +730,10 @@ sudo apt install yara -yAfter installing the tool we need to setup a file that 
     
     <item>
       <title>Sysmon</title>
-      <link>https://cyberbored.site/posts/sysmon/</link>
+      <link>https://cyberbored.site/posts/tryhackme/sysmon/</link>
       <pubDate>Mon, 25 Sep 2023 13:06:53 +0200</pubDate>
       
-      <guid>https://cyberbored.site/posts/sysmon/</guid>
+      <guid>https://cyberbored.site/posts/tryhackme/sysmon/</guid>
       <description>Introduction: System Monitor (Sysmon) is a Windows tool for enhanced security monitoring. It logs critical system events like process creation, file changes, and network activity, providing valuable insights for threat detection and analysis. Highly configurable to meet specific security needs. Sysmon depends on config file in order to tell the binary how to analyze the events that is receiving. Also note that you can either create your own Sysmon config file or download it Example.</description>
       <content>&lt;h1 id=&#34;introduction&#34;&gt;Introduction:&lt;/h1&gt;
 &lt;p&gt;System Monitor (Sysmon) is a Windows tool for enhanced security monitoring. It logs critical system events like process creation, file changes, and network activity, providing valuable insights for threat detection and analysis. Highly configurable to meet specific security needs. Sysmon depends on config file in order to tell the binary how to analyze the events that is receiving. Also note that you can either create your own Sysmon config file or download it &lt;a href=&#34;https://github.com/SwiftOnSecurity/sysmon-config&#34;&gt;Example&lt;/a&gt;.&lt;/p&gt;
@@ -397,10 +899,10 @@ nmap -sC -sV -v -oN simple 10.10.13.112 Which gave me the results above. I learn
     
     <item>
       <title>Windowlogs</title>
-      <link>https://cyberbored.site/posts/windowlogs/</link>
+      <link>https://cyberbored.site/posts/tryhackme/windowlogs/</link>
       <pubDate>Mon, 25 Sep 2023 11:51:45 +0200</pubDate>
       
-      <guid>https://cyberbored.site/posts/windowlogs/</guid>
+      <guid>https://cyberbored.site/posts/tryhackme/windowlogs/</guid>
       <description>Introduction: Think of logs as digital diaries that jot down what&amp;rsquo;s happening in systems, apps, or networks. They&amp;rsquo;re like a timeline of events, helping us figure out problems, spot weird stuff, and understand how things behave. In the cybersecurity world, logs are like detectives – they help us solve mysteries, catch bad guys, and keep things safe. They&amp;rsquo;re the key to knowing what&amp;rsquo;s going on in our digital world!
 The Event Viewer is like a detective&amp;rsquo;s notebook for your computer.</description>
       <content>&lt;h1 id=&#34;introduction&#34;&gt;Introduction:&lt;/h1&gt;
@@ -522,10 +1024,10 @@ First scenario, Admins complained about PowerShell being blocked and now I need 
     
     <item>
       <title>Nessus</title>
-      <link>https://cyberbored.site/posts/nessus/</link>
+      <link>https://cyberbored.site/posts/tryhackme/nessus/</link>
       <pubDate>Mon, 25 Sep 2023 11:42:15 +0200</pubDate>
       
-      <guid>https://cyberbored.site/posts/nessus/</guid>
+      <guid>https://cyberbored.site/posts/tryhackme/nessus/</guid>
       <description>Introduction: Nessus is a widely used vulnerability assessment tool that helps organizations identify and address security issues within their networks, systems, and applications.
 Installation and setup:
 To install and setup Nessus, we need first the installation package found on their website by searching for Nessus download or you can use this link Reference Link, which will take you to the website in the picture bellow.
@@ -564,149 +1066,494 @@ Choose which version and platform of your choice then press download.</descripti
     </item>
     
     <item>
-      <title>Resources</title>
-      <link>https://cyberbored.site/resources/</link>
+      <title>Labs</title>
+      <link>https://cyberbored.site/resources/labs/</link>
       <pubDate>Mon, 25 Sep 2023 11:09:46 +0200</pubDate>
       
-      <guid>https://cyberbored.site/resources/</guid>
-      <description>Top recourses to get started with Cybersecurity: Websites: Networking: • CISCO Academy
-• Network Academy
-Cybersecurity: • TryHackMe
-• HTB
-• BlueTeamLabs
-• CyberDefenders
-• LetsDefend
-• PortSwigger
-• RangeForce
-• EC-Council
-• StationX
-• CyberWox
-• MyDFIR
-• INFOSEC
-• Hacker-Arise
-Programming: • W3School
-• FreeCodeCamp
-• Programiz
-• TutorialsPoint
-Others: • Udemy
-• ZTM
-• Cheatography
-• EDX
-• Coursera
-• DionTraining
-• Cybrary
-• Linkedin Learning
-• Professor Messer</description>
-      <content>&lt;h1 id=&#34;top-recourses-to-get-started-with-cybersecurity&#34;&gt;Top recourses to get started with Cybersecurity:&lt;/h1&gt;
-&lt;h2 id=&#34;websites&#34;&gt;Websites:&lt;/h2&gt;
-&lt;h4 id=&#34;networking&#34;&gt;Networking:&lt;/h4&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.netacad.com/&#34;&gt;CISCO Academy&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.networkacademy.io/&#34;&gt;Network Academy&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;h4 id=&#34;cybersecurity&#34;&gt;Cybersecurity:&lt;/h4&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://tryhackme.com/&#34;&gt;TryHackMe&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://academy.hackthebox.com/login&#34;&gt;HTB&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://blueteamlabs.online/&#34;&gt;BlueTeamLabs&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://cyberdefenders.org/&#34;&gt;CyberDefenders&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://letsdefend.io/&#34;&gt;LetsDefend&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://portswigger.net/&#34;&gt;PortSwigger&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.rangeforce.com/&#34;&gt;RangeForce&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.eccouncil.org/&#34;&gt;EC-Council&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.stationx.net/&#34;&gt;StationX&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://cyberwoxacademy.com/&#34;&gt;CyberWox&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://mydfir.com/&#34;&gt;MyDFIR&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.infosecinstitute.com/&#34;&gt;INFOSEC&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.hackers-arise.com/&#34;&gt;Hacker-Arise&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;h4 id=&#34;programming&#34;&gt;Programming:&lt;/h4&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.w3schools.com/&#34;&gt;W3School&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.freecodecamp.org/&#34;&gt;FreeCodeCamp&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.programiz.com/&#34;&gt;Programiz&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.tutorialspoint.com/index.htm&#34;&gt;TutorialsPoint&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;h4 id=&#34;others&#34;&gt;Others:&lt;/h4&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.udemy.com/&#34;&gt;Udemy&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://zerotomastery.io/&#34;&gt;ZTM&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://cheatography.com/&#34;&gt;Cheatography&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.edx.org/&#34;&gt;EDX&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.coursera.org/&#34;&gt;Coursera&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.diontraining.com/&#34;&gt;DionTraining&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.cybrary.it/&#34;&gt;Cybrary&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.linkedin.com/learning/&#34;&gt;Linkedin Learning&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.professormesser.com/&#34;&gt;Professor Messer&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://hub.totalsem.com/&#34;&gt;Total Seminars&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://learn.microsoft.com/en-us/training/&#34;&gt;Microsoft Learn&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/&#34;&gt;GeeksForGeeks&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://academy.tcm-sec.com/&#34;&gt;TCM&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://learn.networkchuck.com/&#34;&gt;NetworkChuck&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.itpro.tv/&#34;&gt;ITPRO&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;h2 id=&#34;youtube-channels&#34;&gt;Youtube Channels:&lt;/h2&gt;
-&lt;h4 id=&#34;networking-1&#34;&gt;Networking:&lt;/h4&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@JeremysITLab&#34;&gt;Jeremy&amp;rsquo;s IT Lab&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@DalcoNetworking&#34;&gt;Dalco Networking | Cybersecurity &amp;amp; Networking&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;h4 id=&#34;cybersecurity-1&#34;&gt;Cybersecurity:&lt;/h4&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@zSecurity&#34;&gt;zSecurity&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@collinsinfosec&#34;&gt;Grant Collins&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@TCMSecurityAcademy&#34;&gt;The Cyber Mentor&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@pcsecuritychannel&#34;&gt;The PC Security Channel&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@UnixGuy&#34;&gt;UnixGuy&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@HackerSploit&#34;&gt;HackerSploit&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@DayCyberwox&#34;&gt;CYBERWOX&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@JoshMadakor&#34;&gt;Josh Madakor&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@ITSecurityLabs&#34;&gt;I.T Security Labs&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@MyDFIR&#34;&gt;MyDFIR&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@NetworkChuck&#34;&gt;NetworkChuck&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@_JohnHammond&#34;&gt;John Hammond&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@0dayCTF&#34;&gt;Ryan Montgomery&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;h4 id=&#34;programming-1&#34;&gt;Programming:&lt;/h4&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@NetNinja&#34;&gt;Net Ninja&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@learningsoftwareskills&#34;&gt;Learning Software&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@programmingwithmosh&#34;&gt;Programming with Mosh&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@AlexTheAnalyst&#34;&gt;Alex The Analyst&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@freecodecamp&#34;&gt;freeCodeCamp.org&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@Fireship&#34;&gt;Fireship&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;h4 id=&#34;other&#34;&gt;Other:&lt;/h4&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@Seytonic&#34;&gt;Seytonic&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@ZeroToMastery&#34;&gt;ZTM&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@davidbombal&#34;&gt;David Bombal&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@yanivhoffman&#34;&gt;Yaniv Hoffman&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@Sumsubcom&#34;&gt;Sumsub&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@TheHatedOne&#34;&gt;The Hated One&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@n2kcyber&#34;&gt;CyberWire&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@madhatistaken&#34;&gt;Mad Hat&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.youtube.com/@professormesser&#34;&gt;Professor Messer&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;h2 id=&#34;labstopractice&#34;&gt;LabsToPractice:&lt;/h2&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.hacksplaining.com/lessons&#34;&gt;HackSplaining&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://capturetheflag.withgoogle.com/&#34;&gt;Google CTF&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://defendtheweb.net/&#34;&gt;DefendTheWeb&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.smashthestack.org/&#34;&gt;SmashTheStack&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://pwn.college/&#34;&gt;PwnCollege&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://ctftime.org/&#34;&gt;CTFTime&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.root-me.org/?lang=en&#34;&gt;RootMe&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://lab.pentestit.ru/&#34;&gt;Pentestit&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://pentesterlab.com/&#34;&gt;PentesterLab&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.picoctf.org/&#34;&gt;PicoCTF&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://malware-traffic-analysis.net/&#34;&gt;Malware-Traffic&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://overthewire.org/wargames/&#34;&gt;OverTheWire&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.hacker101.com/&#34;&gt;Hacker101&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://attackdefense.com/&#34;&gt;AttackDefense&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://w3challs.com/&#34;&gt;W3challs&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://cryptohack.org/&#34;&gt;CryptoHack&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://cmdchallenge.com/&#34;&gt;CMDChallenge&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://exploit.education/&#34;&gt;ExploitEducation&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.vulnhub.com/&#34;&gt;VulnHub&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://www.zenk-security.com/&#34;&gt;ZenkSecurity&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://vulnmachines.com/&#34;&gt;VulnMachines&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://mysterytwister.org/home/welcome/&#34;&gt;MysteryTwister&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://hackersec.com/ctf/&#34;&gt;HackerSec&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://hacking-lab.com/services/&#34;&gt;HackingLab&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;• &lt;em&gt;&lt;a href=&#34;https://pwnable.kr/play.php&#34;&gt;PWNAble&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+      <guid>https://cyberbored.site/resources/labs/</guid>
+      <description>Networking Programming Cybersecurity HackSplaining
+Google CTF
+DefendTheWeb
+SmashTheStack
+PwnCollege
+CTFTime
+RootMe
+Pentestit
+PentesterLab
+PicoCTF
+Malware-Traffic
+OverTheWire
+Hacker101
+AttackDefense
+W3challs
+CryptoHack
+CMDChallenge
+ExploitEducation
+VulnHub
+ZenkSecurity
+VulnMachines
+MysteryTwister
+HackerSec
+HackingLab
+PWNAble</description>
+      <content>&lt;h2 id=&#34;networking&#34;&gt;Networking&lt;/h2&gt;
+&lt;h2 id=&#34;programming&#34;&gt;Programming&lt;/h2&gt;
+&lt;h2 id=&#34;cybersecurity&#34;&gt;Cybersecurity&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.hacksplaining.com/lessons&#34;&gt;HackSplaining&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://capturetheflag.withgoogle.com/&#34;&gt;Google CTF&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://defendtheweb.net/&#34;&gt;DefendTheWeb&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.smashthestack.org/&#34;&gt;SmashTheStack&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://pwn.college/&#34;&gt;PwnCollege&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://ctftime.org/&#34;&gt;CTFTime&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.root-me.org/?lang=en&#34;&gt;RootMe&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://lab.pentestit.ru/&#34;&gt;Pentestit&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://pentesterlab.com/&#34;&gt;PentesterLab&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.picoctf.org/&#34;&gt;PicoCTF&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://malware-traffic-analysis.net/&#34;&gt;Malware-Traffic&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://overthewire.org/wargames/&#34;&gt;OverTheWire&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.hacker101.com/&#34;&gt;Hacker101&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://attackdefense.com/&#34;&gt;AttackDefense&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://w3challs.com/&#34;&gt;W3challs&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://cryptohack.org/&#34;&gt;CryptoHack&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://cmdchallenge.com/&#34;&gt;CMDChallenge&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://exploit.education/&#34;&gt;ExploitEducation&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.vulnhub.com/&#34;&gt;VulnHub&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.zenk-security.com/&#34;&gt;ZenkSecurity&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://vulnmachines.com/&#34;&gt;VulnMachines&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://mysterytwister.org/home/welcome/&#34;&gt;MysteryTwister&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://hackersec.com/ctf/&#34;&gt;HackerSec&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://hacking-lab.com/services/&#34;&gt;HackingLab&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://pwnable.kr/play.php&#34;&gt;PWNAble&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Websites</title>
+      <link>https://cyberbored.site/resources/websites/</link>
+      <pubDate>Mon, 25 Sep 2023 11:09:46 +0200</pubDate>
+      
+      <guid>https://cyberbored.site/resources/websites/</guid>
+      <description>Networking: CISCO Academy
+Network Academy
+Cybersecurity: TryHackMe
+HTB
+BlueTeamLabs
+CyberDefenders
+LetsDefend
+PortSwigger
+RangeForce
+EC-Council
+StationX
+CyberWox
+MyDFIR
+INFOSEC
+Hacker-Arise
+Programming: W3School
+FreeCodeCamp
+Programiz
+TutorialsPoint
+Others: Udemy
+ZTM
+Cheatography
+EDX
+Coursera
+DionTraining
+Cybrary
+Linkedin Learning
+Professor Messer
+Total Seminars
+Microsoft Learn
+GeeksForGeeks
+TCM
+NetworkChuck
+ITPRO
+0xvmx</description>
+      <content>&lt;h2 id=&#34;networking&#34;&gt;&lt;strong&gt;Networking:&lt;/strong&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.netacad.com/&#34;&gt;CISCO Academy&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.networkacademy.io/&#34;&gt;Network Academy&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;cybersecurity&#34;&gt;&lt;strong&gt;Cybersecurity:&lt;/strong&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://tryhackme.com/&#34;&gt;TryHackMe&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://academy.hackthebox.com/login&#34;&gt;HTB&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://blueteamlabs.online/&#34;&gt;BlueTeamLabs&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://cyberdefenders.org/&#34;&gt;CyberDefenders&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://letsdefend.io/&#34;&gt;LetsDefend&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://portswigger.net/&#34;&gt;PortSwigger&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.rangeforce.com/&#34;&gt;RangeForce&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.eccouncil.org/&#34;&gt;EC-Council&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.stationx.net/&#34;&gt;StationX&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://cyberwoxacademy.com/&#34;&gt;CyberWox&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://mydfir.com/&#34;&gt;MyDFIR&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.infosecinstitute.com/&#34;&gt;INFOSEC&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.hackers-arise.com/&#34;&gt;Hacker-Arise&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;programming&#34;&gt;&lt;strong&gt;Programming:&lt;/strong&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.w3schools.com/&#34;&gt;W3School&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.freecodecamp.org/&#34;&gt;FreeCodeCamp&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.programiz.com/&#34;&gt;Programiz&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.tutorialspoint.com/index.htm&#34;&gt;TutorialsPoint&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;others&#34;&gt;&lt;strong&gt;Others:&lt;/strong&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.udemy.com/&#34;&gt;Udemy&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://zerotomastery.io/&#34;&gt;ZTM&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://cheatography.com/&#34;&gt;Cheatography&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.edx.org/&#34;&gt;EDX&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.coursera.org/&#34;&gt;Coursera&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.diontraining.com/&#34;&gt;DionTraining&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.cybrary.it/&#34;&gt;Cybrary&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.linkedin.com/learning/&#34;&gt;Linkedin Learning&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.professormesser.com/&#34;&gt;Professor Messer&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://hub.totalsem.com/&#34;&gt;Total Seminars&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://learn.microsoft.com/en-us/training/&#34;&gt;Microsoft Learn&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/&#34;&gt;GeeksForGeeks&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://academy.tcm-sec.com/&#34;&gt;TCM&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://learn.networkchuck.com/&#34;&gt;NetworkChuck&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.itpro.tv/&#34;&gt;ITPRO&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://gitlab.com/0xvmx1/awesome-0x&#34;&gt;0xvmx&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Youtube Channels</title>
+      <link>https://cyberbored.site/resources/youtube/</link>
+      <pubDate>Mon, 25 Sep 2023 11:09:46 +0200</pubDate>
+      
+      <guid>https://cyberbored.site/resources/youtube/</guid>
+      <description>Networking: Jeremy&amp;rsquo;s IT Lab
+Dalco Networking | Cybersecurity &amp;amp; Networking
+David Bombal
+Cybersecurity: zSecurity
+Grant Collins
+The Cyber Mentor
+The PC Security Channel
+UnixGuy
+HackerSploit
+CYBERWOX
+Josh Madakor
+I.T Security Labs
+MyDFIR
+NetworkChuck
+John Hammond
+Ryan Montgomery
+JackRhysider
+MentalOutlaw
+sudoSecurity
+garyruddellofficial
+InsiderPhD
+pr0tagnist
+RajneeshCyber
+STOKfredrik
+FarahHawa
+Rootkitdev
+BittenTech
+NahamSec
+LoiLiangYang
+hak5
+mpcybersecurity
+Programming: Net Ninja
+Learning Software
+Programming with Mosh
+Alex The Analyst
+freeCodeCamp.org
+Fireship
+Other: Seytonic
+ZTM
+Yaniv Hoffman</description>
+      <content>&lt;h2 id=&#34;networking&#34;&gt;&lt;strong&gt;Networking:&lt;/strong&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@JeremysITLab&#34;&gt;Jeremy&amp;rsquo;s IT Lab&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@DalcoNetworking&#34;&gt;Dalco Networking | Cybersecurity &amp;amp; Networking&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@davidbombal&#34;&gt;David Bombal&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;cybersecurity&#34;&gt;&lt;strong&gt;Cybersecurity:&lt;/strong&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@zSecurity&#34;&gt;zSecurity&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@collinsinfosec&#34;&gt;Grant Collins&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@TCMSecurityAcademy&#34;&gt;The Cyber Mentor&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@pcsecuritychannel&#34;&gt;The PC Security Channel&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@UnixGuy&#34;&gt;UnixGuy&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@HackerSploit&#34;&gt;HackerSploit&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@DayCyberwox&#34;&gt;CYBERWOX&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@JoshMadakor&#34;&gt;Josh Madakor&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@ITSecurityLabs&#34;&gt;I.T Security Labs&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@MyDFIR&#34;&gt;MyDFIR&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@NetworkChuck&#34;&gt;NetworkChuck&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@_JohnHammond&#34;&gt;John Hammond&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@0dayCTF&#34;&gt;Ryan Montgomery&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@JackRhysider&#34;&gt;JackRhysider&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@MentalOutlaw&#34;&gt;MentalOutlaw&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@sudoSecurity&#34;&gt;sudoSecurity&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@garyruddellofficial&#34;&gt;garyruddellofficial&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@InsiderPhD&#34;&gt;InsiderPhD&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@pr0tagnist/featured&#34;&gt;pr0tagnist&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@RajneeshCyber&#34;&gt;RajneeshCyber&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@STOKfredrik&#34;&gt;STOKfredrik&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@FarahHawa&#34;&gt;FarahHawa&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@Rootkitdev&#34;&gt;Rootkitdev&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@BittenTech&#34;&gt;BittenTech&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@NahamSec&#34;&gt;NahamSec&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@LoiLiangYang&#34;&gt;LoiLiangYang&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@hak5&#34;&gt;hak5&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@mpcybersecurity&#34;&gt;mpcybersecurity&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;programming&#34;&gt;&lt;strong&gt;Programming:&lt;/strong&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@NetNinja&#34;&gt;Net Ninja&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@learningsoftwareskills&#34;&gt;Learning Software&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@programmingwithmosh&#34;&gt;Programming with Mosh&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@AlexTheAnalyst&#34;&gt;Alex The Analyst&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@freecodecamp&#34;&gt;freeCodeCamp.org&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@Fireship&#34;&gt;Fireship&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;other&#34;&gt;&lt;strong&gt;Other:&lt;/strong&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@Seytonic&#34;&gt;Seytonic&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@ZeroToMastery&#34;&gt;ZTM&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@yanivhoffman&#34;&gt;Yaniv Hoffman&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@Sumsubcom/videos&#34;&gt;Sumsub&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@TheHatedOne/videos&#34;&gt;The Hated One&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@n2kcyber&#34;&gt;CyberWire&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@madhatistaken&#34;&gt;Mad Hat&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@professormesser&#34;&gt;Professor Messer&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@TheHatedOne&#34;&gt;TheHatedOne&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@defronix/featured&#34;&gt;defronix&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@infoseclive&#34;&gt;infoseclive&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@SavvyNik/featured&#34;&gt;SavvyNik&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 </content>
     </item>
     
     <item>
       <title>Overpass 2</title>
-      <link>https://cyberbored.site/posts/overpass/</link>
+      <link>https://cyberbored.site/posts/tryhackme/overpass/</link>
       <pubDate>Tue, 29 Aug 2023 15:09:15 +0200</pubDate>
       
-      <guid>https://cyberbored.site/posts/overpass/</guid>
+      <guid>https://cyberbored.site/posts/tryhackme/overpass/</guid>
       <description>Introduction: Today I will be attempting to analyze a packet file for a hacked server.
 Requirements: - Linux fundamentals- Network Fundamentals- Wireshark FundamentalsAfter going through the requirements for this lab, we can go ahead and download the file and make sure that the hash given to us is equal to the hash of the file to be sure that the file didn&amp;rsquo;t get tampered with. md5sum of PCAP file:</description>
       <content>&lt;h1 id=&#34;introduction&#34;&gt;Introduction:&lt;/h1&gt;
@@ -753,10 +1600,10 @@ sudo nmap -sC -sV 10.10.145.160 -vv&lt;/p&gt;
     
     <item>
       <title>Wireshark</title>
-      <link>https://cyberbored.site/posts/wireshark101/</link>
+      <link>https://cyberbored.site/posts/tryhackme/wireshark101/</link>
       <pubDate>Tue, 29 Aug 2023 14:58:35 +0200</pubDate>
       
-      <guid>https://cyberbored.site/posts/wireshark101/</guid>
+      <guid>https://cyberbored.site/posts/tryhackme/wireshark101/</guid>
       <description>Introduction: Wireshark, a renowned application utilized to generate and assess PCAPs (network packet capture files), stands out as a premier packet analysis solution. In this session, we will delve into the fundamentals of Wireshark installation and utilization, focusing on executing elementary packet analysis tasks, while also delving deeply into the intricacies of each prevalent networking protocol.
 Collection Methods: -Network Taps are a physical implant in which you physically tap between a cable, these techniques are commonly used by Threat Hunting/DFIR teams and red teams in an engagement to sniff and capture packets.</description>
       <content>&lt;h1 id=&#34;introduction&#34;&gt;Introduction:&lt;/h1&gt;
@@ -805,10 +1652,10 @@ same subnet.&lt;/p&gt;
     
     <item>
       <title>Active Directory Fundamentals</title>
-      <link>https://cyberbored.site/posts/adbasics/</link>
+      <link>https://cyberbored.site/posts/tryhackme/adbasics/</link>
       <pubDate>Tue, 29 Aug 2023 14:45:29 +0200</pubDate>
       
-      <guid>https://cyberbored.site/posts/adbasics/</guid>
+      <guid>https://cyberbored.site/posts/tryhackme/adbasics/</guid>
       <description>Introduction: Active Directory (AD) is a directory service developed by Microsoft that is used to manage and organize resources in a network. It provides a centralized database for managing and authenticating users, computers, printers, and other network resources within a Windows-based network environment. Active Directory is commonly used in enterprise environments to streamline network management and improve security.
 A Domain Controller (DC) is a critical component of Microsoft&amp;rsquo;s Active Directory (AD) service.</description>
       <content>&lt;h1 id=&#34;introduction&#34;&gt;Introduction:&lt;/h1&gt;
@@ -899,10 +1746,10 @@ To reset the password:&lt;/p&gt;
     
     <item>
       <title>Network Ports 2</title>
-      <link>https://cyberbored.site/posts/netowrkservice2/</link>
+      <link>https://cyberbored.site/posts/tryhackme/netowrkservice2/</link>
       <pubDate>Tue, 29 Aug 2023 14:04:43 +0200</pubDate>
       
-      <guid>https://cyberbored.site/posts/netowrkservice2/</guid>
+      <guid>https://cyberbored.site/posts/tryhackme/netowrkservice2/</guid>
       <description>Brief summary about Network File System: Network File System (NFS) is a distributed file protocol that allows remote access and sharing of files between computers over a network. It enables clients to access files and directories on a remote server as if they were local, making it possible to share data and resources seamlessly across different systems.
 A very important tool to consider while using NFS is nfs-common. It includes programs such as: lockd, statd, showmount, nfsstat, gssd, idmapd and mount.</description>
       <content>&lt;h1 id=&#34;brief-summary-about-network-file-system&#34;&gt;Brief summary about Network File System:&lt;/h1&gt;
@@ -993,15 +1840,35 @@ A very important tool to consider while using NFS is nfs-common. It includes pro
     
     <item>
       <title>Active Directory Home Lab</title>
-      <link>https://cyberbored.site/projects/ad/</link>
+      <link>https://cyberbored.site/projects/monitoringlab/ad/</link>
       <pubDate>Thu, 24 Aug 2023 10:31:35 +0200</pubDate>
       
-      <guid>https://cyberbored.site/projects/ad/</guid>
+      <guid>https://cyberbored.site/projects/monitoringlab/ad/</guid>
       <description>Introduction: Today I will be starting my first ever Active Directory Home Lab.
-Requirements: - Virtual machine from any vendor of your choice.- Windows Server 2019 ISO.- Window 10 ISO.Requirements Installation: -VMware: Note: using VMware Player Workstation won&amp;rsquo;t support internal network option. Either use Virtual Box or VMware Pro Workstation.
-Installation Link, Either press the provided link or search for Vmware Player Workstation, then simply scroll down and you will see the following picture:</description>
+Video reference: -Setting up Virtual machines
+-Setting up Active Directory and Endusers
+Active Directory: AD is used by companies to organize company&amp;rsquo;s users and enforce policies, rules and organize hierarchy of all users on the network. Active Directory uses valid TLD(Top Level Domain) registered to the company. It&amp;rsquo;s comprised of three main components: Domains, Trees, and Forest. A Tree is a collection of domains whereas a Forest is a collection of Trees.</description>
       <content>&lt;h1 id=&#34;introduction&#34;&gt;Introduction:&lt;/h1&gt;
 &lt;p&gt;Today I will be starting my first ever Active Directory Home Lab.&lt;/p&gt;
+&lt;h3 id=&#34;video-reference&#34;&gt;Video reference:&lt;/h3&gt;
+&lt;p&gt;-&lt;a href=&#34;https://www.youtube.com/watch?v=SFb7MUfeqSE&amp;amp;t=45s&#34;&gt;Setting up Virtual machines&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;-&lt;a href=&#34;https://www.youtube.com/watch?v=3NEyWDyUykw&amp;amp;t=21s&#34;&gt;Setting up Active Directory and Endusers&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;active-directory&#34;&gt;&lt;strong&gt;Active Directory:&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;AD is used by companies to organize company&amp;rsquo;s users and enforce policies, rules and organize hierarchy of all users on the network. Active Directory uses valid TLD(Top Level Domain) registered to the company. It&amp;rsquo;s comprised of three main components: Domains, Trees, and Forest. A Tree is a collection of domains whereas a Forest is a collection of Trees.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Key Features:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;-Domain / AD DS:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- Active Directory Domain is a collection of objects. An object can be a single user or a group or it can be a hardware component, such as a computer or a printer. It will be used to create users for our organization.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;-AD Certificate Services:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- AD Certificate Services help enhance security by binding the identity of a person, computer, or service to a corresponding private key.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;-RAS / NAT:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- Remote Access Service (RAT) will be used to connect all endpoint users to our DC to reach internet through our DC.
+- Network Address Translation (NAT) will be used to map our private IP address into one public IP address to connect to the internet and transfer information.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;-DHCP:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- Dynamic Host Configuration Protocol (DHCP) will be used to automate the process of configuring devices on IP network, to allow them to be able to use network services like DNS, NTP, and any communication protocol based on UDP or TCP.
+&lt;/code&gt;&lt;/pre&gt;
 &lt;h4 id=&#34;requirements&#34;&gt;Requirements:&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;- Virtual machine from any vendor of your choice.
 - Windows Server 2019 ISO.
@@ -1009,7 +1876,7 @@ Installation Link, Either press the provided link or search for Vmware Player Wo
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h1 id=&#34;requirements-installation&#34;&gt;Requirements Installation:&lt;/h1&gt;
 &lt;h2 id=&#34;-vmware&#34;&gt;-VMware:&lt;/h2&gt;
-&lt;p&gt;Note: using VMware Player Workstation won&amp;rsquo;t support internal network option. Either use Virtual Box or VMware Pro Workstation.&lt;/p&gt;
+&lt;p&gt;Note: VMware Player Workstation doesn&amp;rsquo;t support internal network option. Either use Virtual Box or VMware Pro Workstation.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html&#34;&gt;Installation Link&lt;/a&gt;, Either press the provided link or search for Vmware Player Workstation, then simply scroll down and you will see the following picture:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../images/vmware/0.png&#34; alt=&#34;Shell&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Choose which version you want depending on the OS you are using and press download and simply install the app.&lt;/p&gt;
@@ -1178,11 +2045,41 @@ Now all that&amp;rsquo;s left for us to do is just configure the windows 10 clie
     </item>
     
     <item>
+      <title>Monitoring &amp; Detection Lab Project</title>
+      <link>https://cyberbored.site/projects/monitoringlab/overview/</link>
+      <pubDate>Wed, 23 Aug 2023 10:31:35 +0200</pubDate>
+      
+      <guid>https://cyberbored.site/projects/monitoringlab/overview/</guid>
+      <description>Introduction Hello everyone and welcome to my first lab proeject! In this project we are going to cover various aspects of monitoring. It will be divided into 2 chapters and will cover everything related.
+Chapter 1: Video Reference for Chapter 1 Overview.
+In chapter 1 we will cover the following features:
+-Installing and Download the necessary ISO images.-Setting up and Configuring the Active directory, Endusers, and Attacking machines.-Connecting everything together with the Domain Center.</description>
+      <content>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Hello everyone and welcome to my first lab proeject! In this project we are going to cover various aspects of monitoring. It will be divided into 2 chapters and will cover everything related.&lt;/p&gt;
+&lt;h2 id=&#34;chapter-1&#34;&gt;Chapter 1:&lt;/h2&gt;
+&lt;p&gt;Video Reference for Chapter 1 &lt;a href=&#34;https://www.youtube.com/watch?v=Q8uhVvCwPa0&#34;&gt;Overview&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In chapter 1 we will cover the following features:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;-Installing  and Download the necessary ISO images.
+-Setting up and Configuring the Active directory, Endusers, and Attacking machines.
+-Connecting everything together with the Domain Center.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;chapter-2&#34;&gt;Chapter 2:&lt;/h2&gt;
+&lt;p&gt;In chapter 2 we will cover the following features:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;-Install  PFSENSE, and Security Onion.
+-Setup PFSENSE as a Firewall.
+-Setup Security Onion as an IDS, Security Monitoruing, and Log Management Solution.
+-Setting up Group Object Policies.
+-Perform Pen-Testing.
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+    </item>
+    
+    <item>
       <title>Network Ports 1</title>
-      <link>https://cyberbored.site/posts/networkservice1/</link>
+      <link>https://cyberbored.site/posts/tryhackme/networkservice1/</link>
       <pubDate>Sat, 19 Aug 2023 16:30:33 +0200</pubDate>
       
-      <guid>https://cyberbored.site/posts/networkservice1/</guid>
+      <guid>https://cyberbored.site/posts/tryhackme/networkservice1/</guid>
       <description>Introduction: Server Message Block(SMB) is a client-server communication protocol used for sharing access to files, printers, serial ports and other resources on a network.
 Enum4linux is a tool used to enumerate SMB shares on both Windows and Linux systems. It is basically a wrapper around the tools in the Samba package and makes it easy to quickly extract information from the target pertaining to SMB. This tool is always used after conducting port scan and SMB port is open.</description>
       <content>&lt;h1 id=&#34;introduction&#34;&gt;Introduction:&lt;/h1&gt;
@@ -1369,10 +2266,10 @@ I picked the first option and setup all required options&lt;/p&gt;
     
     <item>
       <title>Nmap</title>
-      <link>https://cyberbored.site/posts/nmap/</link>
+      <link>https://cyberbored.site/posts/tryhackme/nmap/</link>
       <pubDate>Tue, 15 Aug 2023 14:43:22 +0200</pubDate>
       
-      <guid>https://cyberbored.site/posts/nmap/</guid>
+      <guid>https://cyberbored.site/posts/tryhackme/nmap/</guid>
       <description>Embarking on a new Nmap project today, I&amp;rsquo;m diving into the realm of testing and exploring device scanning.
 To kick things off, it&amp;rsquo;s fascinating to note that every network-enabled computer boasts a whopping 65535 open ports. Out of these, 1024 are well-known ports that add an intriguing layer to our journey.
 Key flags to keep in mind:
@@ -1568,14 +2465,40 @@ Note: When you first create an alias the shell won&amp;rsquo;t recognize it, sin
       <pubDate>Thu, 10 Aug 2023 04:30:37 +0200</pubDate>
       
       <guid>https://cyberbored.site/about/</guid>
-      <description>I&amp;rsquo;m thrilled to have you join me on my cybersecurity journey. This blog is a window into my world of digital defense, where I share my experiences, projects, and insights in the realm of cybersecurity.
-As a passionate cybersecurity enthusiast, I&amp;rsquo;ve embarked on a journey to understand the intricacies of the digital landscape and the ever-evolving threats that surround us. Through this blog, I aim to not only document my personal journey but also provide valuable resources, insights, and discussions about the fascinating world of cybersecurity.</description>
-      <content>&lt;p&gt;I&amp;rsquo;m thrilled to have you join me on my cybersecurity journey. This blog is a window into my world of digital defense, where I share my experiences, projects, and insights in the realm of cybersecurity.&lt;/p&gt;
-&lt;p&gt;As a passionate cybersecurity enthusiast, I&amp;rsquo;ve embarked on a journey to understand the intricacies of the digital landscape and the ever-evolving threats that surround us. Through this blog, I aim to not only document my personal journey but also provide valuable resources, insights, and discussions about the fascinating world of cybersecurity.&lt;/p&gt;
-&lt;p&gt;Here, you&amp;rsquo;ll find a variety of content ranging from in-depth analyses of the latest cyber threats to hands-on tutorials for securing your digital presence. I&amp;rsquo;ll also be sharing my ongoing projects, and experiments in the cybersecurity field, giving you a glimpse into the practical side of safeguarding our digital lives.&lt;/p&gt;
-&lt;p&gt;Whether you&amp;rsquo;re a fellow cybersecurity enthusiast, a curious beginner, or someone looking to enhance their digital security, there&amp;rsquo;s something here for you. Join me as I navigate the ever-changing landscape of cybersecurity, and together, let&amp;rsquo;s stay one step ahead of the digital adversaries.&lt;/p&gt;
-&lt;p&gt;When I&amp;rsquo;m not immersed in lines of code or researching the latest vulnerabilities, you might find me engaging in hands-on labs on platforms like TryHackMe or HackTheBox. Feel free to explore the blog, engage in discussions, and connect with me on &lt;a href=&#34;https://www.linkedin.com/in/mahmoudchoumar/&#34;&gt;Linkedin&lt;/a&gt;.&lt;/p&gt;
+      <description>Hello and welcome to the CyberBored community! Thank you for stopping by and checking out my content. You will find here some of my projects, blogs, social media accounts, and resources to get started with Cybersecurity, Programming, and Networking.
+As a passionate cybersecurity enthusiast, I am on a journey to understand a variety of technologies, attacks, security methods, and OPSEC for anonymity and privacy. Through this blog, I aim to not only document my personal journey but also provide valuable resources, insights, and discussions about the fascinating world of cybersecurity.</description>
+      <content>&lt;p&gt;Hello and welcome to the CyberBored community! Thank you for stopping by and checking out my content. You will find here some of my projects, blogs, social media accounts, and resources to get started with Cybersecurity, Programming, and Networking.&lt;/p&gt;
+&lt;p&gt;As a passionate cybersecurity enthusiast, I am on a journey to understand a variety of technologies, attacks, security methods, and OPSEC for anonymity and privacy. Through this blog, I aim to not only document my personal journey but also provide valuable resources, insights, and discussions about the fascinating world of cybersecurity.&lt;/p&gt;
+&lt;p&gt;Here, you can find a variety of content and information, ranging from blogs to CTFs, projects, and videos. I will also be sharing on going projects and road maps as I advance and get more experience in the field.&lt;/p&gt;
+&lt;p&gt;Whether you&amp;rsquo;re a fellow cybersecurity enthusiast, a curious beginner, or someone looking to enhance their digital security, there&amp;rsquo;s something here for you. Check out my social medias where you can find a variety of content: &lt;strong&gt;&lt;a href=&#34;https://youtube.com/@cyberbored&#34;&gt;youtube/@cyberbored&lt;/a&gt;&lt;/strong&gt; and &lt;strong&gt;&lt;a href=&#34;https://tiktok.com/@cyberbored1&#34;&gt;tikok/@cyberbored1&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;When I&amp;rsquo;m not involved in vulnerability research or projects, you might find me engaging in hands-on labs on platforms such as TryHackMe or HackTheBox.&lt;/p&gt;
 &lt;p&gt;Thank you for being a part of this cybersecurity journey. Let&amp;rsquo;s explore, learn, and secure together!&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://cyberbored.site/socials/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cyberbored.site/socials/</guid>
+      <description> @cyberbored @cyberbored1 @cyberbored.site </description>
+      <content>&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;&lt;strong&gt;&lt;a href=&#34;https://youtube.com/@cyberbored&#34;&gt;@cyberbored&lt;/a&gt;&lt;/strong&gt;&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;&lt;strong&gt;&lt;a href=&#34;https://tiktok.com/@cyberbored1&#34;&gt;@cyberbored1&lt;/a&gt;&lt;/strong&gt;&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;&lt;strong&gt;&lt;a href=&#34;https://instagram.com/cyberbored.site&#34;&gt;@cyberbored.site&lt;/a&gt;&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;../images/icons/image.png&#34; alt=&#34;Youtube&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;../images/icons/video.png&#34; alt=&#34;Tiktok&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;../images/icons/instagram.png&#34; alt=&#34;Instagram&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 </content>
     </item>
     

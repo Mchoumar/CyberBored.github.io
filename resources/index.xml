@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Resources on CyberBored Blog</title>
+    <link>https://cyberbored.site/resources/</link>
+    <description>Recent content in Resources on CyberBored Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>CyberBored, Inc. Copyright</copyright>
+    <lastBuildDate>Mon, 25 Sep 2023 11:09:46 +0200</lastBuildDate><atom:link href="https://cyberbored.site/resources/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Labs</title>
+      <link>https://cyberbored.site/resources/labs/</link>
+      <pubDate>Mon, 25 Sep 2023 11:09:46 +0200</pubDate>
+      
+      <guid>https://cyberbored.site/resources/labs/</guid>
+      <description>Networking Programming Cybersecurity HackSplaining
+Google CTF
+DefendTheWeb
+SmashTheStack
+PwnCollege
+CTFTime
+RootMe
+Pentestit
+PentesterLab
+PicoCTF
+Malware-Traffic
+OverTheWire
+Hacker101
+AttackDefense
+W3challs
+CryptoHack
+CMDChallenge
+ExploitEducation
+VulnHub
+ZenkSecurity
+VulnMachines
+MysteryTwister
+HackerSec
+HackingLab
+PWNAble</description>
+      <content>&lt;h2 id=&#34;networking&#34;&gt;Networking&lt;/h2&gt;
+&lt;h2 id=&#34;programming&#34;&gt;Programming&lt;/h2&gt;
+&lt;h2 id=&#34;cybersecurity&#34;&gt;Cybersecurity&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.hacksplaining.com/lessons&#34;&gt;HackSplaining&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://capturetheflag.withgoogle.com/&#34;&gt;Google CTF&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://defendtheweb.net/&#34;&gt;DefendTheWeb&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.smashthestack.org/&#34;&gt;SmashTheStack&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://pwn.college/&#34;&gt;PwnCollege&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://ctftime.org/&#34;&gt;CTFTime&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.root-me.org/?lang=en&#34;&gt;RootMe&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://lab.pentestit.ru/&#34;&gt;Pentestit&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://pentesterlab.com/&#34;&gt;PentesterLab&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.picoctf.org/&#34;&gt;PicoCTF&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://malware-traffic-analysis.net/&#34;&gt;Malware-Traffic&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://overthewire.org/wargames/&#34;&gt;OverTheWire&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.hacker101.com/&#34;&gt;Hacker101&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://attackdefense.com/&#34;&gt;AttackDefense&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://w3challs.com/&#34;&gt;W3challs&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://cryptohack.org/&#34;&gt;CryptoHack&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://cmdchallenge.com/&#34;&gt;CMDChallenge&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://exploit.education/&#34;&gt;ExploitEducation&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.vulnhub.com/&#34;&gt;VulnHub&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.zenk-security.com/&#34;&gt;ZenkSecurity&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://vulnmachines.com/&#34;&gt;VulnMachines&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://mysterytwister.org/home/welcome/&#34;&gt;MysteryTwister&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://hackersec.com/ctf/&#34;&gt;HackerSec&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://hacking-lab.com/services/&#34;&gt;HackingLab&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://pwnable.kr/play.php&#34;&gt;PWNAble&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Websites</title>
+      <link>https://cyberbored.site/resources/websites/</link>
+      <pubDate>Mon, 25 Sep 2023 11:09:46 +0200</pubDate>
+      
+      <guid>https://cyberbored.site/resources/websites/</guid>
+      <description>Networking: CISCO Academy
+Network Academy
+Cybersecurity: TryHackMe
+HTB
+BlueTeamLabs
+CyberDefenders
+LetsDefend
+PortSwigger
+RangeForce
+EC-Council
+StationX
+CyberWox
+MyDFIR
+INFOSEC
+Hacker-Arise
+Programming: W3School
+FreeCodeCamp
+Programiz
+TutorialsPoint
+Others: Udemy
+ZTM
+Cheatography
+EDX
+Coursera
+DionTraining
+Cybrary
+Linkedin Learning
+Professor Messer
+Total Seminars
+Microsoft Learn
+GeeksForGeeks
+TCM
+NetworkChuck
+ITPRO
+0xvmx</description>
+      <content>&lt;h2 id=&#34;networking&#34;&gt;&lt;strong&gt;Networking:&lt;/strong&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.netacad.com/&#34;&gt;CISCO Academy&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.networkacademy.io/&#34;&gt;Network Academy&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;cybersecurity&#34;&gt;&lt;strong&gt;Cybersecurity:&lt;/strong&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://tryhackme.com/&#34;&gt;TryHackMe&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://academy.hackthebox.com/login&#34;&gt;HTB&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://blueteamlabs.online/&#34;&gt;BlueTeamLabs&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://cyberdefenders.org/&#34;&gt;CyberDefenders&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://letsdefend.io/&#34;&gt;LetsDefend&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://portswigger.net/&#34;&gt;PortSwigger&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.rangeforce.com/&#34;&gt;RangeForce&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.eccouncil.org/&#34;&gt;EC-Council&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.stationx.net/&#34;&gt;StationX&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://cyberwoxacademy.com/&#34;&gt;CyberWox&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://mydfir.com/&#34;&gt;MyDFIR&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.infosecinstitute.com/&#34;&gt;INFOSEC&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.hackers-arise.com/&#34;&gt;Hacker-Arise&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;programming&#34;&gt;&lt;strong&gt;Programming:&lt;/strong&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.w3schools.com/&#34;&gt;W3School&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.freecodecamp.org/&#34;&gt;FreeCodeCamp&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.programiz.com/&#34;&gt;Programiz&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.tutorialspoint.com/index.htm&#34;&gt;TutorialsPoint&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;others&#34;&gt;&lt;strong&gt;Others:&lt;/strong&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.udemy.com/&#34;&gt;Udemy&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://zerotomastery.io/&#34;&gt;ZTM&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://cheatography.com/&#34;&gt;Cheatography&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.edx.org/&#34;&gt;EDX&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.coursera.org/&#34;&gt;Coursera&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.diontraining.com/&#34;&gt;DionTraining&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.cybrary.it/&#34;&gt;Cybrary&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.linkedin.com/learning/&#34;&gt;Linkedin Learning&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.professormesser.com/&#34;&gt;Professor Messer&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://hub.totalsem.com/&#34;&gt;Total Seminars&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://learn.microsoft.com/en-us/training/&#34;&gt;Microsoft Learn&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/&#34;&gt;GeeksForGeeks&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://academy.tcm-sec.com/&#34;&gt;TCM&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://learn.networkchuck.com/&#34;&gt;NetworkChuck&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.itpro.tv/&#34;&gt;ITPRO&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://gitlab.com/0xvmx1/awesome-0x&#34;&gt;0xvmx&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Youtube Channels</title>
+      <link>https://cyberbored.site/resources/youtube/</link>
+      <pubDate>Mon, 25 Sep 2023 11:09:46 +0200</pubDate>
+      
+      <guid>https://cyberbored.site/resources/youtube/</guid>
+      <description>Networking: Jeremy&amp;rsquo;s IT Lab
+Dalco Networking | Cybersecurity &amp;amp; Networking
+David Bombal
+Cybersecurity: zSecurity
+Grant Collins
+The Cyber Mentor
+The PC Security Channel
+UnixGuy
+HackerSploit
+CYBERWOX
+Josh Madakor
+I.T Security Labs
+MyDFIR
+NetworkChuck
+John Hammond
+Ryan Montgomery
+JackRhysider
+MentalOutlaw
+sudoSecurity
+garyruddellofficial
+InsiderPhD
+pr0tagnist
+RajneeshCyber
+STOKfredrik
+FarahHawa
+Rootkitdev
+BittenTech
+NahamSec
+LoiLiangYang
+hak5
+mpcybersecurity
+Programming: Net Ninja
+Learning Software
+Programming with Mosh
+Alex The Analyst
+freeCodeCamp.org
+Fireship
+Other: Seytonic
+ZTM
+Yaniv Hoffman</description>
+      <content>&lt;h2 id=&#34;networking&#34;&gt;&lt;strong&gt;Networking:&lt;/strong&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@JeremysITLab&#34;&gt;Jeremy&amp;rsquo;s IT Lab&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@DalcoNetworking&#34;&gt;Dalco Networking | Cybersecurity &amp;amp; Networking&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@davidbombal&#34;&gt;David Bombal&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;cybersecurity&#34;&gt;&lt;strong&gt;Cybersecurity:&lt;/strong&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@zSecurity&#34;&gt;zSecurity&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@collinsinfosec&#34;&gt;Grant Collins&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@TCMSecurityAcademy&#34;&gt;The Cyber Mentor&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@pcsecuritychannel&#34;&gt;The PC Security Channel&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@UnixGuy&#34;&gt;UnixGuy&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@HackerSploit&#34;&gt;HackerSploit&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@DayCyberwox&#34;&gt;CYBERWOX&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@JoshMadakor&#34;&gt;Josh Madakor&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@ITSecurityLabs&#34;&gt;I.T Security Labs&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@MyDFIR&#34;&gt;MyDFIR&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@NetworkChuck&#34;&gt;NetworkChuck&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@_JohnHammond&#34;&gt;John Hammond&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@0dayCTF&#34;&gt;Ryan Montgomery&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@JackRhysider&#34;&gt;JackRhysider&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@MentalOutlaw&#34;&gt;MentalOutlaw&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@sudoSecurity&#34;&gt;sudoSecurity&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@garyruddellofficial&#34;&gt;garyruddellofficial&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@InsiderPhD&#34;&gt;InsiderPhD&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@pr0tagnist/featured&#34;&gt;pr0tagnist&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@RajneeshCyber&#34;&gt;RajneeshCyber&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@STOKfredrik&#34;&gt;STOKfredrik&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@FarahHawa&#34;&gt;FarahHawa&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@Rootkitdev&#34;&gt;Rootkitdev&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@BittenTech&#34;&gt;BittenTech&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@NahamSec&#34;&gt;NahamSec&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@LoiLiangYang&#34;&gt;LoiLiangYang&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@hak5&#34;&gt;hak5&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@mpcybersecurity&#34;&gt;mpcybersecurity&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;programming&#34;&gt;&lt;strong&gt;Programming:&lt;/strong&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@NetNinja&#34;&gt;Net Ninja&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@learningsoftwareskills&#34;&gt;Learning Software&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@programmingwithmosh&#34;&gt;Programming with Mosh&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@AlexTheAnalyst&#34;&gt;Alex The Analyst&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@freecodecamp&#34;&gt;freeCodeCamp.org&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@Fireship&#34;&gt;Fireship&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;other&#34;&gt;&lt;strong&gt;Other:&lt;/strong&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@Seytonic&#34;&gt;Seytonic&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@ZeroToMastery&#34;&gt;ZTM&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@yanivhoffman&#34;&gt;Yaniv Hoffman&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@Sumsubcom/videos&#34;&gt;Sumsub&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@TheHatedOne/videos&#34;&gt;The Hated One&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@n2kcyber&#34;&gt;CyberWire&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@madhatistaken&#34;&gt;Mad Hat&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@professormesser&#34;&gt;Professor Messer&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@TheHatedOne&#34;&gt;TheHatedOne&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@defronix/featured&#34;&gt;defronix&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@infoseclive&#34;&gt;infoseclive&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@SavvyNik/featured&#34;&gt;SavvyNik&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    </item>
+    
+  </channel>
+</rss>
